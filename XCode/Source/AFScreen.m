@@ -88,7 +88,7 @@ static UIColor* 	loadingTitleColor;
 	if(!viewController)
 	{
 		[self loadViewController];
-		[[NSBundle mainBundle] loadNibNamed:@"AFScreenLoadingView" owner:self options:nil];
+		//[[NSBundle mainBundle] loadNibNamed:@"AFScreenLoadingView" owner:self options:nil];
 		
 		UIColor* bgColor = [AFScreen bgColor];
 		bgColor = [UIColor colorWithRed:[bgColor red] green:[bgColor green] blue:[bgColor blue] alpha:[AFScreen bgOpacity]];

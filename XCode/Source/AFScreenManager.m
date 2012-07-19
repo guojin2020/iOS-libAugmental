@@ -61,7 +61,7 @@ static NSString*	switchViewSound = nil;
 	NSMutableArray* viewControllers = [[NSMutableArray alloc] initWithCapacity:[screens count]];
 	for(AFScreen* screen in screens)
 	{
-		[viewControllers addObject:screen.viewController.navigationController?screen.viewController.navigationController:screen.viewController];
+		[ viewControllers addObject:screen.viewController.navigationController ? screen.viewController.navigationController : screen.viewController ];
 	}
 	[tabController setViewControllers:viewControllers animated:animated];
 	[viewControllers release];
