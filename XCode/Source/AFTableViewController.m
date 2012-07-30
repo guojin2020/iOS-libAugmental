@@ -360,11 +360,16 @@
     CGRect keyboardRect;
 	CGPoint keyboardBegin;
 	CGPoint keyboardEnd;
+    
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
+    
 	[[[notification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&keyboardRect];
 	[[[notification userInfo] objectForKey:UIKeyboardCenterBeginUserInfoKey] getValue:&keyboardBegin];
 	[[[notification userInfo] objectForKey:UIKeyboardCenterEndUserInfoKey] getValue:&keyboardEnd];
 	
+#pragma GCC diagnostic warning "-Wdeprecated-declarations" 
+    
 	if(!keyboardAnimating)
 	{
 		keyboardAnimating = YES;

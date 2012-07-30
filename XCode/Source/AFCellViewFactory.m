@@ -1,7 +1,5 @@
 
 #import "AFCellViewFactory.h" 
-#import "UIImage+NSCoding.h"
-
 
 @implementation AFCellViewFactory  
 

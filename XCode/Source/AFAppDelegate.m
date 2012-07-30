@@ -91,17 +91,6 @@ static BOOL globalSFXEnabled = NO;
 	[[AFAppDelegate appEventManager] broadcastEvent:(event)APP_TERMINATING source:self];
 }
 
-/*
--(void)setRootViewController:(UIViewController*)viewController
-{
-	[rootViewController.view removeFromSuperview];
-	UIViewController* oldViewController = rootViewController;
-	rootViewController = [viewController retain];
-	[oldViewController release];
-	[window addSubview:rootViewController.view];
-}
-*/
-
 -(void)request:(NSObject<AFRequest>*)request returnedWithData:(id)data
 {
 	NSAssert(request==settingsRequest,@"AFAppDelegate received a response from an unexpected request: %@",request);

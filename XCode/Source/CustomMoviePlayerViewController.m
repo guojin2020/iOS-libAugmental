@@ -59,6 +59,7 @@
 	}
 }
 
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 /*---------------------------------------------------------------------------
 * For 3.1.x devices
 * For 3.2 and 4.x see moviePlayerLoadStateChanged: 
@@ -74,6 +75,7 @@
 	// Play the movie
  	[mp play];
 }
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 
 /*---------------------------------------------------------------------------
 * 
@@ -91,6 +93,9 @@
 	[self dismissModalViewControllerAnimated:YES];	
 }
 
+
+
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 /*---------------------------------------------------------------------------
 *
 *--------------------------------------------------------------------------*/
@@ -115,7 +120,10 @@
 	}  
   else
   {
-    // Register to receive a notification when the movie is in memory and ready to play.
+      
+
+
+      // Register to receive a notification when the movie is in memory and ready to play.
     [[NSNotificationCenter defaultCenter] addObserver:self 
                          selector:@selector(moviePreloadDidFinish:) 
                          name:MPMoviePlayerContentPreloadDidFinishNotification 
@@ -128,6 +136,7 @@
                         name:MPMoviePlayerPlaybackDidFinishNotification 
                         object:nil];
 }
+#pragma GCC diagnostic warning "-Wdeprecated-declarations"
 
 /*---------------------------------------------------------------------------
 * 
