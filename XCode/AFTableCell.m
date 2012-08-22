@@ -1,4 +1,4 @@
-
+#import <CoreGraphics/CoreGraphics.h>
 #import "AFTableCell.h"
 #import "AFCellSelectionDelegate.h"
 #import "AFTableCellBackgroundView.h"
@@ -52,6 +52,11 @@ static NSString* cellClickedSound			= nil;
 	return self;
 }
 
+- (void)refresh
+{
+    [self.cell setNeedsLayout];
+}
+
 -(BOOL)deleteSelected{return NO;}
 -(BOOL)allowsDeletion{return NO;}
 
@@ -62,7 +67,7 @@ static NSString* cellClickedSound			= nil;
 	return [self viewCellForTableView:tableIn templateName:nil];
 }
 
--(UINavigationController*)navigationController{return self.parentSection.parentTable.viewController.navigationController;}
+-(UINavigationController*) navigationController { return self.parentSection.parentTable.viewController.navigationController; }
 
 -(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn templateName:(NSString*)templateNameIn
 {
@@ -83,30 +88,15 @@ static NSString* cellClickedSound			= nil;
 			if([labelText length]>0) cell.textLabel.text = labelText;
 		}
 		
-		height = cell.frame.size.height;
-		if(height<=0) height = DEFAULT_CELL_HEIGHT;
-		
-		//Apply default settings for the look and feel of all cells, e.g. font colour
-		cell.textLabel.opaque = NO;
-		cell.textLabel.backgroundColor = [UIColor clearColor];
-        
-        [self setFillColor:[AFTableCell defaultBGColor]];
-		
-		//Apply the default background view, more customisable than the Apple default
-		
-		UIView* backgroundView = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
-		cell.backgroundView = backgroundView;
-		[cell.backgroundView release];
-		 
+		[self viewCellDidLoad];
+        [self refresh];
 	}
 	return cell;
 }
 
 -(CGFloat)heightForTableView:(UITableView*)tableIn
 {
-	if(!cell) self.cell = [self viewCellForTableView:tableIn];
-	
-	return height;
+	return [self viewCellForTableView:tableIn].frame.size.height;
 }
 
 -(void)setFillColor:(UIColor*)color
@@ -114,17 +104,17 @@ static NSString* cellClickedSound			= nil;
 	UIColor* oldColor = fillColor;
 	fillColor = [color retain];
 	if(fillColor!=oldColor) [cell.backgroundView setNeedsDisplay];
-	//[oldColor release];
 }
 
--(void)accessoryTapped{}
+-(void)accessoryTapped {}
+
 -(void)willBeAdded{}
 -(void)willBeRemoved{}
 
 -(void)wasSelected
 {
 	[AFAppDelegate playSound:[AFTableCell cellClickedSound]];
-	
+
 	if(selectionDelegate)[selectionDelegate cellSelected:self];
 }
 
@@ -147,7 +137,7 @@ static NSString* cellClickedSound			= nil;
 +(UIColor*)defaultBGColor
 {
     if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
-    return defaultBGColor;
+    return defaultBGColor?:[UIColor clearColor];
 }
 
 +(UIFont*)defaultTextFont
@@ -171,6 +161,25 @@ static NSString* cellClickedSound			= nil;
 	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
 	return cellClickedSound;
 }
+
+- (void)viewCellDidLoad
+{
+    height = cell.frame.size.height;
+    if(height<=0) height = DEFAULT_CELL_HEIGHT;
+
+    //Apply default settings for the look and feel of all cells, e.g. font colour
+    cell.textLabel.opaque = YES;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+
+    [self setFillColor:[AFTableCell defaultBGColor]];
+
+    //Apply the default background view, more customisable than the Apple default
+
+    UIView* backgroundView = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
+    cell.backgroundView = backgroundView;
+    [cell.backgroundView release];
+}
+
 
 //=================>> Themeable
 

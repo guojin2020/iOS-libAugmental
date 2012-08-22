@@ -11,7 +11,7 @@
  */
 @interface AFTableViewController : UIViewController <UITableViewDataSource,UITableViewDelegate, AFPObserver>
 {
-	AFTable*		table;
+	AFTable*    table;
 	
 	NSMutableDictionary*	headerViews;
 	UITableViewCell*		returnCell;
@@ -19,17 +19,20 @@
 	CGRect	normalTableFrame;
 	BOOL	keyboardAnimating;
 	
-	UIButton *doneButton;
-	UITextField* currentTextField;
-	AFTableCell* currentTableCell;
+	UIButton*       doneButton;
+	UITextField*    currentTextField;
     
     UIViewController* overrideParent;
+
+    UITableViewCellStyle tableStyle;
 }
 
 /*
  * Convenience initialiser, equivalent to doing [init] then performing self.table = tableIn;
  */
--(id)initWithTable:(AFTable*)tableIn;
+
+-(id)initWithStyle:(UITableViewStyle)tableStyleIn;
+-(id)initWithTable:(AFTable*)tableIn style:(UITableViewStyle)tableStyleIn;
 
 -(void)setParentViewController:(UIViewController*)parentViewControllerIn;
 
@@ -46,5 +49,6 @@
 
 @property (nonatomic, retain) AFTable* table;
 @property (nonatomic, retain) UIButton* doneButton;
+//@property (nonatomic) UITableViewCellStyle cellStyle;
 
 @end

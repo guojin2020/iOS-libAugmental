@@ -29,38 +29,34 @@ static UIColor* disclosureArrowColor = nil;
 	return self;
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn;
+-(void)viewCellDidLoad
 {
-	if(!cell || tableView!=tableIn)
-	{
-		self.cell = [super viewCellForTableView:tableIn templateName:@"searchOptionCell"];
-		
-		//Apply the default disclosure view
-		UIView* arrow = [[UICustomDisclosureArrowView alloc] initWithColor:[AFGenericOptionTableCell disclosureArrowColor]];
-		cell.accessoryView = arrow;
-		[arrow release];
-		
-		//Reassign components
-		[searchOptionLabel release];
-		[searchOptionIcon release];
-		
-		searchOptionLabel	= [(UILabel*)		[cell viewWithTag:1] retain];
-		searchOptionIcon	= [(UIImageView*)	[cell viewWithTag:2] retain];
-		
-		//NSLog(@"%@",	searchOptionIcon);
-		
-		NSAssert(searchOptionLabel,	@"");
-		NSAssert(searchOptionIcon,	@"");
-		
-		[searchOptionLabel setTextColor:[AFTableCell defaultTextColor]];
-		[searchOptionLabel setFont:[[AFTableCell defaultTextFont] fontWithSize:[AFTableCell defaultTextSize]]];
-		
-		//NSLog(@"LabelIcon: %@",labelIcon);
-		
-		if(labelText) searchOptionLabel.text = labelText;
-		if(labelIcon && [labelIcon isKindOfClass:[UIImage class]]) [searchOptionIcon setImage:labelIcon];
-	}
-	return cell;
+    [super viewCellDidLoad];
+
+    //Apply the default disclosure view
+    UIView* arrow = [[UICustomDisclosureArrowView alloc] initWithColor:[AFGenericOptionTableCell disclosureArrowColor]];
+    cell.accessoryView = arrow;
+    [arrow release];
+
+    //Reassign components
+    [searchOptionLabel release];
+    [searchOptionIcon release];
+
+    searchOptionLabel	= [(UILabel*)		[cell viewWithTag:1] retain];
+    searchOptionIcon	= [(UIImageView*)	[cell viewWithTag:2] retain];
+
+    //NSLog(@"%@",	searchOptionIcon);
+
+    NSAssert(searchOptionLabel,	@"");
+    NSAssert(searchOptionIcon,	@"");
+
+    [searchOptionLabel setTextColor:[AFTableCell defaultTextColor]];
+    [searchOptionLabel setFont:[[AFTableCell defaultTextFont] fontWithSize:[AFTableCell defaultTextSize]]];
+
+    //NSLog(@"LabelIcon: %@",labelIcon);
+
+    if(labelText) searchOptionLabel.text = labelText;
+    if(labelIcon && [labelIcon isKindOfClass:[UIImage class]]) [searchOptionIcon setImage:labelIcon];
 }
 
 //==========>> Themeable

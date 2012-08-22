@@ -1,9 +1,6 @@
 
 #import "AFBaseObject.h"
-#import "AFObjecthelper.h"
-#import "AFJSONRequest.h"
 #import "AFEventManager.h"
-//#import "AFAppDelegate.h"
 
 @implementation AFBaseObject
 

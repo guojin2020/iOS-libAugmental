@@ -49,50 +49,47 @@ static NSNumber* textShadowEnabled;
 	return [textShadowEnabled boolValue];
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView *)tableViewIn
+- (void)viewCellDidLoad
 {
-	if(!cell)
-	{
-		self.cell		= [self viewCellForTableView:tableViewIn templateName:@"pageScrubbingCell"];
-		headerLabel		= [(UILabel*) [cell viewWithTag:1] retain];
-		pageLabel		= [(UILabel*) [cell viewWithTag:3] retain];
-		slider			= [(UISlider*)[cell viewWithTag:2] retain];
-		
-		[headerLabel setTextColor:[AFPageScrubbingTableCell textColor]];
-		[pageLabel setTextColor:[AFPageScrubbingTableCell textColor]];
-		
-		
-		if([AFPageScrubbingTableCell textShadowEnabled])
-		{
-			[headerLabel setShadowColor:[AFPageScrubbingTableCell textShadowColor]];
-			[pageLabel setShadowColor:[AFPageScrubbingTableCell textShadowColor]];
-			[headerLabel setShadowOffset:CGSizeMake(1,1)];
-			[pageLabel setShadowOffset:CGSizeMake(1,1)];
-		}
-		else
-		{
-			[headerLabel setShadowColor:[UIColor clearColor]];
-			[pageLabel setShadowColor:[UIColor clearColor]];
-			[headerLabel setShadowOffset:CGSizeMake(0,0)];
-			[pageLabel setShadowOffset:CGSizeMake(0,0)];
-		}
-		
-		
-        [slider setMinimumValue:1.00f];
-        [slider setMaximumValue:(float)pageCount];
-        
-		[self updateScrubber];
-		
-		[slider addTarget:self action:@selector(editingDidBegin:)	forControlEvents:UIControlEventTouchDown];
-		[slider addTarget:self action:@selector(editingDidEnd:)		forControlEvents:UIControlEventTouchUpInside];
-		[slider addTarget:self action:@selector(editingChanged:)	forControlEvents:UIControlEventValueChanged];
-		
-		UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
-		backView.backgroundColor = [UIColor clearColor];
-		cell.backgroundView = backView;
-		[backView release];
-	}
-	return cell;
+    [super viewCellDidLoad];
+
+    headerLabel		= [(UILabel*) [cell viewWithTag:1] retain];
+    pageLabel		= [(UILabel*) [cell viewWithTag:3] retain];
+    slider			= [(UISlider*)[cell viewWithTag:2] retain];
+
+    [headerLabel setTextColor:[AFPageScrubbingTableCell textColor]];
+    [pageLabel setTextColor:[AFPageScrubbingTableCell textColor]];
+
+
+    if([AFPageScrubbingTableCell textShadowEnabled])
+    {
+        [headerLabel setShadowColor:[AFPageScrubbingTableCell textShadowColor]];
+        [pageLabel setShadowColor:[AFPageScrubbingTableCell textShadowColor]];
+        [headerLabel setShadowOffset:CGSizeMake(1,1)];
+        [pageLabel setShadowOffset:CGSizeMake(1,1)];
+    }
+    else
+    {
+        [headerLabel setShadowColor:[UIColor clearColor]];
+        [pageLabel setShadowColor:[UIColor clearColor]];
+        [headerLabel setShadowOffset:CGSizeMake(0,0)];
+        [pageLabel setShadowOffset:CGSizeMake(0,0)];
+    }
+
+
+    [slider setMinimumValue:1.00f];
+    [slider setMaximumValue:(float)pageCount];
+
+    [self updateScrubber];
+
+    [slider addTarget:self action:@selector(editingDidBegin:)	forControlEvents:UIControlEventTouchDown];
+    [slider addTarget:self action:@selector(editingDidEnd:)		forControlEvents:UIControlEventTouchUpInside];
+    [slider addTarget:self action:@selector(editingChanged:)	forControlEvents:UIControlEventValueChanged];
+
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
+    backView.backgroundColor = [UIColor clearColor];
+    cell.backgroundView = backView;
+    [backView release];
 }
 
 -(void)updateScrubber

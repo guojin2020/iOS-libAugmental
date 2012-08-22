@@ -39,36 +39,32 @@ static UIImage* editIcon = nil;
 	return nil;
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn;
+- (void)viewCellDidLoad
 {
-	if(!cell||tableView!=tableIn)
-	{
-		self.tableView = tableIn;
-		self.cell = [super viewCellForTableView:tableIn templateName:@"editableOptionCell"];
-		
-		//Reassign components
-		[optionLabel release];
-		[valueLabel release];
-		[editableOptionIcon release];
-		
-		optionLabel				= [(UILabel*)[cell viewWithTag:1] retain];
-		valueLabel				= [(UILabel*)[cell viewWithTag:2] retain];
-		editableOptionIcon		= [(UIImageView*)[cell viewWithTag:3] retain];
-		
-		[optionLabel setTextColor:[AFTableCell defaultTextColor]];
-		[valueLabel setTextColor:[AFTableCell defaultTextColor]];
-		
-		UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[AFViewPanelSetting editIcon]];
-		cell.accessoryView = accessoryView;
-		[accessoryView release];
-		
-		if(labelText) optionLabel.text = labelText;
-		if(labelIcon) editableOptionIcon.image = labelIcon;
-		
-		[self updateControlCell];
-	}
-	return cell;
+    [super viewCellDidLoad];
+
+    //Reassign components
+    [optionLabel release];
+    [valueLabel release];
+    [editableOptionIcon release];
+
+    optionLabel				= [(UILabel*)[cell viewWithTag:1] retain];
+    valueLabel				= [(UILabel*)[cell viewWithTag:2] retain];
+    editableOptionIcon		= [(UIImageView*)[cell viewWithTag:3] retain];
+
+    [optionLabel setTextColor:[AFTableCell defaultTextColor]];
+    [valueLabel  setTextColor:[AFTableCell defaultTextColor]];
+
+    UIImageView* accessoryView = [[UIImageView alloc] initWithImage:[AFViewPanelSetting editIcon]];
+    cell.accessoryView = accessoryView;
+    [accessoryView release];
+
+    if(labelText) optionLabel.text = labelText;
+    if(labelIcon) editableOptionIcon.image = labelIcon;
+
+    [self updateControlCell];
 }
+
 
 -(void)setValue:(NSObject <NSCoding>*)valueIn
 {

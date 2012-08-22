@@ -1,11 +1,7 @@
 
 #import "AFBaseSetting.h"
-#import "AFSettingPersistenceDelegate.h"
 #import "AFValidator.h"
-#import "AFTableCellBackgroundView.h"
-#import "AFTableCell.h"
 #import "AFTable.h"
-#import "AFTableSection.h"
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
 
@@ -55,25 +51,22 @@ static UIColor* invalidColor = nil;
 	return self;
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
+- (void)viewCellDidLoad
 {
-	if(!cell||tableView!=tableIn)
-	{
-		cell = [super viewCellForTableView:tableIn];
-		
-		cell.textLabel.numberOfLines = 2;
-		cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
-		
-		cell.textLabel.opaque = NO;
-		cell.textLabel.backgroundColor = [UIColor clearColor];
-		cell.contentView.opaque = NO;
-		cell.contentView.backgroundColor = [UIColor clearColor];
-		
-		[self updateControlCell];
-	}
-	return cell;
+    [super viewCellDidLoad];
+
+    cell.textLabel.numberOfLines = 2;
+    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
+    cell.textLabel.textAlignment = UITextAlignmentCenter;
+
+    cell.textLabel.opaque = NO;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.contentView.opaque = NO;
+    cell.contentView.backgroundColor = [UIColor clearColor];
+
+    [self updateControlCell];
 }
+
 
 -(NSString*)labelText{return labelText;}
 -(void)setLabelText:(NSString*)labelTextIn

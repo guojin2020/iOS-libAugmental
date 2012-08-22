@@ -42,6 +42,8 @@
 -(void)wasSelected;
 -(void)accessoryTapped;
 
+-(void)refresh; // Refresh UI values from object
+
 /**
  Informs the cell that delete has been selected. The cell may take appropriate action e.g. showing a confirmation dialog or changing its state somehow.
  Subclasses should implement an appropriate behaviour and return YES or NO depending on whether the cell should be removed from its parent table.
@@ -64,11 +66,12 @@
 -(UIColor*)fillColor;
 
 +(UIColor*) defaultTextColor;
-+(UIColor*) defaultSecondaryTextColor;
 +(UIColor*) defaultBGColor;
 +(UIFont*)  defaultTextFont;
 +(float_t)  defaultTextSize;
 +(NSString*)cellClickedSound;
+
+- (void)viewCellDidLoad;
 
 @property (nonatomic,retain) NSObject<AFCellSelectionDelegate>* selectionDelegate;
 @property (nonatomic,retain) UITableViewCell* cell;

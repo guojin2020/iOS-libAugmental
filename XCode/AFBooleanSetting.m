@@ -4,20 +4,6 @@
 
 @implementation AFBooleanSetting
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
-{
-	if(!cell)
-	{
-		cell = [super viewCellForTableView:tableIn];
-		valueSwitch = [[UISwitch alloc]initWithFrame:CGRectZero];
-		[valueSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
-		[cell setAccessoryView:valueSwitch];
-		[self updateControlCell];
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-	}
-	return cell;
-}
-
 -(void)updateControlCell
 {
 	[super updateControlCell];
@@ -33,6 +19,17 @@
 {
 	[valueSwitch release];
 	[super dealloc];
+}
+
+- (void)viewCellDidLoad
+{
+    [super viewCellDidLoad];
+
+    valueSwitch = [[UISwitch alloc]initWithFrame:CGRectZero];
+    [valueSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [cell setAccessoryView:valueSwitch];
+    [self updateControlCell];
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
 }
 
 @dynamic value, validator, valid;

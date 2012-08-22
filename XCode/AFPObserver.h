@@ -14,6 +14,6 @@
 
 @protocol AFPObserver <NSObject>
 
--(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSObject*)object, ...;
+-(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters;
 
 @end

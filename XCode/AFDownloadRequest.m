@@ -1,9 +1,6 @@
 #import "AFDownloadRequest.h"
-//#import "AFAppDelegate.h"
 #import "AFQueueableRequestObserver.h"
-#import "AFSessionStates.h"
 #import "AFSession.h"
-#import "AFRequestObserver.h"
 #import "AFHeaderRequest.h"
 #import "AFPerformSelectorOperation.h"
 
@@ -248,10 +245,10 @@ static NSMutableDictionary* uniqueRequestPool = nil;
 
 -(void)dealloc
 {
-	[sizeCache release];
-	[numberFormatter release];
-	[uniqueRequestPool release];
-	[observers release];
+    [sizeCache release];
+    [numberFormatter release];
+    [uniqueRequestPool release];
+    [observers release];
     [targetPath release];
     [dataBuffer release];
     [myHandle release];
@@ -260,6 +257,7 @@ static NSMutableDictionary* uniqueRequestPool = nil;
 }
 
 @synthesize uniqueKey;
-@dynamic receivedBytes,connection, URL, state, requiresLogin, attempts;
+@dynamic connection, URL, state, requiresLogin, attempts;
+@dynamic receivedBytes;
 
 @end

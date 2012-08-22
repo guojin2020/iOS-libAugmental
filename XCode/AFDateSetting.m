@@ -1,8 +1,6 @@
-#import "AFCellViewFactory.h"
+
 #import "AFDateSetting.h"
 #import "AFThemeManager.h"
-#import "AFImageCache.h"
-#import "AFSettingPersistenceDelegate.h"
 
 @implementation AFDateSetting
 

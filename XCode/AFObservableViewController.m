@@ -32,6 +32,6 @@
     [super dealloc];
 }
 
-@synthesize observableObject;
+-(AFObservable *)observableObject { return object; }
 
 @end

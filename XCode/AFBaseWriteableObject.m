@@ -1,6 +1,5 @@
 
 #import "AFBaseWriteableObject.h"
-#import "AFWriteableObject.h"
 
 static NSString* PRIMARY_KEY_KEY    = @"pk";
 static NSString* CLASS_KEY          = @"class";

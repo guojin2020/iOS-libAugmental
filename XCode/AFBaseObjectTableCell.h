@@ -22,7 +22,6 @@
 
 -(NSString*)cellReuseIdentifier;
 
-@property (nonatomic, retain) UITableViewCell* cell;
-@property (nonatomic, retain) NSObject<AFObject>* object;
+@property (nonatomic, retain) NSObject<AFObject_CellViewable>* object;
 
 @end

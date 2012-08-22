@@ -15,25 +15,17 @@ static AFChangeFlag* FLAG_TABLE_EDITED;
     FLAG_TABLE_EDITED = [AFChangeFlag new];
 }
 
--(id)initWithTitle:(NSString*)titleIn
-{
-	if((self = [self initWithTitle:titleIn backTitle:nil]))
-	{
-        [self notifyObservers:FLAG_TABLE_EDITED parameters:NULL];
-	}
-	return self;
-}
+-(id)init { return [self initWithTitle:@""]; }
+-(id)initWithTitle:(NSString*)titleIn { return [self initWithTitle:titleIn backTitle:nil]; }
 
 -(id)initWithTitle:(NSString*)titleIn backTitle:(NSString*)backTitleIn
 {
-	if((self = [self init]))
+	if((self = [super init]))
 	{
 		title = [titleIn retain];
 		children = [[NSMutableArray alloc] init];
-        
-		//observers = [[NSMutableSet alloc] init];
-		//blockEdit = NO;
-		//editMade = NO;
+
+        [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
         
 		backTitle = [backTitleIn retain];
         viewController = NULL;
@@ -110,7 +102,7 @@ static AFChangeFlag* FLAG_TABLE_EDITED;
 {
     if(!viewController)
     {
-        viewController = [[AFTableViewController alloc] initWithTable:self];
+        viewController = [[AFTableViewController alloc] initWithTable:self style:UITableViewStylePlain];
     }
     return viewController;
 }
@@ -122,7 +114,7 @@ static AFChangeFlag* FLAG_TABLE_EDITED;
 
 //=========>> Dealloc
 
-- (void)change:(AFChangeFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSObject *)object, ...
+- (void)change:(AFChangeFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray*)parameters
 {
 
 }

@@ -8,7 +8,7 @@
 @class AFEventManager;
 @class AFJSONRequest;
 @class AFBooleanSetting;
-@class AFSettingsScreen;
+//@class AFSettingsScreen;
 
 @protocol AFEventObserver;
 
@@ -17,7 +17,7 @@
     UIWindow*           window;
 	AFJSONRequest*      settingsRequest;
 	NSArray*            settingsSections;
-	AFSettingsScreen*   settingsScreen;
+	//AFSettingsScreen*   settingsScreen;
 }
 
 +(AFEventManager*) appEventManager;

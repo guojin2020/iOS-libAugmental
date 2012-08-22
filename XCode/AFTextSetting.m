@@ -39,23 +39,19 @@ static NSString*	beginEditingSound	= nil;
 	return self;
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
+- (void)viewCellDidLoad
 {
-	if(!cell)
-	{		
-		cell=[super viewCellForTableView:tableIn];
-		
-		[cell setAccessoryView:textField];
-		
-		CGRect textFieldFrame = CGRectMake(100.0, 15.0, 180, 36.0);
-		cell.accessoryView.frame = textFieldFrame;
-		//cell.accessoryView.transform = CGAffineTransformMakeTranslation(0, 15);
-		
-		cell.selectionStyle = UITableViewCellSelectionStyleGray;
-		
-		[self updateControlCell];
-	}
-	return cell;
+    [super viewCellDidLoad];
+
+    [cell setAccessoryView:textField];
+
+    CGRect textFieldFrame = CGRectMake(100.0, 15.0, 180, 36.0);
+    cell.accessoryView.frame = textFieldFrame;
+    //cell.accessoryView.transform = CGAffineTransformMakeTranslation(0, 15);
+
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+
+    [self updateControlCell];
 }
 
 //======>>  UITextFieldDelegate Implementation

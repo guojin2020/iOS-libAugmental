@@ -1,11 +1,8 @@
 
 
 #import "AFBaseObjectTableCell.h"
-#import "AFCellViewFactory.h"
 #import "AFObject_CellViewable.h"
-#import "AFObject.h"
 #import "AFEventManager.h"
-#import "AFEventObserver.h"
 
 @implementation AFBaseObjectTableCell
 
@@ -49,6 +46,5 @@
 }
 
 @synthesize object;
-@dynamic cell;
 
 @end

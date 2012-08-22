@@ -1,4 +1,4 @@
-
+#import <CoreGraphics/CoreGraphics.h>
 #import "AFTableViewController.h"
 
 #import "AFScreen.h"
@@ -14,12 +14,19 @@
 
 @end
 
+CGRect CGRectMakePair(CGPoint location, CGSize size);
+CGRect CGRectMakePair(CGPoint location, CGSize size)
+{
+    return CGRectMake(location.x, location.y, size.width, size.height);
+}
+
 @implementation AFTableViewController
 
--(id)init
+-(id)initWithStyle:(UITableViewStyle)tableStyleIn
 {
 	if((self = [super init]))
 	{
+        tableStyle          = tableStyleIn;
 		table				= nil;
 		headerViews			= [[NSMutableDictionary alloc] init];
 		keyboardAnimating	= NO;
@@ -29,9 +36,9 @@
 	return self;
 }
 
--(id)initWithTable:(AFTable*)tableIn
+-(id)initWithTable:(AFTable*)tableIn style:(UITableViewStyle)tableStyleIn
 {
-	if((self = [self init]))
+	if((self = [self initWithStyle:tableStyleIn]))
 	{
 		self.table = tableIn;
 	}
@@ -56,7 +63,7 @@
 	//[self.view performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }
 
--(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSObject*)object, ...
+-(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters
 {
     
 }
@@ -82,9 +89,12 @@
 	if([self isViewLoaded])[self editableChanged:table];
 }
 
+- (UITableViewCellStyle)cellStyle { return tableStyle; }
+
+
 -(void)editableChanged:(AFObservable*)changedTable
 {
-	NSAssert(changedTable==table,@"Doom");
+	NSAssert(changedTable==table,@"Internal inconsistency");
 	
 	self.title = table.title;
 	if([self isViewLoaded]) [self reloadData];
@@ -92,13 +102,19 @@
 
 -(void)loadView
 {
-	UITableView* tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0,0,0) style:UITableViewStyleGrouped];
-	tableView.dataSource = self;
+    UITableView* tableView = [[UITableView alloc] initWithFrame:CGRectZero style:tableStyle];
+
+    tableView.separatorColor = [UIColor colorWithWhite:0.25 alpha:1];
+
+    tableView.dataSource = self;
 	tableView.delegate = self;
 	tableView.showsVerticalScrollIndicator = YES;
 	tableView.showsHorizontalScrollIndicator = NO;
-	
+
 	self.view = tableView;
+
+   tableView.opaque = NO;
+
 	[tableView release];
 }
 
@@ -106,6 +122,13 @@
 {
 	[super viewDidLoad];
 	self.view.backgroundColor = [UIColor clearColor];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    NSLog(@"Table frame on display: %@", NSStringFromCGRect(self.view.frame));
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -157,7 +180,7 @@
 	
 	if(!tableView || !title || [title isEqualToString:@""])
 	{
-		return [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+		return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 	}
 		
 	UIView* headerView = [headerViews objectForKey:title];

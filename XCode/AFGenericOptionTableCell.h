@@ -14,6 +14,7 @@
 }
 
 -(id)initWithLabelText:(NSString*)labelTextIn labelIcon:(UIImage*)labelIconIn;
+
 +(UIColor*)disclosureArrowColor;
 
 @end

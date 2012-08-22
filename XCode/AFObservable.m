@@ -26,18 +26,24 @@
 }
 
 -(void) notifyObservers:(AFChangeFlag*)changeFlag parameters:(id)firstParameter, ...
-{    
-    NSMutableArray* parameters = [[NSMutableArray alloc] init];
-    
-    va_list parameterList;
-    [parameters addObject: firstParameter];
-    va_start(parameterList, firstParameter);
-    id eachParameter;
-    while ((eachParameter = va_arg(parameterList, id)))
+{
+    NSMutableArray* parameters;
+
+    if (firstParameter)
     {
-        [parameters addObject: eachParameter];
+        parameters = [[NSMutableArray alloc] init];
+
+        va_list parameterList;
+        [parameters addObject: firstParameter];
+        va_start(parameterList, firstParameter);
+        id eachParameter;
+        while ((eachParameter = va_arg(parameterList, id)))
+        {
+            [parameters addObject: eachParameter];
+        }
+        va_end(parameterList);
     }
-    va_end(parameterList);
+    else parameters = NULL;
     
     if(lockCount==0)
     {

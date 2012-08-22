@@ -14,15 +14,12 @@
 	return self;
 }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
+- (void)viewCellDidLoad
 {
-	if(!cell)
-	{		
-		cell=[super viewCellForTableView:tableIn];
-		textField.secureTextEntry = YES;
-	}
-	return cell;
+    [super viewCellDidLoad];
+    textField.secureTextEntry = YES;
 }
+
 
 -(void)setValue:(NSObject<NSCoding>*)valueIn
 {

@@ -35,6 +35,8 @@ static AFChangeFlag* FLAG_SECTION_EDITED;
 	return [headerShadowEnabled boolValue];
 }
 
+-(id)init { return [self initWithTitle:@""]; }
+
 -(id)initWithTitle:(NSString*)titleIn
 {
 	if((self = [super init]))
@@ -76,14 +78,14 @@ static AFChangeFlag* FLAG_SECTION_EDITED;
 	cell.parentSection = self;
 	[children addObject:cell];
 	[cell willBeAdded];
-	[self notifyObservers:FLAG_SECTION_EDITED parameters:self];
+	[self notifyObservers:FLAG_SECTION_EDITED parameters:self,nil];
 }
 
 -(void)removeCell:(AFTableCell*)cell
 {
 	[children removeObject:cell];
 	[cell willBeRemoved];
-	[self notifyObservers:FLAG_SECTION_EDITED parameters:self];
+	[self notifyObservers:FLAG_SECTION_EDITED parameters:self,nil];
 }
 
 -(int)cellCount{return [children count];}
