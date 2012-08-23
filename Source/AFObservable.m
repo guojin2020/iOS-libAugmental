@@ -19,7 +19,7 @@
     {
         observers   = [[NSMutableSet alloc] init];
         events      = [[NSMutableSet alloc] init];
-        lockCount = 0;
+        lockCount   = 0;
         return self;
     }
     else return NULL;
