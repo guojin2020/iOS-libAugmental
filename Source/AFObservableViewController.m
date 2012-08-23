@@ -8,7 +8,7 @@
 
 #import "AFObservableViewController.h"
 
-#import "AFObservable.h"
+//#import "AFObservable.h"
 
 @implementation AFObservableViewController
 

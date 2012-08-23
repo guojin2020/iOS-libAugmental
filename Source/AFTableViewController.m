@@ -5,7 +5,7 @@
 #import "AFTable.h"
 #import "AFTableSection.h"
 #import "AFCellSelectionDelegate.h"
-#import "AFBlockEditableObject.h"
+#import "AFObservable.h"
 #import "AFTableCellBackgroundView.h"
 
 @interface AFTableViewController ()
@@ -86,10 +86,11 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 		[backButton release];
 	}
 	
-	if([self isViewLoaded])[self editableChanged:table];
+	//if([self isViewLoaded])[self editableChanged:table];
+    if([self isViewLoaded])[self editableChanged:self];
 }
 
-- (UITableViewCellStyle)cellStyle { return tableStyle; }
+- (UITableViewStyle)cellStyle { return tableStyle; }
 
 
 -(void)editableChanged:(AFObservable*)changedTable

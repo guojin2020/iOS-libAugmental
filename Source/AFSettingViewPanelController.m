@@ -86,7 +86,7 @@
     [value release];
     [value release];
     [defaultValue release];
-    [loadingLabel release];
+    //[loadingLabel release];
     [loadingView release];
     [super dealloc];
 }
