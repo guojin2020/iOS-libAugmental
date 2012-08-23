@@ -1,3 +1,6 @@
 [submodule "Library/TouchJSON"]
 	path = Library/TouchJSON
 	url = https://github.com/TouchCode/TouchJSON.git
+[submodule "TouchJSON"]
+	path = TouchJSON
+	url = git://github.com/TouchCode/TouchJSON.git

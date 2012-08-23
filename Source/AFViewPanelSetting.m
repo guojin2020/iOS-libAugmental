@@ -119,7 +119,7 @@ static UIImage* editIcon = nil;
 	[optionLabel release];
 	[valueLabel release];
 	[editableOptionIcon release];
-    [valueString release];
+    //[valueString release];
     [super dealloc];
 }
 
