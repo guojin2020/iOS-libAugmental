@@ -24,7 +24,7 @@
     
     UIViewController* overrideParent;
 
-    UITableViewCellStyle tableStyle;
+    UITableViewStyle tableStyle;
 }
 
 /*
