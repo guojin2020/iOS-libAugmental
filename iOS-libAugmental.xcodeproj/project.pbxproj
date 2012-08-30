@@ -18,14 +18,20 @@
 		67D174B77EB2D80B48FECAB0 /* AFTable+ValidateAllSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17CAAD4858B979444F411 /* AFTable+ValidateAllSettings.h */; };
 		67D174EB4F0852C934C19523 /* AFTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D1797652BCF7DDF2833C43 /* AFTableCell.h */; };
 		67D175D1568437C36FDAD070 /* AFTableAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D1758E682CD0395E210981 /* AFTableAlert.h */; };
+		67D176C44F9021BFDFB2899A /* AFPConstrainedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17109CE48A45BBC2BBE69 /* AFPConstrainedView.h */; };
 		67D176DEB0A3651B78A945C2 /* AFTableCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17110535EC79A0438A4AA /* AFTableCellBackgroundView.h */; };
+		67D176EB525CCA87779C88B1 /* AFLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17F1FC2ACC3834D4CFD77 /* AFLayoutView.h */; };
 		67D177431F83AFA4F378CB38 /* AFTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17BC1415967F0681F57C6 /* AFTableViewController.h */; };
+		67D1777A00ED71C4AC4FFF49 /* AFStackLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17827A4421772D1649A0D /* AFStackLayoutView.h */; };
 		67D17805B6081499BCBA987A /* AFTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D1745FC915AAF8D295A05C /* AFTableViewController.m */; };
-		67D1795A533E489ADE105A14 /* AFLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D175616765B9FC38A251F7 /* AFLayoutView.h */; };
+		67D17960E974225563EAA2B2 /* AFConstrainedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17D864AC731EA99D4E6ED /* AFConstrainedView.h */; };
+		67D1798D85321B199997A971 /* AFLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17CADF5BE9A1E2380C2B1 /* AFLayoutView.m */; };
 		67D17A7AB1A3242E8D442C47 /* AFTableAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17273365393A596B48448 /* AFTableAlert.m */; };
+		67D17CBE0E013CD44AC14AB0 /* AFConstrainedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17A0BCFE70DD8B1A59F90 /* AFConstrainedView.m */; };
 		67D17CC97551B400342053C1 /* AFTableCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17BA51A0618B64B25BD6A /* AFTableCellBackgroundView.m */; };
 		67D17CCBE6A6668857766C76 /* AFLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D177C656EC5FB814167ED8 /* AFLayoutView.m */; };
 		67D17F267CA81E39B7E198E2 /* AFTableSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D171A27C38442FBF457F1C /* AFTableSection.h */; };
+		67D17F71EB112A23649CBA6B /* AFStackLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D172AF0CB010C389C1906E /* AFStackLayoutView.m */; };
 		759B000A15E6CC1900D32988 /* AFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		759B000B15E6CC1900D32988 /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF3D15E6CC1900D32988 /* AFAppDelegate.m */; };
 		759B000C15E6CC1900D32988 /* AFBaseObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3E15E6CC1900D32988 /* AFBaseObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -249,22 +255,27 @@
 		097252D914A5F48800E75618 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		099C5F7F149EA61800F25175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		67D1706F32F997290A5782D8 /* AFTableSectionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableSectionObserver.h; sourceTree = "<group>"; };
+		67D17109CE48A45BBC2BBE69 /* AFPConstrainedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPConstrainedView.h; sourceTree = "<group>"; };
 		67D17110535EC79A0438A4AA /* AFTableCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableCellBackgroundView.h; sourceTree = "<group>"; };
 		67D171A27C38442FBF457F1C /* AFTableSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableSection.h; sourceTree = "<group>"; };
 		67D17273365393A596B48448 /* AFTableAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableAlert.m; sourceTree = "<group>"; };
+		67D172AF0CB010C389C1906E /* AFStackLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFStackLayoutView.m; sourceTree = "<group>"; };
 		67D17395837F06E9E57ECD01 /* AFTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTable.h; sourceTree = "<group>"; };
 		67D173AF9D2902398C7AAC16 /* AFTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableSection.m; sourceTree = "<group>"; };
 		67D1745FC915AAF8D295A05C /* AFTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableViewController.m; sourceTree = "<group>"; };
-		67D175616765B9FC38A251F7 /* AFLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLayoutView.h; sourceTree = "<group>"; };
 		67D1758E682CD0395E210981 /* AFTableAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableAlert.h; sourceTree = "<group>"; };
 		67D177C656EC5FB814167ED8 /* AFLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLayoutView.m; sourceTree = "<group>"; };
+		67D17827A4421772D1649A0D /* AFStackLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFStackLayoutView.h; sourceTree = "<group>"; };
 		67D1794A8EAA3A9594E6344E /* AFTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableCell.m; sourceTree = "<group>"; };
-		67D17976525AECE24CE1D4FC /* Layout */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = folder; path = Layout; sourceTree = "<group>"; };
 		67D1797652BCF7DDF2833C43 /* AFTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableCell.h; sourceTree = "<group>"; };
+		67D17A0BCFE70DD8B1A59F90 /* AFConstrainedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFConstrainedView.m; sourceTree = "<group>"; };
 		67D17BA51A0618B64B25BD6A /* AFTableCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableCellBackgroundView.m; sourceTree = "<group>"; };
 		67D17BC1415967F0681F57C6 /* AFTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableViewController.h; sourceTree = "<group>"; };
 		67D17BC209BDF7700E009A32 /* AFTable+ValidateAllSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AFTable+ValidateAllSettings.m"; sourceTree = "<group>"; };
 		67D17CAAD4858B979444F411 /* AFTable+ValidateAllSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFTable+ValidateAllSettings.h"; sourceTree = "<group>"; };
+		67D17CADF5BE9A1E2380C2B1 /* AFLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLayoutView.m; sourceTree = "<group>"; };
+		67D17D864AC731EA99D4E6ED /* AFConstrainedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFConstrainedView.h; sourceTree = "<group>"; };
+		67D17F1FC2ACC3834D4CFD77 /* AFLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLayoutView.h; sourceTree = "<group>"; };
 		67D17FD7CC458AFF2E4F7394 /* AFTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTable.m; sourceTree = "<group>"; };
 		759B000015E6CC1900D32988 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		759B000115E6CC1900D32988 /* RichClientFramework.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichClientFramework.h; sourceTree = "<group>"; };
@@ -624,6 +635,20 @@
 			path = Screen;
 			sourceTree = "<group>";
 		};
+		67D179835C58046D32C42A61 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				67D17109CE48A45BBC2BBE69 /* AFPConstrainedView.h */,
+				67D17D864AC731EA99D4E6ED /* AFConstrainedView.h */,
+				67D17A0BCFE70DD8B1A59F90 /* AFConstrainedView.m */,
+				67D17F1FC2ACC3834D4CFD77 /* AFLayoutView.h */,
+				67D17CADF5BE9A1E2380C2B1 /* AFLayoutView.m */,
+				67D17827A4421772D1649A0D /* AFStackLayoutView.h */,
+				67D172AF0CB010C389C1906E /* AFStackLayoutView.m */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		67D17A4CFA01617CD3FB98DB /* Theme */ = {
 			isa = PBXGroup;
 			children = (
@@ -720,11 +745,11 @@
 				759BFFEF15E6CC1900D32988 /* AFUnavailableOfflineViewController.m */,
 				759BFFEC15E6CC1900D32988 /* AFUILib.h */,
 				759BFFED15E6CC1900D32988 /* AFUILib.m */,
-				67D175616765B9FC38A251F7 /* AFLayoutView.h */,
 				67D17F6F3A549CA70EA41454 /* Table */,
 				67D17CD1FE2AFC1DB39AB73E /* Paging */,
 				67D17A4CFA01617CD3FB98DB /* Theme */,
 				67D175FCF1962192C7CF4724 /* Screen */,
+				67D179835C58046D32C42A61 /* Layout */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -825,7 +850,6 @@
 			isa = PBXGroup;
 			children = (
 				67D17FA6E0AF90121EDEB5FC /* Validation */,
-				67D17976525AECE24CE1D4FC /* Layout */,
 				759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */,
 				759BFF3D15E6CC1900D32988 /* AFAppDelegate.m */,
 				759BFF5C15E6CC1900D32988 /* AFEnvironment.h */,
@@ -988,7 +1012,6 @@
 				759B00D315E6CC1900D32988 /* UILabel+ShrinkToFit.h in Headers */,
 				759B00D515E6CC1900D32988 /* UniversalMoviePlayer.h in Headers */,
 				759B00D715E6CC1900D32988 /* iOS-libAugmental-Prefix.pch in Headers */,
-				67D1795A533E489ADE105A14 /* AFLayoutView.h in Headers */,
 				67D177431F83AFA4F378CB38 /* AFTableViewController.h in Headers */,
 				67D174EB4F0852C934C19523 /* AFTableCell.h in Headers */,
 				67D170A4F6C0DB7623B3A940 /* AFTableSectionObserver.h in Headers */,
@@ -997,6 +1020,10 @@
 				67D175D1568437C36FDAD070 /* AFTableAlert.h in Headers */,
 				67D17F267CA81E39B7E198E2 /* AFTableSection.h in Headers */,
 				67D174B77EB2D80B48FECAB0 /* AFTable+ValidateAllSettings.h in Headers */,
+				67D1777A00ED71C4AC4FFF49 /* AFStackLayoutView.h in Headers */,
+				67D176EB525CCA87779C88B1 /* AFLayoutView.h in Headers */,
+				67D17960E974225563EAA2B2 /* AFConstrainedView.h in Headers */,
+				67D176C44F9021BFDFB2899A /* AFPConstrainedView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1160,6 +1187,9 @@
 				67D17CC97551B400342053C1 /* AFTableCellBackgroundView.m in Sources */,
 				67D1702DADD0676286BBC94F /* AFTable.m in Sources */,
 				67D171D3B5BE5C1BD84E7633 /* AFTableSection.m in Sources */,
+				67D17F71EB112A23649CBA6B /* AFStackLayoutView.m in Sources */,
+				67D1798D85321B199997A971 /* AFLayoutView.m in Sources */,
+				67D17CBE0E013CD44AC14AB0 /* AFConstrainedView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
