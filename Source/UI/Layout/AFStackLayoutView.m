@@ -29,7 +29,7 @@
     float space, spaceRemaining, caret = 0;
 
     int childCount = self.subviews.count;
-    for (int i = 0; i<childCount; ++i)
+    for (uint i = 0; i<childCount; ++i)
     {
         view = [self.subviews objectAtIndex:i];
 
@@ -50,6 +50,8 @@
         }
 
         view.frame = CGRectMake(0, caret, self.frame.size.width, space);
+
+        caret += space;
     }
 }
 

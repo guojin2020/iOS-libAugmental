@@ -9,5 +9,6 @@
 
 @property (nonatomic, readonly) CGSize preferredSize;
 @property (nonatomic, readonly) CGSize minimumSize;
+@property (nonatomic, readonly) CGSize maximumSize;
 
 @end

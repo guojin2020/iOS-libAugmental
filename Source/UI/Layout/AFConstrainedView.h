@@ -10,11 +10,14 @@
 
 @interface AFConstrainedView : UIView <AFPConstrainedView>
 {
-    CGSize _preferredSize;
-    CGSize _minimumSize;
+    CGSize
+        _preferredSize,
+        _minimumSize,
+        _maximumSize;
 }
 
-@property (nonatomic, assign) CGSize preferredSize;
-@property (nonatomic, assign) CGSize minimumSize;
+@property (nonatomic) CGSize preferredSize;
+@property (nonatomic) CGSize minimumSize;
+@property (nonatomic) CGSize maximumSize;
 
 @end
