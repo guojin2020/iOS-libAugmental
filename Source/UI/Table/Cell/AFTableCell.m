@@ -166,16 +166,16 @@ static NSString* cellClickedSound			= nil;
     if(height<=0) height = DEFAULT_CELL_HEIGHT;
 
     //Apply default settings for the look and feel of all cells, e.g. font colour
-    cell.textLabel.opaque = YES;
-    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.opaque           = YES;
+    cell.textLabel.backgroundColor  = [UIColor clearColor];
 
     [self setFillColor:[AFTableCell defaultBGColor]];
 
     //Apply the default background view, more customisable than the Apple default
 
-    UIView* backgroundView = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
-    cell.backgroundView = backgroundView;
-    [cell.backgroundView release];
+    UIView* backgroundView  = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
+    cell.backgroundView     = backgroundView;
+    [backgroundView release];
 }
 
 

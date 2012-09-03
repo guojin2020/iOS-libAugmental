@@ -26,7 +26,9 @@
     [super layoutSubviews];
 
     UIView *view;
-    float space, spaceRemaining, caret = 0;
+    float space, spaceRemaining, caret = _edgeInsets.top;
+
+    float layoutHeight = self.frame.size.height - ( _edgeInsets.top + _edgeInsets.bottom );
 
     int childCount = self.subviews.count;
     for (uint i = 0; i<childCount; ++i)
@@ -42,14 +44,14 @@
             space = view.frame.size.height;
         }
 
-        spaceRemaining = self.frame.size.height - caret;
+        spaceRemaining = layoutHeight - caret;
 
         if( space>spaceRemaining || (fillsRemainder && i==childCount -1) )
         {
             space = spaceRemaining;
         }
 
-        view.frame = CGRectMake(0, caret, self.frame.size.width, space);
+        view.frame = CGRectMake(_edgeInsets.left, caret, self.frame.size.width - ( _edgeInsets.left + _edgeInsets.right ), space);
 
         caret += space;
     }

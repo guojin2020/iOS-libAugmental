@@ -29,7 +29,6 @@
 		67D17A7AB1A3242E8D442C47 /* AFTableAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17273365393A596B48448 /* AFTableAlert.m */; };
 		67D17CBE0E013CD44AC14AB0 /* AFConstrainedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17A0BCFE70DD8B1A59F90 /* AFConstrainedView.m */; };
 		67D17CC97551B400342053C1 /* AFTableCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17BA51A0618B64B25BD6A /* AFTableCellBackgroundView.m */; };
-		67D17CCBE6A6668857766C76 /* AFLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D177C656EC5FB814167ED8 /* AFLayoutView.m */; };
 		67D17F267CA81E39B7E198E2 /* AFTableSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D171A27C38442FBF457F1C /* AFTableSection.h */; };
 		67D17F71EB112A23649CBA6B /* AFStackLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D172AF0CB010C389C1906E /* AFStackLayoutView.m */; };
 		759B000A15E6CC1900D32988 /* AFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -264,7 +263,6 @@
 		67D173AF9D2902398C7AAC16 /* AFTableSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableSection.m; sourceTree = "<group>"; };
 		67D1745FC915AAF8D295A05C /* AFTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableViewController.m; sourceTree = "<group>"; };
 		67D1758E682CD0395E210981 /* AFTableAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableAlert.h; sourceTree = "<group>"; };
-		67D177C656EC5FB814167ED8 /* AFLayoutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLayoutView.m; sourceTree = "<group>"; };
 		67D17827A4421772D1649A0D /* AFStackLayoutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFStackLayoutView.h; sourceTree = "<group>"; };
 		67D1794A8EAA3A9594E6344E /* AFTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFTableCell.m; sourceTree = "<group>"; };
 		67D1797652BCF7DDF2833C43 /* AFTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableCell.h; sourceTree = "<group>"; };
@@ -494,7 +492,6 @@
 				759BFF6D15E6CC1900D32988 /* AFMMYYDate.h */,
 				759BFFA615E6CC1900D32988 /* AFPerformSelectorOperation.m */,
 				759BFFA515E6CC1900D32988 /* AFPerformSelectorOperation.h */,
-				67D177C656EC5FB814167ED8 /* AFLayoutView.m */,
 				759BFF7415E6CC1900D32988 /* AFMovingAverage.h */,
 				759BFF7515E6CC1900D32988 /* AFMovingAverage.m */,
 				759B000015E6CC1900D32988 /* NSData+Base64.m */,
@@ -1179,7 +1176,6 @@
 				759B00D215E6CC1900D32988 /* UICustomDisclosureArrowView.m in Sources */,
 				759B00D415E6CC1900D32988 /* UILabel+ShrinkToFit.m in Sources */,
 				759B00D615E6CC1900D32988 /* UniversalMoviePlayer.m in Sources */,
-				67D17CCBE6A6668857766C76 /* AFLayoutView.m in Sources */,
 				67D17A7AB1A3242E8D442C47 /* AFTableAlert.m in Sources */,
 				67D1746D33B3F3C386336F80 /* AFTableCell.m in Sources */,
 				67D17805B6081499BCBA987A /* AFTableViewController.m in Sources */,

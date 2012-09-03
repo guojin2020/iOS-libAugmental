@@ -14,6 +14,8 @@
         _preferredSize,
         _minimumSize,
         _maximumSize;
+
+    UIEdgeInsets _edgeInsets;
 }
 
 @property (nonatomic) CGSize preferredSize;
