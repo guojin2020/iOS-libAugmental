@@ -5,8 +5,6 @@
 #import "AFTableViewController.h"
 #import "AFChangeFlag.h"
 
-static AFChangeFlag* FLAG_TABLE_EDITED;
-
 @implementation AFTable
 
 +(void)initialize

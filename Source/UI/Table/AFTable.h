@@ -7,6 +7,8 @@
 @class AFTableSection;
 @class AFTableViewController;
 
+static AFChangeFlag* FLAG_TABLE_EDITED;
+
 /**
  *	Generic framework-like class, representing an on-screen table
  *  which is assembled from individual Cell and Section objects.
