@@ -189,7 +189,7 @@ static NSString* cellClickedSound			= nil;
     defaultTextSize = -1.0;
 }
 
-+(Class<AFThemeable>)themeParentSectionClass{return [AFTable class];}
++(id<AFThemeable>)themeParentSectionClass{return [AFTable class];}
 +(NSString*)themeSectionName{return @"cell";}
 
 +(NSDictionary*)defaultThemeSection

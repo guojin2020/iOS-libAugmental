@@ -8,7 +8,7 @@
 
 @interface AFThemeManager ()
 
-+ (NSMutableDictionary *)composeThemeForClass:(Class <AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache;
++ (NSMutableDictionary *)composeThemeForClass:(id<AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache;
 
 @end
 
@@ -48,7 +48,7 @@ static NSMutableSet *observers;
     NSMutableDictionary *rootThemeDictionary = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *themeCache          = [[NSMutableDictionary alloc] init];
     [themeCache setObject:rootThemeDictionary forKey:ROOT_DICTIONARY_CACHE_KEY];
-    Class <AFThemeable> currentClass;
+    id<AFThemeable> currentClass;
 
     while ([themeables count] > 0)
     {
@@ -64,13 +64,13 @@ static NSMutableSet *observers;
     return rootThemeDictionary;
 }
 
-+ (NSMutableDictionary *)composeThemeForClass:(Class <AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
++ (NSMutableDictionary *)composeThemeForClass:(id<AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
 {
     NSString            *className  = NSStringFromClass(themeableClass);
     NSMutableDictionary *dictionary = [themeCache objectForKey:className];
     if (!dictionary)
     {
-        Class <AFThemeable> parentClass = [themeableClass themeParentSectionClass];
+        id<AFThemeable> parentClass = [themeableClass themeParentSectionClass];
         NSMutableDictionary *parentDictionary = parentClass ? [self composeThemeForClass:parentClass usingCache:themeCache] : [themeCache objectForKey:ROOT_DICTIONARY_CACHE_KEY];
 
         NSString *classSectionName = [themeableClass themeSectionName];
@@ -136,10 +136,10 @@ static NSMutableSet *observers;
     {[observer themeChanged];}
 }
 
-+ (NSDictionary *)themeSectionForClass:(Class <AFThemeable>)themeableClass
++ (NSDictionary *)themeSectionForClass:(id<AFThemeable>)themeableClass
 {
     //NSLog(@"%@",NSStringFromClass(themeableClass));
-    Class <AFThemeable> themeableParentClass = [themeableClass themeParentSectionClass];
+    id<AFThemeable> themeableParentClass = [themeableClass themeParentSectionClass];
     NSDictionary *parentSection    = themeableParentClass ? [self themeSectionForClass:themeableParentClass] : [AFThemeManager currentTheme];
     NSString     *themeSectionName = [themeableClass themeSectionName];
     return themeSectionName ? [parentSection objectForKey:themeSectionName] : parentSection;

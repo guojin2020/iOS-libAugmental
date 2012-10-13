@@ -46,7 +46,7 @@ static UIImage *dateIcon = nil;
 - (void)themeChanged
 {dateIcon = nil;}
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return [AFBaseSetting class];}
 
 + (NSString *)themeSectionName

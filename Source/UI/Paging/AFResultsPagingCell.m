@@ -115,7 +115,7 @@ static UIImage *imagePrevious;
     [showingLabel setText:[NSString stringWithFormat:@"Showing %i-%i of %i", startIndex, endIndex, resultsPage.resultsCount]];
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return [AFTableCell class];}
 
 + (NSString *)themeSectionName

@@ -78,7 +78,7 @@
     {
         NSObject <AFObject_PanelViewable> *pageViewObject = [objects objectAtIndex:page];
 
-        Class <AFObjectViewPanelController> viewPanelControllerClass = [((id<AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
+        id<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
         if (viewPanelControllerClass)
         {
             viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject(viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];

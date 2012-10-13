@@ -4,6 +4,6 @@
 
 @protocol AFObject_PanelViewable <AFObject>
 
-+ (Class <AFObjectViewPanelController>)viewPanelClass;
++ (id<AFObjectViewPanelController>)viewPanelClass;
 
 @end

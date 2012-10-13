@@ -89,14 +89,14 @@ static UIColor *bgColor   = nil;
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:[AFBasePickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBasePickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
     return textColor;
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:[AFBasePickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBasePickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 
@@ -108,7 +108,7 @@ static UIColor *bgColor   = nil;
     bgColor   = nil;
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

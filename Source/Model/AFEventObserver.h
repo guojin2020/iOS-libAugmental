@@ -20,6 +20,6 @@ typedef enum event
  Called on an object when the specified AFEvent is broadcast by AFEventManager.
  */
 - (void)eventOccurred:(event)type source:(NSObject *)source;
-//-(BOOL)respondsToEventType:(Class<AFEvent>*)event;
+//-(BOOL)respondsToEventType:(id<AFEvent>*)event;
 
 @end

@@ -10,7 +10,7 @@ static UIColor *disclosureArrowColor = nil;
 {
     if (!disclosureArrowColor)
     {
-        disclosureArrowColor = [[AFThemeManager themeSectionForClass:[AFGenericOptionTableCell class]] colorForKey:THEME_KEY_DISCLOSURE_ARROW_COLOR];
+        disclosureArrowColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFGenericOptionTableCell class]] colorForKey:THEME_KEY_DISCLOSURE_ARROW_COLOR];
     }
     return disclosureArrowColor;
 }
@@ -63,8 +63,8 @@ static UIColor *disclosureArrowColor = nil;
     disclosureArrowColor = nil;
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
-{return [AFTableCell class];}
++ (id<AFThemeable>)themeParentSectionClass
+{return (id<AFThemeable>)[AFTableCell class];}
 
 + (NSString *)themeSectionName
 {return @"genericOption";}

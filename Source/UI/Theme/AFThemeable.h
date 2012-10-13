@@ -5,7 +5,7 @@
 
 @protocol AFThemeable <NSObject, AFThemeObserver>
 
-+ (Class <AFThemeable>)themeParentSectionClass;
++ (id<AFThemeable>)themeParentSectionClass;
 
 + (NSString *)themeSectionName;
 

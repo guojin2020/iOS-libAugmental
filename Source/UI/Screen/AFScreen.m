@@ -232,7 +232,7 @@ static UIColor  *loadingTitleColor;
     loadingTitle = nil;
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

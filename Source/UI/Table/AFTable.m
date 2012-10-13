@@ -87,7 +87,7 @@ AFChangeFlag *FLAG_TABLE_EDITED;
 //=======>> Themeable Implementation
 
 -(void)themeChanged{}
-+(Class<AFThemeable>)themeParentSectionClass{return nil;}
++(id<AFThemeable>)themeParentSectionClass{return nil;}
 +(NSString*)themeSectionName{return @"table";}
 
 +(NSDictionary*)defaultThemeSection

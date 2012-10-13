@@ -153,7 +153,7 @@ static float defaultBorderWidth = -1;
     defaultBorderColor      = nil;
 }
 
-+(Class<AFThemeable>)themeParentSectionClass{return [AFTableCell class];}
++(id<AFThemeable>)themeParentSectionClass{return [AFTableCell class];}
 +(NSString*)themeSectionName{return nil;}
 
 +(NSDictionary*)defaultThemeSection

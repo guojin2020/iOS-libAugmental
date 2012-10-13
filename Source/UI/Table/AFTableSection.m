@@ -19,19 +19,19 @@ AFChangeFlag* FLAG_SECTION_EDITED;
 
 +(UIColor*)headerColor
 {
-	if(!headerColor)headerColor = [[AFThemeManager themeSectionForClass:[AFTableSection class]] colorForKey:THEME_KEY_HEADER_COLOR];
+	if(!headerColor)headerColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_COLOR];
 	return headerColor;
 }
 
 +(UIColor*)headerShadowColor
 {
-	if(!headerShadowColor)headerShadowColor = [[AFThemeManager themeSectionForClass:[AFTableSection class]] colorForKey:THEME_KEY_HEADER_SHADOW_COLOR];
+	if(!headerShadowColor)headerShadowColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_SHADOW_COLOR];
 	return headerShadowColor;
 }
 
 +(BOOL)headerShadowEnabled
 {
-	if(!headerShadowEnabled)headerShadowEnabled = [[AFThemeManager themeSectionForClass:[AFTableSection class]] valueForKey:THEME_KEY_HEADER_SHADOW_ENABLED];
+	if(!headerShadowEnabled)headerShadowEnabled = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] valueForKey:THEME_KEY_HEADER_SHADOW_ENABLED];
 	return [headerShadowEnabled boolValue];
 }
 
@@ -106,7 +106,7 @@ AFChangeFlag* FLAG_SECTION_EDITED;
 	headerShadowColor = nil;
 }
 
-+(Class<AFThemeable>)themeParentSectionClass{return [AFTable class];}
++(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTable class];}
 +(NSString*)themeSectionName{return nil;}
 +(NSDictionary*)defaultThemeSection
 {

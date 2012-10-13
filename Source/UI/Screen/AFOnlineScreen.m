@@ -59,7 +59,7 @@
     [super dealloc];
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return [AFScreen class];}
 
 + (NSString *)themeSectionName

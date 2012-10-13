@@ -169,7 +169,7 @@ static NSNumber *textShadowEnabled;
 - (void)themeChanged
 {textColor = nil;}
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return [AFTableCell class];}
 
 + (NSString *)themeSectionName

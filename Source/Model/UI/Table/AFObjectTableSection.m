@@ -34,7 +34,7 @@
 
 - (NSObject <AFObjectTableCell> *)addObject:(NSObject <AFObject_CellViewable> *)object;
 {
-    Class <AFObjectTableCell> cellClass = [((Class <AFObject_CellViewable>) [object class]) cellViewClass];
+    id<AFObjectTableCell> cellClass = [((id<AFObject_CellViewable>) [object class]) cellViewClass];
     AFTableCell <AFObjectTableCell> *cell = [((AFTableCell <AFObjectTableCell> *) NSAllocateObject(cellClass, 0, NULL)) initWithObject:object];
 
     [children addObject:cell];

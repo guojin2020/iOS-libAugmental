@@ -16,7 +16,7 @@
 
 + (void)setCurrentTheme:(NSDictionary *)newTheme;
 
-+ (NSDictionary *)themeSectionForClass:(Class <AFThemeable>)themeableClass;
++ (NSDictionary *)themeSectionForClass:(id<AFThemeable>)themeableClass;
 
 + (NSDictionary *)newThemeTemplate;
 

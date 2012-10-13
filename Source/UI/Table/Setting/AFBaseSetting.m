@@ -211,7 +211,7 @@ static UIColor *invalidColor = nil;
     invalidColor = nil;
 }
 
-+ (Class <AFThemeable>)themeParentSectionClass
++ (id<AFThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

@@ -4,6 +4,6 @@
 
 @protocol AFObject_CellViewable <AFObject>
 
-+ (Class <AFObjectTableCell>)cellViewClass;
++ (id<AFObjectTableCell>)cellViewClass;
 
 @end
