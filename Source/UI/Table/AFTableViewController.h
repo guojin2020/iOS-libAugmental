@@ -47,6 +47,11 @@
 -(void)keyboardWillHide:(NSNotification*)note;
 -(void)keyboardDidHide:(NSNotification*)notification;
 
+- (void)textFieldDidEndEditing:(UITextField *)textField;
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField;
+
+
 @property (nonatomic, retain) AFTable* table;
 @property (nonatomic, retain) UIButton* doneButton;
 //@property (nonatomic) UITableViewCellStyle cellStyle;

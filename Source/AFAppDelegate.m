@@ -33,8 +33,8 @@ static BOOL globalSFXEnabled = NO;
 	NSDictionary* templateDictionary = [AFThemeManager generateThemeTemplate];
 
 	//Get app document path
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [documentPaths objectAtIndex:0];
 
 	//Make temp file path
 	NSString *tempFilePath = [NSString stringWithFormat:@"%@temp.plist",documentsDirectory];

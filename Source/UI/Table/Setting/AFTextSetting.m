@@ -2,6 +2,7 @@
 #import "AFAppDelegate.h"
 #import "AFTable.h"
 #import "AFThemeManager.h"
+#import "AFTableViewController.h"
 
 static UIColor  *textColor         = nil;
 static NSString *beginEditingSound = nil;
@@ -51,7 +52,7 @@ static NSString *beginEditingSound = nil;
 
 //======>>  UITextFieldDelegate Implementation
 
-- (BOOL)textField:(UITextField *)textFieldIn shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+- (BOOL)textField:(UITextField *)textFieldIn shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)stringIn
 {
     return !(maxLength > 0 && [textFieldIn.text length] >= maxLength && range.length == 0);
 }
@@ -72,10 +73,10 @@ static NSString *beginEditingSound = nil;
     if (textFieldDelegate) [textFieldDelegate textFieldDidEndEditing:textFieldIn];
 }
 
-- (BOOL)textFieldShouldClear:(UITextField *)textField
+- (BOOL)textFieldShouldClear:(UITextField *)textFieldIn
 {return YES;}
 
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textFieldIn
 {return YES;}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textFieldIn

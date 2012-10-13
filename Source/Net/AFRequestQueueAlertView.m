@@ -8,7 +8,7 @@
 #define REQUEST_SECTION_HEADER_HEIGHT 0;
 
 static AFRequestQueueAlertView *alert = nil;
-static AFRequestQueue          *queue = nil;
+static AFRequestQueue          *visibleQueue = nil;
 
 @interface AFRequestQueueAlertView ()
 
@@ -44,7 +44,7 @@ static AFRequestQueue          *queue = nil;
 {
     if (!queueIn) return;
 
-    if (queue == queueIn)
+    if (visibleQueue == queueIn)
     {
         //If we're already showing this RequestQueue, refresh it
         [alert reloadTableData];
@@ -52,8 +52,8 @@ static AFRequestQueue          *queue = nil;
     else
     {
         //Otherwise, let's create a new view and show it
-        queue = [queueIn retain];
-        alert = [[AFRequestQueueAlertView alloc] initWithRequestQueue:queue];
+        visibleQueue = [queueIn retain];
+        alert = [[AFRequestQueueAlertView alloc] initWithRequestQueue:queueIn];
         [alert show];
     }
 }
@@ -69,7 +69,7 @@ static AFRequestQueue          *queue = nil;
     alert = nil;
 }
 
-// Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
+// Called when we cancel a view (eg. the user clicks the Home button). This is not called when the USER clicks the cancel button.
 // If not defined in the delegate, we simulate a click in the cancel button
 //- (void)alertViewCancel:(UIAlertView *)alertView{}
 - (void)willPresentAlertView:(UIAlertView *)alertView
@@ -182,7 +182,7 @@ static AFRequestQueue          *queue = nil;
     [headingRow release];
 
     [queue release];
-    [queue release];
+    [visibleQueue release];
     [activatedRequestCache release];
     [super dealloc];
 }

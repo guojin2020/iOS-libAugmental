@@ -28,7 +28,7 @@
 
 - (BOOL)complete;
 
-- (void)writeDataInternal:(NSData *)data;
+//- (void)writeDataInternal:(NSData *)data;
 
 - (void)updateReceivedBytesFromFile;
 
@@ -39,5 +39,6 @@
 - (void)closeHandleSafely;
 
 @property(nonatomic, retain, readonly) NSString *uniqueKey;
+@property(nonatomic, readonly) NSString *targetPath;
 
 @end

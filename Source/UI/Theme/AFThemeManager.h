@@ -8,6 +8,8 @@
 @interface AFThemeManager : NSObject
 {}
 
++(AFThemeManager *)sharedInstance;
+
 + (void)addObserver:(NSObject <AFThemeObserver> *)observerIn;
 
 + (void)removeObserver:(NSObject <AFThemeObserver> *)observerIn;
@@ -21,8 +23,6 @@
 + (NSMutableSet *)newSetOfThemeableClasses;
 
 + (NSDictionary *)currentTheme;
-
-@property(nonatomic, retain) NSDictionary *currentTheme;
 
 @end
 
@@ -55,10 +55,6 @@
 - (CGFloat)blue;
 
 - (CGFloat)alpha;
-
-- (NSString *)stringFromColor;
-
-- (NSString *)hexStringFromColor;
 
 - (NSString *)stringFromColor;
 

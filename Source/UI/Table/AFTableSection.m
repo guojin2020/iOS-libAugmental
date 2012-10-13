@@ -8,6 +8,8 @@ static UIColor* headerColor				= nil;
 static UIColor* headerShadowColor		= nil;
 static NSNumber* headerShadowEnabled	= nil;
 
+AFChangeFlag* FLAG_SECTION_EDITED;
+
 @implementation AFTableSection
 
 +(void)initialize

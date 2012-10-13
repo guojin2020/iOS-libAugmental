@@ -9,7 +9,7 @@
     navTitleLabel.frame           = CGRectMake(64, -5, 400, 44);
     navTitleLabel.backgroundColor = [UIColor clearColor];
     navTitleLabel.textColor       = [UIColor whiteColor];
-    navTitleLabel.lineBreakMode   = UILineBreakModeWordWrap;
+    navTitleLabel.lineBreakMode   = NSLineBreakByWordWrapping;
     navTitleLabel.numberOfLines   = 2;
     return navTitleLabel;
 }

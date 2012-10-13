@@ -26,8 +26,6 @@
 
 + (UIColor *)textColor;
 
-+ (UIColor *)textColor;
-
 + (UIColor *)textShadowColor;
 
 + (BOOL)textShadowEnabled;

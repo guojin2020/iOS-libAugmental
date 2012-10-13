@@ -1,4 +1,5 @@
 #import "AFObject.h"
+
 #import "AFObjectRequest.h"
 #import "AFObjectHelper.h"
 #import "AFWriteableObject.h"
@@ -20,7 +21,7 @@
     return self;
 }
 
-- (NSObject <AFObject> *)objectOfType:(Class <AFObject>)objectClass withPrimaryKey:(int)primaryKey
+- (NSObject <AFObject> *)objectOfType:(id<AFObject>)objectClass withPrimaryKey:(int)primaryKey
 {
     NSAssert(primaryKey > 0, @"Invalid primary key calling %@", NSStringFromSelector(_cmd));
     NSAssert(objectClass, @"Invalid class calling %@", NSStringFromSelector(_cmd));
@@ -28,7 +29,7 @@
     if (primaryKey <= 0)
     {}
 
-    NSString     *classString    = NSStringFromClass(objectClass);
+    NSString     *classString    = NSStringFromClass((Class)objectClass);
     NSDictionary *typeDictionary = [cache objectForKey:classString];
 
     //If we had a dictionary for that type, search it
@@ -38,10 +39,10 @@
     if (findObject) return findObject;
     else
     {
-        NSObject <AFObject> *newObject = [NSAllocateObject(objectClass, 0, NULL) initPlaceholderWithPrimaryKey:primaryKey];
+        NSObject <AFObject> *newObject = [NSAllocateObject((Class)objectClass, 0, NULL) initPlaceholderWithPrimaryKey:primaryKey];
         [self injectObject:newObject]; //If we just created a new object, put it into the cache
 
-        NSString        *queryString = [NSString stringWithFormat:@"?action=get%@&id=%i", [objectClass modelName], primaryKey];
+        NSString        *queryString = [NSString stringWithFormat:@"?action=get%@&id=%i", (id<AFObject>)[objectClass modelName], primaryKey];
         NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
         AFObjectRequest *request     = [[AFObjectRequest alloc] initWithURL:callURL endpoint:self];
         [[AFSession sharedSession] handleRequest:request];
@@ -100,7 +101,7 @@
 {
     NSAssert(object, @"Invalid object calling %@", NSStringFromSelector(_cmd));
 
-    Class <AFObject> objectClass = ((Class <AFObject>) [object class]);
+    id<AFObject> objectClass = ((id<AFObject>) [object class]);
     NSString        *queryString = [NSString stringWithFormat:@"?action=put%@", [objectClass modelName]];
     NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
     AFObjectRequest *request     = [[AFObjectRequest alloc] initWithURL:callURL AFWriteableObjects:[NSArray arrayWithObjects:object, nil] endpoint:endpoint];
@@ -113,7 +114,7 @@
 {
     NSAssert(object, @"Invalid object calling %@", NSStringFromSelector(_cmd));
 
-    Class <AFObject> objectClass = ((Class <AFObject>) [object class]);
+    id<AFObject> objectClass = ((id<AFObject>) [object class]);
 
     if ([object conformsToProtocol:@protocol(AFWriteableObject)])
     {
@@ -121,7 +122,7 @@
 
         if ([object primaryKey] > 0)
         {
-            NSMutableDictionary *typeDictionary = (NSMutableDictionary *) [cache objectForKey:NSStringFromClass(objectClass)];
+            NSMutableDictionary *typeDictionary = (NSMutableDictionary *) [cache objectForKey:NSStringFromClass((Class)objectClass)];
             [typeDictionary removeObjectForKey:[NSNumber numberWithInt:object.primaryKey]];
 
             NSString *queryString = [NSString stringWithFormat:@"?action=delete%@&id=%i", [objectClass modelName], [object primaryKey]];
@@ -155,7 +156,7 @@
 
 }
 
-- (NSArray *)objectsOfType:(Class)objectClass withPrimaryKeys:(NSArray *)primaryKeys
+- (NSArray *)objectsOfType:(id<AFObject>)objectClass withPrimaryKeys:(NSArray *)primaryKeys
 {
     NSMutableArray *objectsOut = [NSMutableArray array];
     int primaryKey;
@@ -210,7 +211,7 @@
             : @"Tried to make an object from a dictionary which had an invalid primaryKey");
 
     //Get the actual class for this model name
-    Class <AFObject> objectClass = (Class <AFObject>) [AFObjectHelper classForModelName:className];
+    id<AFObject> objectClass = (id<AFObject>) [AFObjectHelper classForModelName:className];
 
     //If the object is already in the cache, assume it has updated content and update our existing instance
     if ([self containsObjectOfType:objectClass withPrimaryKey:primaryKey])
@@ -226,7 +227,7 @@
     else //If the object isn't already in the cache....
     {
         //Initialise a new AFObject instance of the right type for the incoming dictionary
-        object = NSAllocateObject(objectClass, 0, NULL);
+        object = NSAllocateObject((Class)objectClass, 0, NULL);
         [(NSObject <AFObject> *) object initPlaceholderWithPrimaryKey:primaryKey];
 
         //Register it with the cache
@@ -247,7 +248,7 @@
     NSMutableArray *objects = [[NSMutableArray alloc] init];
     if (!objectDictionaries) return objects;
     NSMutableArray *objectsToSet = [[NSMutableArray alloc] init];
-    Class <AFObject> objectClass;
+    id<AFObject> objectClass;
     for (NSDictionary *objectDictionary in objectDictionaries)
     {
         if (objectDictionary && (NSNull *) objectDictionary != [NSNull null])
@@ -256,7 +257,7 @@
             if (className)
             {
                 NSObject <AFObject> *object;
-                objectClass = (Class <AFObject>) [AFObjectHelper classForModelName:className];
+                objectClass = (id<AFObject>) [AFObjectHelper classForModelName:className];
                 int primaryKey = -1;
                 NSNumber *pkNumber = [objectDictionary objectForKey:@"pk"];
                 if (![pkNumber isKindOfClass:[NSNull class]])
@@ -277,7 +278,7 @@
                     }
                     else
                     {
-                        object = NSAllocateObject(objectClass, 0, NULL);
+                        object = NSAllocateObject((Class)objectClass, 0, NULL);
                         [(NSObject <AFObject> *) object initPlaceholderWithPrimaryKey:primaryKey];
                         [self injectObject:object];
                         [objectsToSet addObject:[NSArray arrayWithObjects:object, objectDictionary, nil]];
@@ -355,9 +356,9 @@
     if (object && [object conformsToProtocol:@protocol(AFObject)])
     {
         int primaryKey = [((NSObject <AFObject> *) object) primaryKey];
-        if ([self containsObjectOfType:[object class] withPrimaryKey:primaryKey])
+        if ([self containsObjectOfType:(id<AFObject>)[object class] withPrimaryKey:primaryKey])
         {
-            return [self objectOfType:[object class] withPrimaryKey:primaryKey];
+            return [self objectOfType:(id<AFObject>)[object class] withPrimaryKey:primaryKey];
         }
         else
         {

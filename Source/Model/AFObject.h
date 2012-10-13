@@ -41,7 +41,7 @@
  Reflects whether this AFObject is in 'placeholder' state, this can be very useful when retrieving and displaying data from a remote server.
  UI components which display AFObject data can be constructed and painted on screen using a placeholder instance which gets
  called back to and update by a server request. Using this asynchronous method, rather than waiting for completion of data before
- screen-drawing, keeps the application feeling more responsive to the user.
+ screen-drawing, keeps the application feeling more responsive to the USER.
  */
 - (BOOL)isPlaceholder;
 

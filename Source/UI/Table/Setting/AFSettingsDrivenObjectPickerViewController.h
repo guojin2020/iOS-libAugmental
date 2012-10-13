@@ -4,13 +4,14 @@
 #import "AFEventObserver.h"
 #import "AFObjectPickerDelegate.h"
 #import "AFSettingViewPanelObserver.h"
+#import "AFObject.h"
 
 @interface AFSettingsDrivenObjectPickerViewController : AFBasePickerViewController <AFRequestEndpoint, AFEventObserver, AFObjectPickerDelegate, AFSettingViewPanelObserver>
 {
     NSString *getObjectActionString;
     NSString *objectCSVIdListSettingsKey;
     NSString *objectDefaultSelectionIdKey;
-    Class objectClass;
+    id<AFObject> objectClass;
 }
 
 - (id)  initWithTitle:(NSString *)title

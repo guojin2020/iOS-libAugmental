@@ -55,8 +55,8 @@ static UIColor *invalidColor = nil;
     [super viewCellDidLoad];
 
     cell.textLabel.numberOfLines = 2;
-    cell.textLabel.lineBreakMode = UILineBreakModeWordWrap;
-    cell.textLabel.textAlignment = UITextAlignmentCenter;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.textLabel.textAlignment = NSTextAlignmentCenter;
 
     cell.textLabel.opaque            = NO;
     cell.textLabel.backgroundColor   = [UIColor clearColor];

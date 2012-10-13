@@ -62,7 +62,14 @@
 }
 
 - (BOOL)actionRequest:(NSObject <AFRequest> *)request
-{return [targetHandler handleRequest:request];}
+{
+    if(targetHandler) return [targetHandler handleRequest:request];
+    else
+    {
+        [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:) withObject:request waitUntilDone:NO modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+        return YES;
+    }
+}
 
 /**
  *	Cancels all requests in this queue
@@ -121,6 +128,15 @@
     [requestIn addObserver:self];
     [queue addObject:requestIn];
     [self startWaitingRequests];
+}
+
+- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request
+{
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:request.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
+    urlRequest = [request willSendURLRequest:urlRequest];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:(NSURLRequest *) urlRequest delegate:self startImmediately:YES];
+    request.connection = connection;
+    [connection release];
 }
 
 - (void)requestSizePolled:(int)sizeBytes forRequest:(NSObject <AFRequest> *)requestIn
@@ -189,6 +205,75 @@
 
 - (BOOL)isRequestActive:(NSObject <AFRequest> *)request
 {return [activeRequests containsObject:request];}
+
+// NSURLConnectionDelegate
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+
+    NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
+    NSAssert(findRequest != nil, responseString);
+
+    [findRequest willReceiveWithHeaders:[((NSHTTPURLResponse *) response) allHeaderFields] responseCode:[((NSHTTPURLResponse *) response) statusCode]];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+
+    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+    if (findRequest) [findRequest received:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+
+    NSObject <AFRequest> *findRequest;
+
+    //[self setOffline:YES];
+
+    NSAssert(findRequest = [self queuedRequestForConnection:connection], @"Couldn't find the request for connection in %@", [self class]);
+
+    [findRequest didFail:error];
+
+    //[connection release];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+
+    NSObject <AFRequest> *findRequest = [[self queuedRequestForConnection:connection] retain];
+
+    //NSAssert(findRequest,@"Couldn't retrieve request for finished connection");
+
+    [findRequest didFinish]; //Tell the object that it finished (so it can do something useful with the data)
+    [findRequest removeObserver:(NSObject <AFRequestObserver> *) self]; //Stop listening to the request
+    [queue removeObject:findRequest]; //Remove the request from the list
+    [self startWaitingRequests];
+
+    [findRequest release];
+    [connection autorelease];
+}
+
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
+{
+    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+
+    if (redirectResponse)
+    {
+    }
+    return request; //Currently always allowing the redirection, by returning the request value
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+    return nil;
+}
+
+// End NSURLConnectionDelegate methods
 
 - (void)dealloc
 {

@@ -13,7 +13,7 @@
 @class AFTable;
 @class AFChangeFlag;
 
-static AFChangeFlag* FLAG_SECTION_EDITED;
+extern AFChangeFlag* FLAG_SECTION_EDITED;
 
 /**
  *	Represents a basic section in a table, with a text header and any number of cells.

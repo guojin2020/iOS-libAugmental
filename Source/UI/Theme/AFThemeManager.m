@@ -6,10 +6,6 @@
 
 #define ROOT_DICTIONARY_CACHE_KEY @"ROOT"
 
-static UIColor      *DEFAULT_VOID_COLOR = nil;
-static NSDictionary *currentTheme;
-static NSMutableSet *observers;
-
 @interface AFThemeManager ()
 
 + (NSMutableDictionary *)composeThemeForClass:(Class <AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache;
@@ -17,6 +13,10 @@ static NSMutableSet *observers;
 @end
 
 @implementation AFThemeManager
+
+static NSDictionary *currentTheme;
+static UIColor      *DEFAULT_VOID_COLOR = nil;
+static NSMutableSet *observers;
 
 + (void)initialize
 {
@@ -145,13 +145,11 @@ static NSMutableSet *observers;
     return themeSectionName ? [parentSection objectForKey:themeSectionName] : parentSection;
 }
 
-- (void)dealloc
++ (AFThemeManager *)sharedInstance
 {
-    [currentTheme release];
-    [super dealloc];
+    return nil;
 }
 
-@synthesize currentTheme;
 
 @end
 

@@ -39,21 +39,18 @@
 //Initialisers
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn;
 
-- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request;
-
 //Public Methods
 - (BOOL)connect;
 
 - (void)didLogout:(id)logOutResponseData;
 
 /**
- *	Logs out the current user and reverts the receiving AFSession's customer property to the default guest user.
+ *	Logs out the current user and reverts the receiving AFSession's customer property to the default guest USER.
  */
 - (void)logOut;
 
 //URL Connection Delegate
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
-
+/*
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -61,6 +58,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
+*/
 
 - (void)addObserver:(NSObject <AFSessionObserver> *)sessionObserver;
 

@@ -84,7 +84,7 @@
 /*
  *	This method should be called by the user-application when initialisation of this Screens viewController is
  *  fully completed, this will usually be at the end of viewControllerBackgroundInit. This removes the
- *  "Loading..." subview from the now loaded view, so that it is ready for the user to start interacting with.
+ *  "Loading..." subview from the now loaded view, so that it is ready for the USER to start interacting with.
  *
  *	Overriding implementations should always call [super viewControllerDidLoad];
  */
@@ -112,10 +112,6 @@
 + (NSString *)defaultTitle;
 
 + (NSString *)defaultTabName;
-
-- (void)addScreenObserver:(NSObject <AFScreenObserver> *)observer;
-
-- (void)removeScreenObserver:(NSObject <AFScreenObserver> *)observer;
 
 - (void)setViewController:(UIViewController *)viewControllerIn animated:(BOOL)animatedIn;
 

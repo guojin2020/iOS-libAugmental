@@ -61,7 +61,7 @@
 
     // pages are created on demand
     // load the visible page
-    // load the page on either side to avoid flashes when the user starts scrolling
+    // load the page on either side to avoid flashes when the USER starts scrolling
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
 }
@@ -78,7 +78,7 @@
     {
         NSObject <AFObject_PanelViewable> *pageViewObject = [objects objectAtIndex:page];
 
-        Class <AFObjectViewPanelController> viewPanelControllerClass = [((Class <AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
+        Class <AFObjectViewPanelController> viewPanelControllerClass = [((id<AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
         if (viewPanelControllerClass)
         {
             viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject(viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];
@@ -114,11 +114,11 @@
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
     // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
-    // which a scroll event generated from the user hitting the page control triggers updates from
+    // which a scroll event generated from the USER hitting the page control triggers updates from
     // the delegate method. We use a boolean to disable the delegate logic when the page control is used.
     if (pageControlUsed)
     {
-        // do nothing - the scroll was initiated from the page control, not the user dragging
+        // do nothing - the scroll was initiated from the page control, not the USER dragging
         return;
     }
     // Switch the indicator when more than 50% of the previous/next page is visible
@@ -126,7 +126,7 @@
     int     page      = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
     pageControl.currentPage = page;
 
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
+    // load the visible page and the page on either side of it (to avoid flashes when the USER starts scrolling)
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];
@@ -135,7 +135,7 @@
 }
 
 // At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollViewIn
 {
     pageControlUsed = NO;
 }
@@ -143,7 +143,7 @@
 - (IBAction)changePage:(id)sender
 {
     int page = pageControl.currentPage;
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
+    // load the visible page and the page on either side of it (to avoid flashes when the USER starts scrolling)
     [self loadScrollViewWithPage:page - 1];
     [self loadScrollViewWithPage:page];
     [self loadScrollViewWithPage:page + 1];

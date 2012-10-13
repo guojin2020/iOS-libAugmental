@@ -4,6 +4,7 @@
 #import "AFHeaderRequest.h"
 #import "AFPerformSelectorOperation.h"
 
+// 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
 
 @implementation AFDownloadRequest
@@ -90,14 +91,40 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
 {
+    NSLog(@"Will begin writing to file '%@'",targetPath);
+
     state = (requestState) inProcess;
     [self broadcastToObservers:(requestEvent) started];
 
-    if (![self existsInLocalStorage]) [[NSFileManager defaultManager] createFileAtPath:targetPath contents:nil attributes:nil];
+    NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+
+    NSError* error = nil;
+
+    BOOL isDirectory = NO;
+    NSString* directoryPath = [[fileURL URLByDeletingLastPathComponent] path];
+    if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
+    {
+        NSLog(@"Creating directory: %@", directoryPath);
+        [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:&error];
+    }
+
+    NSAssert(!error, [error localizedDescription]);
+
+    if (![self existsInLocalStorage])
+    {
+        NSLog(@"Creating file: %@", targetPath);
+        [fileManager createFileAtPath:targetPath contents:nil attributes:nil];
+    }
+
     myHandle = [[NSFileHandle fileHandleForWritingAtPath:targetPath] retain];
 
-    if (responseCode == 206)[myHandle seekToEndOfFile];
+    [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
 
+    NSAssert(myHandle!=nil, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
+
+    if (responseCode == 206)[myHandle seekToEndOfFile];
     else if (responseCode == 200)
     {
         [myHandle truncateFileAtOffset:0];
@@ -105,10 +132,9 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
     else
     {
-        [NSException raise:NSInternalInconsistencyException format:@"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]];
+        NSLog(@"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]);
+        //[NSException raise:NSInternalInconsistencyException format:@"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]];
     }
-
-    NSAssert(myHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 }
 
 - (void)received:(NSData *)dataIn
@@ -117,7 +143,8 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
     if ([dataIn length] > DATA_BUFFER_LENGTH) //It's a large chunk of data, worth writing immediately
     {
-        [self performSelectorOnCommonBackgroundThread:@selector(writeDataInternal:) withObject:dataIn];
+        [myHandle writeData:dataBuffer];
+        //[self performSelectorOnCommonBackgroundThread:@selector(writeDataInternal:) withObject:dataIn];
     }
     else //It's not much data, let's just buffer it in RAM
     {
@@ -142,10 +169,12 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 - (NSString *)actionDescription
 {return @"Downloading file";}
 
+/*
 - (void)writeDataInternal:(NSData *)data
 {
     [myHandle writeData:data];
 }
+*/
 
 - (void)didFinish;
 {
@@ -262,8 +291,14 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     [super dealloc];
 }
 
+-(NSString *)targetPath
+{
+    return targetPath;
+}
+
 @synthesize uniqueKey;
-@dynamic connection, URL, state, requiresLogin, attempts;
-@dynamic receivedBytes;
+@dynamic requiresLogin, attempts;
+
+//@dynamic receivedBytes, connection, URL, state;
 
 @end

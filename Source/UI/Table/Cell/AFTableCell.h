@@ -18,7 +18,7 @@
 /**
  *	Implementation of a basic Table cell for use in the Table framework classes.
  *	Uses the default UITableViewCell to display a line of text and a target object and
- *	selector to announce user-touches.
+ *	selector to announce USER-touches.
  */
 @interface AFTableCell : NSObject <AFThemeable>
 {
@@ -51,7 +51,7 @@
  */
 -(BOOL)deleteSelected;
 /**
- Determines whether this cell will display the Delete action button when it is swiped by the user.
+ Determines whether this cell will display the Delete action button when it is swiped by the USER.
  This returns NO by default but may be subclassed to return YES by deletable cell types.
  The cell is polled to see whether it is deletable at creation time, so dynamically changing the
  return value after table creation will not reflected on the UI.

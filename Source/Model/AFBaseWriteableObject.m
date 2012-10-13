@@ -8,7 +8,7 @@ static NSString *CLASS_KEY       = @"class";
 - (NSMutableDictionary *)setDictionaryFromContent:(NSMutableDictionary *)dictionary
 {
     [dictionary setObject:[NSNumber numberWithInt:primaryKey] forKey:PRIMARY_KEY_KEY];
-    [dictionary setObject:[((Class <AFObject>) [self class]) modelName] forKey:CLASS_KEY];
+    [dictionary setObject:[((id<AFObject>) [self class]) modelName] forKey:CLASS_KEY];
     return dictionary;
 }
 

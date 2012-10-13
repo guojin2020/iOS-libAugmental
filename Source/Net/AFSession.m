@@ -32,7 +32,7 @@ static AFSession *sharedSession = nil;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cookiesUpdated:) name:@"NSHTTPCookieManagerCookiesChangedNotification" object:cookieStore];
         observers     = [[NSMutableSet alloc] init];
         state         = (sessionState) disconnected;
-        downloadQueue = [[AFRequestQueue alloc] initWithTargetHandler:(NSObject <AFRequestHandler> *) self maxConcurrentDownloads:2];
+        downloadQueue = [[AFRequestQueue alloc] initWithTargetHandler:self maxConcurrentDownloads:2];
         offline       = NO;
         cache         = [[AFObjectCache alloc] init];
     }
@@ -87,15 +87,6 @@ static AFSession *sharedSession = nil;
     return YES;
 }
 
-- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request
-{
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:request.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
-    urlRequest = [request willSendURLRequest:urlRequest];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:(NSURLRequest *) urlRequest delegate:self startImmediately:YES];
-    request.connection = connection;
-    [connection release];
-}
-
 - (void)requestFailed:(NSObject <AFRequest> *)requestIn
 {
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
@@ -126,71 +117,6 @@ static AFSession *sharedSession = nil;
 - (void)didLogout:(id)logOutResponseData
 {
     [self setState:(sessionState) disconnected];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
-
-    NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
-    NSAssert(findRequest != nil, responseString);
-
-    [findRequest willReceiveWithHeaders:[((NSHTTPURLResponse *) response) allHeaderFields] responseCode:[((NSHTTPURLResponse *) response) statusCode]];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
-
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
-    if (findRequest) [findRequest received:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
-
-    NSObject <AFRequest> *findRequest;
-
-    //[self setOffline:YES];
-
-    NSAssert(findRequest = [self queuedRequestForConnection:connection], @"Couldn't find the request for connection in %@", [self class]);
-
-    [findRequest didFail:error];
-
-    //[connection release];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
-
-    NSObject <AFRequest> *findRequest = [[self queuedRequestForConnection:connection] retain];
-
-    //NSAssert(findRequest,@"Couldn't retrieve request for finished connection");
-
-    [findRequest didFinish]; //Tell the object that it finished (so it can do something useful with the data)
-    [findRequest removeObserver:(NSObject <AFRequestObserver> *) self]; //Stop listening to the request
-    [queue removeObject:findRequest]; //Remove the request from the list
-    [self startWaitingRequests];
-
-    [findRequest release];
-    [connection autorelease];
-}
-
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
-{
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
-
-    if (redirectResponse)
-    {
-    }
-    return request; //Currently always allowing the redirection, by returning the request value
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    return nil;
 }
 
 - (void)cookiesUpdated:(id)message

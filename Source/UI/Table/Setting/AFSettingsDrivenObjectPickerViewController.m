@@ -5,6 +5,7 @@
 #import "AFSession.h"
 #import "AFObjectCache.h"
 #import "AFEnvironment.h"
+#import "AFEventManager.h"
 
 @interface AFSettingsDrivenObjectPickerViewController ()
 
@@ -18,7 +19,7 @@
      getObjectActionString:(NSString *)getObjectActionStringIn
  objectCSVIdListSettingsKey:(NSString *)objectCSVIdListSettingsKeyIn
 objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
-                objectClass:(Class)objectClassIn
+                objectClass:(id<AFObject>)objectClassIn
 {
     if ((self = [super initWithObjects:nil delegate:self title:titleIn]))
     {

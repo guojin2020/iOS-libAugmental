@@ -137,24 +137,12 @@
     [observerSnapshot release];
 }
 
-- (int)attempts
-{return attempts;}
+-(int)attempts {return attempts;}
 
-- (void)dealloc
+-(void)dealloc
 {
     [numberFormatter release];
     [observers release];
-    [URL release];
-    [connection release];
-    [URL release];
-    [connection release];
-    [URL release];
-    [connection release];
-    [URL release];
-    [URL release];
-    [connection release];
-    [connection release];
-    [URL release];
     [connection release];
     [URL release];
     [super dealloc];

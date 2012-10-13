@@ -45,7 +45,7 @@
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
         [NSException raise:NSInternalInconsistencyException format:@"Deserialisation error in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
-        [responseString release];
+        //[responseString release];
     }
 
     NSArray *deleteObjects = [returnedDictionary objectForKey:@"delete"];

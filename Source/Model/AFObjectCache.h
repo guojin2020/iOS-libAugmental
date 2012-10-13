@@ -31,7 +31,7 @@
  necessary server call to get the real information for that object before updating it asynchronously.
  When it does so, an objectEvent will inform observing users of that object.
  */
-- (NSObject <AFObject> *)objectOfType:(Class <AFObject>)objectClass withPrimaryKey:(int)primaryKey;
+- (NSObject <AFObject> *)objectOfType:(id<AFObject>)objectClass withPrimaryKey:(int)primaryKey;
 
 /**
  Writes the specified object to the server. The endpoint receives the servers response to the write operation,
@@ -49,12 +49,12 @@
 /**
  Efficiency method to allow multiple objects to be retrieved in a single server request.
  */
-- (NSArray *)objectsOfType:(Class <AFObject>)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
+- (NSArray *)objectsOfType:(id<AFObject>)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
 
 /**
  Returns true if an object of the given type and primary key is already held in the local cache, false otherwise.
  */
-- (BOOL)containsObjectOfType:(Class)objectClass withPrimaryKey:(int)primaryKey;
+- (BOOL)containsObjectOfType:(id<AFObject>)objectClass withPrimaryKey:(int)primaryKey;
 
 /**
  Where AFObjects are acquired from the server by means other than a direct primary key reference (e.g. a server API call for name searching),

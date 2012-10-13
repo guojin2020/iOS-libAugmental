@@ -83,8 +83,8 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 		[backButton release];
 	}
 	
-	//if([self isViewLoaded])[self editableChanged:table];
-    if([self isViewLoaded])[self editableChanged:self];
+	//if([self isViewLoaded])[self editableChanged:self];
+    if([self isViewLoaded])[self editableChanged:table];
 }
 
 - (UITableViewStyle)cellStyle { return tableStyle; }
