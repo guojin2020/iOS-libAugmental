@@ -5,21 +5,26 @@
 
 typedef enum requestEvent
 {
-    started, progressUpdated, finished, cancel, queued, reset, sizePolled, failed
-} requestEvent;
+    started,
+    progressUpdated,
+    finished,
+    cancel,
+    queued,
+    reset,
+    sizePolled,
+    failed
+}
+requestEvent;
 
 @interface AFBaseRequest : NSObject
 {
-    NSURL           *URL;
-    NSURLConnection *connection;
-    requestState state;
     int          expectedBytes;
     int          receivedBytes;
     NSMutableSet      *observers;
     NSNumberFormatter *numberFormatter;
-
+    NSURL* URL;
     BOOL requiresLogin;
-
+    requestState state;
     int attempts;
 }
 

@@ -21,9 +21,9 @@
     return self;
 }
 
-- (AFTableCell *)cellAtIndex:(NSInteger)index;
+- (AFTableCell *)cellAtIndex:(NSUInteger)index;
 {
-    return [super cellAtIndex:index];
+    return [super cellAtIndex:(NSUInteger) index];
 }
 
 - (void)addCell:(AFTableCell *)cell;
@@ -35,7 +35,7 @@
 - (NSObject <AFObjectTableCell> *)addObject:(NSObject <AFObject_CellViewable> *)object;
 {
     id<AFObjectTableCell> cellClass = [((id<AFObject_CellViewable>) [object class]) cellViewClass];
-    AFTableCell <AFObjectTableCell> *cell = [((AFTableCell <AFObjectTableCell> *) NSAllocateObject(cellClass, 0, NULL)) initWithObject:object];
+    AFTableCell <AFObjectTableCell> *cell = [((AFTableCell <AFObjectTableCell> *) NSAllocateObject((Class)cellClass, 0, NULL)) initWithObject:object];
 
     [children addObject:cell];
     cell.parentSection = self;
@@ -47,13 +47,13 @@
 }
 
 
-- (void)setObjectArray:(NSMutableArray *)objectArrayIn;
+- (void)setObjectArray:(NSArray *)objectArrayIn;
 {
     [self removeAllCells];
     [self addObjectArray:objectArrayIn];
 }
 
-- (void)addObjectArray:(NSMutableArray *)objectArrayIn;
+- (void)addObjectArray:(NSArray *)objectArrayIn;
 {
     for (NSObject <AFObject_CellViewable> *cellObject in objectArrayIn) [self addObject:cellObject];
 }

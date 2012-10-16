@@ -11,6 +11,7 @@
     navTitleLabel.textColor       = [UIColor whiteColor];
     navTitleLabel.lineBreakMode   = NSLineBreakByWordWrapping;
     navTitleLabel.numberOfLines   = 2;
+    [navTitleLabel release];
     return navTitleLabel;
 }
 

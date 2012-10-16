@@ -89,7 +89,7 @@
     {
         case 0:
         case 1:
-            [self setValue:[NSString stringWithFormat:@"%@%@", [monthStrings objectAtIndex:[picker selectedRowInComponent:0]], [yearStrings objectAtIndex:[picker selectedRowInComponent:1]]]];
+            [self setValue:[NSString stringWithFormat:@"%@%@", [monthStrings objectAtIndex:(NSUInteger) [picker selectedRowInComponent:0]], [yearStrings objectAtIndex:(NSUInteger) [picker selectedRowInComponent:1]]]];
             break;
         default:
             break;
@@ -101,9 +101,9 @@
     switch (component)
     {
         case 0:
-            return [monthStrings objectAtIndex:row];
+            return [monthStrings objectAtIndex:(NSUInteger) row];
         case 1:
-            return [yearStrings objectAtIndex:row];
+            return [yearStrings objectAtIndex:(NSUInteger) row];
         default:
             return nil;
     }

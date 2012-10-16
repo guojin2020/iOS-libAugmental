@@ -7,7 +7,7 @@
 {
     NSAssert(endpointIn, @"No endpoint was specified for a header request.");
 
-    if ((self = [super initWithURL:(NSURL *) URLIn]))
+    if ((self = [super initWithURL:URLIn]))
     {
         self.endpoint = endpointIn;
     }
@@ -50,6 +50,6 @@
 }
 
 @synthesize endpoint, headers;
-@dynamic connection, URL, state, requiresLogin, attempts;
+//@dynamic connection, URL, state, requiresLogin, attempts;
 
 @end

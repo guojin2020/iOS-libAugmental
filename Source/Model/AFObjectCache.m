@@ -161,7 +161,7 @@
     NSMutableArray *objectsOut = [NSMutableArray array];
     int primaryKey;
     NSObject <AFObject> *AFObject;
-    for (int i = 0; i < [primaryKeys count]; i++)
+    for (NSUInteger i = 0; i < [primaryKeys count]; i++)
     {
         primaryKey = [((NSNumber *) [primaryKeys objectAtIndex:i]) intValue];
         AFObject   = [self objectOfType:objectClass withPrimaryKey:primaryKey];
@@ -170,11 +170,11 @@
     return objectsOut;
 }
 
-- (BOOL)containsObjectOfType:(Class)objectClass withPrimaryKey:(int)primaryKey
+- (BOOL)containsObjectOfType:(id <AFObject>)objectClass withPrimaryKey:(int)primaryKey
 {
     NSAssert(primaryKey > 0, @"Invalid primary key calling %@", NSStringFromSelector(_cmd));
 
-    NSDictionary *typeDictionary = [cache objectForKey:NSStringFromClass(objectClass)];
+    NSDictionary *typeDictionary = [cache objectForKey:NSStringFromClass((Class)objectClass)];
     return (typeDictionary && [typeDictionary objectForKey:[NSNumber numberWithInt:primaryKey]]);
 }
 
@@ -194,7 +194,7 @@
             [cache setObject:typeDictionary forKey:className];
             [typeDictionary release];
         }
-        [typeDictionary setObject:(NSObject *) object forKey:[NSNumber numberWithInt:[object primaryKey]]];
+        [typeDictionary setObject:object forKey:[NSNumber numberWithInt:[object primaryKey]]];
     }
 }
 
@@ -228,7 +228,7 @@
     {
         //Initialise a new AFObject instance of the right type for the incoming dictionary
         object = NSAllocateObject((Class)objectClass, 0, NULL);
-        [(NSObject <AFObject> *) object initPlaceholderWithPrimaryKey:primaryKey];
+        [object initPlaceholderWithPrimaryKey:primaryKey];
 
         //Register it with the cache
         [self injectObject:object];
@@ -251,20 +251,20 @@
     id<AFObject> objectClass;
     for (NSDictionary *objectDictionary in objectDictionaries)
     {
-        if (objectDictionary && (NSNull *) objectDictionary != [NSNull null])
+        if (objectDictionary && (id)objectDictionary != [NSNull null])
         {
             NSString *className = [[objectDictionary valueForKey:@"class"] retain];
             if (className)
             {
                 NSObject <AFObject> *object;
                 objectClass = (id<AFObject>) [AFObjectHelper classForModelName:className];
-                int primaryKey = -1;
+                int primaryKey;
                 NSNumber *pkNumber = [objectDictionary objectForKey:@"pk"];
                 if (![pkNumber isKindOfClass:[NSNull class]])
                 {
                     primaryKey = [pkNumber intValue];
 
-                    if (objectClass == NSClassFromString(@"AFAddress"))
+                    if ((Class)objectClass == NSClassFromString(@"AFAddress"))
                     {
                     }
 
@@ -279,11 +279,11 @@
                     else
                     {
                         object = NSAllocateObject((Class)objectClass, 0, NULL);
-                        [(NSObject <AFObject> *) object initPlaceholderWithPrimaryKey:primaryKey];
+                        [object initPlaceholderWithPrimaryKey:primaryKey];
                         [self injectObject:object];
                         [objectsToSet addObject:[NSArray arrayWithObjects:object, objectDictionary, nil]];
                     }
-                    if (object) [objects addObject:(NSObject *) object];
+                    if (object) [objects addObject:object];
                 }
             }
             [className release];

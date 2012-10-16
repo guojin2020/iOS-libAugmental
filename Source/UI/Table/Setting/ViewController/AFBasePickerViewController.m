@@ -24,7 +24,7 @@ static UIColor *bgColor   = nil;
 
 - (void)setObjects:(NSArray *)objectsIn
 {
-    NSMutableArray *oldObjects = objects;
+    NSArray *oldObjects = objects;
     objects = [[NSMutableArray alloc] initWithArray:objectsIn];
     [oldObjects release];
     if ((!defaultValue || ![objects containsObject:defaultValue]) && [objects count] > 0) self.defaultValue = [objects objectAtIndex:0];
@@ -36,7 +36,7 @@ static UIColor *bgColor   = nil;
     {
         if (![objects containsObject:(NSObject *) valueIn])
         {
-            [objects addObject:valueIn];
+            self.objects = [objects arrayByAddingObject:valueIn];
             [picker reloadAllComponents];
         }
         [picker selectRow:[objects indexOfObject:valueIn] inComponent:0 animated:NO];
@@ -74,13 +74,13 @@ static UIColor *bgColor   = nil;
     }
     else
     {
-        self.value = [objects objectAtIndex:row];
+        self.value = [objects objectAtIndex:(NSUInteger) row];
     }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *objectTitle = component == 0 ? [delegate titleForObject:[objects objectAtIndex:row]] : nil;
+    NSString *objectTitle = component == 0 ? [delegate titleForObject:[objects objectAtIndex:(NSUInteger) row]] : nil;
     return objectTitle;
 }
 

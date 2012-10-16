@@ -6,7 +6,7 @@
 {
     NSAssert(callbackObjectIn && callbackSelectorIn, @"Invalid parameters initing %@", [self class]);
 
-    if ((self = [super initWithURL:(NSURL *) URLIn]))
+    if ((self = [super initWithURL:URLIn]))
     {
         callbackObject = [callbackObjectIn retain];
         [callbackObject retain];
@@ -68,6 +68,6 @@
     [super dealloc];
 }
 
-@dynamic connection, URL, state, requiresLogin, attempts;
+//@dynamic connection, URL, state, requiresLogin, attempts;
 
 @end

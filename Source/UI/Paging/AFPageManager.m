@@ -93,7 +93,7 @@
 }
 
 - (AFPage *)pageAtIndex:(int)pageIndex
-{return (AFPage *) [pages objectAtIndex:pageIndex];}
+{return (AFPage *) [pages objectAtIndex:(NSUInteger) pageIndex];}
 
 - (void)addObserver:(NSObject <AFPageObserver> *)observerIn
 {[observers addObject:observerIn];}

@@ -48,20 +48,20 @@ AFChangeFlag* FLAG_SECTION_EDITED;
 	return self;
 }
 
--(AFTableCell*)cellAtIndex:(NSInteger)index 
+-(AFTableCell*)cellAtIndex:(NSUInteger)index
 {
 	return [children objectAtIndex:index];
 }
 
-- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)lenIn
+- (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)lenIn
 {
-	int len = [children count];
+	NSUInteger len = [children count];
 	id* childrenCopy = malloc(sizeof(id)*len);
 	[children getObjects:childrenCopy range:NSMakeRange(0, len)];
 	
 	if(state->state >= len)return 0;
     state->itemsPtr = childrenCopy;
-    state->state = len;
+    state->state = (unsigned long) len;
     state->mutationsPtr = (unsigned long *)self;
     return len;
 	

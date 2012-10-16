@@ -85,7 +85,7 @@ static AFTableCell *resultsLoadingCell;
     }
     else
     {
-        int pages = ceil((resultsPage.resultsCount - 1) / resultsPage.resultsPerPage);
+        int pages = (int) ceil((resultsPage.resultsCount - 1) / resultsPage.resultsPerPage);
 
         //Add results header
         AFTableCell *headerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage > 1 ? topBetweenPage : topFirstPage) resultsPage:resultsPage];
@@ -110,7 +110,7 @@ static AFTableCell *resultsLoadingCell;
             }
 
             //Set self as the handler for touches on the cells
-            for (int i = 1; i < [resultsTableSection cellCount]; i++) [resultsTableSection cellAtIndex:i].selectionDelegate = selectionDelegate;
+            for (int i = 1; i < [resultsTableSection cellCount]; i++) [resultsTableSection cellAtIndex:(NSUInteger) i].selectionDelegate = selectionDelegate;
 
             //Add next results optionsƒ
             AFTableCell *footerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage <= pages ? bottomBetweenPage : bottomLastPage) resultsPage:resultsPage];
@@ -133,9 +133,9 @@ static AFTableCell *resultsLoadingCell;
         [headerCell release];
 
         //Reload the table!
-        [self.view performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        [(UITableView*)self.view performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 
-        NSUInteger bottomIndexPath[] = {[resultsTable sectionCount] - 1, [[resultsTable sectionAtIndex:[resultsTable sectionCount] - 1] cellCount] - 1};
+        NSUInteger bottomIndexPath[] = {[resultsTable sectionCount] - 1, (NSUInteger) ([[resultsTable sectionAtIndex:[resultsTable sectionCount] - 1] cellCount] - 1)};
         NSUInteger topIndexPath[]    = {0, 0};
 
         switch (scrollNeed)
@@ -219,7 +219,7 @@ static AFTableCell *resultsLoadingCell;
 - (void)goToResultsPage:(int)page
 {
     [waitAlert = [[AFSpinAlertView alloc] initWithTitle:@"Please wait" message:nil] show];
-    query.currentPageNumber = page;
+    query.currentPageNumber = (uint8_t) page;
 }
 
 - (NSString *)queryString

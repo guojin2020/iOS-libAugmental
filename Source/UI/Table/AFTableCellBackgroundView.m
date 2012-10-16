@@ -13,25 +13,25 @@ static float defaultBorderWidth = -1;
 
 +(UIColor*)defaultBackgroundColor
 {
-    if(!defaultBackgroundColor) defaultBackgroundColor = [[[AFThemeManager themeSectionForClass:[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBackgroundColor) defaultBackgroundColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
     return defaultBackgroundColor;
 }
 
 +(UIColor*)defaultBorderColor
 {
-    if(!defaultBorderColor) defaultBorderColor = [[[AFThemeManager themeSectionForClass:[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR] retain];
+    if(!defaultBorderColor) defaultBorderColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR] retain];
     return defaultBorderColor;
 }
 
 +(float)defaultRounding
 {
-	if(defaultRounding<0) defaultRounding = [[[AFThemeManager themeSectionForClass:[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_ROUNDING] floatValue];
+	if(defaultRounding<0) defaultRounding = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_ROUNDING] floatValue];
     return defaultRounding;
 }
 
 +(float)defaultBorderWidth
 {
-	if(defaultBorderWidth<0) defaultBorderWidth = [[[AFThemeManager themeSectionForClass:[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_BORDER_WIDTH] floatValue];
+	if(defaultBorderWidth<0) defaultBorderWidth = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_BORDER_WIDTH] floatValue];
     return defaultBorderWidth;
 }
 
@@ -64,7 +64,6 @@ static float defaultBorderWidth = -1;
         miny = miny + 1;
 		
         maxx = maxx - 1;
-        maxy = maxy ;
 		
         CGContextMoveToPoint(c, minx, maxy);
         CGContextAddArcToPoint(c, minx, miny, midx, miny, [AFTableCellBackgroundView defaultRounding]);
@@ -103,10 +102,7 @@ static float defaultBorderWidth = -1;
         CGFloat minx = CGRectGetMinX(rect) , maxx = CGRectGetMaxX(rect) ;
         CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
         minx = minx + 1;
-        miny = miny;
-		
         maxx = maxx - 1;
-        maxy = maxy;
 		
         CGContextMoveToPoint(c, minx, miny);
         CGContextAddLineToPoint(c, maxx, miny);
@@ -153,7 +149,7 @@ static float defaultBorderWidth = -1;
     defaultBorderColor      = nil;
 }
 
-+(id<AFThemeable>)themeParentSectionClass{return [AFTableCell class];}
++(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTableCell class];}
 +(NSString*)themeSectionName{return nil;}
 
 +(NSDictionary*)defaultThemeSection

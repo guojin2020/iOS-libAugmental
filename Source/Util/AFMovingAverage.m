@@ -27,7 +27,7 @@
     }
     if (currentSampleCount < maxSampleCount) currentSampleCount++;
     if (++index == currentSampleCount)index = 0;
-    average = (float) ((float) total / (float) currentSampleCount);
+    average = total / (float) currentSampleCount;
     return average;
 }
 

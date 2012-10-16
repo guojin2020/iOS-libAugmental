@@ -42,11 +42,11 @@ static const NSDictionary      *tidyHTMLReplacements;
 }
 
 + (NSNumber *)numberFromString:(NSString *)string
-{return !string || (NSNull *) string == [NSNull null] ? nil : [numberFormatter numberFromString:string];}
+{return !string || (id)string == [NSNull null] ? nil : [numberFormatter numberFromString:string];}
 
 + (NSDate *)dateFromString:(NSString *)string
 {
-    return !string || (NSNull *) string == [NSNull null] ? nil : [dateFormatter dateFromString:string];
+    return !string || (id)string == [NSNull null] ? nil : [dateFormatter dateFromString:string];
 }
 
 + (NSString *)stringFromDate:(NSDate *)date
@@ -56,13 +56,13 @@ static const NSDictionary      *tidyHTMLReplacements;
 
 + (NSURL *)URLFromString:(NSString *)string
 {
-    if (!string || (NSNull *) string == [NSNull null]) return nil;
+    if (!string || (id)string == [NSNull null]) return nil;
     else return [NSURL URLWithString:string];
 }
 
 + (NSURL *)URLFromString:(NSString *)string relativeToURL:(NSURL *)baseURL
 {
-    if (!string || !baseURL || (NSNull *) string == [NSNull null]) return nil;
+    if (!string || !baseURL || (id)string == [NSNull null]) return nil;
     else return [NSURL URLWithString:string relativeToURL:baseURL];
 }
 

@@ -25,7 +25,7 @@
 
 - (void)broadcastNewValueToObservers:(NSObject *)newValue;
 
-@property(nonatomic, retain) NSSet               *observers;
+@property(nonatomic, retain) NSMutableSet        *observers;
 @property(nonatomic, retain) NSObject <NSCoding> *value;
 @property(nonatomic, retain) NSObject <NSCoding> *defaultValue;
 

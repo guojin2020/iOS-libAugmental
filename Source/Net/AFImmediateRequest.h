@@ -9,6 +9,7 @@
     NSMutableData *responseDataBuffer;
 
     NSData *postData;
+    NSURLConnection *connection;
 }
 
 - (id)initWithURL:(NSURL *)URLIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn;

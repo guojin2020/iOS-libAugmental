@@ -73,7 +73,7 @@
 
         AFResultsPage *oldResultsPage = (AFResultsPage *) resultsPage;
         currentResultsPage = [resultsPage retain];
-        currentPageNumber  = currentResultsPage.currentPage;
+        currentPageNumber  = (uint8_t) currentResultsPage.currentPage;
         [oldResultsPage release];
         for (NSObject <AFPagedObjectQueryObserver> *observer in observers) [observer resultsPageUpdated:resultsPage];
     }
@@ -93,8 +93,8 @@
     if ((self = [super init]))
     {
         queryString       = [[coder decodeObjectForKey:@"queryString"] retain];
-        currentPageNumber = [coder decodeIntForKey:@"currentPageNumber"];
-        pageBy            = [coder decodeIntForKey:@"pageBy"];
+        currentPageNumber = (uint8_t) [coder decodeIntForKey:@"currentPageNumber"];
+        pageBy            = (uint16_t) [coder decodeIntForKey:@"pageBy"];
 
         observers          = [[NSMutableSet alloc] init];
         currentResultsPage = nil;

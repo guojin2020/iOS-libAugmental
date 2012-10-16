@@ -122,19 +122,19 @@ static NSString* cellClickedSound			= nil;
 
 +(UIColor*)defaultTextColor
 {
-    if(!defaultTextColor) defaultTextColor = [[[AFThemeManager themeSectionForClass:[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR] retain];
+    if(!defaultTextColor) defaultTextColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR] retain];
     return defaultTextColor;
 }
 
 +(UIColor*)defaultSecondaryTextColor
 {
-    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[[AFThemeManager themeSectionForClass:[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR] retain];
+    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR] retain];
     return defaultSecondaryTextColor;
 }
 
 +(UIColor*)defaultBGColor
 {
-    if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
     return defaultBGColor?:[UIColor clearColor];
 }
 
@@ -142,7 +142,7 @@ static NSString* cellClickedSound			= nil;
 {
     if(!defaultTextFont)
     {
-        NSString* fontName = [[AFThemeManager themeSectionForClass:[AFTableCell class]] valueForKey:THEME_KEY_DEFAULT_TEXT_FONT];
+        NSString* fontName = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_DEFAULT_TEXT_FONT];
         defaultTextFont = [[UIFont fontWithName:fontName size:[AFTableCell defaultTextSize]] retain];
     }
     return defaultTextFont;
@@ -150,13 +150,13 @@ static NSString* cellClickedSound			= nil;
 
 +(float_t)defaultTextSize
 {
-    if(defaultTextSize<0) defaultTextSize = [[AFThemeManager themeSectionForClass:[AFTableCell class]] floatForKey:THEME_KEY_DEFAULT_TEXT_SIZE];
+    if(defaultTextSize<0) defaultTextSize = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] floatForKey:THEME_KEY_DEFAULT_TEXT_SIZE];
     return defaultTextSize;
 }
 
 +(NSString*)cellClickedSound
 {
-	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
+	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
 	return cellClickedSound;
 }
 
@@ -189,7 +189,7 @@ static NSString* cellClickedSound			= nil;
     defaultTextSize = -1.0;
 }
 
-+(id<AFThemeable>)themeParentSectionClass{return [AFTable class];}
++(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTable class];}
 +(NSString*)themeSectionName{return @"cell";}
 
 +(NSDictionary*)defaultThemeSection
@@ -209,7 +209,7 @@ static NSString* cellClickedSound			= nil;
 	[labelText	release];
 	[tableView	release];
 	[cell		release];
-    [fillColor release];
+    [fillColor  release];
     [selectionDelegate release];
     [parentSection release];
     [super		dealloc];

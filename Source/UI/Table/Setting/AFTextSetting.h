@@ -13,6 +13,7 @@
     UITextField                    *textField;
     NSObject <UITextFieldDelegate> *textFieldDelegate;
     uint8_t maxLength;
+
 }
 
 + (UIColor *)textColor;

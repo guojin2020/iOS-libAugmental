@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'iOS-libAugmental-test' target in the 'iOS-libAugmental-test' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif

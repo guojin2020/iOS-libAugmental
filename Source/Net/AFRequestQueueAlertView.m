@@ -108,11 +108,11 @@ static AFRequestQueue          *visibleQueue = nil;
     NSObject <AFRequest> *request;
     if (row < [activatedRequestCache count])
     {
-        request = [activatedRequestCache objectAtIndex:row];
+        request = [activatedRequestCache objectAtIndex:(NSUInteger) row];
     }
     else
     {
-        request = [queue.queue objectAtIndex:row - [activatedRequestCache count]];
+        request = [queue.queue objectAtIndex:(NSUInteger) (row - [activatedRequestCache count])];
     }
 
     UITableViewCell *cell = [[AFCellViewFactory defaultFactory] cellOfKind:@"requestCell" forTable:tableViewIn reuseIdentifier:[NSString stringWithFormat:@"%@", request]];

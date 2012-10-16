@@ -20,7 +20,6 @@
 @interface AFBaseSetting : AFTableCell <AFEventObserver, AFCellSelectionDelegate, AFThemeable>
 {
     NSObject <AFSettingPersistenceDelegate> *persistenceDelegate;
-    NSObject <NSCoding>                     *value;
 
     NSString     *identity;
     NSMutableSet *settingObservers;
@@ -30,6 +29,8 @@
     BOOL valueChangedSinceLastValidation;
 
     NSObject <AFValidator> *validator;
+    NSObject <NSCoding> *value;
+
 }
 
 - (id)initWithIdentity:(NSString *)identityIn persistenceDelegate:(NSObject <AFSettingPersistenceDelegate> *)persistenceDelegateIn defaultValue:(NSObject <NSCoding> *)defaultValue;

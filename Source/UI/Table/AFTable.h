@@ -30,10 +30,10 @@ extern AFChangeFlag *FLAG_TABLE_EDITED;
 
 -(BOOL)containsSection:(AFTableSection*)section;
 
--(void)insertSection:(AFTableSection*)group atIndex:(int)index;
+-(void)insertSection:(AFTableSection*)group atIndex:(NSUInteger)index;
 
--(AFTableSection*)sectionAtIndex:(NSInteger)index;
--(NSInteger) sectionCount;
+-(AFTableSection*)sectionAtIndex:(NSUInteger)index;
+-(NSUInteger) sectionCount;
 -(void)clear;
 
 @property (nonatomic,retain) NSString* title;

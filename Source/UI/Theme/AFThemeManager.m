@@ -66,7 +66,7 @@ static NSMutableSet *observers;
 
 + (NSMutableDictionary *)composeThemeForClass:(id<AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
 {
-    NSString            *className  = NSStringFromClass(themeableClass);
+    NSString            *className  = NSStringFromClass((Class)themeableClass);
     NSMutableDictionary *dictionary = [themeCache objectForKey:className];
     if (!dictionary)
     {
@@ -161,7 +161,7 @@ static NSMutableSet *observers;
 {return [(NSNumber *) [self valueForKey:key] boolValue];}
 
 - (BOOL)floatForKey:(NSString *)key
-{return [(NSNumber *) [self valueForKey:key] floatValue];}
+{return (BOOL) [(NSNumber *) [self valueForKey:key] floatValue];}
 
 - (UIColor *)colorForKey:(NSString *)key
 {return [UIColor colorWithHexString:[self valueForKey:key]];}

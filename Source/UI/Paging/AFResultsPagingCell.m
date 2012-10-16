@@ -28,28 +28,28 @@ static UIImage *imagePrevious;
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:[AFResultsPagingCell class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:[AFResultsPagingCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
     return textColor;
 }
 
 + (UIImage *)imageNext
 {
     if (!imageNext)
-    {imageNext = [[[AFThemeManager themeSectionForClass:[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_NEXT] retain];}
+    {imageNext = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_NEXT] retain];}
     return imageNext;
 }
 
 + (UIImage *)imagePrevious
 {
     if (!imagePrevious)
-    {imagePrevious = [[[AFThemeManager themeSectionForClass:[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_PREVIOUS] retain];}
+    {imagePrevious = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_PREVIOUS] retain];}
     return imagePrevious;
 }
 
@@ -116,7 +116,7 @@ static UIImage *imagePrevious;
 }
 
 + (id<AFThemeable>)themeParentSectionClass
-{return [AFTableCell class];}
+{return (id<AFThemeable>)[AFTableCell class];}
 
 + (NSString *)themeSectionName
 {return @"resultsPagingCell";}

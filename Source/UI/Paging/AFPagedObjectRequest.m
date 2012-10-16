@@ -42,9 +42,9 @@
     NSArray *pageObjects = resultsCount > 0 ? [[AFSession sharedSession].cache allocObjectsFromDictionaries:objectDictionaries] : [[NSArray alloc] init];
 
     AFResultsPage *resultsPage = [[AFResultsPage alloc] initWithPageObjects:pageObjects
-                                                               resultsCount:resultsCount
-                                                                currentPage:[(NSNumber *) [pagingData objectForKey:@"currentPage"] intValue]
-                                                             resultsPerPage:[(NSNumber *) [pagingData objectForKey:@"resultsPerPage"] intValue]];
+                                                               resultsCount:(uint16_t) resultsCount
+                                                                currentPage:(uint16_t) [(NSNumber *) [pagingData objectForKey:@"currentPage"] intValue]
+                                                             resultsPerPage:(uint16_t) [(NSNumber *) [pagingData objectForKey:@"resultsPerPage"] intValue]];
 
     [pageObjects release];
     [endpoint request:self returnedWithData:resultsPage];

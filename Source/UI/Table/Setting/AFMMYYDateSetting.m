@@ -37,7 +37,7 @@ static UIImage *dateIcon = nil;
 
 + (UIImage *)dateIcon
 {
-    if (!dateIcon) dateIcon = [[[AFThemeManager themeSectionForClass:[AFMMYYDateSetting class]] imageForKey:THEME_KEY_DATE_ICON] retain];
+    if (!dateIcon) dateIcon = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFMMYYDateSetting class]] imageForKey:THEME_KEY_DATE_ICON] retain];
     return dateIcon;
 }
 
@@ -49,7 +49,7 @@ static UIImage *dateIcon = nil;
 }
 
 + (id<AFThemeable>)themeParentSectionClass
-{return [AFBaseSetting class];}
+{return (id<AFThemeable>)[AFBaseSetting class];}
 
 + (NSString *)themeSectionName
 {return nil;}
@@ -69,6 +69,6 @@ static UIImage *dateIcon = nil;
     [super dealloc];
 }
 
-@dynamic value, validator, valid;
+//@dynamic value, validator, valid;
 
 @end

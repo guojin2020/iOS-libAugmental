@@ -16,7 +16,7 @@
 
 - (void)setObjectArray:(NSArray *)objectArrayIn;
 
-- (void)addObjectArray:(NSMutableArray *)objectArrayIn;
+- (void)addObjectArray:(NSArray *)objectArrayIn;
 
 - (void)removeAllCells;
 

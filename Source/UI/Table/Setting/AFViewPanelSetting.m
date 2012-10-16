@@ -66,9 +66,10 @@ static UIImage *editIcon = nil;
     [panelViewController setValue:valueIn];
 }
 
-- (void)settingViewPanel:(AFSettingViewPanelController *)viewPanelController valueChanged:(NSObject <NSCoding> *)newValue
+- (void)settingViewPanel:(AFSettingViewPanelController *)viewPanelController valueChanged:(NSObject *)newValue
 {
-    [self setValue:newValue];
+    NSAssert([newValue conformsToProtocol:@protocol(NSCoding)],@"Internal inconsistency");
+    [self setValue:(NSObject<NSCoding>*)newValue];
 }
 
 - (NSString *)valueString
@@ -90,7 +91,7 @@ static UIImage *editIcon = nil;
 
 + (UIImage *)editIcon
 {
-    if (!editIcon)editIcon = [[AFThemeManager themeSectionForClass:[AFViewPanelSetting class]] imageForKey:THEME_KEY_EDIT_ICON];
+    if (!editIcon)editIcon = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFViewPanelSetting class]] imageForKey:THEME_KEY_EDIT_ICON];
     return editIcon;
 }
 
@@ -100,7 +101,7 @@ static UIImage *editIcon = nil;
 {editIcon = nil;}
 
 + (id<AFThemeable>)themeParentSectionClass
-{return [AFBaseSetting class];}
+{return (id<AFThemeable>)[AFBaseSetting class];}
 
 + (NSString *)themeSectionName
 {return nil;}
@@ -125,7 +126,5 @@ static UIImage *editIcon = nil;
     //[valueString release];
     [super dealloc];
 }
-
-@synthesize valueString;
 
 @end

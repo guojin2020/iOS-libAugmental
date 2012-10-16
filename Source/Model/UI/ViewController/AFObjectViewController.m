@@ -24,7 +24,7 @@
         return nil;
     }
 
-    for (int i = 1; i < [objects count]; i++)
+    for (NSUInteger i = 1; i < [objects count]; i++)
         if (![[objects objectAtIndex:i] isKindOfClass:objectType])
         {
             return nil;
@@ -66,22 +66,21 @@
     [self loadScrollViewWithPage:1];
 }
 
-- (void)loadScrollViewWithPage:(int)page
+- (void)loadScrollViewWithPage:(NSUInteger)page
 {
-    if (page < 0) return;
     if (page >= kNumberOfPages) return;
 
     // replace the placeholder if necessary
     UIViewController *viewController = [viewControllers objectAtIndex:page];
 
-    if ((NSNull *) viewController == [NSNull null])
+    if ((id)viewController == [NSNull null])
     {
         NSObject <AFObject_PanelViewable> *pageViewObject = [objects objectAtIndex:page];
 
         id<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
         if (viewPanelControllerClass)
         {
-            viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject(viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];
+            viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject((Class)viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];
         }
         else
         {
@@ -123,13 +122,13 @@
     }
     // Switch the indicator when more than 50% of the previous/next page is visible
     CGFloat pageWidth = scrollView.frame.size.width;
-    int     page      = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    int     page      = (int) (floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1);
     pageControl.currentPage = page;
 
     // load the visible page and the page on either side of it (to avoid flashes when the USER starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
+    [self loadScrollViewWithPage:(NSUInteger) (page - 1)];
+    [self loadScrollViewWithPage:(NSUInteger) page];
+    [self loadScrollViewWithPage:(NSUInteger) (page + 1)];
 
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
@@ -144,9 +143,9 @@
 {
     int page = pageControl.currentPage;
     // load the visible page and the page on either side of it (to avoid flashes when the USER starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
+    [self loadScrollViewWithPage:(NSUInteger) (page - 1)];
+    [self loadScrollViewWithPage:(NSUInteger) page];
+    [self loadScrollViewWithPage:(NSUInteger) (page + 1)];
     // update the scroll view to the appropriate page
     CGRect frame = scrollView.frame;
     frame.origin.x = frame.size.width * page;

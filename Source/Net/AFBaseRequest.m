@@ -89,7 +89,7 @@
 
 - (float)progress
 {
-    return expectedBytes > 0 ? (float) ((float) receivedBytes / (float) expectedBytes) : 0;
+    return expectedBytes > 0 ? (float) receivedBytes / (float) expectedBytes : 0;
 }
 
 - (void)addObserver:(NSObject <AFRequestObserver> *)newObserver

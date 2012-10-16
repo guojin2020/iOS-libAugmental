@@ -23,7 +23,7 @@
 
 - (IBAction)changePage:(id)sender;
 
-- (void)loadScrollViewWithPage:(int)page;
+- (void)loadScrollViewWithPage:(NSUInteger)page;
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender;
 

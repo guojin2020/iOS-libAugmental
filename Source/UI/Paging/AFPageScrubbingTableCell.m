@@ -33,19 +33,19 @@ static NSNumber *textShadowEnabled;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textColor;
 }
 
 + (UIColor *)textShadowColor
 {
-    if (!textShadowColor)textShadowColor = [[[AFThemeManager themeSectionForClass:[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textShadowColor)textShadowColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textShadowColor;
 }
 
 + (BOOL)textShadowEnabled
 {
-    if (!textShadowEnabled)textShadowEnabled = [[[AFThemeManager themeSectionForClass:[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED] retain];
+    if (!textShadowEnabled)textShadowEnabled = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED] retain];
     return [textShadowEnabled boolValue];
 }
 
@@ -94,7 +94,7 @@ static NSNumber *textShadowEnabled;
 
 - (void)updateScrubber
 {
-    pageCount = ceil((float) (pagedObjectListViewController.currentResultsPage.resultsCount) / (float) (pagedObjectListViewController.currentResultsPage.resultsPerPage));
+    pageCount = (int) ceil((float) (pagedObjectListViewController.currentResultsPage.resultsCount) / (float) (pagedObjectListViewController.currentResultsPage.resultsPerPage));
 
     int currentPage = pagedObjectListViewController.currentResultsPage.currentPage;
 
@@ -118,7 +118,7 @@ static NSNumber *textShadowEnabled;
     }
     else suppressSecondEvent = YES;
 
-    int soughtPage = round([slider value]);
+    int soughtPage = (int) round([slider value]);
     if (round([slider value]) != pagedObjectListViewController.currentResultsPage.currentPage)
     {
         pageLabel.text = [NSString stringWithFormat:@"Seeking to page %i", soughtPage];
@@ -134,7 +134,7 @@ static NSNumber *textShadowEnabled;
 {
     if ([sender isTracking])
     {
-        int seekPage = round([slider value]);
+        int seekPage = (int) round([slider value]);
         if (seekPage == pagedObjectListViewController.currentResultsPage.currentPage)
         {
             pageLabel.text = @"Current page";
@@ -170,7 +170,7 @@ static NSNumber *textShadowEnabled;
 {textColor = nil;}
 
 + (id<AFThemeable>)themeParentSectionClass
-{return [AFTableCell class];}
+{return (id<AFThemeable>)[AFTableCell class];}
 
 + (NSString *)themeSectionName
 {return @"pageScrubbingCell";}

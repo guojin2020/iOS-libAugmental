@@ -20,7 +20,7 @@ static const char encodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopq
         memset(decodingTable, CHAR_MAX, 256);
         NSUInteger i;
         for (i = 0; i < 64; i++)
-            decodingTable[(short) encodingTable[i]] = i;
+            decodingTable[(short) encodingTable[i]] = (char) i;
     }
 
     const char *characters = [string cStringUsingEncoding:NSASCIIStringEncoding];

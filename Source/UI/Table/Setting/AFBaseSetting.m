@@ -192,14 +192,14 @@ static UIColor *invalidColor = nil;
 + (UIColor *)validColor
 {
     if (!validColor)
-    {validColor = [[[AFThemeManager themeSectionForClass:[AFBaseSetting class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
+    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBaseSetting class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
     return validColor;
 }
 
 + (UIColor *)invalidColor
 {
     if (!invalidColor)
-    {invalidColor = [[[AFThemeManager themeSectionForClass:[AFBaseSetting class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
+    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBaseSetting class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
     return invalidColor;
 }
 
@@ -255,6 +255,6 @@ static UIColor *invalidColor = nil;
     [super dealloc];
 }
 
-@synthesize persistenceDelegate, identity, helpText, value, validator, valid, tableController;
+@synthesize persistenceDelegate, identity, helpText, value, valid;
 
 @end

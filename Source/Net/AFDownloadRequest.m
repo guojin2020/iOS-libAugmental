@@ -2,7 +2,6 @@
 #import "AFQueueableRequestObserver.h"
 #import "AFSession.h"
 #import "AFHeaderRequest.h"
-#import "AFPerformSelectorOperation.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -14,7 +13,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 + (AFDownloadRequest *)requestForURL:(NSURL *)URLIn
                           targetPath:(NSString *)targetPathIn
                            observers:(NSSet *)observersIn
-                       fileSizeCache:(NSDictionary *)sizeCacheIn
+                       fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 {
     if (!uniqueRequestPool) uniqueRequestPool = [[NSMutableDictionary alloc] init];
 
@@ -44,7 +43,10 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     return YES;
 }
 
-- (id)initWithURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn
+- (id)initWithURL:(NSURL *)URLIn
+       targetPath:(NSString *)targetPathIn
+        observers:(NSSet *)observersIn
+    fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 {
     NSAssert(URLIn && targetPathIn && sizeCacheIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
 
@@ -66,7 +68,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
         if (![AFSession sharedSession].offline)
         {
-            pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:URL endpoint:self];
+            pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:URLIn endpoint:self];
             [[AFSession sharedSession] handleRequest:pollSizeRequest];
             [pollSizeRequest release];
         }
@@ -91,10 +93,12 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
 {
+    [super willReceiveWithHeaders:headers responseCode:responseCode];
+
     NSLog(@"Will begin writing to file '%@'",targetPath);
 
-    state = (requestState) inProcess;
-    [self broadcastToObservers:(requestEvent) started];
+    //state = (requestState) inProcess;
+    //[self broadcastToObservers:(requestEvent) started];
 
     NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
 
@@ -152,10 +156,10 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
         if ([dataIn length] > bufferSpaceRemaining) //Theres not enough buffer space
         {
-            [dataBuffer replaceBytesInRange:NSMakeRange(dataBufferPosition, bufferSpaceRemaining) withBytes:[dataIn bytes] length:bufferSpaceRemaining];
+            [dataBuffer replaceBytesInRange:NSMakeRange(dataBufferPosition, (NSUInteger) bufferSpaceRemaining) withBytes:[dataIn bytes] length:(NSUInteger) bufferSpaceRemaining];
             [myHandle writeData:dataBuffer];
-            const int leftOverBytes = [dataIn length] - bufferSpaceRemaining;
-            [dataBuffer replaceBytesInRange:NSMakeRange(0, leftOverBytes) withBytes:[[dataIn subdataWithRange:NSMakeRange(bufferSpaceRemaining, leftOverBytes)] bytes]];
+            NSUInteger leftOverBytes = [dataIn length] - bufferSpaceRemaining;
+            [dataBuffer replaceBytesInRange:NSMakeRange(0, leftOverBytes) withBytes:[[dataIn subdataWithRange:NSMakeRange((NSUInteger) bufferSpaceRemaining, leftOverBytes)] bytes]];
             dataBufferPosition = leftOverBytes;
         }
         else //There is enough buffer space
@@ -168,13 +172,6 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
 - (NSString *)actionDescription
 {return @"Downloading file";}
-
-/*
-- (void)writeDataInternal:(NSData *)data
-{
-    [myHandle writeData:data];
-}
-*/
 
 - (void)didFinish;
 {
@@ -209,12 +206,11 @@ static NSMutableDictionary *uniqueRequestPool = nil;
         [myHandle release];
         myHandle = nil;
     }
-
 }
 
 - (void)requestQueuedAtPosition:(int)queuePositionIn;
 {
-    queuePosition = queuePositionIn;
+    queuePosition = (NSUInteger) queuePositionIn;
     [self broadcastToObservers:(requestEvent) queued];
 }
 
@@ -224,13 +220,13 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     switch (event)
     {
         case (requestEvent) queued:
-            for (NSObject *observer in observerSnapshot)if ([observer conformsToProtocol:@protocol(AFQueueableRequestObserver)])[(NSObject <AFQueueableRequestObserver> *) observer requestQueued:(NSObject <AFQueueableRequest> *) self AtPosition:queuePosition];
+            for (NSObject *observer in observerSnapshot)if ([observer conformsToProtocol:@protocol(AFQueueableRequestObserver)])[(NSObject <AFQueueableRequestObserver> *) observer requestQueued:self AtPosition:queuePosition];
             break;
         case (requestEvent) sizePolled:
-            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestSizePolled:forRequest:)])[(NSObject <AFRequestObserver> *) observer requestSizePolled:(int) expectedBytes forRequest:self];
+            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestSizePolled:forRequest:)])[(NSObject <AFRequestObserver> *) observer requestSizePolled:expectedBytes forRequest:self];
             break;
         case (requestEvent) reset:
-            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestReset:)]) [(NSObject <AFRequestObserver> *) observer requestReset:(NSObject <AFRequest> *) self];
+            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestReset:)]) [(NSObject <AFRequestObserver> *) observer requestReset:self];
             break;
         default:
             [super broadcastToObservers:event];
@@ -258,7 +254,9 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 {return [[NSFileManager defaultManager] fileExistsAtPath:targetPath];}
 
 - (BOOL)complete
-{return receivedBytes >= expectedBytes;}
+{
+    return receivedBytes >= expectedBytes;
+}
 
 - (void)updateReceivedBytesFromFile
 {
@@ -282,7 +280,6 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 {
     [sizeCache release];
     [numberFormatter release];
-    [uniqueRequestPool release];
     [observers release];
     [targetPath release];
     [dataBuffer release];
@@ -297,8 +294,5 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 }
 
 @synthesize uniqueKey;
-@dynamic requiresLogin, attempts;
-
-//@dynamic receivedBytes, connection, URL, state;
 
 @end

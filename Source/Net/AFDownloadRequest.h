@@ -11,10 +11,10 @@
     NSFileHandle        *myHandle;
     NSString            *targetPath;
     NSMutableDictionary *sizeCache;
-    int queuePosition;
+    NSUInteger queuePosition;
     NSString      *uniqueKey;
     NSMutableData *dataBuffer;
-    int dataBufferPosition;
+    NSUInteger dataBufferPosition;
     AFHeaderRequest *pollSizeRequest;
 }
 
@@ -24,7 +24,7 @@
 
 + (BOOL)sizePolledForAllPooledRequests;
 
-- (id)initWithURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSDictionary *)sizeCacheIn;
+- (id)initWithURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn;
 
 - (BOOL)complete;
 

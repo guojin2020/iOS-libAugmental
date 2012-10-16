@@ -35,9 +35,9 @@ static NSString *PAGE_OBJECTS_KEY     = @"pageObjects";
 {
     if ((self = [super init]))
     {
-        resultsCount   = [coder decodeIntForKey:RESULTS_COUNT_KEY];
-        currentPage    = [coder decodeIntForKey:CURRENT_PAGE_KEY];
-        resultsPerPage = [coder decodeIntForKey:RESULTS_PER_PAGE_KEY];
+        resultsCount   = (uint16_t) [coder decodeIntForKey:RESULTS_COUNT_KEY];
+        currentPage    = (uint16_t) [coder decodeIntForKey:CURRENT_PAGE_KEY];
+        resultsPerPage = (uint16_t) (uint16_t) [coder decodeIntForKey:RESULTS_PER_PAGE_KEY];
         pageObjects    = [coder decodeObjectForKey:PAGE_OBJECTS_KEY];
 
         NSAssert(pageObjects && resultsPerPage > 0, @"");

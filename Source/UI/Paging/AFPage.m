@@ -69,18 +69,22 @@
 
 - (BOOL)mayGoToNextStep
 {
+    BOOL answer;
+
     if ([viewController conformsToProtocol:@protocol(AFValidatable)])
     {
-        if ([viewController respondsToSelector:@selector(validateWithInvalidUserAlert)])
+        if ([(id)viewController respondsToSelector:@selector(validateWithInvalidUserAlert)])
         {
-            return [(NSObject <AFValidatable> *) viewController validateWithInvalidUserAlert];
+            answer = [(NSObject <AFValidatable> *) viewController validateWithInvalidUserAlert];
         }
         else
         {
-            return [((NSObject <AFValidatable> *) viewController) valid];
+            answer = [((NSObject <AFValidatable> *) viewController) valid];
         }
     }
-    else return YES;
+    else answer = YES;
+
+    return answer;
 }
 
 - (BOOL)mayGoToPreviousStep
@@ -137,6 +141,6 @@
     [super dealloc];
 }
 
-@synthesize title, viewController, manager;
+@synthesize viewController, manager;
 
 @end

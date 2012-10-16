@@ -18,6 +18,6 @@
      getObjectActionString:(NSString *)getObjectActionStringIn
  objectCSVIdListSettingsKey:(NSString *)objectCSVIdListSettingsKeyIn
 objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
-                objectClass:(Class)objectClassIn;
+                objectClass:(id <AFObject>)objectClassIn;
 
 @end

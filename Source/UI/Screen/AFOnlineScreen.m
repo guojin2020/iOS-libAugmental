@@ -60,7 +60,7 @@
 }
 
 + (id<AFThemeable>)themeParentSectionClass
-{return [AFScreen class];}
+{return (id<AFThemeable>)[AFScreen class];}
 
 + (NSString *)themeSectionName
 {return nil;} //@"onlineScreen"

@@ -103,9 +103,9 @@ static char base64EncodingTable[64] = {
             [objectsIdCsv appendFormat:@"%i", ((NSObject <AFObject> *) [objects objectAtIndex:0]).primaryKey];
             for (int i = 1; i < objectsCount; i++)
             {
-                if ([[objects objectAtIndex:i] conformsToProtocol:@protocol(AFObject)])
+                if ([[objects objectAtIndex:(NSUInteger) i] conformsToProtocol:@protocol(AFObject)])
                 {
-                    [objectsIdCsv appendFormat:@",%i", ((NSObject <AFObject> *) [objects objectAtIndex:i]).primaryKey];
+                    [objectsIdCsv appendFormat:@",%i", ((NSObject <AFObject> *) [objects objectAtIndex:(NSUInteger) i]).primaryKey];
                 }
                 else
                 {
@@ -124,7 +124,7 @@ static char base64EncodingTable[64] = {
     // Create zero addy
     struct sockaddr_in zeroAddress;
     bzero(&zeroAddress, sizeof(zeroAddress));
-    zeroAddress.sin_len    = sizeof(zeroAddress);
+    zeroAddress.sin_len    = (__uint8_t) sizeof(zeroAddress);
     zeroAddress.sin_family = AF_INET;
 
     // Recover reachability flags
@@ -132,7 +132,7 @@ static char base64EncodingTable[64] = {
     SCNetworkReachabilityFlags flags;
 
     BOOL didRetrieveFlags = SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags);
-    CFRelease(defaultRouteReachability);
+    CFRelease((CFTypeRef)defaultRouteReachability);
 
     if (!didRetrieveFlags)
     {
@@ -156,9 +156,9 @@ static char base64EncodingTable[64] = {
 
 + (NSString *)newDurationString:(NSTimeInterval)time
 {
-    int days    = floor(time / 86400);
-    int hours   = floor((time / 3600) - (days * 24));
-    int minutes = floor((time / 60) - (days * 1440) - (hours * 60));
+    int days    = (int) floor(time / 86400);
+    int hours   = (int) floor((time / 3600) - (days * 24));
+    int minutes = (int) floor((time / 60) - (days * 1440) - (hours * 60));
     //int seconds = (int)time % 60;
 
     if (days == 0)
@@ -191,7 +191,7 @@ static char base64EncodingTable[64] = {
     int lentext = [data length];
     if (lentext < 1) return @"";
 
-    char *outbuf = malloc(lentext * 4 / 3 + 4); // add 4 to be sure
+    char *outbuf = malloc((size_t) (lentext * 4 / 3 + 4)); // add 4 to be sure
 
     if (!outbuf) return nil;
 
@@ -227,7 +227,7 @@ static char base64EncodingTable[64] = {
 
     }
 
-    NSString *ret = [[[NSString alloc] initWithBytes:outbuf length:outp encoding:NSASCIIStringEncoding] autorelease];
+    NSString *ret = [[[NSString alloc] initWithBytes:outbuf length:(NSUInteger) outp encoding:NSASCIIStringEncoding] autorelease];
     free(outbuf);
 
     return ret;

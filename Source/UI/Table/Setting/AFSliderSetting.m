@@ -44,6 +44,6 @@
     [super dealloc];
 }
 
-@dynamic validator, valid, value;
+//@dynamic validator, valid, value;
 
 @end

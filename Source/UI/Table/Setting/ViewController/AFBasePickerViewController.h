@@ -10,7 +10,7 @@
 
 @interface AFBasePickerViewController : AFSettingViewPanelController <UIPickerViewDataSource, UIPickerViewDelegate, AFThemeable>
 {
-    NSMutableArray                    *objects;
+    NSArray                           *objects;
     UIPickerView                      *picker;
     UITextView                        *adviceText;
     NSObject <AFObjectPickerDelegate> *delegate;
@@ -23,6 +23,9 @@
 - (id)initWithObjects:(NSArray *)objectsIn
              delegate:(NSObject <AFObjectPickerDelegate> *)delegate
                 title:(NSString *)titleIn;
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+
 
 @property(nonatomic, retain) IBOutlet UIPickerView *picker;
 @property(nonatomic, retain) IBOutlet UITextView   *adviceText;

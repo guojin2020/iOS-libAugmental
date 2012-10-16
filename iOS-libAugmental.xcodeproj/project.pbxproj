@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		097252DA14A5F48800E75618 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097252D914A5F48800E75618 /* SystemConfiguration.framework */; };
 		099C5F80149EA61800F25175 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099C5F7F149EA61800F25175 /* UIKit.framework */; };
+		09C62F10162ADF5B00CC6B73 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 09C62F0F162ADF5B00CC6B73 /* SenTestingKit.framework */; };
+		09C62F11162ADF5B00CC6B73 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 099C5F7F149EA61800F25175 /* UIKit.framework */; };
+		09C62F12162ADF5B00CC6B73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A4AC821485AB9000EBD4B0 /* Foundation.framework */; };
+		09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */; };
+		09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */; };
 		67D1702DADD0676286BBC94F /* AFTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17FD7CC458AFF2E4F7394 /* AFTable.m */; };
 		67D170A4F6C0DB7623B3A940 /* AFTableSectionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D1706F32F997290A5782D8 /* AFTableSectionObserver.h */; };
 		67D171D3B5BE5C1BD84E7633 /* AFTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D173AF9D2902398C7AAC16 /* AFTableSection.m */; };
@@ -207,8 +212,6 @@
 		759B00C615E6CC1900D32988 /* AFViewPanelSetting.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF815E6CC1900D32988 /* AFViewPanelSetting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		759B00C715E6CC1900D32988 /* AFViewPanelSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFF915E6CC1900D32988 /* AFViewPanelSetting.m */; };
 		759B00C815E6CC1900D32988 /* AFWriteableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFA15E6CC1900D32988 /* AFWriteableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		759B00C915E6CC1900D32988 /* CustomMoviePlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFB15E6CC1900D32988 /* CustomMoviePlayerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		759B00CA15E6CC1900D32988 /* CustomMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFC15E6CC1900D32988 /* CustomMoviePlayerViewController.m */; };
 		759B00CB15E6CC1900D32988 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFD15E6CC1900D32988 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		759B00CC15E6CC1900D32988 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFE15E6CC1900D32988 /* Logger.m */; };
 		759B00CD15E6CC1900D32988 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFF15E6CC1900D32988 /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -219,11 +222,17 @@
 		759B00D215E6CC1900D32988 /* UICustomDisclosureArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000415E6CC1900D32988 /* UICustomDisclosureArrowView.m */; };
 		759B00D315E6CC1900D32988 /* UILabel+ShrinkToFit.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		759B00D415E6CC1900D32988 /* UILabel+ShrinkToFit.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000615E6CC1900D32988 /* UILabel+ShrinkToFit.m */; };
-		759B00D515E6CC1900D32988 /* UniversalMoviePlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000715E6CC1900D32988 /* UniversalMoviePlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		759B00D615E6CC1900D32988 /* UniversalMoviePlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000815E6CC1900D32988 /* UniversalMoviePlayer.m */; };
 		759B00D715E6CC1900D32988 /* iOS-libAugmental-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 759B000915E6CC1900D32988 /* iOS-libAugmental-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		759BFF3515E6CB1600D32988 /* libTouchJSON-iphonesimulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 759BFF3215E6CACE00D32988 /* libTouchJSON-iphonesimulator.a */; };
 		75A4AC831485AB9000EBD4B0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A4AC821485AB9000EBD4B0 /* Foundation.framework */; };
+		B03CA2063C95B63F83E55E30 /* AFVideoStillsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */; };
+		B03CA2151266AC2908CC380A /* AFVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */; };
+		B03CA23D5215BB90D1A1689E /* AFVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */; };
+		B03CA9E6B5AD346F71708214 /* AFVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */; };
+		B03CAC09D6517A355C8B838A /* AFAVAssetCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA99F66C1827E59555137 /* AFAVAssetCache.h */; };
+		B03CAD7150B14B050A67FBF2 /* AFVideoPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */; };
+		B03CADCD0A6E709A4955ED60 /* AFAVAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */; };
+		B03CAF0BAAB45ED5528039C9 /* AFVideoStillsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA935657322CEC376CD89 /* AFVideoStillsFactory.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -253,6 +262,13 @@
 /* Begin PBXFileReference section */
 		097252D914A5F48800E75618 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		099C5F7F149EA61800F25175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-libAugmental-test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C62F0F162ADF5B00CC6B73 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		09C62F15162ADF5B00CC6B73 /* iOS-libAugmental-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS-libAugmental-test-Info.plist"; sourceTree = "<group>"; };
+		09C62F17162ADF5B00CC6B73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		09C62F19162ADF5B00CC6B73 /* iOS_libAugmental_test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iOS_libAugmental_test.h; sourceTree = "<group>"; };
+		09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iOS_libAugmental_test.m; sourceTree = "<group>"; };
+		09C62F1C162ADF5B00CC6B73 /* iOS-libAugmental-test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iOS-libAugmental-test-Prefix.pch"; sourceTree = "<group>"; };
 		67D1706F32F997290A5782D8 /* AFTableSectionObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableSectionObserver.h; sourceTree = "<group>"; };
 		67D17109CE48A45BBC2BBE69 /* AFPConstrainedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPConstrainedView.h; sourceTree = "<group>"; };
 		67D17110535EC79A0438A4AA /* AFTableCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFTableCellBackgroundView.h; sourceTree = "<group>"; };
@@ -282,8 +298,6 @@
 		759B000415E6CC1900D32988 /* UICustomDisclosureArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomDisclosureArrowView.m; sourceTree = "<group>"; };
 		759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+ShrinkToFit.h"; sourceTree = "<group>"; };
 		759B000615E6CC1900D32988 /* UILabel+ShrinkToFit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+ShrinkToFit.m"; sourceTree = "<group>"; };
-		759B000715E6CC1900D32988 /* UniversalMoviePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalMoviePlayer.h; sourceTree = "<group>"; };
-		759B000815E6CC1900D32988 /* UniversalMoviePlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalMoviePlayer.m; sourceTree = "<group>"; };
 		759B000915E6CC1900D32988 /* iOS-libAugmental-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iOS-libAugmental-Prefix.pch"; sourceTree = "<group>"; };
 		759BFF2715E6CACE00D32988 /* TouchJSON-iOS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "TouchJSON-iOS.xcodeproj"; path = "TouchJSON/Support/TouchJSON-iOS.xcodeproj"; sourceTree = "<group>"; };
 		759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
@@ -462,16 +476,32 @@
 		759BFFF815E6CC1900D32988 /* AFViewPanelSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewPanelSetting.h; sourceTree = "<group>"; };
 		759BFFF915E6CC1900D32988 /* AFViewPanelSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewPanelSetting.m; sourceTree = "<group>"; };
 		759BFFFA15E6CC1900D32988 /* AFWriteableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWriteableObject.h; sourceTree = "<group>"; };
-		759BFFFB15E6CC1900D32988 /* CustomMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMoviePlayerViewController.h; sourceTree = "<group>"; };
-		759BFFFC15E6CC1900D32988 /* CustomMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMoviePlayerViewController.m; sourceTree = "<group>"; };
 		759BFFFD15E6CC1900D32988 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		759BFFFE15E6CC1900D32988 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		759BFFFF15E6CC1900D32988 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		75A4AC7F1485AB9000EBD4B0 /* libiOS-libAugmental.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libiOS-libAugmental.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75A4AC821485AB9000EBD4B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerViewController.h; sourceTree = "<group>"; };
+		B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAVAssetCache.m; sourceTree = "<group>"; };
+		B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoStillsFactory.m; sourceTree = "<group>"; };
+		B03CA935657322CEC376CD89 /* AFVideoStillsFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoStillsFactory.h; sourceTree = "<group>"; };
+		B03CA99F66C1827E59555137 /* AFAVAssetCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAVAssetCache.h; sourceTree = "<group>"; };
+		B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerView.h; sourceTree = "<group>"; };
+		B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerViewController.m; sourceTree = "<group>"; };
+		B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		09C62F0A162ADF5B00CC6B73 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C62F10162ADF5B00CC6B73 /* SenTestingKit.framework in Frameworks */,
+				09C62F11162ADF5B00CC6B73 /* UIKit.framework in Frameworks */,
+				09C62F12162ADF5B00CC6B73 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75A4AC7C1485AB9000EBD4B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -486,6 +516,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09C62F13162ADF5B00CC6B73 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				09C62F19162ADF5B00CC6B73 /* iOS_libAugmental_test.h */,
+				09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */,
+				09C62F14162ADF5B00CC6B73 /* Supporting Files */,
+			);
+			name = Test;
+			path = "iOS-libAugmental-test";
+			sourceTree = "<group>";
+		};
+		09C62F14162ADF5B00CC6B73 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				09C62F15162ADF5B00CC6B73 /* iOS-libAugmental-test-Info.plist */,
+				09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */,
+				09C62F1C162ADF5B00CC6B73 /* iOS-libAugmental-test-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		67D170C381B55297F1578E06 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,7 +599,6 @@
 				67D17C0C49A2DF61B3CEAD5D /* ViewController */,
 				67D17C1449B4C373BDBB7392 /* ViewCell */,
 			);
-			lastKnownFileType = text;
 			path = Setting;
 			sourceTree = "<group>";
 		};
@@ -596,12 +646,16 @@
 			children = (
 				759BFF6815E6CC1900D32988 /* AFImageCache.m */,
 				759BFF6715E6CC1900D32988 /* AFImageCache.h */,
-				759B000715E6CC1900D32988 /* UniversalMoviePlayer.h */,
-				759B000815E6CC1900D32988 /* UniversalMoviePlayer.m */,
-				759BFFFC15E6CC1900D32988 /* CustomMoviePlayerViewController.m */,
-				759BFFFB15E6CC1900D32988 /* CustomMoviePlayerViewController.h */,
 				759BFF4D15E6CC1900D32988 /* AFCachingAudioPlayer.m */,
 				759BFF4C15E6CC1900D32988 /* AFCachingAudioPlayer.h */,
+				B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */,
+				B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */,
+				B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */,
+				B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */,
+				B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */,
+				B03CA935657322CEC376CD89 /* AFVideoStillsFactory.h */,
+				B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */,
+				B03CA99F66C1827E59555137 /* AFAVAssetCache.h */,
 			);
 			path = Media;
 			sourceTree = "<group>";
@@ -685,7 +739,6 @@
 			isa = PBXGroup;
 			children = (
 			);
-			lastKnownFileType = text;
 			path = ViewCell;
 			sourceTree = "<group>";
 		};
@@ -866,6 +919,7 @@
 			children = (
 				759BFF3B15E6CC1900D32988 /* Source */,
 				759BFF2715E6CACE00D32988 /* TouchJSON-iOS.xcodeproj */,
+				09C62F13162ADF5B00CC6B73 /* Test */,
 				75A4AC811485AB9000EBD4B0 /* Frameworks */,
 				75A4AC801485AB9000EBD4B0 /* Products */,
 			);
@@ -875,6 +929,7 @@
 			isa = PBXGroup;
 			children = (
 				75A4AC7F1485AB9000EBD4B0 /* libiOS-libAugmental.a */,
+				09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -885,6 +940,7 @@
 				097252D914A5F48800E75618 /* SystemConfiguration.framework */,
 				099C5F7F149EA61800F25175 /* UIKit.framework */,
 				75A4AC821485AB9000EBD4B0 /* Foundation.framework */,
+				09C62F0F162ADF5B00CC6B73 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1001,13 +1057,11 @@
 				759B00C515E6CC1900D32988 /* AFValidator.h in Headers */,
 				759B00C615E6CC1900D32988 /* AFViewPanelSetting.h in Headers */,
 				759B00C815E6CC1900D32988 /* AFWriteableObject.h in Headers */,
-				759B00C915E6CC1900D32988 /* CustomMoviePlayerViewController.h in Headers */,
 				759B00CB15E6CC1900D32988 /* Logger.h in Headers */,
 				759B00CD15E6CC1900D32988 /* NSData+Base64.h in Headers */,
 				759B00CF15E6CC1900D32988 /* RichClientFramework.h in Headers */,
 				759B00D115E6CC1900D32988 /* UICustomDisclosureArrowView.h in Headers */,
 				759B00D315E6CC1900D32988 /* UILabel+ShrinkToFit.h in Headers */,
-				759B00D515E6CC1900D32988 /* UniversalMoviePlayer.h in Headers */,
 				759B00D715E6CC1900D32988 /* iOS-libAugmental-Prefix.pch in Headers */,
 				67D177431F83AFA4F378CB38 /* AFTableViewController.h in Headers */,
 				67D174EB4F0852C934C19523 /* AFTableCell.h in Headers */,
@@ -1021,12 +1075,34 @@
 				67D176EB525CCA87779C88B1 /* AFLayoutView.h in Headers */,
 				67D17960E974225563EAA2B2 /* AFConstrainedView.h in Headers */,
 				67D176C44F9021BFDFB2899A /* AFPConstrainedView.h in Headers */,
+				B03CA9E6B5AD346F71708214 /* AFVideoPlayerView.h in Headers */,
+				B03CAD7150B14B050A67FBF2 /* AFVideoPlayerViewController.h in Headers */,
+				B03CAF0BAAB45ED5528039C9 /* AFVideoStillsFactory.h in Headers */,
+				B03CAC09D6517A355C8B838A /* AFAVAssetCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-test" */;
+			buildPhases = (
+				09C62F09162ADF5B00CC6B73 /* Sources */,
+				09C62F0A162ADF5B00CC6B73 /* Frameworks */,
+				09C62F0B162ADF5B00CC6B73 /* Resources */,
+				09C62F0C162ADF5B00CC6B73 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iOS-libAugmental-test";
+			productName = "iOS-libAugmental-test";
+			productReference = 09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		75A4AC7E1485AB9000EBD4B0 /* iOS-libAugmental */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 75A4AC8C1485AB9000EBD4B0 /* Build configuration list for PBXNativeTarget "iOS-libAugmental" */;
@@ -1072,6 +1148,7 @@
 			projectRoot = "";
 			targets = (
 				75A4AC7E1485AB9000EBD4B0 /* iOS-libAugmental */,
+				09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-test */,
 			);
 		};
 /* End PBXProject section */
@@ -1093,7 +1170,42 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXResourcesBuildPhase section */
+		09C62F0B162ADF5B00CC6B73 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		09C62F0C162ADF5B00CC6B73 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		09C62F09162ADF5B00CC6B73 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		75A4AC7B1485AB9000EBD4B0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1169,13 +1281,11 @@
 				759B00C115E6CC1900D32988 /* AFUtil.m in Sources */,
 				759B00C415E6CC1900D32988 /* AFValidatableValidator.m in Sources */,
 				759B00C715E6CC1900D32988 /* AFViewPanelSetting.m in Sources */,
-				759B00CA15E6CC1900D32988 /* CustomMoviePlayerViewController.m in Sources */,
 				759B00CC15E6CC1900D32988 /* Logger.m in Sources */,
 				759B00CE15E6CC1900D32988 /* NSData+Base64.m in Sources */,
 				759B00D015E6CC1900D32988 /* RichClientFramework.m in Sources */,
 				759B00D215E6CC1900D32988 /* UICustomDisclosureArrowView.m in Sources */,
 				759B00D415E6CC1900D32988 /* UILabel+ShrinkToFit.m in Sources */,
-				759B00D615E6CC1900D32988 /* UniversalMoviePlayer.m in Sources */,
 				67D17A7AB1A3242E8D442C47 /* AFTableAlert.m in Sources */,
 				67D1746D33B3F3C386336F80 /* AFTableCell.m in Sources */,
 				67D17805B6081499BCBA987A /* AFTableViewController.m in Sources */,
@@ -1186,6 +1296,10 @@
 				67D17F71EB112A23649CBA6B /* AFStackLayoutView.m in Sources */,
 				67D1798D85321B199997A971 /* AFLayoutView.m in Sources */,
 				67D17CBE0E013CD44AC14AB0 /* AFConstrainedView.m in Sources */,
+				B03CA23D5215BB90D1A1689E /* AFVideoPlayerView.m in Sources */,
+				B03CA2151266AC2908CC380A /* AFVideoPlayerViewController.m in Sources */,
+				B03CA2063C95B63F83E55E30 /* AFVideoStillsFactory.m in Sources */,
+				B03CADCD0A6E709A4955ED60 /* AFAVAssetCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1199,7 +1313,63 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				09C62F17162ADF5B00CC6B73 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		09C62F1F162ADF5B00CC6B73 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iOS-libAugmental-test/iOS-libAugmental-test-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "iOS-libAugmental-test/iOS-libAugmental-test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		09C62F20162ADF5B00CC6B73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iOS-libAugmental-test/iOS-libAugmental-test-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "iOS-libAugmental-test/iOS-libAugmental-test-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		75A4AC8A1485AB9000EBD4B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1276,6 +1446,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				09C62F1F162ADF5B00CC6B73 /* Debug */,
+				09C62F20162ADF5B00CC6B73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		75A4AC791485AB8F00EBD4B0 /* Build configuration list for PBXProject "iOS-libAugmental" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

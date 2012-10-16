@@ -56,13 +56,11 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(void)reloadData
 {
-	[self.view performSelector:@selector(reloadData)];
-	//[self.view performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+	[(UITableView*)self.view performSelector:@selector(reloadData)];
 }
 
 -(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters
 {
-    
 }
 
 -(void)setTable:(AFTable*)tableIn
@@ -206,7 +204,10 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	return headerView;
 }
 
--(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section{return [[table sectionAtIndex:section].title length]>0?22.0f:0.0;}
+-(CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [[table sectionAtIndex:(NSUInteger) section].title length]>0?22.0f:0.0;
+}
 
 -(CGFloat)tableView:(UITableView*)tableView heightForFooterInSection:(NSInteger)section{return 0.0;}
 
@@ -233,12 +234,12 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(void)tableView:(UITableView*)tableView willBeginEditingRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	if(table)[[table sectionAtIndex:indexPath.section] beginAtomic];
+	if(table)[[table sectionAtIndex:(NSUInteger) indexPath.section] beginAtomic];
 }
 
 -(void)tableView:(UITableView*)tableView didEndEditingRowAtIndexPath:(NSIndexPath*)indexPath
 {
-	if(table)[[table sectionAtIndex:indexPath.section] completeAtomic];
+	if(table)[[table sectionAtIndex:(NSUInteger) indexPath.section] completeAtomic];
 }
 
 -(UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -260,7 +261,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(AFTableCell*)tableCellForIndexPath:(NSIndexPath*)indexPath 
 {
-	return table?[[table sectionAtIndex:indexPath.section] cellAtIndex:indexPath.row]:nil;
+	return table? [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row]:nil;
 }
 
 -(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
@@ -269,7 +270,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	returnCell = usefulCell?[usefulCell viewCellForTableView:(UITableView*)(self.view)]:nil;
 	if(!returnCell) returnCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil]; //[NSString stringWithFormat:@"%i%i",indexPath.section,indexPath.row]
 
-	int sectionCells = [[table sectionAtIndex:indexPath.section] cellCount];
+	int sectionCells = [[table sectionAtIndex:(NSUInteger) indexPath.section] cellCount];
 	
 	if([usefulCell.cell.backgroundView isKindOfClass:[AFTableCellBackgroundView class]])
 	{
@@ -299,14 +300,14 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 -(NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section
 {
 	//NSAssert(tableView==self.view,@"Wrong table view!");
-	NSArray* rows = [table sectionAtIndex:section].children;
+	NSArray* rows = [table sectionAtIndex:(NSUInteger) section].children;
 	int rowCount = [rows count];
 	return table?rowCount:0;
 }
 
 -(NSString*)tableView:(UITableView*)tableView titleForHeaderInSection:(NSInteger)section
 {
-	return table?[[table sectionAtIndex:section] title]:nil;
+	return table?[[table sectionAtIndex:(NSUInteger) section] title]:nil;
 }
 
 -(void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath
@@ -316,7 +317,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 		AFTableCell* cell = [self tableCellForIndexPath:indexPath];
 		if([cell deleteSelected])
 		{
-			[[table sectionAtIndex:indexPath.section] removeCell:cell];
+			[[table sectionAtIndex:(NSUInteger) indexPath.section] removeCell:cell];
 		}
 	}
 }
@@ -360,7 +361,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	{
 		UIWindow* tempWindow = [windows objectAtIndex:1];
 		UIView* keyboard;
-		for(int i=0; i<[tempWindow.subviews count]; i++)
+		for(NSUInteger i=0; i<[tempWindow.subviews count]; i++)
 		{
 			keyboard = [tempWindow.subviews objectAtIndex:i];
 			// keyboard found, add the button

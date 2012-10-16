@@ -104,7 +104,7 @@
 
 - (void)removeScreenObserver:(NSObject <AFScreenObserver> *)observer;
 
-- (void)setActive:(BOOL)nowActive;
+//- (void)setActive:(BOOL)nowActive;
 
 - (void)refreshActive;
 

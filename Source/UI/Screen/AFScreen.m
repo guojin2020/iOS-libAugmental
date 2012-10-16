@@ -148,8 +148,8 @@ static UIColor  *loadingTitleColor;
         NSSet                            *observerSnapshot = [[NSSet alloc] initWithSet:observers];
         for (NSObject <AFScreenObserver> *observer in observerSnapshot)
         {
-            if (active)[observer screenBecameActive:(AFScreen *) self];
-            else [observer screenBecameInactive:(AFScreen *) self];
+            if (active)[observer screenBecameActive:self];
+            else [observer screenBecameInactive:self];
         }
         [observerSnapshot release];
     }
@@ -198,28 +198,28 @@ static UIColor  *loadingTitleColor;
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR] retain];}
     return bgColor;
 }
 
 + (float)bgOpacity
 {
     if (!bgOpacity)
-    {bgOpacity = [[[AFThemeManager themeSectionForClass:[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY] retain];}
+    {bgOpacity = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY] retain];}
     return [bgOpacity floatValue];
 }
 
 + (NSString *)loadingTitle
 {
     if (!loadingTitle)
-    {loadingTitle = [[[AFThemeManager themeSectionForClass:[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE] retain];}
+    {loadingTitle = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE] retain];}
     return loadingTitle;
 }
 
 + (UIColor *)loadingTitleColor
 {
     if (!loadingTitleColor)
-    {loadingTitleColor = [[[AFThemeManager themeSectionForClass:[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR] retain];}
+    {loadingTitleColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR] retain];}
     return loadingTitleColor;
 }
 
@@ -262,6 +262,6 @@ static UIColor  *loadingTitleColor;
     [super dealloc];
 }
 
-@synthesize tabName, needsNavigationController, viewController, loadingLabel, loadingView;
+@synthesize tabName, needsNavigationController, loadingLabel, loadingView;
 
 @end

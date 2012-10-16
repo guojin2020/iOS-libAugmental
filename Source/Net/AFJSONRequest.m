@@ -29,7 +29,7 @@ static CJSONSerializer   *jsonSerializer;
 {
     NSAssert(endpointIn, @"Invalid parameters when initing %@", [self class]);
 
-    if ((self = [super initWithURL:(NSURL *) URLIn]))
+    if ((self = [super initWithURL:URLIn]))
     {
         endpoint           = [endpointIn retain];
         responseDataBuffer = [[NSMutableData alloc] initWithLength:0];
@@ -83,13 +83,13 @@ static CJSONSerializer   *jsonSerializer;
 
 - (NSData *)receivedData
 {
-    if (state == (requestState) fulfilled) return (NSData *) responseDataBuffer;
+    if (state == (requestState) fulfilled) return responseDataBuffer;
     return nil;
 }
 
 - (NSData *)postData
 {
-    if (state == (requestState) fulfilled) return (NSData *) responseDataBuffer;
+    if (state == (requestState) fulfilled) return responseDataBuffer;
     return nil;
 }
 
@@ -109,6 +109,7 @@ static CJSONSerializer   *jsonSerializer;
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
         [NSException raise:NSInternalInconsistencyException format:@"Deserialisation error in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
         //[responseString release];
+        [responseString release];
     }
 
     if (endpoint)
@@ -156,7 +157,7 @@ static CJSONSerializer   *jsonSerializer;
 }
 
 @synthesize returnedDictionary;
-@dynamic requiresLogin, attempts;
+//@dynamic requiresLogin, attempts;
 
 //connection, URL, state
 

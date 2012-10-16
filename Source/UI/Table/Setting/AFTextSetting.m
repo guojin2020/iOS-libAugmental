@@ -100,13 +100,13 @@ static NSString *beginEditingSound = nil;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:[AFTextSetting class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTextSetting class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textColor;
 }
 
 + (NSString *)beginEditingSound
 {
-    if (!beginEditingSound)beginEditingSound = [[[AFThemeManager themeSectionForClass:[AFTextSetting class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND] retain];
+    if (!beginEditingSound)beginEditingSound = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTextSetting class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND] retain];
     return beginEditingSound;
 }
 
@@ -146,6 +146,6 @@ static NSString *beginEditingSound = nil;
 
 @synthesize string, textField, textFieldDelegate, maxLength;
 
-@dynamic value, validator, valid;
+//@dynamic value, valid;
 
 @end

@@ -66,7 +66,7 @@ typedef enum needToScroll
 
 @property(nonatomic) SEL pageObjectSortSelector;
 @property(nonatomic, readonly) AFResultsPage    *currentResultsPage;
-@property(nonatomic, assign) AFPagedObjectQuery *query;
+@property(nonatomic, retain) AFPagedObjectQuery *query;
 @property(nonatomic, retain) AFTableCell        *noResultsCell;
 
 @end

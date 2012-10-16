@@ -35,7 +35,7 @@ static NSString *switchViewSound = nil;
         tabController.delegate                 = self;
 
         tabController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        NSDictionary *themeSection = [AFThemeManager themeSectionForClass:[AFScreenManager class]];
+        NSDictionary *themeSection = [AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]];
         tabController.view.backgroundColor = [themeSection colorForKey:THEME_KEY_BG_COLOR];
 
         tabController.view.opaque = YES;
@@ -88,7 +88,7 @@ static NSString *switchViewSound = nil;
 - (void)hideScreen:(AFScreen *)screen
 {
     int screenIndex = [screens indexOfObject:screen];
-    [screens removeObjectAtIndex:screenIndex];
+    [screens removeObjectAtIndex:(NSUInteger) screenIndex];
 
     [tabController setViewControllers:screens animated:YES];
 }
@@ -213,27 +213,27 @@ static NSString *switchViewSound = nil;
 + (NSString *)bgImageName
 {
     if (!bgImageName)
-    {bgImageName = [[[AFThemeManager themeSectionForClass:[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME] retain];}
+    {bgImageName = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME] retain];}
     return bgImageName;
 }
 
 + (BOOL)bgImageEnable
 {
     if (!bgImageEnable)
-    {bgImageEnable = [[[AFThemeManager themeSectionForClass:[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE] retain];}
+    {bgImageEnable = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE] retain];}
     return [bgImageEnable boolValue];
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 
 + (NSString *)switchViewSound
 {
-    if (!switchViewSound)switchViewSound = [[[AFThemeManager themeSectionForClass:[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND] retain];
+    if (!switchViewSound)switchViewSound = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND] retain];
     return switchViewSound;
 }
 

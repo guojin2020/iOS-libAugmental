@@ -80,7 +80,7 @@
 /**
  *	Same as calling 
  */
-- (BOOL)handleRequest:(NSObject <AFQueueableRequest> *)request
+- (BOOL)handleRequest:(NSObject <AFRequest> *)request
 {
 #ifdef BACKGROUND_HANDLING_ENABLED
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
@@ -134,7 +134,7 @@
 {
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:request.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     urlRequest = [request willSendURLRequest:urlRequest];
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:(NSURLRequest *) urlRequest delegate:self startImmediately:YES];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
     request.connection = connection;
     [connection release];
 }
@@ -142,13 +142,13 @@
 - (void)requestSizePolled:(int)sizeBytes forRequest:(NSObject <AFRequest> *)requestIn
 {}
 
-- (void)requestStarted:(NSObject <AFQueueableRequest> *)requestIn
+- (void)requestStarted:(NSObject <AFRequest> *)requestIn
 {}
 
-- (void)requestProgressUpdated:(float)completion forRequest:(NSObject <AFQueueableRequest> *)requestIn
+- (void)requestProgressUpdated:(float)completion forRequest:(NSObject <AFRequest> *)requestIn
 {}
 
-- (void)requestComplete:(NSObject <AFQueueableRequest> *)requestIn
+- (void)requestComplete:(NSObject <AFRequest> *)requestIn
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -157,7 +157,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestCancelled:(NSObject <AFQueueableRequest> *)requestIn
+- (void)requestCancelled:(NSObject <AFRequest> *)requestIn
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -167,7 +167,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestReset:(NSObject <AFQueueableRequest> *)requestIn //Same behaviour as cancel (dequeue)
+- (void)requestReset:(NSObject <AFRequest> *)requestIn //Same behaviour as cancel (dequeue)
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -250,7 +250,7 @@
     //NSAssert(findRequest,@"Couldn't retrieve request for finished connection");
 
     [findRequest didFinish]; //Tell the object that it finished (so it can do something useful with the data)
-    [findRequest removeObserver:(NSObject <AFRequestObserver> *) self]; //Stop listening to the request
+    [findRequest removeObserver:self]; //Stop listening to the request
     [queue removeObject:findRequest]; //Remove the request from the list
     [self startWaitingRequests];
 

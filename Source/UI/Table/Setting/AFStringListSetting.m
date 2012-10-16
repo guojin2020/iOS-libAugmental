@@ -26,6 +26,6 @@
     [super updateControlCell];
 }
 
-@dynamic valid, validator, value;
+//@dynamic valid, validator, value;
 
 @end

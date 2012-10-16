@@ -60,6 +60,4 @@ static const int size = 44;
     imageView.transform = CGAffineTransformConcat(baseTransform, transform);
 }
 
-@synthesize imageTransform;
-
 @end

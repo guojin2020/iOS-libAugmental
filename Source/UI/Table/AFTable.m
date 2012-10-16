@@ -32,7 +32,7 @@ AFChangeFlag *FLAG_TABLE_EDITED;
 	return self;
 }
 
--(void)insertSection:(AFTableSection*)group atIndex:(int)index
+-(void)insertSection:(AFTableSection*)group atIndex:(NSUInteger)index
 {
 	group.parentTable = self;
 	[children insertObject:group atIndex:index];
@@ -64,16 +64,16 @@ AFChangeFlag *FLAG_TABLE_EDITED;
     [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
 }
 
--(AFTableSection*)sectionAtIndex:(NSInteger)index
+-(AFTableSection*)sectionAtIndex:(NSUInteger)index
 {
 	return (AFTableSection*)[children objectAtIndex:index];
 }
 
--(NSInteger)sectionCount{return [children count];}
+-(NSUInteger)sectionCount{return [children count];}
 
--(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id *)stackbuf count:(NSUInteger)lenIn
+-(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id[])stackbuf count:(NSUInteger)lenIn
 {
-	int len = [children count];
+	NSUInteger len = [children count];
 	id* childrenCopy = malloc(sizeof(id)*len);
 	[children getObjects:childrenCopy range:NSMakeRange(0, len)];
 	

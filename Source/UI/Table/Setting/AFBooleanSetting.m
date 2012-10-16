@@ -5,7 +5,7 @@
 - (void)updateControlCell
 {
     [super updateControlCell];
-    [valueSwitch setOn:[(NSNumber *) value boolValue] animated:NO];
+    [valueSwitch setOn:[(NSNumber *)self.value boolValue] animated:NO];
 }
 
 - (void)controlValueChanged:(id)sender
@@ -30,6 +30,6 @@
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
 }
 
-@dynamic value, validator, valid;
+//@dynamic value, validator, valid;
 
 @end

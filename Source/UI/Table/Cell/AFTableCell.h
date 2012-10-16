@@ -78,6 +78,6 @@
 @property (nonatomic,retain) UITableView* tableView;
 @property (nonatomic,retain) AFTableSection* parentSection;
 @property (nonatomic,readonly) UINavigationController* navigationController;
-@property (nonatomic,assign) UIColor* fillColor;
+@property (nonatomic, retain) UIColor* fillColor;
 
 @end
