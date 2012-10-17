@@ -38,7 +38,7 @@
 
 - (void)closeHandleSafely;
 
-@property(nonatomic, retain, readonly) NSString *uniqueKey;
+@property(nonatomic, readonly) NSString *uniqueKey;
 @property(nonatomic, readonly) NSString *targetPath;
 
 @end

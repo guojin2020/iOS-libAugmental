@@ -9,6 +9,6 @@
 
 @interface AFVideoPlayerView : UIView
 
-@property (nonatomic) AVPlayer *player;
+@property (nonatomic, retain) AVPlayer *player;
 
 @end

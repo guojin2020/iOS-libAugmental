@@ -288,11 +288,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     [super dealloc];
 }
 
--(NSString *)targetPath
-{
-    return targetPath;
-}
-
 @synthesize uniqueKey;
+@synthesize targetPath;
 
 @end

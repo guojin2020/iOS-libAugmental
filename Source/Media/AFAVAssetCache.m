@@ -45,7 +45,7 @@ static AFAVAssetCache* sharedInstance;
 
         item = malloc(sizeof(AVCacheItem));
 
-        item->asset=assetURL;
+        item->asset          = asset;
         item->referenceCount = 1;
 
         [cacheItems setObject:[NSValue valueWithPointer:item] forKey:assetURL];

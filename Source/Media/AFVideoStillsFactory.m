@@ -43,7 +43,7 @@ static AFVideoStillsFactory *sharedInstance;
 
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
 
-    Float64 durationSeconds = CMTimeGetSeconds([asset duration]);
+    //Float64 durationSeconds = CMTimeGetSeconds([asset duration]);
 
     NSMutableArray* cmTimes = [[NSMutableArray alloc] initWithCapacity:[times count]];
     CMTime cmTime;
@@ -77,7 +77,7 @@ static AFVideoStillsFactory *sharedInstance;
                 [cmTimes removeObject:requestedTimeValue];
                 if ([cmTimes count]==0)
                 {
-                    handler([images allValues]);
+                    handler(images);
 
                     [cmTimes release];
                     [imageGenerator release];
