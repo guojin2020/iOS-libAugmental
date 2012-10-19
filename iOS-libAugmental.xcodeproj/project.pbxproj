@@ -1446,7 +1446,7 @@
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iOS-libAugmental";
 				SKIP_INSTALL = YES;
@@ -1461,7 +1461,7 @@
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iOS-libAugmental";
 				SKIP_INSTALL = YES;
@@ -1479,6 +1479,7 @@
 				09C62F20162ADF5B00CC6B73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		75A4AC791485AB8F00EBD4B0 /* Build configuration list for PBXProject "iOS-libAugmental" */ = {
 			isa = XCConfigurationList;
