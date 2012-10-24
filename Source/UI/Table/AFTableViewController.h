@@ -7,7 +7,7 @@
 
 /**
  *	Generic framework-like class, providing an easy-to-use TableViewController
- *  which displays a table assembled from individual Cell and Section objects.
+ *  which displays a table assembled from individual pruneCellCache and Section objects.
  */
 @interface AFTableViewController : UIViewController <UITableViewDataSource,UITableViewDelegate, AFPObserver>
 {

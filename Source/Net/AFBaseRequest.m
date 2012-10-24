@@ -17,7 +17,7 @@
     if (URLIn && (self = [super init]))
     {
         URL   = [URLIn retain];
-        state = (requestState) pending;
+        state = (RequestState) Pending;
         expectedBytes = -1;
         receivedBytes = 0;
         numberFormatter = [[NSNumberFormatter alloc] init];
@@ -37,7 +37,7 @@
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
 {
     [self setExpectedBytesFromHeader:headers isCritical:NO];
-    state = (requestState) inProcess;
+    state = (RequestState) InProcess;
     [self broadcastToObservers:(requestEvent) started];
 }
 
@@ -70,19 +70,19 @@
 
 - (void)didFinish
 {
-    state = (requestState) fulfilled;
+    state = (RequestState) Fulfilled;
     [self broadcastToObservers:(requestEvent) finished];
 }
 
 - (void)didFail:(NSError *)error
 {
-    state = (requestState) pending;
+    state = (RequestState) Pending;
     [self broadcastToObservers:(requestEvent) failed];
 }
 
 - (void)cancel
 {
-    state = (requestState) pending;
+    state = (RequestState) Pending;
     [connection cancel];
     [self broadcastToObservers:(requestEvent) cancel];
 }
@@ -93,13 +93,14 @@
 }
 
 - (void)addObserver:(NSObject <AFRequestObserver> *)newObserver
-{[observers addObject:newObserver];}
+{
+    [observers addObject:newObserver];
+}
 
 - (void)removeObserver:(NSObject <AFRequestObserver> *)oldObserver
-{[observers removeObject:oldObserver];}
-
-- (BOOL)requiresLogin
-{return requiresLogin;}
+{
+    [observers removeObject:oldObserver];
+}
 
 - (void)broadcastToObservers:(requestEvent)event
 {
@@ -137,7 +138,28 @@
     [observerSnapshot release];
 }
 
--(int)attempts {return attempts;}
+- (BOOL)complete
+{
+    return receivedBytes >= expectedBytes;
+}
+
+- (NSUInteger)          attempts        { return attempts;      }
+- (BOOL)                requiresLogin   { return requiresLogin; }
+- (NSURL *)             URL             { return URL;           }
+- (NSURLConnection *)   connection      { return connection;    }
+- (RequestState)        state           { return state;         }
+- (NSUInteger)          receivedBytes   { return receivedBytes; }
+- (int)                 expectedBytes   { return expectedBytes; }
+
+- (void)setConnection:(NSURLConnection *)connectionIn
+{
+    if (connection != connectionIn)
+    {
+        [connectionIn retain];
+        [connection release];
+        connection = connectionIn;
+    }
+}
 
 -(void)dealloc
 {
@@ -147,7 +169,5 @@
     [URL release];
     [super dealloc];
 }
-
-@synthesize URL, connection, state, receivedBytes, expectedBytes;
 
 @end

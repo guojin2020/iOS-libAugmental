@@ -77,19 +77,19 @@ static CJSONSerializer   *jsonSerializer;
 - (void)received:(NSData *)dataIn
 {
     [super received:dataIn];
-    if ((state = (requestState) inProcess))
+    if ((state = (RequestState) InProcess))
     {[responseDataBuffer appendData:dataIn];}
 }
 
 - (NSData *)receivedData
 {
-    if (state == (requestState) fulfilled) return responseDataBuffer;
+    if (state == (RequestState) Fulfilled) return responseDataBuffer;
     return nil;
 }
 
 - (NSData *)postData
 {
-    if (state == (requestState) fulfilled) return responseDataBuffer;
+    if (state == (RequestState) Fulfilled) return responseDataBuffer;
     return nil;
 }
 

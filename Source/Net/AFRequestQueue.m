@@ -8,6 +8,21 @@
 @end
 
 @implementation AFRequestQueue
+{
+    NSMutableArray *queue;
+    NSMutableSet   *activeRequests;
+    NSMutableSet   *activatedRequests;
+    int queuePosition;
+    NSObject <AFRequestHandler> *targetHandler;
+    int maxConcurrentDownloads;
+
+    BOOL keepProcessing;
+
+#ifdef THREADED_REQUEST_HANDLER_ENABLED
+	NSCondition* requestThreadCondition;
+	NSThread* requestThread;
+	#endif
+}
 
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn
 {
@@ -32,7 +47,7 @@
     {
         for (NSObject <AFQueueableRequest> *request in queue)
         {
-            if (request.state == (requestState) pending)
+            if (request.state == (RequestState) Pending)
             {
                 if ([activeRequests count] < maxConcurrentDownloads)
                 {
@@ -47,7 +62,7 @@
                 }
                 else
                 {
-                    if ([request respondsToSelector:@selector(requestQueuedAtPosition:)])[request requestQueuedAtPosition:queuePosition];
+                    if ([request respondsToSelector:@selector(requestWasQueuedAtPosition:)])[request requestWasQueuedAtPosition:queuePosition];
                     queuePosition++;
                 }
             }
@@ -75,7 +90,16 @@
  *	Cancels all requests in this queue
  */
 - (void)cancelAllRequests
-{for (NSObject <AFQueueableRequest> *request in [NSArray arrayWithArray:queue])if (request)[request cancel];}
+{
+    for (NSObject <AFQueueableRequest> *request in [NSArray arrayWithArray:queue])
+    {
+        if (request)
+        {
+            [request cancel];
+
+        }
+    }
+}
 
 /**
  *	Same as calling 
@@ -99,7 +123,7 @@
 #endif
 
     BOOL returnVal;
-    if (request && request.state != (requestState) fulfilled)
+    if (request && request.state != (RequestState) Fulfilled)
     {
         [self queueRequestAtBack:request];
         returnVal = YES;
@@ -164,6 +188,12 @@
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
     [activeRequests removeObject:requestIn];
+
+    if([requestIn conformsToProtocol:@protocol(AFQueueableRequest)])
+    {
+        [((id<AFQueueableRequest>)requestIn) requestWasUnqueued];
+    }
+
     [self startWaitingRequests];
 }
 

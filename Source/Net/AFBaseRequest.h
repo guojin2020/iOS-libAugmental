@@ -18,14 +18,15 @@ requestEvent;
 
 @interface AFBaseRequest : NSObject
 {
-    int          expectedBytes;
-    int          receivedBytes;
-    NSMutableSet      *observers;
-    NSNumberFormatter *numberFormatter;
-    NSURL* URL;
-    BOOL requiresLogin;
-    requestState state;
-    int attempts;
+    int                 expectedBytes;
+    int                 receivedBytes;
+    NSMutableSet        *observers;
+    NSNumberFormatter   *numberFormatter;
+    NSURL               *URL;
+    BOOL                requiresLogin;
+    RequestState        state;
+    NSUInteger          attempts;
+    NSURLConnection     *connection;
 }
 
 - (id)initWithURL:(NSURL *)URLIn;
@@ -40,6 +41,8 @@ requestEvent;
 
 - (void)didFinish;
 
+- (BOOL)complete;
+
 - (void)didFail:(NSError *)error;
 
 - (void)cancel;
@@ -52,12 +55,9 @@ requestEvent;
 
 - (void)broadcastToObservers:(requestEvent)event;
 
-@property(nonatomic, readonly) int attempts;
-@property(nonatomic, retain) NSURL           *URL;
-@property(nonatomic, retain) NSURLConnection *connection;
-@property(nonatomic) requestState    state;
-@property(nonatomic, readonly) int   receivedBytes;
-@property(nonatomic, readonly) int   expectedBytes;
-@property(nonatomic, readonly) float progress;
+@property(nonatomic, readonly) NSUInteger       attempts;
+@property(nonatomic, readonly) NSUInteger       receivedBytes;
+@property(nonatomic, readonly) int              expectedBytes;
+@property(nonatomic, readonly) float            progress;
 
 @end

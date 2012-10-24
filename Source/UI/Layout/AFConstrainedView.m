@@ -21,7 +21,6 @@
     return self;
 }
 
-
 - (CGSize)minimumSize                           { return _minimumSize;              }
 - (void)setMinimumSize:(CGSize)minimumSize      { _minimumSize = minimumSize;       }
 

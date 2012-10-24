@@ -9,21 +9,6 @@
 #define REQUEST_RETRY_LIMIT 3
 
 @interface AFRequestQueue : NSObject <AFRequestObserver, AFRequestHandler>
-{
-    NSMutableArray *queue;
-    NSMutableSet   *activeRequests;
-    NSMutableSet   *activatedRequests;
-    int queuePosition;
-    NSObject <AFRequestHandler> *targetHandler;
-    int maxConcurrentDownloads;
-
-    BOOL keepProcessing;
-
-#ifdef THREADED_REQUEST_HANDLER_ENABLED
-	NSCondition* requestThreadCondition;
-	NSThread* requestThread;
-	#endif
-}
 
 - (void)cancelAllRequests;
 

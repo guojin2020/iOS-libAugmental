@@ -7,13 +7,23 @@
 #define DATA_BUFFER_LENGTH 524288
 
 @implementation AFDownloadRequest
+{
+    NSFileHandle        *myHandle;
+    NSString            *targetPath;
+    NSMutableDictionary *sizeCache;
+    NSUInteger          queuePosition;
+    NSString            *uniqueKey;
+    NSMutableData       *dataBuffer;
+    NSUInteger          dataBufferPosition;
+    AFHeaderRequest     *pollSizeRequest;
+}
 
 static NSMutableDictionary *uniqueRequestPool = nil;
 
-+ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn
-                          targetPath:(NSString *)targetPathIn
-                           observers:(NSSet *)observersIn
-                       fileSizeCache:(NSMutableDictionary *)sizeCacheIn
++(AFDownloadRequest *)requestForURL:(NSURL *)URLIn
+                         targetPath:(NSString *)targetPathIn
+                          observers:(NSSet *)observersIn
+                      fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 {
     if (!uniqueRequestPool) uniqueRequestPool = [[NSMutableDictionary alloc] init];
 
@@ -33,17 +43,16 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     return request;
 }
 
-+ (void)clearRequestPool
-{[uniqueRequestPool removeAllObjects];}
++(void)clearRequestPool { [uniqueRequestPool removeAllObjects]; }
 
-+ (BOOL)sizePolledForAllPooledRequests
++(BOOL)sizePolledForAllPooledRequests
 {
     @synchronized (uniqueRequestPool)
     {for (NSString *curRequestKey in uniqueRequestPool)if (((AFDownloadRequest *) [uniqueRequestPool objectForKey:curRequestKey]).expectedBytes == -1) return NO;}
     return YES;
 }
 
-- (id)initWithURL:(NSURL *)URLIn
+-(id)initWithURL:(NSURL *)URLIn
        targetPath:(NSString *)targetPathIn
         observers:(NSSet *)observersIn
     fileSizeCache:(NSMutableDictionary *)sizeCacheIn
@@ -97,7 +106,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
     NSLog(@"Will begin writing to file '%@'",targetPath);
 
-    //state = (requestState) inProcess;
+    //state = (RequestState) InProcess;
     //[self broadcastToObservers:(requestEvent) started];
 
     NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
@@ -126,18 +135,22 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
     [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
 
-    NSAssert(myHandle!=nil, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
+    NSAssert(myHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
-    if (responseCode == 206)[myHandle seekToEndOfFile];
-    else if (responseCode == 200)
+    switch(responseCode)
     {
-        [myHandle truncateFileAtOffset:0];
-        receivedBytes = 0;
-    }
-    else
-    {
-        NSLog(@"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]);
-        //[NSException raise:NSInternalInconsistencyException format:@"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]];
+        case 206:
+            [myHandle seekToEndOfFile];
+            break;
+
+        case 200:
+            [myHandle truncateFileAtOffset:0];
+            receivedBytes = 0;
+            break;
+
+        default:
+            NSAssert(NO, @"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]);
+            break;
     }
 }
 
@@ -148,7 +161,6 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     if ([dataIn length] > DATA_BUFFER_LENGTH) //It's a large chunk of data, worth writing immediately
     {
         [myHandle writeData:dataBuffer];
-        //[self performSelectorOnCommonBackgroundThread:@selector(writeDataInternal:) withObject:dataIn];
     }
     else //It's not much data, let's just buffer it in RAM
     {
@@ -208,10 +220,15 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
 }
 
-- (void)requestQueuedAtPosition:(int)queuePositionIn;
+- (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 {
     queuePosition = (NSUInteger) queuePositionIn;
     [self broadcastToObservers:(requestEvent) queued];
+}
+
+- (void)requestWasUnqueued
+{
+    state = Idle;
 }
 
 - (void)broadcastToObservers:(requestEvent)event
@@ -244,18 +261,15 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
 - (void)deleteLocalCopy
 {
-    if (state == (requestState) inProcess)[self cancel];
+    if (state == (RequestState) InProcess)[self cancel];
     if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:targetPath error:nil];
     receivedBytes = 0;
     [self broadcastToObservers:(requestEvent) reset];
 }
 
 - (BOOL)existsInLocalStorage
-{return [[NSFileManager defaultManager] fileExistsAtPath:targetPath];}
-
-- (BOOL)complete
 {
-    return receivedBytes >= expectedBytes;
+    return [[NSFileManager defaultManager] fileExistsAtPath:targetPath];
 }
 
 - (void)updateReceivedBytesFromFile

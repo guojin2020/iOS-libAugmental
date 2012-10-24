@@ -2,6 +2,7 @@
 
 @protocol AFQueueableRequest <AFRequest>
 
-- (void)requestQueuedAtPosition:(int)queuePosition;
+- (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
+- (void)requestWasUnqueued;
 
 @end

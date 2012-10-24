@@ -19,7 +19,7 @@
 
 - (void)didFinish
 {
-    state = (requestState) fulfilled;
+    state = (RequestState) Fulfilled;
     [self broadcastToObservers:(requestEvent) finished];
 
     NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];

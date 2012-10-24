@@ -33,7 +33,7 @@
 
 - (void)didFinish
 {
-    state = (requestState) fulfilled;
+    state = (RequestState) Fulfilled;
     [self broadcastToObservers:(requestEvent) finished];
 
     NSError *error = nil;

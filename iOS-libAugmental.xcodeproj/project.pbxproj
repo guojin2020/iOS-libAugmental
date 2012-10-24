@@ -1446,7 +1446,7 @@
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iOS-libAugmental";
 				SKIP_INSTALL = YES;
@@ -1461,7 +1461,7 @@
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "iOS-libAugmental";
 				SKIP_INSTALL = YES;

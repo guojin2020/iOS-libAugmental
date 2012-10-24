@@ -49,10 +49,10 @@
 
 - (NSString *)actionDescription;
 
-@property(nonatomic, readonly) int  attempts;
-@property(nonatomic, readonly) BOOL requiresLogin;
-@property(nonatomic, retain) NSURL           *URL;
-@property(nonatomic, retain) NSURLConnection *connection;
-@property(nonatomic) requestState state;
+@property(nonatomic, readonly)  NSUInteger      attempts;
+@property(nonatomic, readonly)  BOOL            requiresLogin;
+@property(nonatomic, readonly)  NSURL           *URL;
+@property(nonatomic, retain)    NSURLConnection *connection;
+@property(nonatomic, readonly)  RequestState    state;
 
 @end

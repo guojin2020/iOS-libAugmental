@@ -4,12 +4,10 @@
 
 @interface AFImmediateRequest : AFBaseRequest <AFRequest>
 {
-    NSObject *callbackObject;
-    SEL callbackSelector;
-    NSMutableData *responseDataBuffer;
-
-    NSData *postData;
-    NSURLConnection *connection;
+    NSObject        *callbackObject;
+    SEL             callbackSelector;
+    NSMutableData   *responseDataBuffer;
+    NSData          *postData;
 }
 
 - (id)initWithURL:(NSURL *)URLIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn;

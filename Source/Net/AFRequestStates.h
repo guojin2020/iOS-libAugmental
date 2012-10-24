@@ -1,8 +1,9 @@
 //Download enumerations
-typedef enum requestState
+typedef enum RequestState
 {
-    pending   = 1,        //The Session object is not initialised or there has been an error.
-    inProcess = 2,    //Means the Session object is initalised, or has finished its last connection.
-    fulfilled = 3    //The session object is in the process of disconnecting.
+    Idle        = 0,  // The request is Idle
+    Pending     = 1,  // The request is due to be Fulfilled (queued, waiting initialising etc.)
+    InProcess   = 2,  // The request is currently in the process of being Fulfilled.
+    Fulfilled   = 3   // The request has been Fulfilled.
 }
-        requestState;
+RequestState;
