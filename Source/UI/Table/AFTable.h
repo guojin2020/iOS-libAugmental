@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
-#import "AFPObserver.h"
 #import "AFObservable.h"
+#import "AFPObserver.h"
 #import "AFThemeable.h"
 
 @class AFTableSection;

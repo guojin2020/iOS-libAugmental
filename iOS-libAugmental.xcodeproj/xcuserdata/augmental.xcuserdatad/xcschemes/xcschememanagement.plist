@@ -4,14 +4,34 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>iOS-libAugmental-test.xcscheme</key>
+		<key>iOS-libAugmental copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>iOS-libAugmental-test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>test.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>099B10A8163D635100E81588</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>099B10B5163D639600E81588</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>09C62F0D162ADF5B00CC6B73</key>
 		<dict>
 			<key>primary</key>

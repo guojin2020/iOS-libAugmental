@@ -160,7 +160,7 @@ static NSString* cellClickedSound			= nil;
 	return cellClickedSound;
 }
 
-- (void)viewCellDidLoad
+-(void)viewCellDidLoad
 {
     height = cell.frame.size.height;
     if(height<=0) height = DEFAULT_CELL_HEIGHT;
