@@ -1415,7 +1415,7 @@
 					"\"-L${PROJECT_DIR}/Library/libTouchJSON/\"",
 					"\"-lTouchJSON\"",
 				);
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/** /Users/augmental/Projects/iOS-libAugmental/XCode/** /Users/augmental/Projects/iOS-AtomEngine/iOS-AtomEngine/** $(BUILT_PRODUCTS_DIR)/** {$libAugmental}/XCode/** $(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts/**/**";
 			};
@@ -1437,7 +1437,7 @@
 					"\"-L${PROJECT_DIR}/Library/libTouchJSON/\"",
 					"\"-lTouchJSON\"",
 				);
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "$(BUILT_PRODUCTS_DIR)/** /Users/augmental/Projects/iOS-libAugmental/XCode/** /Users/augmental/Projects/iOS-AtomEngine/iOS-AtomEngine/** $(BUILT_PRODUCTS_DIR)/** {$libAugmental}/XCode/** $(BUILD_ROOT)/../IntermediateBuildFilesPath/UninstalledProducts/**/**";
 				VALIDATE_PRODUCT = YES;
