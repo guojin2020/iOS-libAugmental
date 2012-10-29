@@ -18,6 +18,7 @@ requestEvent;
 
 @interface AFBaseRequest : NSObject
 {
+    NSUInteger          responseCode;
     int                 expectedBytes;
     int                 receivedBytes;
     NSMutableSet        *observers;

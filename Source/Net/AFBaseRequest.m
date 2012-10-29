@@ -34,8 +34,9 @@
     return requestIn;
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
+- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
+    responseCode = responseCodeIn;
     [self setExpectedBytesFromHeader:headers isCritical:NO];
     state = (RequestState) InProcess;
     [self broadcastToObservers:(requestEvent) started];

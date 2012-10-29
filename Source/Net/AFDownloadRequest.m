@@ -6,6 +6,12 @@
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
 
+@interface AFDownloadRequest ()
+
+- (void)handleHTTPErrorResponse;
+
+@end
+
 @implementation AFDownloadRequest
 {
     NSFileHandle        *myHandle;
@@ -149,10 +155,33 @@ static NSMutableDictionary *uniqueRequestPool = nil;
             break;
 
         default:
-            NSAssert(NO, @"Unexcepted HTTP response code (%i) to from request to '%@'", responseCode, [URL absoluteString]);
+            [self performSelectorOnMainThread:@selector(handleHTTPErrorResponse) withObject:nil waitUntilDone:NO];
             break;
     }
 }
+
+-(void)handleHTTPErrorResponse
+{
+    NSString* errorMessage;
+    UIAlertView* alert;
+    errorMessage = [NSString stringWithFormat:@"Your file couldn't be downloaded due to a network error. If the problem persists, please eMail our support team who will be happy to help you.\n(Error %i)",responseCode];
+    alert = [[UIAlertView alloc] initWithTitle:@"We are sorry" message:errorMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"eMail Support",nil];
+    [alert show];
+    [alert release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *url;
+
+    switch (buttonIndex)
+    {
+        case 1:
+        url = [NSString stringWithFormat: @"mailto:chris@pocket-innovation.com?&subject=Pocket%%20Trainer%%20support%%20request&body=Error%%20code%%20%i",responseCode];
+        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+    }
+}
+
 
 - (void)received:(NSData *)dataIn
 {

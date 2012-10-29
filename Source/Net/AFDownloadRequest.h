@@ -7,7 +7,7 @@
 @class AFHeaderRequest;
 @class AFSession;
 
-@interface AFDownloadRequest : AFBaseRequest <AFQueueableRequest, AFRequestEndpoint>
+@interface AFDownloadRequest : AFBaseRequest <AFQueueableRequest, AFRequestEndpoint, UIAlertViewDelegate>
 
 + (AFDownloadRequest *)requestForURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn;
 
