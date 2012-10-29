@@ -106,6 +106,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	tableView.delegate = self;
 	tableView.showsVerticalScrollIndicator = YES;
 	tableView.showsHorizontalScrollIndicator = NO;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
 	self.view = tableView;
 
