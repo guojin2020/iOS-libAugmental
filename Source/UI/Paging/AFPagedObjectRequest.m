@@ -19,8 +19,8 @@
 
 - (void)didFinish
 {
-    state = (RequestState) Fulfilled;
-    [self broadcastToObservers:(requestEvent) finished];
+    state = (AFRequestState) AFRequestStateFulfilled;
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
 
     NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
     //DebugLog(@"Response from '%@': %@",[URL absoluteString],responseString);
@@ -28,7 +28,7 @@
 
     NSError      *error         = nil;
     NSDictionary *rootContainer = [[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error];
-    //NSLog(@"%@",error);
+    //NSLog(@"%@",AFSessionStateError);
 
     //NSAssert([rootContainer isKindOfClass:[NSDictionary class]],@"There was no paging data from the request '%@'",[URL absoluteString]);
 

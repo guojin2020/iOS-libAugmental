@@ -42,11 +42,11 @@
 
 /**
  <p>All AFObjects inherit a simple 'batch updating' mechanism. Under normal conditions, calls to fieldUpdated are immediately
- reported to this objects observers, via the eventManager, as an OBJECT_FIELD_UPDATED event.</p>
+ reported to this objects observers, via the eventManager, as an AFEventObjectFieldUpdated AFEvent.</p>
  <p>In the example case of an observer which updates a UI showing this objects fields,
  having the the observer informed after every change in sequence would result in multiple screenupdates and a wasteful use of
  CPU and display resources.</p>
- <p>startBatchUpdate allows OBJECT_FIELD_UPDATED event firing to be suppressed. </p>
+ <p>startBatchUpdate allows AFEventObjectFieldUpdated AFEvent firing to be suppressed. </p>
  **/
 - (void)startBatchUpdate;
 

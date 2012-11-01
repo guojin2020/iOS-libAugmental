@@ -8,18 +8,19 @@
 #define THEME_KEY_DEFAULT_BG_COLOR		@"bgColor"
 #define THEME_KEY_DEFAULT_BORDER_COLOR	@"borderColor"
 
-typedef enum 
+typedef enum AFTableCellBackgroundViewPosition
 {
-    TableCellBackgroundViewPositionTop		= 1,
-    TableCellBackgroundViewPositionMiddle	= 2, 
-    TableCellBackgroundViewPositionBottom	= 3,
-    TableCellBackgroundViewPositionSingle	= 4
-}	TableCellBackgroundViewPosition;
+    AFTableCellBackgroundViewPositionTop    = 1,
+    AFTableCellBackgroundViewPositionMiddle = 2,
+    AFTableCellBackgroundViewPositionBottom = 3,
+    AFTableCellBackgroundViewPositionSingle = 4
+}
+AFTableCellBackgroundViewPosition;
 
 @interface AFTableCellBackgroundView : UIView <AFThemeable>
 {
     AFTableCell* cell;
-    TableCellBackgroundViewPosition position;
+    AFTableCellBackgroundViewPosition position;
 }
 
 -(id)initWithFrame:(CGRect)frame usefulTableCell:(AFTableCell*)usefulCellIn;
@@ -30,6 +31,6 @@ typedef enum
 +(float)defaultBorderWidth;
 
 @property(nonatomic, readonly) AFTableCell* cell;
-@property(nonatomic) TableCellBackgroundViewPosition position;
+@property(nonatomic) AFTableCellBackgroundViewPosition position;
 
 @end

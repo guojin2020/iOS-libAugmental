@@ -88,7 +88,7 @@ static AFTableCell *resultsLoadingCell;
         int pages = (int) ceil((resultsPage.resultsCount - 1) / resultsPage.resultsPerPage);
 
         //Add results header
-        AFTableCell *headerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage > 1 ? topBetweenPage : topFirstPage) resultsPage:resultsPage];
+        AFTableCell *headerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage > 1 ? AFPagingCellConfigurationTopBetweenPage : AFPagingCellConfigurationTopFirstPage) resultsPage:resultsPage];
         headerCell.selectionDelegate = self;
 
         NSMutableArray *objectArray = (NSMutableArray *) resultsPage.pageObjects;
@@ -113,7 +113,7 @@ static AFTableCell *resultsLoadingCell;
             for (int i = 1; i < [resultsTableSection cellCount]; i++) [resultsTableSection cellAtIndex:(NSUInteger) i].selectionDelegate = selectionDelegate;
 
             //Add next results optionsƒ
-            AFTableCell *footerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage <= pages ? bottomBetweenPage : bottomLastPage) resultsPage:resultsPage];
+            AFTableCell *footerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage <= pages ? AFPagingCellConfigurationBottomBetweenPage : AFPagingCellConfigurationBottomLastPage) resultsPage:resultsPage];
             footerCell.selectionDelegate = self;
             [resultsTableSection addCell:footerCell];
             [footerCell release];
@@ -140,18 +140,18 @@ static AFTableCell *resultsLoadingCell;
 
         switch (scrollNeed)
         {
-            case (needToScroll) noScroll:
+            case (AFScrollIntent) AFScrollIntentNone:
                 break;
-            case (needToScroll) toTop:
+            case (AFScrollIntent) AFScrollIntentTop:
                 //[resultsTableController.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
                 [(UITableView *) (self.view) scrollToRowAtIndexPath:[NSIndexPath indexPathWithIndexes:topIndexPath length:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                scrollNeed = (needToScroll) noScroll;
+                scrollNeed = (AFScrollIntent) AFScrollIntentNone;
                 break;
-            case (needToScroll) toBottom:
+            case (AFScrollIntent) AFScrollIntentBottom:
                 //[resultsTableController.tableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionBottom animated:YES];
 
                 [(UITableView *) (self.view) scrollToRowAtIndexPath:[NSIndexPath indexPathWithIndexes:bottomIndexPath length:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
-                scrollNeed = (needToScroll) noScroll;
+                scrollNeed = (AFScrollIntent) AFScrollIntentNone;
                 break;
         }
     }
@@ -197,16 +197,16 @@ static AFTableCell *resultsLoadingCell;
     {
         switch (((AFResultsPagingCell *) cell).configuration)
         {
-            case (PagingCellConfiguration) topFirstPage:
-            case (PagingCellConfiguration) bottomLastPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopFirstPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomLastPage:
                 break;
-            case (PagingCellConfiguration) topBetweenPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
                 [self goToResultsPage:query.currentPageNumber - 1];
-                scrollNeed = (needToScroll) toBottom;
+                scrollNeed = (AFScrollIntent) AFScrollIntentBottom;
                 break;
-            case (PagingCellConfiguration) bottomBetweenPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
                 [self goToResultsPage:query.currentPageNumber + 1];
-                scrollNeed = (needToScroll) toTop;
+                scrollNeed = (AFScrollIntent) AFScrollIntentTop;
                 break;
         }
     }

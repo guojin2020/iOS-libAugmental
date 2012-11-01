@@ -20,8 +20,8 @@
 - (void)removeObserver:(NSObject <AFEventObserver> *)observer;
 
 /**
- Notify all observers in the pool of the specified event.
+ Notify all observers in the pool of the specified AFEvent.
  */
-- (void)broadcastEvent:(event)type source:(NSObject *)source;
+- (void)broadcastEvent:(AFEvent)type source:(NSObject *)source;
 
 @end

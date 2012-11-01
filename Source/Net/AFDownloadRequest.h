@@ -17,8 +17,6 @@
 
 - (id)initWithURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn;
 
-- (void)updateReceivedBytesFromFile;
-
 - (BOOL)existsInLocalStorage;
 
 - (void)deleteLocalCopy;

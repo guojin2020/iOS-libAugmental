@@ -63,9 +63,9 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     //[loadingView removeFromSuperview];
 }
 
-- (void)eventOccurred:(event)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
 {
-    if (type == APP_SETTINGS_LOADED)
+    if (type == AFEventAppSettingsLoaded)
     {
         [self setupUsingSettings];
     }

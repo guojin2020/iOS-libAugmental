@@ -19,11 +19,9 @@ static CJSONSerializer   *jsonSerializer;
     jsonSerializer   = [[CJSONSerializer serializer] retain];
 }
 
-+ (CJSONDeserializer *)jsonDeserializer
-{return jsonDeserializer;}
++ (CJSONDeserializer *)jsonDeserializer { return jsonDeserializer; }
 
-+ (CJSONSerializer *)jsonSerializer
-{return jsonSerializer;}
++ (CJSONSerializer *)jsonSerializer { return jsonSerializer; }
 
 - (id)initWithURL:(NSURL *)URLIn endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
@@ -46,7 +44,7 @@ static CJSONSerializer   *jsonSerializer;
     if ((self = [self initWithURL:URLIn endpoint:endpointIn]))
     {
         postData = [[[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil] retain];
-        NSAssert(postData, @"Serialisation error");
+        NSAssert(postData, @"Serialisation AFSessionStateError");
     }
     return self;
 }
@@ -60,7 +58,7 @@ static CJSONSerializer   *jsonSerializer;
 {
     [super willSendURLRequest:requestIn];
 
-    //NSAssert(postData,@"Serialisation error in %@, request was: %@",[self class],[URL absoluteString]);
+    //NSAssert(postData,@"Serialisation AFSessionStateError in %@, request was: %@",[self class],[URL absoluteString]);
 
     [requestIn setHTTPMethod:@"POST"];
     [requestIn setHTTPBody:postData];
@@ -77,19 +75,19 @@ static CJSONSerializer   *jsonSerializer;
 - (void)received:(NSData *)dataIn
 {
     [super received:dataIn];
-    if ((state = (RequestState) InProcess))
+    if ((state = (AFRequestState) AFRequestStateInProcess))
     {[responseDataBuffer appendData:dataIn];}
 }
 
 - (NSData *)receivedData
 {
-    if (state == (RequestState) Fulfilled) return responseDataBuffer;
+    if (state == (AFRequestState) AFRequestStateFulfilled) return responseDataBuffer;
     return nil;
 }
 
 - (NSData *)postData
 {
-    if (state == (RequestState) Fulfilled) return responseDataBuffer;
+    if (state == (AFRequestState) AFRequestStateFulfilled) return responseDataBuffer;
     return nil;
 }
 
@@ -107,7 +105,7 @@ static CJSONSerializer   *jsonSerializer;
     if (error)
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
-        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation error in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
+        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
         //[responseString release];
         [responseString release];
     }
@@ -125,7 +123,7 @@ static CJSONSerializer   *jsonSerializer;
         //#endif
 
         //#ifdef SHOW_SERVER_ERROR
-        NSString *errorString = [returnedDictionary objectForKey:@"error"];
+        NSString *errorString = [returnedDictionary objectForKey:@"AFSessionStateError"];
         if ([errorString isKindOfClass:[NSString class]] && [errorString length] > 0)
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Error Message" message:[NSString stringWithFormat:@"%@ logged: %@", [URL absoluteString], errorString] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

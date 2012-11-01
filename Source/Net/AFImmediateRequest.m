@@ -46,7 +46,7 @@
 - (void)received:(NSData *)dataIn
 {
     [super received:dataIn];
-    if ((state = (RequestState) InProcess))
+    if ((state = (AFRequestState) AFRequestStateInProcess))
     {[responseDataBuffer appendData:dataIn];}
 }
 

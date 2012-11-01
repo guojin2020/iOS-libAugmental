@@ -4,7 +4,6 @@
 
 #define REQUEST_ROW_HEIGHT 32
 #define REQUEST_SECTION_HEADER_TEXT nil;
-//#define REQUEST_SECTION_HEADER_TEXT @"Waiting requests";
 #define REQUEST_SECTION_HEADER_HEIGHT 0;
 
 static AFRequestQueueAlertView *alert = nil;
@@ -69,8 +68,8 @@ static AFRequestQueue          *visibleQueue = nil;
     alert = nil;
 }
 
-// Called when we cancel a view (eg. the user clicks the Home button). This is not called when the USER clicks the cancel button.
-// If not defined in the delegate, we simulate a click in the cancel button
+// Called when we AFRequestEventCancel a view (eg. the user clicks the Home button). This is not called when the USER clicks the AFRequestEventCancel button.
+// If not defined in the delegate, we simulate a click in the AFRequestEventCancel button
 //- (void)alertViewCancel:(UIAlertView *)alertView{}
 - (void)willPresentAlertView:(UIAlertView *)alertView
 {}

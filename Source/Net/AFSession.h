@@ -25,7 +25,7 @@
     AFRequestQueue *downloadQueue;
 
     NSMutableDictionary *offlineLoginCache;
-    sessionState state;
+    AFSessionState state;
     NSMutableSet *observers;
     NSMutableSet *requestsAwaitingLogin;
 
@@ -53,7 +53,7 @@
 /*
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)AFSessionStateError;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
@@ -74,7 +74,7 @@
  * Property signifies the sessions authentication state.
  * Changing this property informs the receiving sessions observers.
  */
-@property(nonatomic) sessionState state;
+@property(nonatomic) AFSessionState state;
 
 /**
  * Property signifies whether this Session can communicate across the internet.

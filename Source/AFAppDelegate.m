@@ -44,7 +44,7 @@ static BOOL globalSFXEnabled = NO;
 	[templateDictionary writeToFile:tempFilePath atomically:NO];
 	
 	//Read back file
-	NSString *plistData = [NSString stringWithContentsOfFile:tempFilePath encoding:NSUTF8StringEncoding error:nil];
+	NSString *plistData = [NSString stringWithContentsOfFile:tempFilePath encoding:NSUTF8StringEncoding AFSessionStateError:nil];
 	
 	//Dump file contents
 	//NSLog(@"\n---- TEMPLATE PLIST START ----\n\n%@\n\n---- TEMPLATE PLIST END ----",plistData);
@@ -82,7 +82,7 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationWillTerminate:(UIApplication*)application
 {
-	[[AFAppDelegate appEventManager] broadcastEvent:(event)APP_TERMINATING source:self];
+    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppTerminating source:self];
 }
 
 -(void)request:(NSObject<AFRequest>*)request returnedWithData:(id)data
@@ -93,12 +93,12 @@ static BOOL globalSFXEnabled = NO;
 	if(settings)
 	{
 		[[AFAppDelegate settings] addEntriesFromDictionary:settings];
-		[[AFAppDelegate appEventManager] broadcastEvent:(event)APP_SETTINGS_LOADED source:self];
+        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoaded source:self];
 		settingsLoaded=YES;
 	}
 	else
 	{
-		[[AFAppDelegate appEventManager] broadcastEvent:(event)APP_SETTINGS_LOAD_FAILED source:self];
+        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoadFailed source:self];
 	}
 	[settingsRequest release];
 }
@@ -128,7 +128,7 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-	[[AFAppDelegate appEventManager] broadcastEvent:(event)APP_MEMORY_WARNING source:self];
+    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppMemoryWarning source:self];
 }
 
 -(NSArray*)settingsSections

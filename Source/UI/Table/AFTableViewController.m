@@ -276,12 +276,12 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	if([usefulCell.cell.backgroundView isKindOfClass:[AFTableCellBackgroundView class]])
 	{
 		const AFTableCellBackgroundView* bgView = (AFTableCellBackgroundView*)(usefulCell.cell.backgroundView);
-		TableCellBackgroundViewPosition oldPosition = bgView.position;
+		AFTableCellBackgroundViewPosition oldPosition = bgView.position;
 		
-		if(sectionCells==1)						bgView.position = (TableCellBackgroundViewPosition)TableCellBackgroundViewPositionSingle;
-		else if(indexPath.row==0)				bgView.position = (TableCellBackgroundViewPosition)TableCellBackgroundViewPositionTop;
-		else if(indexPath.row==sectionCells-1)	bgView.position = (TableCellBackgroundViewPosition)TableCellBackgroundViewPositionBottom;
-		else									bgView.position = (TableCellBackgroundViewPosition)TableCellBackgroundViewPositionMiddle;
+		if(sectionCells==1)						bgView.position = (AFTableCellBackgroundViewPosition) AFTableCellBackgroundViewPositionSingle;
+		else if(indexPath.row==0)				bgView.position = (AFTableCellBackgroundViewPosition) AFTableCellBackgroundViewPositionTop;
+		else if(indexPath.row==sectionCells-1)	bgView.position = (AFTableCellBackgroundViewPosition) AFTableCellBackgroundViewPositionBottom;
+		else									bgView.position = (AFTableCellBackgroundViewPosition) AFTableCellBackgroundViewPositionMiddle;
 		
 		if(bgView.position!=oldPosition)
 		{
@@ -426,7 +426,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	}
 }
 
-//Once the view area has finished shrinking or growing, make sure any currently selected text field remains scrolled to visible
+//Once the view area has AFRequestEventFinished shrinking or growing, make sure any currently selected text field remains scrolled to visible
 -(void)finishAnimation:(NSString*)animationId finished:(BOOL)finished context:(void*)context
 {
     [self scrollToCurrentTextField];

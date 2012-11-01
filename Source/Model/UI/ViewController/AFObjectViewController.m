@@ -113,7 +113,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)sender
 {
     // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
-    // which a scroll event generated from the USER hitting the page control triggers updates from
+    // which a scroll AFEvent generated from the USER hitting the page control triggers updates from
     // the delegate method. We use a boolean to disable the delegate logic when the page control is used.
     if (pageControlUsed)
     {
@@ -133,7 +133,7 @@
     // A possible optimization would be to unload the views+controllers which are no longer visible
 }
 
-// At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+// At the end of scroll animation, AFRequestEventReset the boolean used when scrolls originate from the UIPageControl
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollViewIn
 {
     pageControlUsed = NO;

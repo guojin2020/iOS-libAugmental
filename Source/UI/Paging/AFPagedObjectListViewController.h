@@ -18,10 +18,13 @@
 
 @protocol AFPagedObjectListViewObserver;
 
-typedef enum needToScroll
+typedef enum AFScrollIntent
 {
-    noScroll = 0, toTop = 1, toBottom, none = 2
-} needToScroll;
+    AFScrollIntentNone      = 0,
+    AFScrollIntentTop       = 1,
+    AFScrollIntentBottom    = 2
+}
+AFScrollIntent;
 
 @interface AFPagedObjectListViewController : AFTableViewController <AFCellSelectionDelegate, AFPagedObjectQueryObserver>
 {
@@ -29,7 +32,7 @@ typedef enum needToScroll
     AFTable              *resultsTable;
     AFObjectTableSection *resultsTableSection;
     AFSpinAlertView      *waitAlert;
-    needToScroll scrollNeed;
+    AFScrollIntent scrollNeed;
     AFResultsPage *currentResultsPage;
     BOOL firstUpdate;
     SEL  pageObjectSortSelector;

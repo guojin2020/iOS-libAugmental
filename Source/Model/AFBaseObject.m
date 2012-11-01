@@ -69,7 +69,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 
 - (void)finishBatchUpdating
 {
-    if (batchUpdating && updateNeeded) [eventManager broadcastEvent:(event) OBJECT_FIELD_UPDATED source:self];
+    if (batchUpdating && updateNeeded) [eventManager broadcastEvent:(AFEvent) AFEventObjectFieldUpdated source:self];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
@@ -77,7 +77,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)fieldUpdated
 {
     if (batchUpdating) updateNeeded = YES;
-    else [eventManager broadcastEvent:(event) OBJECT_FIELD_UPDATED source:self];
+    else [eventManager broadcastEvent:(AFEvent) AFEventObjectFieldUpdated source:self];
 }
 
 - (void)setContentFromDictionary:(NSDictionary *)dictionary
@@ -116,13 +116,13 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)wasValidated
 {
     isPlaceholder = NO;
-    [eventManager broadcastEvent:(event) OBJECT_VALIDATED source:self];
+    [eventManager broadcastEvent:(AFEvent) AFEventObjectValidated source:self];
 }
 
 - (void)wasInvalidated
 {
     isPlaceholder = YES;
-    [eventManager broadcastEvent:(event) OBJECT_INVALIDATED source:self];
+    [eventManager broadcastEvent:(AFEvent) AFEventObjectInvalidated source:self];
 }
 
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint
