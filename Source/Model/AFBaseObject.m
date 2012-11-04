@@ -34,8 +34,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     if ((self = [super init]))
     {
         [self commonInit];
-        //valid = NO;
-        isPlaceholder = YES;
+        isPlaceholder = NO;
     }
     return self;
 }
@@ -86,27 +85,19 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     else
     {
         isPlaceholder = NO;
-
-        NSAssert([((NSNumber *) [dictionary objectForKey:@"pk"]) intValue] == primaryKey, @"Whoah! What's happening, tried to set information for this object using a dictionary with an unmatched primary key, are you crazy!?");
-
-        //primaryKey = [((NSNumber*)[dictionary objectForKey:@"pk"]) intValue];
+        NSAssert([((NSNumber *) [dictionary objectForKey:@"pk"]) intValue] == primaryKey, @"Internal inconsistency: AFObject being set using data with an unmatched primary key");
     }
 }
 
-- (SEL)defaultComparisonSelector
-{return nil;}
-
-- (NSString *)placeholderString
-{return placeholderString;}
-
-- (NSNumber *)placeholderNumber
-{return placeholderNumber;}
-
-- (NSDate *)placeholderDate
-{return placeholderDate;}
+- (SEL)         defaultComparisonSelector   { return nil; }
+- (NSString *)  placeholderString           { return placeholderString; }
+- (NSNumber *)  placeholderNumber           { return placeholderNumber; }
+- (NSDate *)    placeholderDate             { return placeholderDate; }
 
 - (void)setPlaceholderValues
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    isPlaceholder = YES;
+}
 
 - (BOOL)valid
 {
@@ -132,23 +123,17 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     //return [[AFSession sharedSession].cache deleteObject:(NSObject<AFObject>*)self endpoint:endpoint];
 }
 
-- (int)primaryKey
-{return primaryKey;}
+- (int)primaryKey {return primaryKey;}
 
-- (BOOL)isPlaceholder
-{return isPlaceholder;}
+- (BOOL)isPlaceholder {return isPlaceholder;}
 
-+ (NSString *)modelName
-{return nil;}
++ (NSString *)modelName {return nil;}
 
-+ (NSString *)placeholderString
-{return placeholderString;}
++ (NSString *)placeholderString {return placeholderString;}
 
-+ (NSNumber *)placeholderNumber
-{return placeholderNumber;}
++ (NSNumber *)placeholderNumber {return placeholderNumber;}
 
-+ (NSDate *)placeholderDate
-{return placeholderDate;}
++ (NSDate *)placeholderDate {return placeholderDate;}
 
 //==================================>> NSCoding
 

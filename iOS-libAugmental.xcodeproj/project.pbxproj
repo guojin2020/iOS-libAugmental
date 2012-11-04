@@ -249,6 +249,7 @@
 		09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */; };
 		09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
+		B03CA6855E2A3A60A744EE8E /* AFSKProductCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAE2B3F911E7B1D724583 /* AFSKProductCache.m */; };
 		B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
 		B03CABEE61FC1181BE3995B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -480,6 +481,7 @@
 		B03CA030861D5274FEAE80F6 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
 		B03CA08B5E731989B9094E68 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerViewController.h; sourceTree = "<group>"; };
+		B03CA1DA3808EDE110BF69C9 /* AFSKProductCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductCache.h; sourceTree = "<group>"; };
 		B03CA39A1176128227F3AF37 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAVAssetCache.m; sourceTree = "<group>"; };
 		B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoStillsFactory.m; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 		B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerView.m; sourceTree = "<group>"; };
 		B03CADB1DB86B732668F58BF /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
 		B03CADFFEB65C0359AC15524 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		B03CAE2B3F911E7B1D724583 /* AFSKProductCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductCache.m; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
 		B03CAE991ECD6DB57BD0AAB7 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -938,6 +941,7 @@
 				67D17234C1AD7E4DB61F6D93 /* Model */,
 				67D1743244AB9F6651C59D25 /* Media */,
 				67D170C381B55297F1578E06 /* Util */,
+				B03CA4F227CDFB9C5855E1D4 /* StoreKit */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -991,6 +995,15 @@
 				B03CACC1575DDDF5BE314C50 /* include */,
 			);
 			path = libTouchJSON;
+			sourceTree = "<group>";
+		};
+		B03CA4F227CDFB9C5855E1D4 /* StoreKit */ = {
+			isa = PBXGroup;
+			children = (
+				B03CAE2B3F911E7B1D724583 /* AFSKProductCache.m */,
+				B03CA1DA3808EDE110BF69C9 /* AFSKProductCache.h */,
+			);
+			path = StoreKit;
 			sourceTree = "<group>";
 		};
 		B03CACC1575DDDF5BE314C50 /* include */ = {
@@ -1355,6 +1368,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */,
+				B03CA6855E2A3A60A744EE8E /* AFSKProductCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
