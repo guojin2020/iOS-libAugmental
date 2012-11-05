@@ -3,31 +3,34 @@
 #import "AFRequestObserver.h"
 #import "AFRequestStates.h"
 
-typedef enum requestEvent
+typedef enum AFRequestEvent
 {
-    started,
-    progressUpdated,
-    finished,
-    cancel,
-    queued,
-    reset,
-    sizePolled,
-    failed
+    AFRequestEventStarted,
+    AFRequestEventProgressUpdated,
+    AFRequestEventFinished,
+    AFRequestEventCancel,
+    AFRequestEventQueued,
+    AFRequestEventReset,
+    AFRequestEventSizePolled,
+    AFRequestEventFailed
 }
-requestEvent;
+AFRequestEvent;
 
 @interface AFBaseRequest : NSObject
 {
-    NSUInteger          responseCode;
+    NSURL               *URL;
+    NSURLConnection     *connection;
+
+    AFRequestState      state;
     int                 expectedBytes;
     int                 receivedBytes;
+
     NSMutableSet        *observers;
-    NSNumberFormatter   *numberFormatter;
-    NSURL               *URL;
-    BOOL                requiresLogin;
-    RequestState        state;
+    NSUInteger          responseCode;
     NSUInteger          attempts;
-    NSURLConnection     *connection;
+
+    NSNumberFormatter   *numberFormatter;
+    BOOL                requiresLogin;
 }
 
 - (id)initWithURL:(NSURL *)URLIn;
@@ -54,7 +57,7 @@ requestEvent;
 
 - (void)removeObserver:(NSObject <AFRequestObserver> *)newObserver;
 
-- (void)broadcastToObservers:(requestEvent)event;
+- (void)broadcastToObservers:(AFRequestEvent)event;
 
 @property(nonatomic, readonly) NSUInteger       attempts;
 @property(nonatomic, readonly) NSUInteger       receivedBytes;

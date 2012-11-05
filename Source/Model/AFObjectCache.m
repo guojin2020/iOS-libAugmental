@@ -51,9 +51,9 @@
     }
 }
 
-- (void)eventOccurred:(event)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
 {
-    if (type == (event) APP_MEMORY_WARNING)
+    if (type == (AFEvent) AFEventAppMemoryWarning)
     {
         [self pruneCache];
     }
@@ -316,7 +316,7 @@
     [objectData release];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"...finished saving key '%@'", key);
+    NSLog(@"...AFRequestEventFinished saving key '%@'", key);
 }
 
 - (NSObject <NSCoding> *)loadObjectFromDefaultsForKey:(NSString *)key
@@ -337,7 +337,7 @@
         [unarchiver finishDecoding];
         [unarchiver release];
 
-        NSLog(@"...finished loading '%@' from key '%@'", object, key);
+        NSLog(@"...AFRequestEventFinished loading '%@' from key '%@'", object, key);
         return object;
     }
 

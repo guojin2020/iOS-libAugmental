@@ -1,9 +1,9 @@
 //Download enumerations
-typedef enum RequestState
+typedef enum AFRequestState
 {
-    Idle        = 0,  // The request is Idle
-    Pending     = 1,  // The request is due to be Fulfilled (queued, waiting initialising etc.)
-    InProcess   = 2,  // The request is currently in the process of being Fulfilled.
-    Fulfilled   = 3   // The request has been Fulfilled.
+    AFRequestStateIdle      = 0,  // The request is AFRequestStateIdle
+    AFRequestStatePending   = 1,  // The request is due to be AFRequestStateFulfilled (AFRequestEventQueued, waiting initialising etc.)
+    AFRequestStateInProcess = 2,  // The request is currently in the process of being AFRequestStateFulfilled.
+    AFRequestStateFulfilled = 3   // The request has been AFRequestStateFulfilled.
 }
-RequestState;
+AFRequestState;

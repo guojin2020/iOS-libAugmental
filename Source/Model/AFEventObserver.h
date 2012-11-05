@@ -1,15 +1,15 @@
-typedef enum event
+typedef enum AFEvent
 {
-    APP_SETTINGS_LOADED      = 1,
-    APP_TERMINATING          = 2,
-    OBJECT_FIELD_UPDATED     = 3,
-    OBJECT_INVALIDATED       = 4,
-    OBJECT_VALIDATED         = 5,
-    APP_SETTINGS_LOAD_FAILED = 6,
-    APP_MEMORY_WARNING       = 7,
-    BASKET_ITEMS_CHANGED     = 8
+    AFEventAppSettingsLoaded     = 1,
+    AFEventAppTerminating        = 2,
+    AFEventObjectFieldUpdated    = 3,
+    AFEventObjectInvalidated     = 4,
+    AFEventObjectValidated       = 5,
+    AFEventAppSettingsLoadFailed = 6,
+    AFEventAppMemoryWarning      = 7,
+    AFEventBasketItemsChanged    = 8
 }
-        event;
+AFEvent;
 
 /**
  This protocol describes an object which can respond to a AFEvent.
@@ -19,7 +19,7 @@ typedef enum event
 /**
  Called on an object when the specified AFEvent is broadcast by AFEventManager.
  */
-- (void)eventOccurred:(event)type source:(NSObject *)source;
-//-(BOOL)respondsToEventType:(id<AFEvent>*)event;
+- (void)eventOccurred:(AFEvent)type source:(NSObject *)source;
+//-(BOOL)respondsToEventType:(id<AFEvent>*)AFEvent;
 
 @end

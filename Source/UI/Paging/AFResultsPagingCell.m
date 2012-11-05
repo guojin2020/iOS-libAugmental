@@ -13,7 +13,7 @@ static UIImage *imagePrevious;
 
 @implementation AFResultsPagingCell
 
-- (id)initWithConfiguration:(PagingCellConfiguration)configurationIn resultsPage:(AFResultsPage *)resultsPageIn
+- (id)initWithConfiguration:(AFPagingCellConfiguration)configurationIn resultsPage:(AFResultsPage *)resultsPageIn
 {
     if ((self = [self init]))
     {
@@ -59,18 +59,18 @@ static UIImage *imagePrevious;
     {
         switch (configuration)
         {
-            case (PagingCellConfiguration) topFirstPage:
-            case (PagingCellConfiguration) bottomLastPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopFirstPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomLastPage:
                 self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_End"];
                 break;
 
-            case (PagingCellConfiguration) topBetweenPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
                 self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidTop"];
                 swipeImageView = (UIImageView *) [cell viewWithTag:2];
                 [swipeImageView setImage:[AFResultsPagingCell imagePrevious]];
 
                 break;
-            case (PagingCellConfiguration) bottomBetweenPage:
+            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
                 self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidBottom"];
                 swipeImageView = (UIImageView *) [cell viewWithTag:2];
                 [swipeImageView setImage:[AFResultsPagingCell imageNext]];
@@ -87,16 +87,16 @@ static UIImage *imagePrevious;
 
     switch (configuration)
     {
-        case (PagingCellConfiguration) topFirstPage:
-        case (PagingCellConfiguration) bottomLastPage:
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationTopFirstPage:
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomLastPage:
             break;
 
-        case (PagingCellConfiguration) topBetweenPage:
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
             swipeImageView = (UIImageView *) [cell viewWithTag:2];
             [swipeImageView setImage:[AFResultsPagingCell imagePrevious]];
 
             break;
-        case (PagingCellConfiguration) bottomBetweenPage:
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
             swipeImageView = (UIImageView *) [cell viewWithTag:2];
             [swipeImageView setImage:[AFResultsPagingCell imageNext]];
             break;

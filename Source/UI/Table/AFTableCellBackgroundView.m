@@ -40,7 +40,7 @@ static float defaultBorderWidth = -1;
     if((self = [super initWithFrame:frame]))
 	{
         cell = [usefulCellIn retain];
-		position = TableCellBackgroundViewPositionSingle;
+		position = AFTableCellBackgroundViewPositionSingle;
         
         [AFThemeManager addObserver:self];
         [self themeChanged];
@@ -55,7 +55,7 @@ static float defaultBorderWidth = -1;
     CGContextSetStrokeColorWithColor(c, [[AFTableCellBackgroundView defaultBorderColor] CGColor]);
     CGContextSetLineWidth(c, [AFTableCellBackgroundView defaultBorderWidth]);
 	
-    if(position == TableCellBackgroundViewPositionTop)
+    if(position == AFTableCellBackgroundViewPositionTop)
 	{
 		
         CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect) ;
@@ -76,7 +76,7 @@ static float defaultBorderWidth = -1;
         CGContextDrawPath(c, kCGPathFillStroke);                
         return;
     }
-	else if (position == TableCellBackgroundViewPositionBottom)
+	else if (position == AFTableCellBackgroundViewPositionBottom)
 	{
 		
         CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect) ;
@@ -97,7 +97,7 @@ static float defaultBorderWidth = -1;
         CGContextDrawPath(c, kCGPathFillStroke);        
         return;
     }
-	else if (position == TableCellBackgroundViewPositionMiddle)
+	else if (position == AFTableCellBackgroundViewPositionMiddle)
 	{
         CGFloat minx = CGRectGetMinX(rect) , maxx = CGRectGetMaxX(rect) ;
         CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
@@ -114,7 +114,7 @@ static float defaultBorderWidth = -1;
         CGContextDrawPath(c, kCGPathFillStroke);        
         return;
     }
-	else if (position == TableCellBackgroundViewPositionSingle)
+	else if (position == AFTableCellBackgroundViewPositionSingle)
 	{
         CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect) ;
         CGFloat miny = CGRectGetMinY(rect) , midy = CGRectGetMidY(rect) , maxy = CGRectGetMaxY(rect) ;

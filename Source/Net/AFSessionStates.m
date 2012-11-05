@@ -2,13 +2,13 @@
 
 @implementation AFSessionStates
 
-+ (NSString *)stringForState:(sessionState)stateIn
++ (NSString *)stringForState:(AFSessionState)stateIn
 {
-    if (stateIn == (sessionState) disconnected) return @"Disconnected";
-    else if (stateIn == (sessionState) connecting) return @"Connecting";
-    else if (stateIn == (sessionState) connected) return @"Connected";
-    else if (stateIn == (sessionState) disconnecting) return @"Disconnecting";
-    else if (stateIn == (sessionState) rejected) return @"Rejected";
+    if (stateIn == (AFSessionState) AFSessionStateDisconnected) return @"Disconnected";
+    else if (stateIn == (AFSessionState) AFSessionStateConnecting) return @"Connecting";
+    else if (stateIn == (AFSessionState) AFSessionStateConnected) return @"Connected";
+    else if (stateIn == (AFSessionState) AFSessionStateDisconnecting) return @"Disconnecting";
+    else if (stateIn == (AFSessionState) AFSessionStateRejected) return @"Rejected";
     else return @"Unknown";
 }
 

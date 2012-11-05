@@ -47,7 +47,7 @@
     {
         for (NSObject <AFQueueableRequest> *request in queue)
         {
-            if (request.state == (RequestState) Pending)
+            if (request.state == (AFRequestState) AFRequestStatePending)
             {
                 if ([activeRequests count] < maxConcurrentDownloads)
                 {
@@ -123,7 +123,7 @@
 #endif
 
     BOOL returnVal;
-    if (request && request.state != (RequestState) Fulfilled)
+    if (request && request.state != (AFRequestState) AFRequestStateFulfilled)
     {
         [self queueRequestAtBack:request];
         returnVal = YES;
@@ -197,7 +197,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestReset:(NSObject <AFRequest> *)requestIn //Same behaviour as cancel (dequeue)
+- (void)requestReset:(NSObject <AFRequest> *)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -277,9 +277,9 @@
 
     NSObject <AFRequest> *findRequest = [[self queuedRequestForConnection:connection] retain];
 
-    //NSAssert(findRequest,@"Couldn't retrieve request for finished connection");
+    //NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
 
-    [findRequest didFinish]; //Tell the object that it finished (so it can do something useful with the data)
+    [findRequest didFinish]; //Tell the object that it AFRequestEventFinished (so it can do something useful with the data)
     [findRequest removeObserver:self]; //Stop listening to the request
     [queue removeObject:findRequest]; //Remove the request from the list
     [self startWaitingRequests];

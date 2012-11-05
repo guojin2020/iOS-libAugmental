@@ -77,7 +77,7 @@
  *  content gets initialized on a demand basis.
  *
  *	User applications should over-ride this method to provide an implementation, but never invoke it directly.
- *	When the initialisation has finished, the Appliction should call viewControllerDidLoad.
+ *	When the initialisation has AFRequestEventFinished, the Appliction should call viewControllerDidLoad.
  */
 - (void)viewControllerBackgroundInit;
 

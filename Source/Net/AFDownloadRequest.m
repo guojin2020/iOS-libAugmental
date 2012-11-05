@@ -10,6 +10,7 @@
 
 - (void)handleHTTPErrorResponse;
 
+- (void)updateReceivedBytesFromFile;
 @end
 
 @implementation AFDownloadRequest
@@ -78,7 +79,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
         if (expectedSizeNumber)
         {
             expectedBytes = [expectedSizeNumber intValue];
-            [self broadcastToObservers:(requestEvent) sizePolled];
+            [self broadcastToObservers:(AFRequestEvent) AFRequestEventSizePolled];
         }
 
         if (![AFSession sharedSession].offline)
@@ -112,8 +113,8 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
     NSLog(@"Will begin writing to file '%@'",targetPath);
 
-    //state = (RequestState) InProcess;
-    //[self broadcastToObservers:(requestEvent) started];
+    //state = (AFRequestState) AFRequestStateInProcess;
+    //[self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
 
     NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
 
@@ -195,7 +196,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     {
         const int bufferSpaceRemaining = DATA_BUFFER_LENGTH- dataBufferPosition;
 
-        if ([dataIn length] > bufferSpaceRemaining) //Theres not enough buffer space
+        if ([dataIn length] > bufferSpaceRemaining) //There's not enough buffer space
         {
             [dataBuffer replaceBytesInRange:NSMakeRange(dataBufferPosition, (NSUInteger) bufferSpaceRemaining) withBytes:[dataIn bytes] length:(NSUInteger) bufferSpaceRemaining];
             [myHandle writeData:dataBuffer];
@@ -211,12 +212,10 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
 }
 
-- (NSString *)actionDescription
-{return @"Downloading file";}
+- (NSString *)actionDescription { return @"Downloading file"; }
 
 - (void)didFinish;
 {
-    [super didFinish];
     if (dataBufferPosition > 0)
     {
         NSData *finalData = [[NSData alloc] initWithBytes:[dataBuffer bytes] length:dataBufferPosition];
@@ -224,6 +223,8 @@ static NSMutableDictionary *uniqueRequestPool = nil;
         [finalData release];
     }
     [self closeHandleSafely];
+
+    [super didFinish];
 }
 
 - (void)didFail:(NSError *)error
@@ -252,26 +253,26 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 {
     queuePosition = (NSUInteger) queuePositionIn;
-    [self broadcastToObservers:(requestEvent) queued];
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventQueued];
 }
 
 - (void)requestWasUnqueued
 {
-    state = Idle;
+    state = AFRequestStateIdle;
 }
 
-- (void)broadcastToObservers:(requestEvent)event
+- (void)broadcastToObservers:(AFRequestEvent)event
 {
     NSSet *observerSnapshot = [[NSSet alloc] initWithSet:observers];
     switch (event)
     {
-        case (requestEvent) queued:
+        case AFRequestEventQueued:
             for (NSObject *observer in observerSnapshot)if ([observer conformsToProtocol:@protocol(AFQueueableRequestObserver)])[(NSObject <AFQueueableRequestObserver> *) observer requestQueued:self AtPosition:queuePosition];
             break;
-        case (requestEvent) sizePolled:
+        case AFRequestEventSizePolled:
             for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestSizePolled:forRequest:)])[(NSObject <AFRequestObserver> *) observer requestSizePolled:expectedBytes forRequest:self];
             break;
-        case (requestEvent) reset:
+        case AFRequestEventReset:
             for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestReset:)]) [(NSObject <AFRequestObserver> *) observer requestReset:self];
             break;
         default:
@@ -285,15 +286,15 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 {
     NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
     [self setExpectedBytesFromHeader:header isCritical:YES];
-    [self broadcastToObservers:(requestEvent) sizePolled];
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventSizePolled];
 }
 
 - (void)deleteLocalCopy
 {
-    if (state == (RequestState) InProcess)[self cancel];
+    if (state == (AFRequestState) AFRequestStateInProcess)[self cancel];
     if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:targetPath error:nil];
     receivedBytes = 0;
-    [self broadcastToObservers:(requestEvent) reset];
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventReset];
 }
 
 - (BOOL)existsInLocalStorage

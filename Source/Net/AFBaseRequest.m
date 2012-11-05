@@ -17,7 +17,7 @@
     if (URLIn && (self = [super init]))
     {
         URL   = [URLIn retain];
-        state = (RequestState) Pending;
+        state = (AFRequestState) AFRequestStatePending;
         expectedBytes = -1;
         receivedBytes = 0;
         numberFormatter = [[NSNumberFormatter alloc] init];
@@ -38,8 +38,8 @@
 {
     responseCode = responseCodeIn;
     [self setExpectedBytesFromHeader:headers isCritical:NO];
-    state = (RequestState) InProcess;
-    [self broadcastToObservers:(requestEvent) started];
+    state = (AFRequestState) AFRequestStateInProcess;
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
 }
 
 - (void)setExpectedBytesFromHeader:(NSDictionary *)header isCritical:(BOOL)critical;
@@ -66,26 +66,26 @@
 - (void)received:(NSData *)dataIn
 {
     receivedBytes += [dataIn length];
-    [self broadcastToObservers:(requestEvent) progressUpdated];
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventProgressUpdated];
 }
 
 - (void)didFinish
 {
-    state = (RequestState) Fulfilled;
-    [self broadcastToObservers:(requestEvent) finished];
+    state = (AFRequestState) AFRequestStateFulfilled;
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
 }
 
 - (void)didFail:(NSError *)error
 {
-    state = (RequestState) Pending;
-    [self broadcastToObservers:(requestEvent) failed];
+    state = (AFRequestState) AFRequestStatePending;
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFailed];
 }
 
 - (void)cancel
 {
-    state = (RequestState) Pending;
+    state = (AFRequestState) AFRequestStatePending;
     [connection cancel];
-    [self broadcastToObservers:(requestEvent) cancel];
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventCancel];
 }
 
 - (float)progress
@@ -103,7 +103,7 @@
     [observers removeObject:oldObserver];
 }
 
-- (void)broadcastToObservers:(requestEvent)event
+- (void)broadcastToObservers:(AFRequestEvent)event
 {
     const register NSSet *observerSnapshot = [[NSSet alloc] initWithSet:observers];
     @synchronized (observers)
@@ -112,23 +112,23 @@
         {
             switch (event)
             {
-                case (requestEvent) started:
+                case (AFRequestEvent) AFRequestEventStarted:
                     if ([observer respondsToSelector:@selector(requestStarted:)]) [((NSObject <AFRequestObserver> *) observer) requestStarted:(NSObject <AFRequest> *) self];
                     break;
 
-                case (requestEvent) progressUpdated:
+                case (AFRequestEvent) AFRequestEventProgressUpdated:
                     if ([observer respondsToSelector:@selector(requestProgressUpdated:forRequest:)]) [((NSObject <AFRequestObserver> *) observer) requestProgressUpdated:[self progress] forRequest:(NSObject <AFRequest> *) self];
                     break;
 
-                case (requestEvent) finished:
+                case (AFRequestEvent) AFRequestEventFinished:
                     if ([observer respondsToSelector:@selector(requestComplete:)]) [((NSObject <AFRequestObserver> *) observer) requestComplete:(NSObject <AFRequest> *) self];
                     break;
 
-                case (requestEvent) cancel:
+                case (AFRequestEvent) AFRequestEventCancel:
                     if ([observer respondsToSelector:@selector(requestCancelled:)]) [((NSObject <AFRequestObserver> *) observer) requestCancelled:(NSObject <AFRequest> *) self];
                     break;
 
-                case (requestEvent) failed:
+                case (AFRequestEvent) AFRequestEventFailed:
                     if ([observer respondsToSelector:@selector(requestFailed:)]) [((NSObject <AFRequestObserver> *) observer) requestFailed:(NSObject <AFRequest> *) self];
                     break;
                 default:
@@ -148,7 +148,7 @@
 - (BOOL)                requiresLogin   { return requiresLogin; }
 - (NSURL *)             URL             { return URL;           }
 - (NSURLConnection *)   connection      { return connection;    }
-- (RequestState)        state           { return state;         }
+- (AFRequestState)        state           { return state;         }
 - (NSUInteger)          receivedBytes   { return receivedBytes; }
 - (int)                 expectedBytes   { return expectedBytes; }
 

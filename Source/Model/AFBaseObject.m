@@ -34,8 +34,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     if ((self = [super init]))
     {
         [self commonInit];
-        //valid = NO;
-        isPlaceholder = YES;
+        isPlaceholder = NO;
     }
     return self;
 }
@@ -69,7 +68,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 
 - (void)finishBatchUpdating
 {
-    if (batchUpdating && updateNeeded) [eventManager broadcastEvent:(event) OBJECT_FIELD_UPDATED source:self];
+    if (batchUpdating && updateNeeded) [eventManager broadcastEvent:(AFEvent) AFEventObjectFieldUpdated source:self];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
@@ -77,7 +76,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)fieldUpdated
 {
     if (batchUpdating) updateNeeded = YES;
-    else [eventManager broadcastEvent:(event) OBJECT_FIELD_UPDATED source:self];
+    else [eventManager broadcastEvent:(AFEvent) AFEventObjectFieldUpdated source:self];
 }
 
 - (void)setContentFromDictionary:(NSDictionary *)dictionary
@@ -86,27 +85,19 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     else
     {
         isPlaceholder = NO;
-
-        NSAssert([((NSNumber *) [dictionary objectForKey:@"pk"]) intValue] == primaryKey, @"Whoah! What's happening, tried to set information for this object using a dictionary with an unmatched primary key, are you crazy!?");
-
-        //primaryKey = [((NSNumber*)[dictionary objectForKey:@"pk"]) intValue];
+        NSAssert([((NSNumber *) [dictionary objectForKey:@"pk"]) intValue] == primaryKey, @"Internal inconsistency: AFObject being set using data with an unmatched primary key");
     }
 }
 
-- (SEL)defaultComparisonSelector
-{return nil;}
-
-- (NSString *)placeholderString
-{return placeholderString;}
-
-- (NSNumber *)placeholderNumber
-{return placeholderNumber;}
-
-- (NSDate *)placeholderDate
-{return placeholderDate;}
+- (SEL)         defaultComparisonSelector   { return nil; }
+- (NSString *)  placeholderString           { return placeholderString; }
+- (NSNumber *)  placeholderNumber           { return placeholderNumber; }
+- (NSDate *)    placeholderDate             { return placeholderDate; }
 
 - (void)setPlaceholderValues
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    isPlaceholder = YES;
+}
 
 - (BOOL)valid
 {
@@ -116,13 +107,13 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)wasValidated
 {
     isPlaceholder = NO;
-    [eventManager broadcastEvent:(event) OBJECT_VALIDATED source:self];
+    [eventManager broadcastEvent:(AFEvent) AFEventObjectValidated source:self];
 }
 
 - (void)wasInvalidated
 {
     isPlaceholder = YES;
-    [eventManager broadcastEvent:(event) OBJECT_INVALIDATED source:self];
+    [eventManager broadcastEvent:(AFEvent) AFEventObjectInvalidated source:self];
 }
 
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint
@@ -132,23 +123,17 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     //return [[AFSession sharedSession].cache deleteObject:(NSObject<AFObject>*)self endpoint:endpoint];
 }
 
-- (int)primaryKey
-{return primaryKey;}
+- (int)primaryKey {return primaryKey;}
 
-- (BOOL)isPlaceholder
-{return isPlaceholder;}
+- (BOOL)isPlaceholder {return isPlaceholder;}
 
-+ (NSString *)modelName
-{return nil;}
++ (NSString *)modelName {return nil;}
 
-+ (NSString *)placeholderString
-{return placeholderString;}
++ (NSString *)placeholderString {return placeholderString;}
 
-+ (NSNumber *)placeholderNumber
-{return placeholderNumber;}
++ (NSNumber *)placeholderNumber {return placeholderNumber;}
 
-+ (NSDate *)placeholderDate
-{return placeholderDate;}
++ (NSDate *)placeholderDate {return placeholderDate;}
 
 //==================================>> NSCoding
 

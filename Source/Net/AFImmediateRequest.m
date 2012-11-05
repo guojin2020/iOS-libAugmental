@@ -37,16 +37,16 @@
     return requestIn;
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
+- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
-    [super willReceiveWithHeaders:headers responseCode:responseCode];
+    [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
     [responseDataBuffer setLength:0];
 }
 
 - (void)received:(NSData *)dataIn
 {
     [super received:dataIn];
-    if ((state = (RequestState) InProcess))
+    if ((state = (AFRequestState) AFRequestStateInProcess))
     {[responseDataBuffer appendData:dataIn];}
 }
 

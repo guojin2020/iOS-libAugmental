@@ -19,9 +19,9 @@
 - (void)refreshFields
 {[self doesNotRecognizeSelector:_cmd];}
 
-- (void)eventOccurred:(event)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
 {
-    if (type == (event) OBJECT_FIELD_UPDATED)[self refreshFields];
+    if (type == (AFEvent) AFEventObjectFieldUpdated)[self refreshFields];
 }
 
 - (NSString *)cellReuseIdentifier

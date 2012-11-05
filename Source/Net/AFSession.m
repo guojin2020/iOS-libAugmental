@@ -1,6 +1,4 @@
 #import "AFSessionStates.h"
-
-//#import "AFAppDelegate.h"
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
 #import "AFSession.h"
@@ -31,7 +29,7 @@ static AFSession *sharedSession = nil;
         [cookieStore setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cookiesUpdated:) name:@"NSHTTPCookieManagerCookiesChangedNotification" object:cookieStore];
         observers     = [[NSMutableSet alloc] init];
-        state         = (sessionState) disconnected;
+        state         = (AFSessionState) AFSessionStateDisconnected;
         downloadQueue = [[AFRequestQueue alloc] initWithTargetHandler:self maxConcurrentDownloads:2];
         offline       = NO;
         cache         = [[AFObjectCache alloc] init];
@@ -60,14 +58,14 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)connect
 {
-    [self setState:(sessionState) connecting];
-    [self setState:(sessionState) connected];
+    [self setState:(AFSessionState) AFSessionStateConnecting];
+    [self setState:(AFSessionState) AFSessionStateConnected];
     return YES;
 }
 
 - (BOOL)handleRequest:(NSObject <AFRequest> *)request
 {
-    if (!request || request.state == (RequestState) Fulfilled)
+    if (!request || request.state == (AFRequestState) AFRequestStateFulfilled)
     {
         return NO;
     }
@@ -110,13 +108,13 @@ static AFSession *sharedSession = nil;
     [downloadQueue cancelAllRequests];
     [AFDownloadRequest clearRequestPool];
 
-    [self setState:(sessionState) disconnecting];
-    [self setState:(sessionState) disconnected];
+    [self setState:(AFSessionState) AFSessionStateDisconnecting];
+    [self setState:(AFSessionState) AFSessionStateDisconnected];
 }
 
 - (void)didLogout:(id)logOutResponseData
 {
-    [self setState:(sessionState) disconnected];
+    [self setState:(AFSessionState) AFSessionStateDisconnected];
 }
 
 - (void)cookiesUpdated:(id)message
@@ -137,17 +135,17 @@ static AFSession *sharedSession = nil;
     }
 }
 
-- (void)setState:(sessionState)newState
+- (void)setState:(AFSessionState)newState
 {
     if (newState != state)
     {
-        sessionState oldState = state;
+        AFSessionState oldState = state;
         state = newState;
         NSSet                             *observerSnapshot = [[NSSet alloc] initWithSet:observers];
         for (NSObject <AFSessionObserver> *observer in observerSnapshot)if ([observer respondsToSelector:@selector(stateOfSession:changedFrom:to:)])[observer stateOfSession:self changedFrom:oldState to:state];
         [observerSnapshot release];
     }
-    //if(state==(sessionState)disconnected || state==(sessionState)rejected) offline = NO;
+    //if(state==(AFSessionState)AFSessionStateDisconnected || state==(AFSessionState)AFSessionStateRejected) offline = NO;
 }
 
 - (void)setOffline:(BOOL)offlineState
@@ -161,7 +159,7 @@ static AFSession *sharedSession = nil;
     }
 }
 
-- (sessionState)state
+- (AFSessionState)state
 {return state;}
 
 - (BOOL)offline

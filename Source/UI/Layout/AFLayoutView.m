@@ -5,6 +5,7 @@
 //
 
 
+#import <QuartzCore/QuartzCore.h>
 #import "AFLayoutView.h"
 
 
@@ -20,7 +21,7 @@
     return self;
 }
 
-- (UIEdgeInsets)edgeInsets                      { return _edgeInsets;               }
-- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets  { _edgeInsets = edgeInsets;         }
+- (UIEdgeInsets)edgeInsets                      { return _edgeInsets;       }
+- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets  { _edgeInsets = edgeInsets; }
 
 @end

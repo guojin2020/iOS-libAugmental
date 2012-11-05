@@ -22,10 +22,10 @@
     return requestIn;
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headersIn responseCode:(int)responseCode
+- (void)willReceiveWithHeaders:(NSDictionary *)headersIn responseCode:(int)responseCodeIn
 {
     self.headers = headersIn;
-    [super willReceiveWithHeaders:headers responseCode:responseCode];
+    [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 
 }
 

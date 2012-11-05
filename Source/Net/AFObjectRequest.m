@@ -26,15 +26,15 @@
         NSString *postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
         [postString release];
 
-        NSAssert(postData, @"Deserialisation error in %@, request was: %@", [self class], [URL absoluteString]);
+        NSAssert(postData, @"Deserialisation AFSessionStateError in %@, request was: %@", [self class], [URL absoluteString]);
     }
     return self;
 }
 
 - (void)didFinish
 {
-    state = (RequestState) Fulfilled;
-    [self broadcastToObservers:(requestEvent) finished];
+    state = (AFRequestState) AFRequestStateFulfilled;
+    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
 
     NSError *error = nil;
     returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];
@@ -44,7 +44,7 @@
     if (error || !objectDictionaries || [objectDictionaries isKindOfClass:[NSNull class]])
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
-        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation error in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
+        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
         //[responseString release];
         [responseString release];
     }
@@ -66,7 +66,7 @@
         }
     }
 
-    NSString *errorString = [returnedDictionary objectForKey:@"error"];
+    NSString *errorString = [returnedDictionary objectForKey:@"AFSessionStateError"];
     if (errorString)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

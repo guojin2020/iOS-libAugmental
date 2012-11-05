@@ -119,7 +119,7 @@ static NSMutableSet *observers;
             class = classes[i];
             if ([NSStringFromClass(class) hasPrefix:@"AF"] && [class conformsToProtocol:@protocol(AFThemeable)])[themeableClasses addObject:class];
         }
-        //NSLog(@"...finished.");
+        //NSLog(@"...AFRequestEventFinished.");
         free(classes);
     }
 

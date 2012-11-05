@@ -9,20 +9,24 @@
 
 @class AFResultsPage;
 
-typedef enum
+typedef enum AFPagingCellConfiguration
 {
-    topFirstPage = 0, topBetweenPage = 1, bottomLastPage = 2, bottomBetweenPage = 3
-} PagingCellConfiguration;
+    AFPagingCellConfigurationTopFirstPage       = 0,
+    AFPagingCellConfigurationTopBetweenPage     = 1,
+    AFPagingCellConfigurationBottomLastPage     = 2,
+    AFPagingCellConfigurationBottomBetweenPage  = 3
+}
+AFPagingCellConfiguration;
 
 @interface AFResultsPagingCell : AFTableCell <AFThemeable>
 {
     UILabel     *showingLabel;
     UIImageView *swipeImageView;
-    PagingCellConfiguration configuration;
+    AFPagingCellConfiguration configuration;
     AFResultsPage *resultsPage;
 }
 
-- (id)initWithConfiguration:(PagingCellConfiguration)configurationIn resultsPage:(AFResultsPage *)resultsPage;
+- (id)initWithConfiguration:(AFPagingCellConfiguration)configurationIn resultsPage:(AFResultsPage *)resultsPage;
 
 + (UIColor *)bgColor;
 
@@ -32,6 +36,6 @@ typedef enum
 
 + (UIImage *)imagePrevious;
 
-@property(nonatomic) PagingCellConfiguration configuration;
+@property(nonatomic) AFPagingCellConfiguration configuration;
 
 @end
