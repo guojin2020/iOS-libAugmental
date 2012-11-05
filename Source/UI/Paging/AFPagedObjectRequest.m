@@ -1,7 +1,7 @@
 #import "AFPagedObjectRequest.h"
 #import "AFResultsPage.h"
 #import "AFSession.h"
-#import "AFObjectCache.h"
+#import "AFLegacyObjectCache.h"
 
 @implementation AFPagedObjectRequest
 

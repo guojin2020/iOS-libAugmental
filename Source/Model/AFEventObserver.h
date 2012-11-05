@@ -1,3 +1,4 @@
+@protocol AFObject;
 typedef enum AFEvent
 {
     AFEventAppSettingsLoaded     = 1,
@@ -7,7 +8,8 @@ typedef enum AFEvent
     AFEventObjectValidated       = 5,
     AFEventAppSettingsLoadFailed = 6,
     AFEventAppMemoryWarning      = 7,
-    AFEventBasketItemsChanged    = 8
+    AFEventBasketItemsChanged    = 8,
+    AFEventObjectDeallocating = 9
 }
 AFEvent;
 
@@ -19,7 +21,6 @@ AFEvent;
 /**
  Called on an object when the specified AFEvent is broadcast by AFEventManager.
  */
-- (void)eventOccurred:(AFEvent)type source:(NSObject *)source;
-//-(BOOL)respondsToEventType:(id<AFEvent>*)AFEvent;
+- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source;
 
 @end

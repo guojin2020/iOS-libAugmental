@@ -128,7 +128,7 @@ static UIColor *invalidColor = nil;
  the application exits, this settings value will be persisted using its persistence
  delegate.
  */
-- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
 {
     switch (type)
     {

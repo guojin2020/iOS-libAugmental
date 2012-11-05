@@ -3,7 +3,7 @@
 #import "AFObjectHelper.h"
 #import "AFAppDelegate.h"
 #import "AFSession.h"
-#import "AFObjectCache.h"
+#import "AFLegacyObjectCache.h"
 #import "AFEnvironment.h"
 #import "AFEventManager.h"
 
@@ -63,7 +63,7 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     //[loadingView removeFromSuperview];
 }
 
-- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
 {
     if (type == AFEventAppSettingsLoaded)
     {

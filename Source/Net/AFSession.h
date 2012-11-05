@@ -11,7 +11,7 @@
 @class AFUtil;
 @class AFRequestQueue;
 @class AFImmediateRequest;
-@class AFObjectCache;
+@class AFLegacyObjectCache;
 @class AFEnvironment;
 
 @interface AFSession : AFRequestQueue <AFSessionObserver, AFRequestEndpoint>
@@ -33,7 +33,7 @@
 
     AFEnvironment *environment;
 
-    AFObjectCache *cache;
+    AFLegacyObjectCache *cache;
 }
 
 //Initialisers
@@ -86,7 +86,7 @@
 
 @property(nonatomic, retain, readonly) AFRequestQueue *downloadQueue;
 
-@property(nonatomic, retain, readonly) AFObjectCache *cache;
+@property(nonatomic, retain, readonly) AFLegacyObjectCache *cache;
 
 @end
 

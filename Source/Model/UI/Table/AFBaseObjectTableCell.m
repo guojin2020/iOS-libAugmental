@@ -19,7 +19,7 @@
 - (void)refreshFields
 {[self doesNotRecognizeSelector:_cmd];}
 
-- (void)eventOccurred:(AFEvent)type source:(NSObject *)source
+- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
 {
     if (type == (AFEvent) AFEventObjectFieldUpdated)[self refreshFields];
 }

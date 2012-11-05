@@ -6,7 +6,7 @@
 #import "AFJSONRequest.h"
 #import "AFBooleanSetting.h"
 #import "AFCachingAudioPlayer.h"
-#import "AFObjectCache.h"
+#import "AFLegacyObjectCache.h"
 #import "AFEventManager.h"
 #import "AFSession.h"
 

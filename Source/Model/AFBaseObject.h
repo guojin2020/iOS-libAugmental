@@ -91,7 +91,7 @@
  */
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 
-@property(nonatomic, retain, readonly) AFEventManager *eventManager;
+
 //@property (nonatomic) BOOL valid;
 
 @end
