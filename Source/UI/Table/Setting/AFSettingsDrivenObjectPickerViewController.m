@@ -3,7 +3,7 @@
 #import "AFObjectHelper.h"
 #import "AFAppDelegate.h"
 #import "AFSession.h"
-#import "AFLegacyObjectCache.h"
+#import "AFObjectCache.h"
 #import "AFEnvironment.h"
 #import "AFEventManager.h"
 

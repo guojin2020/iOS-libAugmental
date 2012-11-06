@@ -1,7 +1,7 @@
 #import "AFObject.h"
 #import "AFObjectViewPanelController.h"
 
-@class AFLegacyObjectCache;
+@class AFObjectCache;
 @class AFObjectHelper;
 @protocol AFValidator;
 

@@ -3,7 +3,7 @@
 
 #import "AFObjectRequest.h"
 #import "AFSession.h"
-#import "AFLegacyObjectCache.h"
+#import "AFObjectCache.h"
 #import "AFWriteableObject.h"
 
 @implementation AFObjectRequest

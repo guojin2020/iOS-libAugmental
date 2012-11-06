@@ -3,7 +3,7 @@
 #import "AFRequestQueue.h"
 #import "AFSession.h"
 #import "AFEnvironment.h"
-#import "AFLegacyObjectCache.h"
+#import "AFObjectCache.h"
 #import "AFRequestQueueAlertView.h"
 
 @implementation AFSession
@@ -32,7 +32,7 @@ static AFSession *sharedSession = nil;
         state         = (AFSessionState) AFSessionStateDisconnected;
         downloadQueue = [[AFRequestQueue alloc] initWithTargetHandler:self maxConcurrentDownloads:2];
         offline       = NO;
-        cache         = [[AFLegacyObjectCache alloc] init];
+        cache         = [[AFObjectCache alloc] init];
     }
     return self;
 }

@@ -3,12 +3,12 @@
 #import "AFObjectRequest.h"
 #import "AFObjectHelper.h"
 #import "AFWriteableObject.h"
-#import "AFLegacyObjectCache.h"
+#import "AFObjectCache.h"
 #import "AFSession.h"
 #import "AFUtil.h"
 #import "AFEnvironment.h"
 
-@implementation AFLegacyObjectCache
+@implementation AFObjectCache
 
 - (id)init
 {

@@ -11,14 +11,14 @@
 @class AFSession;
 
 /**
- AFLegacyObjectCache could be described as the most important and central class to the entire application.
+ AFObjectCache could be described as the most important and central class to the entire application.
  It's purpose is to service requests for any AFObject by primaryKey, which it does either by returning an already
  cached instance or by creating a placeholder instance. Both would be returned instantly by
- AFLegacyObjectCache, the difference is that when a placeholder is returned, AFObject cache automatically makes the
+ AFObjectCache, the difference is that when a placeholder is returned, AFObject cache automatically makes the
  necessary server call to get the real information for that object and update it asynchronously. When it does so, an
  objectEvent will inform observing users of that object.
  */
-@interface AFLegacyObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint, AFEventObserver>
+@interface AFObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint, AFEventObserver>
 {
     NSMutableDictionary *cache;
     NSNumberFormatter   *numberFormatter;
@@ -27,7 +27,7 @@
 /**
  Retrieves a AFObject by primaryKey, either by returning an already
  cached instance or a newly created placeholder instance. Both are returned instantly by
- AFLegacyObjectCache, and if a placeholder is returned, AFObject cache automatically makes the
+ AFObjectCache, and if a placeholder is returned, AFObject cache automatically makes the
  necessary server call to get the real information for that object before updating it asynchronously.
  When it does so, an objectEvent will inform observing users of that object.
  */
@@ -58,7 +58,7 @@
 
 /**
  Where AFObjects are acquired from the server by means other than a direct primary key reference (e.g. a server API call for name searching),
- AFLegacyObjectCache provides this method to inject those objects into the cache so that subsequent primary key requests for that
+ AFObjectCache provides this method to inject those objects into the cache so that subsequent primary key requests for that
  same object will be serviced more efficiently.
  */
 - (void)injectObject:(NSObject <AFObject> *)object;
@@ -106,7 +106,7 @@
 
 /**
  This method loads and returns a named object graph from NSUserDefaults persistent storage. As traverses the
- object graph, will inject all AFObject compliant objects into this instance of AFLegacyObjectCache.
+ object graph, will inject all AFObject compliant objects into this instance of AFObjectCache.
  It's primary use, as the counterpart for saveObject:forKey:, is to restore persisted, cached AFObjects from
  a previous application run.
  */
