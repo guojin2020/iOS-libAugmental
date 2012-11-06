@@ -261,10 +261,10 @@
 		B03CA86A7C767B010039C034 /* AFSKProductFetchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA38A9EFFFE3CFF9955BA /* AFSKProductFetchResponse.m */; };
 		B03CA8C4254B4F05A5132C33 /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */; };
 		B03CA8FAA917B392D1D1DA7E /* AFSKProductFetchResponseFailed.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA18005EF2F47350D3980 /* AFSKProductFetchResponseFailed.h */; };
-		B03CAA4C296E981B1CE6649C /* AFWeakObjectDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA62A898291D4BBDA6805 /* AFWeakObjectDictionary.h */; };
+		B03CAA4C296E981B1CE6649C /* AFWeakCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA62A898291D4BBDA6805 /* AFWeakCache.h */; };
 		B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
 		B03CABEE61FC1181BE3995B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
-		B03CABFF1880F4BBAF9CA04F /* AFWeakObjectDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAF2365EF8E27782AA4BF /* AFWeakObjectDictionary.m */; };
+		B03CABFF1880F4BBAF9CA04F /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAF2365EF8E27782AA4BF /* AFWeakCache.m */; };
 		B03CAD48859F339A04B1C956 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */; };
 		B03CAE6F1DD894AA699C532D /* AFSKProductFetchResponseFailed.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5E5D646F27E83434093 /* AFSKProductFetchResponseFailed.m */; };
 /* End PBXBuildFile section */
@@ -507,7 +507,7 @@
 		B03CA5A2DBB36E1670659E38 /* AFMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMoviePlayerViewController.h; sourceTree = "<group>"; };
 		B03CA5D2CB96A51A59E910CF /* AFMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMoviePlayerViewController.m; sourceTree = "<group>"; };
 		B03CA5E5D646F27E83434093 /* AFSKProductFetchResponseFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetchResponseFailed.m; sourceTree = "<group>"; };
-		B03CA62A898291D4BBDA6805 /* AFWeakObjectDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWeakObjectDictionary.h; sourceTree = "<group>"; };
+		B03CA62A898291D4BBDA6805 /* AFWeakCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWeakCache.h; sourceTree = "<group>"; };
 		B03CA64BE8CCE02DFCDD6937 /* AFObjectCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectCache.h; sourceTree = "<group>"; };
 		B03CA6BC7D80316536686AC2 /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
 		B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponse.h; sourceTree = "<group>"; };
@@ -531,7 +531,7 @@
 		B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetcher.m; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
 		B03CAE991ECD6DB57BD0AAB7 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
-		B03CAF2365EF8E27782AA4BF /* AFWeakObjectDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFWeakObjectDictionary.m; sourceTree = "<group>"; };
+		B03CAF2365EF8E27782AA4BF /* AFWeakCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFWeakCache.m; sourceTree = "<group>"; };
 		B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -682,8 +682,6 @@
 				759BFF8A15E6CC1900D32988 /* AFObservable.h */,
 				759BFF7E15E6CC1900D32988 /* AFObjectHelper.m */,
 				759BFF7D15E6CC1900D32988 /* AFObjectHelper.h */,
-				759BFF7C15E6CC1900D32988 /* AFLegacyObjectCache.m */,
-				759BFF7B15E6CC1900D32988 /* AFLegacyObjectCache.h */,
 				759BFF7A15E6CC1900D32988 /* AFObject.h */,
 				759BFF6015E6CC1900D32988 /* AFEventObserver.h */,
 				759BFF5B15E6CC1900D32988 /* AFEditableObserver.h */,
@@ -694,10 +692,7 @@
 				759BFF4815E6CC1900D32988 /* AFBaseWriteableObject.h */,
 				759BFF4915E6CC1900D32988 /* AFBaseWriteableObject.m */,
 				67D17C287950BB6A7E1F6F5B /* UI */,
-				B03CAF2365EF8E27782AA4BF /* AFWeakObjectDictionary.m */,
-				B03CA62A898291D4BBDA6805 /* AFWeakObjectDictionary.h */,
-				B03CACBB3613A9D6CF6EF068 /* AFObjectCache.m */,
-				B03CA64BE8CCE02DFCDD6937 /* AFObjectCache.h */,
+				B03CA12E2FD05A0C1CED811C /* Cache */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1025,6 +1020,19 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
+		B03CA12E2FD05A0C1CED811C /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				759BFF7B15E6CC1900D32988 /* AFLegacyObjectCache.h */,
+				759BFF7C15E6CC1900D32988 /* AFLegacyObjectCache.m */,
+				B03CA64BE8CCE02DFCDD6937 /* AFObjectCache.h */,
+				B03CACBB3613A9D6CF6EF068 /* AFObjectCache.m */,
+				B03CAF2365EF8E27782AA4BF /* AFWeakCache.m */,
+				B03CA62A898291D4BBDA6805 /* AFWeakCache.h */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		B03CA21A564078D40A4EC0B4 /* libTouchJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -1221,7 +1229,7 @@
 				B03CA165C0A5F1F60955028B /* AFSKProductFetchResponseSuccess.h in Headers */,
 				B03CA8FAA917B392D1D1DA7E /* AFSKProductFetchResponseFailed.h in Headers */,
 				B03CA5A7AB08E9CF8410D5FA /* AFSKProductRequest.h in Headers */,
-				B03CAA4C296E981B1CE6649C /* AFWeakObjectDictionary.h in Headers */,
+				B03CAA4C296E981B1CE6649C /* AFWeakCache.h in Headers */,
 				B03CA5A7F7CFC4DF785873D1 /* AFObjectCache.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1417,7 +1425,7 @@
 				B03CA66BDB47E907B4853200 /* AFSKProductFetchResponseSuccess.m in Sources */,
 				B03CAE6F1DD894AA699C532D /* AFSKProductFetchResponseFailed.m in Sources */,
 				B03CA45BC73F4A8C09D16789 /* AFSKProductRequest.m in Sources */,
-				B03CABFF1880F4BBAF9CA04F /* AFWeakObjectDictionary.m in Sources */,
+				B03CABFF1880F4BBAF9CA04F /* AFWeakCache.m in Sources */,
 				B03CA299EABCD1487D3576DF /* AFObjectCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

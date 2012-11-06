@@ -5,12 +5,12 @@
 //
 
 
-#import "AFWeakObjectDictionary.h"
+#import "AFWeakCache.h"
 #import "AFObject.h"
 #import "AFEventManager.h"
 
 
-@implementation AFWeakObjectDictionary
+@implementation AFWeakCache
 {
     NSMutableDictionary* dictionary;
 }
