@@ -10,7 +10,7 @@
 
 @protocol AFObject;
 
-@interface AFWeakObjectDictionary : NSObject <AFEventObserver>
+@interface AFWeakCache : NSObject <AFEventObserver>
 
 - (void)addObject:(id <AFObject> *)valueIn forKey:(id <AFObject> *)keyIn;
 

@@ -22,7 +22,7 @@ static AFSKProductFetcher *sharedInstance;
     self = [super init];
     if (self)
     {
-        idsProducts = [[NSMutableDictionary alloc] init];
+        //idsProducts = [[NSMutableDictionary alloc] init];
     }
     return self;
 }

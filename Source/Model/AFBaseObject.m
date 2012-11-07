@@ -153,6 +153,4 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     [super dealloc];
 }
 
-@synthesize eventManager;
-
 @end

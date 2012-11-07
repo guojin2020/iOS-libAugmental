@@ -13,7 +13,7 @@
  AFBaseObject provides state and functionality which will be common to all AFObject implementations.
  It is essentially abstract and intended to be subclassed: it should never be instantiated directly.
  **/
-@interface AFBaseObject : NSObject <NSCoding, AFValidatable>
+@interface AFBaseObject : NSObject <AFObject, NSCoding, AFValidatable>
 {
     //The objects primary key; this will match the primary key of this objects database representation on the server.
     int  primaryKey;
