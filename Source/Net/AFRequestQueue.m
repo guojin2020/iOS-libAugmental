@@ -110,7 +110,7 @@
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
     return YES;
 #else
-		return [self handleRequestInternal:request];
+		return [self handleRequestInternal:storeKitRequest];
 	#endif
 }
 

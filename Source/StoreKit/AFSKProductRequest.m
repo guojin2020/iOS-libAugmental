@@ -15,6 +15,9 @@
     id<AFPSKProductConsumer> productConsumer;
 }
 
+@synthesize productId;
+@synthesize productConsumer;
+
 -(id)initWithProductId:(NSString *)productIdIn consumer:(id<AFPSKProductConsumer>)productConsumerIn
 {
     self = [super init];

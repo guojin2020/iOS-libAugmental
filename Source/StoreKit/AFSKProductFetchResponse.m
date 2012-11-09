@@ -5,11 +5,12 @@
 //
 
 
+#import <StoreKit/StoreKit.h>
 #import "AFSKProductFetchResponse.h"
 
 
-@implementation AFSKProductFetchResponse {
-
+@implementation AFSKProductFetchResponse
+{
 }
 
 @end

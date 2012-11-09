@@ -9,4 +9,7 @@
 
 
 @interface AFSKProductFetchResponse : NSObject
+
+
+
 @end
