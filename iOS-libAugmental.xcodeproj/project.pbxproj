@@ -1054,7 +1054,6 @@
 				B03CA18005EF2F47350D3980 /* AFSKProductFetchResponseFailed.h */,
 				B03CA9BE058CA34B82CC7496 /* AFSKProductRequest.m */,
 				B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */,
-				B03CA93C499009AA3377C93B,
 			);
 			path = StoreKit;
 			sourceTree = "<group>";
@@ -1286,7 +1285,7 @@
 		75A4AC761485AB8F00EBD4B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 75A4AC791485AB8F00EBD4B0 /* Build configuration list for PBXProject "iOS-libAugmental" */;
 			compatibilityVersion = "Xcode 3.2";

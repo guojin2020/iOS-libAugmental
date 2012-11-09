@@ -4,11 +4,9 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "AFWeakCache.h"
 #import "AFObject.h"
 #import "AFEventManager.h"
-
 
 @implementation AFWeakCache
 {
@@ -42,8 +40,8 @@
             weakKey     = (NSValue *)key;
             weakValue   = (NSValue *)[dictionary objectForKey:weakKey];
 
-            [((id<AFObject>)[weakKey   pointerValue]) removeObserver:self];
-            [((id<AFObject>)[weakValue pointerValue]) removeObserver:self];
+            [((id<AFObject>)[weakKey   pointerValue]).eventManager removeObserver:self];
+            [((id<AFObject>)[weakValue pointerValue]).eventManager removeObserver:self];
 
             if([deadWeakReference isEqualToValue:weakKey] || [deadWeakReference isEqualToValue:weakValue])
             {

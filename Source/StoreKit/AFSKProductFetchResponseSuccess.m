@@ -20,6 +20,8 @@
     {
         product = [productIn retain];
     }
+
+    return self;
 }
 
 -(SKProduct *)product

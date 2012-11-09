@@ -145,7 +145,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     [coder encodeBool:updateNeeded forKey:UPDATE_NEEDED_KEY];
 }
 
-//====================== NSCodin
+//====================== NSCoding
 
 - (void)dealloc
 {

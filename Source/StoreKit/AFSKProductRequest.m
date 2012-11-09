@@ -17,8 +17,13 @@
 
 -(id)initWithProductId:(NSString *)productIdIn consumer:(id<AFPSKProductConsumer>)productConsumerIn
 {
-    productId = [productIdIn retain];
-    productConsumer = [productConsumerIn retain];
+    self = [super init];
+    if(self)
+    {
+        productId = [productIdIn retain];
+        productConsumer = [productConsumerIn retain];
+    }
+    return self;
 }
 
 -(void)dealloc

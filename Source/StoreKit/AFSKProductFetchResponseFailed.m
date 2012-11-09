@@ -17,6 +17,7 @@
     {
         reason = [reasonIn retain];
     }
+    return self;
 }
 
 -(NSString*)reason
