@@ -5,6 +5,7 @@
 //
 
 #import "AFSKProductFetcher.h"
+
 #import "AFSKProductRequest.h"
 #import "AFPSKProductConsumer.h"
 #import "AFSKProductFetchResponse.h"
@@ -12,6 +13,7 @@
 #import "AFSKProductFetchResponseFailed.h"
 
 @interface AFSKProductFetcher ()
+
 - (void)sendRequests;
 
 @end
@@ -27,7 +29,7 @@ static AFSKProductFetcher *sharedInstance;
     return sharedInstance ?: (sharedInstance = [[AFSKProductFetcher alloc] init]);
 }
 
-- (id)init
+-(id)init
 {
     self = [super init];
     if (self)
@@ -38,7 +40,7 @@ static AFSKProductFetcher *sharedInstance;
     return self;
 }
 
-- (void)lock
+-(void)lock
 {
     ++bufferLockCount;
 }
@@ -48,11 +50,22 @@ static AFSKProductFetcher *sharedInstance;
     if(bufferLockCount>0)
     {
         --bufferLockCount;
-        if(bufferLockCount==0)
+        if(bufferLockCount==0 && [bufferedRequests count]>0)
         {
             [self sendRequests];
         }
     }
+}
+
+-(AFSKProductRequest*)requestProductForConsumer:(id<AFPSKProductConsumer>)consumer
+{
+    AFSKProductRequest *request = [[AFSKProductRequest alloc] initWithConsumer:consumer];
+    [bufferedRequests addObject:request];
+    [request release];
+
+    if (bufferLockCount==0) [self sendRequests];
+
+    return request;
 }
 
 -(void)sendRequests
@@ -66,9 +79,16 @@ static AFSKProductFetcher *sharedInstance;
     bufferedRequests = swapSet;
 
     NSMutableSet *productIds = [[NSMutableSet alloc] init];
-    for(AFSKProductRequest *activeRequests)
+    for(AFSKProductRequest *activeRequest in activeRequests)
+    {
+        [productIds addObject:activeRequest.productConsumer.storeKitProductId];
+    }
 
-    [[SKProductsRequest alloc] initWithProductIdentifiers:<#(NSSet *)productIdentifiers#>]
+    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIds];
+    [productIds release];
+
+    request.delegate = self;
+    [request start];
 }
 
 // SKProductsRequestDelegate implementation
@@ -84,7 +104,7 @@ static AFSKProductFetcher *sharedInstance;
         found = NO;
         for(request in activeRequests)
         {
-            if([request.productId isEqualToString:product.productIdentifier])
+            if([request.productConsumer.storeKitProductId isEqualToString:product.productIdentifier])
             {
                 found = YES;
 

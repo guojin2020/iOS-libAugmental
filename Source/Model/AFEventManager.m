@@ -22,7 +22,7 @@
     [observers removeObject:observer];
 }
 
-- (void)broadcastEvent:(AFEvent)type source:(id <AFObject>)source
+- (void)broadcastEvent:(AFEvent)type source:(id)source
 {
     NSSet                           *observerCopy = [[NSSet alloc] initWithSet:observers];
     for (NSObject <AFEventObserver> *observer in observerCopy) [observer eventOccurred:type source:source];

@@ -11,19 +11,16 @@
 
 @implementation AFSKProductRequest
 {
-    NSString* productId;
     id<AFPSKProductConsumer> productConsumer;
 }
 
-@synthesize productId;
 @synthesize productConsumer;
 
--(id)initWithProductId:(NSString *)productIdIn consumer:(id<AFPSKProductConsumer>)productConsumerIn
+-(id)initWithConsumer:(id<AFPSKProductConsumer>)productConsumerIn
 {
     self = [super init];
     if(self)
     {
-        productId = [productIdIn retain];
         productConsumer = [productConsumerIn retain];
     }
     return self;
@@ -31,7 +28,6 @@
 
 -(void)dealloc
 {
-    [productId release];
     [productConsumer release];
     [super dealloc];
 }

@@ -7,6 +7,9 @@
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
 
+@protocol AFPSKProductConsumer;
+@class AFSKProductRequest;
+
 @interface AFSKProductFetcher : NSObject <SKProductsRequestDelegate>
 {
     NSMutableSet* bufferedRequests;
@@ -18,5 +21,7 @@
 
 -(void)lock;
 -(void)unlock;
+
+- (AFSKProductRequest*)requestProductForConsumer:(id<AFPSKProductConsumer>)consumer;
 
 @end

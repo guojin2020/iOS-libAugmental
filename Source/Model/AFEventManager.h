@@ -22,6 +22,6 @@
 /**
  Notify all observers in the pool of the specified AFEvent.
  */
-- (void)broadcastEvent:(AFEvent)type source:(id <AFObject>)source;
+- (void)broadcastEvent:(AFEvent)type source:(id)source;
 
 @end
