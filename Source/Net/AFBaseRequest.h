@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+
 #import "AFRequest.h"
 #import "AFRequestObserver.h"
 #import "AFRequestStates.h"
@@ -16,7 +17,7 @@ typedef enum AFRequestEvent
 }
 AFRequestEvent;
 
-@interface AFBaseRequest : NSObject
+@interface AFBaseRequest : NSObject <AFRequest>
 {
     NSURL               *URL;
     NSURLConnection     *connection;

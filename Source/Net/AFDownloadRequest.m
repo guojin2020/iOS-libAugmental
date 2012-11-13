@@ -9,8 +9,8 @@
 @interface AFDownloadRequest ()
 
 - (void)handleHTTPErrorResponse;
-
 - (void)updateReceivedBytesFromFile;
+
 @end
 
 @implementation AFDownloadRequest
@@ -24,6 +24,8 @@
     NSUInteger          dataBufferPosition;
     AFHeaderRequest     *pollSizeRequest;
 }
+
+@dynamic requiresLogin, URL, state;
 
 static NSMutableDictionary *uniqueRequestPool = nil;
 
@@ -107,9 +109,9 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     return requestIn;
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode
+- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
-    [super willReceiveWithHeaders:headers responseCode:responseCode];
+    [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 
     NSLog(@"Will begin writing to file '%@'",targetPath);
 
@@ -144,7 +146,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 
     NSAssert(myHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
-    switch(responseCode)
+    switch(responseCodeIn)
     {
         case 206:
             [myHandle seekToEndOfFile];

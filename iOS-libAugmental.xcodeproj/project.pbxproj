@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		090231EB165306CA007CF387 /* AFEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 090231E9165306CA007CF387 /* AFEnvironment.h */; };
+		090231EC165306CA007CF387 /* AFEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 090231EA165306CA007CF387 /* AFEnvironment.m */; };
 		099B10B7163D639600E81588 /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF3D15E6CC1900D32988 /* AFAppDelegate.m */; };
 		099B10B8163D639600E81588 /* AFBaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF3F15E6CC1900D32988 /* AFBaseObject.m */; };
 		099B10B9163D639600E81588 /* AFBaseObjectTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF4115E6CC1900D32988 /* AFBaseObjectTableCell.m */; };
@@ -22,7 +24,6 @@
 		099B10C3163D639600E81588 /* AFDateSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5615E6CC1900D32988 /* AFDateSetting.m */; };
 		099B10C4163D639600E81588 /* AFDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5815E6CC1900D32988 /* AFDownloadRequest.m */; };
 		099B10C5163D639600E81588 /* AFEMailAddressValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5A15E6CC1900D32988 /* AFEMailAddressValidator.m */; };
-		099B10C6163D639600E81588 /* AFEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5D15E6CC1900D32988 /* AFEnvironment.m */; };
 		099B10C7163D639600E81588 /* AFEventManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5F15E6CC1900D32988 /* AFEventManager.m */; };
 		099B10C8163D639600E81588 /* AFGenericOptionTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF6215E6CC1900D32988 /* AFGenericOptionTableCell.m */; };
 		099B10C9163D639600E81588 /* AFHeaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF6415E6CC1900D32988 /* AFHeaderRequest.m */; };
@@ -120,7 +121,6 @@
 		099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5715E6CC1900D32988 /* AFDownloadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1129163D639600E81588 /* AFEMailAddressValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5915E6CC1900D32988 /* AFEMailAddressValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B112A163D639600E81588 /* AFEditableObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5B15E6CC1900D32988 /* AFEditableObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B112B163D639600E81588 /* AFEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5C15E6CC1900D32988 /* AFEnvironment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B112C163D639600E81588 /* AFEventManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5E15E6CC1900D32988 /* AFEventManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B112D163D639600E81588 /* AFEventObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6015E6CC1900D32988 /* AFEventObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B112E163D639600E81588 /* AFGenericOptionTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6115E6CC1900D32988 /* AFGenericOptionTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -171,7 +171,6 @@
 		099B115C163D639600E81588 /* AFRequestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAC15E6CC1900D32988 /* AFRequestObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B115D163D639600E81588 /* AFRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAD15E6CC1900D32988 /* AFRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B115E163D639600E81588 /* AFRequestQueueAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAF15E6CC1900D32988 /* AFRequestQueueAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115F163D639600E81588 /* AFRequestStates.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB115E6CC1900D32988 /* AFRequestStates.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1160163D639600E81588 /* AFResultsPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB215E6CC1900D32988 /* AFResultsPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1161163D639600E81588 /* AFResultsPagingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB415E6CC1900D32988 /* AFResultsPagingCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1162163D639600E81588 /* AFScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB615E6CC1900D32988 /* AFScreen.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -246,6 +245,7 @@
 		09C62F12162ADF5B00CC6B73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A4AC821485AB9000EBD4B0 /* Foundation.framework */; };
 		09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */; };
 		09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */; };
+		09E125571653098F008154C0 /* AFRequestStates.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB115E6CC1900D32988 /* AFRequestStates.h */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
 		B03CA0BFAB202CD6BCC37511 /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0728B89BDDDC5881C94 /* AFCache.m */; };
 		B03CA0D72E763740185B3672 /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAC2BA136E701D2F56205 /* AFWeakCache.m */; };
@@ -272,13 +272,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		090231E9165306CA007CF387 /* AFEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEnvironment.h; sourceTree = "<group>"; };
+		090231EA165306CA007CF387 /* AFEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEnvironment.m; sourceTree = "<group>"; };
 		097252D914A5F48800E75618 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		099B10AD163D635100E81588 /* test-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "test-Prefix.pch"; sourceTree = "<group>"; };
-		099B10AE163D635100E81588 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
-		099B10B0163D635100E81588 /* test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
 		099B11A8163D639600E81588 /* libiOS-libAugmental.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libiOS-libAugmental.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		099C5F7F149EA61800F25175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "iOS-libAugmental-test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "iOS-libAugmental-test.octest"; path = "iOS-libAugmental-Test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C62F0F162ADF5B00CC6B73 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		09C62F15162ADF5B00CC6B73 /* iOS-libAugmental-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS-libAugmental-test-Info.plist"; sourceTree = "<group>"; };
 		09C62F17162ADF5B00CC6B73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -347,8 +346,6 @@
 		759BFF5915E6CC1900D32988 /* AFEMailAddressValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEMailAddressValidator.h; sourceTree = "<group>"; };
 		759BFF5A15E6CC1900D32988 /* AFEMailAddressValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEMailAddressValidator.m; sourceTree = "<group>"; };
 		759BFF5B15E6CC1900D32988 /* AFEditableObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEditableObserver.h; sourceTree = "<group>"; };
-		759BFF5C15E6CC1900D32988 /* AFEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEnvironment.h; sourceTree = "<group>"; };
-		759BFF5D15E6CC1900D32988 /* AFEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEnvironment.m; sourceTree = "<group>"; };
 		759BFF5E15E6CC1900D32988 /* AFEventManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEventManager.h; sourceTree = "<group>"; };
 		759BFF5F15E6CC1900D32988 /* AFEventManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEventManager.m; sourceTree = "<group>"; };
 		759BFF6015E6CC1900D32988 /* AFEventObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEventObserver.h; sourceTree = "<group>"; };
@@ -570,24 +567,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		099B10AB163D635100E81588 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				099B10AE163D635100E81588 /* test.h */,
-				099B10B0163D635100E81588 /* test.m */,
-				099B10AC163D635100E81588 /* Supporting Files */,
-			);
-			path = test;
-			sourceTree = "<group>";
-		};
-		099B10AC163D635100E81588 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				099B10AD163D635100E81588 /* test-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		09C62F13162ADF5B00CC6B73 /* Test */ = {
 			isa = PBXGroup;
 			children = (
@@ -964,11 +943,11 @@
 		759BFF3B15E6CC1900D32988 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				090231E9165306CA007CF387 /* AFEnvironment.h */,
+				090231EA165306CA007CF387 /* AFEnvironment.m */,
 				67D17FA6E0AF90121EDEB5FC /* Validation */,
 				759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */,
 				759BFF3D15E6CC1900D32988 /* AFAppDelegate.m */,
-				759BFF5C15E6CC1900D32988 /* AFEnvironment.h */,
-				759BFF5D15E6CC1900D32988 /* AFEnvironment.m */,
 				759B000915E6CC1900D32988 /* iOS-libAugmental-Prefix.pch */,
 				67D17D1A964F3C5B187D669D /* UI */,
 				67D17D9F7B3EE71AD15B26A4 /* Net */,
@@ -985,7 +964,6 @@
 			children = (
 				759BFF3B15E6CC1900D32988 /* Source */,
 				09C62F13162ADF5B00CC6B73 /* Test */,
-				099B10AB163D635100E81588 /* test */,
 				75A4AC811485AB9000EBD4B0 /* Frameworks */,
 				75A4AC801485AB9000EBD4B0 /* Products */,
 				B03CA11051E3926267725A55 /* Library */,
@@ -1113,7 +1091,6 @@
 				099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */,
 				099B1129163D639600E81588 /* AFEMailAddressValidator.h in Headers */,
 				099B112A163D639600E81588 /* AFEditableObserver.h in Headers */,
-				099B112B163D639600E81588 /* AFEnvironment.h in Headers */,
 				099B112C163D639600E81588 /* AFEventManager.h in Headers */,
 				099B112D163D639600E81588 /* AFEventObserver.h in Headers */,
 				099B112E163D639600E81588 /* AFGenericOptionTableCell.h in Headers */,
@@ -1164,7 +1141,6 @@
 				099B115C163D639600E81588 /* AFRequestObserver.h in Headers */,
 				099B115D163D639600E81588 /* AFRequestQueue.h in Headers */,
 				099B115E163D639600E81588 /* AFRequestQueueAlertView.h in Headers */,
-				099B115F163D639600E81588 /* AFRequestStates.h in Headers */,
 				099B1160163D639600E81588 /* AFResultsPage.h in Headers */,
 				099B1161163D639600E81588 /* AFResultsPagingCell.h in Headers */,
 				099B1162163D639600E81588 /* AFScreen.h in Headers */,
@@ -1206,6 +1182,7 @@
 				099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */,
 				099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */,
 				099B1188163D639600E81588 /* iOS-libAugmental-Prefix.pch in Headers */,
+				09E125571653098F008154C0 /* AFRequestStates.h in Headers */,
 				099B1189163D639600E81588 /* AFTableViewController.h in Headers */,
 				099B118A163D639600E81588 /* AFTableCell.h in Headers */,
 				099B118B163D639600E81588 /* AFTableSectionObserver.h in Headers */,
@@ -1244,6 +1221,7 @@
 				B03CA19C4C9A4F850CF7DADE /* AFCache.h in Headers */,
 				B03CA23FB89EABB08A287F16 /* AFPSKProductIdProvider.h in Headers */,
 				B03CABAFFD0C13E7C0A12D68 /* AFSKProductFetcher.h in Headers */,
+				090231EB165306CA007CF387 /* AFEnvironment.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1267,9 +1245,9 @@
 			productReference = 099B11A8163D639600E81588 /* libiOS-libAugmental.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-test */ = {
+		09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-Test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-test" */;
+			buildConfigurationList = 09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-Test" */;
 			buildPhases = (
 				09C62F09162ADF5B00CC6B73 /* Sources */,
 				09C62F0A162ADF5B00CC6B73 /* Frameworks */,
@@ -1280,7 +1258,7 @@
 			);
 			dependencies = (
 			);
-			name = "iOS-libAugmental-test";
+			name = "iOS-libAugmental-Test";
 			productName = "iOS-libAugmental-test";
 			productReference = 09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -1305,8 +1283,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-test */,
 				099B10B5163D639600E81588 /* iOS-libAugmental */,
+				09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-Test */,
 			);
 		};
 /* End PBXProject section */
@@ -1358,7 +1336,6 @@
 				099B10C3163D639600E81588 /* AFDateSetting.m in Sources */,
 				099B10C4163D639600E81588 /* AFDownloadRequest.m in Sources */,
 				099B10C5163D639600E81588 /* AFEMailAddressValidator.m in Sources */,
-				099B10C6163D639600E81588 /* AFEnvironment.m in Sources */,
 				099B10C7163D639600E81588 /* AFEventManager.m in Sources */,
 				099B10C8163D639600E81588 /* AFGenericOptionTableCell.m in Sources */,
 				099B10C9163D639600E81588 /* AFHeaderRequest.m in Sources */,
@@ -1441,6 +1418,7 @@
 				B03CA966AD5DF5B4B4A20B30 /* AFObjectCache.m in Sources */,
 				B03CA0BFAB202CD6BCC37511 /* AFCache.m in Sources */,
 				B03CA76B4098E86976C655EE /* AFSKProductFetcher.m in Sources */,
+				090231EC165306CA007CF387 /* AFEnvironment.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1601,7 +1579,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-test" */ = {
+		09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-Test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09C62F1F162ADF5B00CC6B73 /* Debug */,

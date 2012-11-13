@@ -131,6 +131,7 @@ static AFSKProductFetcher *sharedInstance;
 
 - (void)requestDidFinish:(SKRequest *)request
 {
+    NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error

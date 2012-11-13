@@ -1,7 +1,8 @@
 #import "AFBaseRequest.h"
-//#import "AFAppDelegate.h"
 
 @implementation AFBaseRequest
+
+@synthesize attempts, requiresLogin, URL, state;
 
 - (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn
 {
@@ -148,7 +149,7 @@
 - (BOOL)                requiresLogin   { return requiresLogin; }
 - (NSURL *)             URL             { return URL;           }
 - (NSURLConnection *)   connection      { return connection;    }
-- (AFRequestState)        state           { return state;         }
+- (AFRequestState)      state           { return state;         }
 - (NSUInteger)          receivedBytes   { return receivedBytes; }
 - (int)                 expectedBytes   { return expectedBytes; }
 
