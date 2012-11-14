@@ -87,7 +87,7 @@
 
 /**
  Convenience method to delete this object from the server and local caches, using the current shared AFSession.
- Equivalent to calling: [[AFSession sharedSession].cache deleteObject:self endpoint:endpoint];
+ Equivalent to calling: [[AFSession sharedSession].cacheImage deleteObject:self endpoint:endpoint];
  */
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 

@@ -120,7 +120,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 {
     return nil;
 
-    //return [[AFSession sharedSession].cache deleteObject:(NSObject<AFObject>*)self endpoint:endpoint];
+    //return [[AFSession sharedSession].cacheImage deleteObject:(NSObject<AFObject>*)self endpoint:endpoint];
 }
 
 - (int)primaryKey {return primaryKey;}

@@ -16,7 +16,7 @@ static NSString *CLASS_KEY       = @"class";
 {
     return nil;
 
-    //return [[AFSession sharedSession].cache writeObject:(NSObject<AFWriteableObject>*)self endpoint:endpointIn];
+    //return [[AFSession sharedSession].cacheImage writeObject:(NSObject<AFWriteableObject>*)self endpoint:endpointIn];
 }
 
 @end

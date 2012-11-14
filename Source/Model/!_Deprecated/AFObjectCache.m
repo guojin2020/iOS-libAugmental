@@ -35,12 +35,12 @@
     //If we had a dictionary for that type, search it
     NSObject <AFObject> *findObject = nil;
     if (typeDictionary) findObject = [typeDictionary objectForKey:[NSNumber numberWithInt:primaryKey]];
-    //If we had the object in the cache, return it
+    //If we had the object in the cacheImage, return it
     if (findObject) return findObject;
     else
     {
         NSObject <AFObject> *newObject = [NSAllocateObject((Class)objectClass, 0, NULL) initPlaceholderWithPrimaryKey:primaryKey];
-        [self injectObject:newObject]; //If we just created a new object, put it into the cache
+        [self injectObject:newObject]; //If we just created a new object, put it into the cacheImage
 
         NSString        *queryString = [NSString stringWithFormat:@"?action=get%@&id=%i", (id<AFObject>)[objectClass modelName], primaryKey];
         NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
@@ -213,10 +213,10 @@
     //Get the actual class for this model name
     id<AFObject> objectClass = (id<AFObject>) [AFObjectHelper classForModelName:className];
 
-    //If the object is already in the cache, assume it has updated content and update our existing instance
+    //If the object is already in the cacheImage, assume it has updated content and update our existing instance
     if ([self containsObjectOfType:objectClass withPrimaryKey:primaryKey])
     {
-        //Retrieve the existing instance from the cache
+        //Retrieve the existing instance from the cacheImage
         object = [self objectOfType:objectClass withPrimaryKey:primaryKey];
         if (object.isPlaceholder)
         {
@@ -224,13 +224,13 @@
             [object setContentFromDictionary:objectDictionary];
         }
     }
-    else //If the object isn't already in the cache....
+    else //If the object isn't already in the cacheImage....
     {
         //Initialise a new AFObject instance of the right type for the incoming dictionary
         object = NSAllocateObject((Class)objectClass, 0, NULL);
         [object initPlaceholderWithPrimaryKey:primaryKey];
 
-        //Register it with the cache
+        //Register it with the cacheImage
         [self injectObject:object];
 
         //Set its content from the incoming dictionary
