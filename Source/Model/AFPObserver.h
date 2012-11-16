@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFChangeFlag;
+@class AFEventFlag;
 @class AFObservable;
-@class AFChangeFlag;
+@class AFEventFlag;
 
 @protocol AFPObserver <NSObject>
 
-- (void)change:(AFChangeFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray *)parameters;
+- (void)change:(AFEventFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray *)parameters;
 
 @end

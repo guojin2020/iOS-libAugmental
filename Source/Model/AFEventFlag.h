@@ -1,5 +1,5 @@
 //
-//  AFChangeFlag.h
+//  AFEventFlag.h
 //  iOS-libAugmental
 //
 //  Created by Chris Hatton on 27/07/2012.
@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AFChangeFlag : NSObject
+@interface AFEventFlag : NSObject
 
 @end

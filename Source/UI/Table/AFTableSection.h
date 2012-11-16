@@ -11,9 +11,9 @@
 
 @protocol AFTableSectionObserver;
 @class AFTable;
-@class AFChangeFlag;
+@class AFEventFlag;
 
-extern AFChangeFlag* FLAG_SECTION_EDITED;
+extern AFEventFlag * FLAG_SECTION_EDITED;
 
 /**
  *	Represents a basic section in a table, with a text header and any number of cells.

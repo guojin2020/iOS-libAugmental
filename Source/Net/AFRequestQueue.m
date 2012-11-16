@@ -45,7 +45,7 @@
     [activatedRequests removeAllObjects];
     @synchronized (queue)
     {
-        for (NSObject <AFQueueableRequest> *request in queue)
+        for (NSObject<AFQueueableRequest>* request in queue)
         {
             if (request.state == (AFRequestState) AFRequestStatePending)
             {
@@ -69,11 +69,6 @@
         }
         for (NSObject <AFQueueableRequest> *request in activatedRequests)[queue removeObject:request];
     }
-    //}
-    //else
-    //{
-    //    //NSLog(@"Warning: %@ was called while we were offline!",NSStringFromSelector(_cmd));
-    //}
 }
 
 - (BOOL)actionRequest:(NSObject <AFRequest> *)request

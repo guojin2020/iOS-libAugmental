@@ -9,7 +9,7 @@
 #import "AFObservable.h"
 
 #import "AFPObserver.h"
-#import "AFChangeFlag.h"
+#import "AFEventFlag.h"
 
 @implementation AFObservable
 
@@ -25,7 +25,7 @@
     else return NULL;
 }
 
-- (void)notifyObservers:(AFChangeFlag *)changeFlag parameters:(id)firstParameter, ...
+- (void)notifyObservers:(AFEventFlag *)changeFlag parameters:(id)firstParameter, ...
 {
     NSMutableArray *parameters;
 
@@ -61,7 +61,7 @@
     [parameters release];
 }
 
-- (void)fireNotification:(AFChangeFlag *)changeFlag parameters:(NSArray *)parameters
+- (void)fireNotification:(AFEventFlag *)changeFlag parameters:(NSArray *)parameters
 {
     for (id <AFPObserver> observer in observers)
     {
