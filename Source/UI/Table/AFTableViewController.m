@@ -59,7 +59,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	[(UITableView*)self.view performSelector:@selector(reloadData)];
 }
 
--(void)change:(AFChangeFlag*)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters
+-(void)change:(AFEventFlag *)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters
 {
 }
 

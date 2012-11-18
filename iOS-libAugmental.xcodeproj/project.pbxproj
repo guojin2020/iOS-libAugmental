@@ -19,7 +19,7 @@
 		099B10BE163D639600E81588 /* AFBooleanSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF4B15E6CC1900D32988 /* AFBooleanSetting.m */; };
 		099B10BF163D639600E81588 /* AFCachingAudioPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF4D15E6CC1900D32988 /* AFCachingAudioPlayer.m */; };
 		099B10C0163D639600E81588 /* AFCellViewFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5015E6CC1900D32988 /* AFCellViewFactory.m */; };
-		099B10C1163D639600E81588 /* AFChangeFlag.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5215E6CC1900D32988 /* AFChangeFlag.m */; };
+		099B10C1163D639600E81588 /* AFEventFlag.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5215E6CC1900D32988 /* AFEventFlag.m */; };
 		099B10C2163D639600E81588 /* AFDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5415E6CC1900D32988 /* AFDatePickerViewController.m */; };
 		099B10C3163D639600E81588 /* AFDateSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5615E6CC1900D32988 /* AFDateSetting.m */; };
 		099B10C4163D639600E81588 /* AFDownloadRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF5815E6CC1900D32988 /* AFDownloadRequest.m */; };
@@ -115,7 +115,7 @@
 		099B1122163D639600E81588 /* AFCachingAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4C15E6CC1900D32988 /* AFCachingAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1123163D639600E81588 /* AFCellSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4E15E6CC1900D32988 /* AFCellSelectionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1124163D639600E81588 /* AFCellViewFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4F15E6CC1900D32988 /* AFCellViewFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1125163D639600E81588 /* AFChangeFlag.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5115E6CC1900D32988 /* AFChangeFlag.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		099B1125163D639600E81588 /* AFEventFlag.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5115E6CC1900D32988 /* AFEventFlag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1126163D639600E81588 /* AFDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5315E6CC1900D32988 /* AFDatePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1127163D639600E81588 /* AFDateSetting.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5515E6CC1900D32988 /* AFDateSetting.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5715E6CC1900D32988 /* AFDownloadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -337,8 +337,8 @@
 		759BFF4E15E6CC1900D32988 /* AFCellSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCellSelectionDelegate.h; sourceTree = "<group>"; };
 		759BFF4F15E6CC1900D32988 /* AFCellViewFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCellViewFactory.h; sourceTree = "<group>"; };
 		759BFF5015E6CC1900D32988 /* AFCellViewFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCellViewFactory.m; sourceTree = "<group>"; };
-		759BFF5115E6CC1900D32988 /* AFChangeFlag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFChangeFlag.h; sourceTree = "<group>"; };
-		759BFF5215E6CC1900D32988 /* AFChangeFlag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFChangeFlag.m; sourceTree = "<group>"; };
+		759BFF5115E6CC1900D32988 /* AFEventFlag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEventFlag.h; sourceTree = "<group>"; };
+		759BFF5215E6CC1900D32988 /* AFEventFlag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEventFlag.m; sourceTree = "<group>"; };
 		759BFF5315E6CC1900D32988 /* AFDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDatePickerViewController.h; sourceTree = "<group>"; };
 		759BFF5415E6CC1900D32988 /* AFDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDatePickerViewController.m; sourceTree = "<group>"; };
 		759BFF5515E6CC1900D32988 /* AFDateSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDateSetting.h; sourceTree = "<group>"; };
@@ -671,8 +671,8 @@
 				759BFF7A15E6CC1900D32988 /* AFObject.h */,
 				759BFF6015E6CC1900D32988 /* AFEventObserver.h */,
 				759BFF5B15E6CC1900D32988 /* AFEditableObserver.h */,
-				759BFF5215E6CC1900D32988 /* AFChangeFlag.m */,
-				759BFF5115E6CC1900D32988 /* AFChangeFlag.h */,
+				759BFF5215E6CC1900D32988 /* AFEventFlag.m */,
+				759BFF5115E6CC1900D32988 /* AFEventFlag.h */,
 				759BFF3E15E6CC1900D32988 /* AFBaseObject.h */,
 				759BFF3F15E6CC1900D32988 /* AFBaseObject.m */,
 				759BFF4815E6CC1900D32988 /* AFBaseWriteableObject.h */,
@@ -1091,7 +1091,7 @@
 				099B1122163D639600E81588 /* AFCachingAudioPlayer.h in Headers */,
 				099B1123163D639600E81588 /* AFCellSelectionDelegate.h in Headers */,
 				099B1124163D639600E81588 /* AFCellViewFactory.h in Headers */,
-				099B1125163D639600E81588 /* AFChangeFlag.h in Headers */,
+				099B1125163D639600E81588 /* AFEventFlag.h in Headers */,
 				099B1126163D639600E81588 /* AFDatePickerViewController.h in Headers */,
 				099B1127163D639600E81588 /* AFDateSetting.h in Headers */,
 				099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */,
@@ -1338,7 +1338,7 @@
 				099B10BE163D639600E81588 /* AFBooleanSetting.m in Sources */,
 				099B10BF163D639600E81588 /* AFCachingAudioPlayer.m in Sources */,
 				099B10C0163D639600E81588 /* AFCellViewFactory.m in Sources */,
-				099B10C1163D639600E81588 /* AFChangeFlag.m in Sources */,
+				099B10C1163D639600E81588 /* AFEventFlag.m in Sources */,
 				099B10C2163D639600E81588 /* AFDatePickerViewController.m in Sources */,
 				099B10C3163D639600E81588 /* AFDateSetting.m in Sources */,
 				099B10C4163D639600E81588 /* AFDownloadRequest.m in Sources */,

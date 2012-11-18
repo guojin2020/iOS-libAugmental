@@ -2,19 +2,19 @@
 #import "AFTableSection.h"
 #import "AFTable.h"
 #import "AFThemeManager.h"
-#import "AFChangeFlag.h"
+#import "AFEventFlag.h"
 
 static UIColor* headerColor				= nil;
 static UIColor* headerShadowColor		= nil;
 static NSNumber* headerShadowEnabled	= nil;
 
-AFChangeFlag* FLAG_SECTION_EDITED;
+AFEventFlag * FLAG_SECTION_EDITED;
 
 @implementation AFTableSection
 
 +(void)initialize
 {
-    FLAG_SECTION_EDITED = [AFChangeFlag new];
+    FLAG_SECTION_EDITED = [AFEventFlag new];
 }
 
 +(UIColor*)headerColor

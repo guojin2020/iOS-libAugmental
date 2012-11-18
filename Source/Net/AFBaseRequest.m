@@ -89,7 +89,7 @@
     [self broadcastToObservers:(AFRequestEvent) AFRequestEventCancel];
 }
 
-- (float)progress
+-(float)progress
 {
     return expectedBytes > 0 ? (float) receivedBytes / (float) expectedBytes : 0;
 }

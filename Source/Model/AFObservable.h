@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFChangeFlag;
+@class AFEventFlag;
 @protocol AFPObserver;
 
 typedef struct observableEvent
 {
-    AFChangeFlag *changeFlag;
+    AFEventFlag *changeFlag;
     NSArray      *parameters;
 }
         observableEvent;
@@ -28,7 +28,7 @@ typedef struct observableEvent
 
 - (id)init;
 
-- (void)notifyObservers:(AFChangeFlag *)changeFlag parameters:(NSObject *)objects, ...;
+- (void)notifyObservers:(AFEventFlag *)changeFlag parameters:(NSObject *)objects, ...;
 
 - (void)addObserver:(id<AFPObserver>)observable;
 

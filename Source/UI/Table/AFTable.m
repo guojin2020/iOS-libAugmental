@@ -3,15 +3,15 @@
 
 #import "AFTableSection.h"
 #import "AFTableViewController.h"
-#import "AFChangeFlag.h"
+#import "AFEventFlag.h"
 
-AFChangeFlag *FLAG_TABLE_EDITED;
+AFEventFlag *FLAG_TABLE_EDITED;
 
 @implementation AFTable
 
 +(void)initialize
 {
-    FLAG_TABLE_EDITED = [AFChangeFlag new];
+    FLAG_TABLE_EDITED = [AFEventFlag new];
 }
 
 -(id)init { return [self initWithTitle:@""]; }
@@ -113,7 +113,7 @@ AFChangeFlag *FLAG_TABLE_EDITED;
 
 //=========>> Dealloc
 
-- (void)change:(AFChangeFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray*)parameters
+- (void)change:(AFEventFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray*)parameters
 {
 
 }
