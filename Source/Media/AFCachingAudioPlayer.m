@@ -17,7 +17,7 @@ static NSMutableDictionary* sounds;
 	{
 		NSString* path = [[NSBundle mainBundle] pathForResource:name ofType:@"wav"];
 		NSError* e;
-		player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] AFSessionStateError:&e];
+		player = nil;//[[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] AFSessionStateError:&e];
 		[sounds setObject:player forKey:name];
 		[player play];
 		[player release];
