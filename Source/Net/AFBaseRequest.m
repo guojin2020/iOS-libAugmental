@@ -145,6 +145,8 @@
     return receivedBytes >= expectedBytes;
 }
 
+- (NSString *)actionDescription { return nil; }
+
 - (NSUInteger)          attempts        { return attempts;      }
 - (BOOL)                requiresLogin   { return requiresLogin; }
 - (NSURL *)             URL             { return URL;           }

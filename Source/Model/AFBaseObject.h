@@ -8,6 +8,7 @@
 
 @class AFSession;
 @class AFObjectRequest;
+@class AFEventManager;
 
 /**
  AFBaseObject provides state and functionality which will be common to all AFObject implementations.
@@ -91,6 +92,7 @@
  */
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 
+@property(nonatomic, readonly) AFEventManager *eventManager;
 
 //@property (nonatomic) BOOL valid;
 

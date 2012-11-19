@@ -46,6 +46,8 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
     updateNeeded  = NO;
 }
 
+-(AFEventManager *)eventManager { return eventManager; }
+
 - (id)initWithCoder:(NSCoder *)coder;
 {
     if ((self = [super init]))
