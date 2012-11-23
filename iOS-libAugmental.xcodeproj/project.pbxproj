@@ -246,6 +246,10 @@
 		09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */; };
 		09C62F1B162ADF5B00CC6B73 /* iOS_libAugmental_test.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C62F1A162ADF5B00CC6B73 /* iOS_libAugmental_test.m */; };
 		09E125571653098F008154C0 /* AFRequestStates.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB115E6CC1900D32988 /* AFRequestStates.h */; };
+		91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
+		91C9B6BCB1A1F57AB6EAA7F4 /* AFScrollingLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */; };
+		91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
+		91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
 		B03CA0BFAB202CD6BCC37511 /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0728B89BDDDC5881C94 /* AFCache.m */; };
 		B03CA0CA2A6903CEF0EA27A4 /* AFCachedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5087A87CEB4637A13AF /* AFCachedView.m */; };
@@ -498,6 +502,9 @@
 		759BFFFE15E6CC1900D32988 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		759BFFFF15E6CC1900D32988 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		75A4AC821485AB9000EBD4B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFScrollingLabel.m; sourceTree = "<group>"; };
+		91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFScrollingLabel.h; sourceTree = "<group>"; };
+		91CFE7288593DE871232F922 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B03CA030861D5274FEAE80F6 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
 		B03CA0728B89BDDDC5881C94 /* AFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCache.m; sourceTree = "<group>"; };
 		B03CA08B5E731989B9094E68 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
@@ -563,6 +570,7 @@
 				099B1117163D639600E81588 /* CoreMedia.framework in Frameworks */,
 				099B1118163D639600E81588 /* MediaPlayer.framework in Frameworks */,
 				B03CAD48859F339A04B1C956 /* StoreKit.framework in Frameworks */,
+				91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +585,7 @@
 				B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */,
 				B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */,
 				B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */,
+				91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -873,6 +882,8 @@
 				67D179835C58046D32C42A61 /* Layout */,
 				B03CA5087A87CEB4637A13AF /* AFCachedView.m */,
 				B03CA3B36983B53ADA14F860 /* AFCachedView.h */,
+				91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */,
+				91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1011,6 +1022,7 @@
 				B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */,
 				B03CA39A1176128227F3AF37 /* MediaPlayer.framework */,
 				B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */,
+				91CFE7288593DE871232F922 /* CoreText.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1266,6 +1278,7 @@
 				B03CAE7480C36713D62EF361 /* AFDefaultsBackedStringDictionary.h in Headers */,
 				B03CA3B370A2DDF0F377D942 /* AFCategoryOverrideMissingException.h in Headers */,
 				B03CAC47D48B54927AD226F4 /* AFMethodBlockedException.h in Headers */,
+				91C9B6BCB1A1F57AB6EAA7F4 /* AFScrollingLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1467,6 +1480,7 @@
 				B03CA28DBEACA8215C804101 /* AFDefaultsBackedStringDictionary.m in Sources */,
 				B03CABF83052F74BC0141587 /* AFCategoryOverrideMissingException.m in Sources */,
 				B03CAE7AE016A7344E17641B /* AFMethodBlockedException.m in Sources */,
+				91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
