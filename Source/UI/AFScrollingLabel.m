@@ -1,7 +1,6 @@
 //
 // Created by IE on 20/11/2012.
-//
-// To change the template use AppCode | Preferences | File Templates.
+// Contact: christopherhattonuk@gmail.com
 //
 
 
@@ -68,10 +67,10 @@
     textLayer.string = text;
 }
 
-- (float)fadeSize { return _fadeSize; }
-- (void)setFadeSize:(float)fadeSize1
+- (float)fadeSize { return fadeSize; }
+- (void)setFadeSize:(float)fadeSizeIn
 {
-    _fadeSize = fadeSize1;
+    fadeSize = fadeSizeIn;
 }
 
 -(float) fontSize                   { return (float)textLayer.fontSize; }

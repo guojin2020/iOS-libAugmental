@@ -27,7 +27,7 @@ extern AFEventFlag * FLAG_SECTION_EDITED;
 
 -(id)initWithTitle:(NSString*)titleIn;
 -(AFTableCell*)cellAtIndex:(NSUInteger)index;
--(NSUInteger)indexOf:(AFTableCell*)cell;
+-(NSInteger)indexOf:(AFTableCell*)cell;
 -(void)addCell:(AFTableCell*)cell;
 -(void)removeCell:(AFTableCell*)cell;
 -(void)removeAllCells;

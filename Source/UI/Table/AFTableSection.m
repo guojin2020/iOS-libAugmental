@@ -73,8 +73,10 @@ AFEventFlag * FLAG_SECTION_EDITED;
 	 */
 }
 
--(NSUInteger)indexOf:(AFTableCell *)cell
+-(NSInteger)indexOf:(AFTableCell *)cell
 {
+	NSAssert([children containsObject:cell],@"Internal inconsistency");
+
 	return [children indexOfObject:cell];
 }
 

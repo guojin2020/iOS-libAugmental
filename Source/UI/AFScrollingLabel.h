@@ -1,7 +1,6 @@
 //
 // Created by IE on 20/11/2012.
-//
-// To change the template use AppCode | Preferences | File Templates.
+// Contact: christopherhattonuk@gmail.com
 //
 
 
@@ -14,6 +13,6 @@
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) UIFont*   font;
 @property (nonatomic, assign) float     fontSize;
-@property (nonatomic, assign) float     fadeSize;
+@property (nonatomic, assign) float fadeSize;
 
 @end

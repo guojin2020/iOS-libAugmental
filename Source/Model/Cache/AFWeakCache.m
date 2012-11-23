@@ -1,7 +1,6 @@
 //
-// Created by augmental on 05/11/2012.
-//
-// To change the template use AppCode | Preferences | File Templates.
+// Created by Chris Hatton on 05/11/2012.
+// Contact: christopherhattonuk@gmail.com
 //
 
 #import "AFWeakCache.h"

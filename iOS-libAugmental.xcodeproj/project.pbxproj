@@ -259,12 +259,14 @@
 		B03CA19C4C9A4F850CF7DADE /* AFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAAA3A87FC690F69F0F4B /* AFCache.h */; };
 		B03CA23FB89EABB08A287F16 /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA405C5514ED46961A232 /* AFPSKProductIdProvider.h */; };
 		B03CA28DBEACA8215C804101 /* AFDefaultsBackedStringDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */; };
+		B03CA299F9762593D179D180 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		B03CA3B370A2DDF0F377D942 /* AFCategoryOverrideMissingException.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA8C25CE010678E40DD7F /* AFCategoryOverrideMissingException.h */; };
 		B03CA45BC73F4A8C09D16789 /* AFSKProductRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA9BE058CA34B82CC7496 /* AFSKProductRequest.m */; };
 		B03CA58F31C0FD074BA6C390 /* AFPSKProductConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA1270537ABFBD73376A2 /* AFPSKProductConsumer.h */; };
 		B03CA5A7AB08E9CF8410D5FA /* AFSKProductRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */; };
 		B03CA66BDB47E907B4853200 /* AFSKProductFetchResponseSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA941845677379C813E2E /* AFSKProductFetchResponseSuccess.m */; };
 		B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */; };
+		B03CA6C2271C866FE6F008A3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		B03CA76B4098E86976C655EE /* AFSKProductFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */; };
 		B03CA86A7C767B010039C034 /* AFSKProductFetchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA38A9EFFFE3CFF9955BA /* AFSKProductFetchResponse.m */; };
 		B03CA8C4254B4F05A5132C33 /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */; };
@@ -571,6 +573,7 @@
 				099B1118163D639600E81588 /* MediaPlayer.framework in Frameworks */,
 				B03CAD48859F339A04B1C956 /* StoreKit.framework in Frameworks */,
 				91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */,
+				B03CA6C2271C866FE6F008A3 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +589,7 @@
 				B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */,
 				B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */,
 				91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */,
+				B03CA299F9762593D179D180 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
