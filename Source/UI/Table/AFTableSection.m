@@ -73,6 +73,11 @@ AFEventFlag * FLAG_SECTION_EDITED;
 	 */
 }
 
+-(NSUInteger)indexOf:(AFTableCell *)cell
+{
+	return [children indexOfObject:cell];
+}
+
 -(void)addCell:(AFTableCell*)cell
 {
 	cell.parentSection = self;
