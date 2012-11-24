@@ -2,9 +2,9 @@
 #import "AFAppDelegate.h"
 #import "AFEventObserver.h"
 #import "AFScreenManager.h"
-#import "AFSettingsSection.h"
+#import "AFFormSection.h"
 #import "AFJSONRequest.h"
-#import "AFBooleanSetting.h"
+#import "AFBooleanField.h"
 #import "AFCachingAudioPlayer.h"
 #import "AFObjectCache.h"
 #import "AFEventManager.h"
@@ -13,7 +13,7 @@
 static NSMutableDictionary* settings = nil;
 static BOOL settingsLoaded = NO;
 static AFEventManager* appEventManager = nil;
-static AFBooleanSetting* soundFXSetting = nil;
+static AFBooleanField * soundFXSetting = nil;
 static BOOL globalSFXEnabled = NO;
 
 @implementation AFAppDelegate
@@ -70,7 +70,7 @@ static BOOL globalSFXEnabled = NO;
 	return YES;
 }
 
--(void)settingValueChanged:(NSObject<AFSetting>*)setting {}
+-(void)settingValueChanged:(NSObject<AFField>*)setting {}
 
 +(NSString*)settingsPath
 {

@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 #import "AFValidator.h"
 
-@class AFPasswordSetting;
+@class AFPasswordField;
 
 @interface AFPasswordValidator : NSObject <AFValidator>
 {
-    AFPasswordSetting *comparisonSetting;
+    AFPasswordField *comparisonSetting;
     BOOL allowEmpty;
 }
 
-- (id)initWithComparisonSetting:(AFPasswordSetting *)comparisonSettingIn allowsEmpty:(BOOL)allowEmptyIn;
+- (id)initWithComparisonSetting:(AFPasswordField *)comparisonSettingIn allowsEmpty:(BOOL)allowEmptyIn;
 
-@property(nonatomic, retain) AFPasswordSetting *comparisonSetting;
+@property(nonatomic, retain) AFPasswordField *comparisonSetting;
 
 @end

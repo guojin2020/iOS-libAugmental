@@ -1,18 +1,18 @@
 
 #import <UIKit/UIKit.h>
 #import "AFRequestEndpoint.h"
-#import "AFSettingsProvider.h"
+#import "AFSettingProvider.h"
 
 //#define CREATE_THEME_TEMPLATE_MODE
 
 @class AFEventManager;
 @class AFJSONRequest;
-@class AFBooleanSetting;
+@class AFBooleanField;
 //@class AFSettingsScreen;
 
 @protocol AFEventObserver;
 
-@interface AFAppDelegate : UIResponder <UIApplicationDelegate, AFRequestEndpoint, AFSettingsProvider>
+@interface AFAppDelegate : UIResponder <UIApplicationDelegate, AFRequestEndpoint, AFSettingProvider>
 {
     UIWindow*           window;
 	AFJSONRequest*      settingsRequest;

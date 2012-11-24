@@ -130,7 +130,7 @@ static UIColor  *loadingTitleColor;
 - (NSArray *)settingsSections
 {return nil;}
 
-- (void)settingValueChanged:(NSObject <AFSetting> *)setting
+- (void)settingValueChanged:(NSObject <AFField> *)setting
 {[self doesNotRecognizeSelector:_cmd];}
 
 - (void)refreshActive

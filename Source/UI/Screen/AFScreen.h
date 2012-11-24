@@ -1,6 +1,6 @@
 #import <UIKit/UIKit.h>
 
-#import "AFSettingsProvider.h"
+#import "AFSettingProvider.h"
 #import "AFSessionObserver.h"
 #import "AFThemeable.h"
 
@@ -10,7 +10,7 @@
 #define THEME_KEY_LOADING_TITLE_COLOR    @"loadingTitleColor"
 
 @class AFSession;
-@class AFSettingsSection;
+@class AFFormSection;
 @class AFScreenLoadingViewController;
 
 @protocol AFScreenObserver;
@@ -19,7 +19,7 @@
  * Implements functionality common to all Screens
  * This is not a complete implementation of a Screen and needs to be subclassed for use
  */
-@interface AFScreen : NSObject <AFSettingsProvider, AFSessionObserver, AFThemeable>
+@interface AFScreen : NSObject <AFSettingProvider, AFSessionObserver, AFThemeable>
 {
     BOOL needsNavigationController;
     UIViewController *viewController;

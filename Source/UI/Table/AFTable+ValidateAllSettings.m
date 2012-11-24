@@ -1,7 +1,7 @@
 
 #import "AFTable+ValidateAllSettings.h"
 #import "AFTableCell.h"
-#import "AFSetting.h"
+#import "AFField.h"
 #import "AFValidator.h"
 
 @implementation AFTable (ValidatableBySettings)
@@ -15,11 +15,11 @@
 	{
 		for(AFTableCell* cell in section)
 		{
-			if([cell conformsToProtocol:@protocol(AFSetting)] && ((NSObject<AFSetting>*)cell).validator && !((NSObject<AFSetting>*)cell).valid)
+			if([cell conformsToProtocol:@protocol(AFField)] && ((NSObject<AFField>*)cell).validator && !((NSObject<AFField>*)cell).valid)
 			{
-				[errorMessage appendString:[((NSObject<AFSetting>*)cell) identity]];
+				[errorMessage appendString:[((NSObject<AFField>*)cell) identity]];
 				[errorMessage appendString:@" must "];
-				[errorMessage appendString:[((NSObject<AFSetting>*)cell).validator conditionDescription]];
+				[errorMessage appendString:[((NSObject<AFField>*)cell).validator conditionDescription]];
 				[errorMessage appendString:@"\n"];
 			}
 		}
