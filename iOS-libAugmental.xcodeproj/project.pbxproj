@@ -250,18 +250,23 @@
 		91C9B6BCB1A1F57AB6EAA7F4 /* AFScrollingLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */; };
 		91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */; };
+		B03CA021B2385171C0754E9D /* AFDrawingDelegableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0D5DE519171EEB1BE2C /* AFDrawingDelegableView.m */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
 		B03CA0BFAB202CD6BCC37511 /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0728B89BDDDC5881C94 /* AFCache.m */; };
 		B03CA0CA2A6903CEF0EA27A4 /* AFCachedView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5087A87CEB4637A13AF /* AFCachedView.m */; };
 		B03CA0D72E763740185B3672 /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAC2BA136E701D2F56205 /* AFWeakCache.m */; };
+		B03CA13A01207BF4761FC928 /* AFDrawingDelegableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */; };
 		B03CA13CDB37C9802F95FDE3 /* AFCachedView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA3B36983B53ADA14F860 /* AFCachedView.h */; };
 		B03CA165C0A5F1F60955028B /* AFSKProductFetchResponseSuccess.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA999866CE469694932A8 /* AFSKProductFetchResponseSuccess.h */; };
 		B03CA19C4C9A4F850CF7DADE /* AFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAAA3A87FC690F69F0F4B /* AFCache.h */; };
+		B03CA1CD7ED436B7470A8599 /* AFDrawingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */; };
 		B03CA23FB89EABB08A287F16 /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA405C5514ED46961A232 /* AFPSKProductIdProvider.h */; };
 		B03CA28DBEACA8215C804101 /* AFDefaultsBackedStringDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */; };
 		B03CA299F9762593D179D180 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
+		B03CA2E06B3912409EF7E2B5 /* AFDrawingDelegableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */; };
 		B03CA3B370A2DDF0F377D942 /* AFCategoryOverrideMissingException.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA8C25CE010678E40DD7F /* AFCategoryOverrideMissingException.h */; };
 		B03CA45BC73F4A8C09D16789 /* AFSKProductRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA9BE058CA34B82CC7496 /* AFSKProductRequest.m */; };
+		B03CA4866F6DC409F7366EA6 /* AFDrawingDelegableTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CABC3FC47DE3DDC347A98 /* AFDrawingDelegableTableViewCell.h */; };
 		B03CA58F31C0FD074BA6C390 /* AFPSKProductConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA1270537ABFBD73376A2 /* AFPSKProductConsumer.h */; };
 		B03CA5A7AB08E9CF8410D5FA /* AFSKProductRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */; };
 		B03CA66BDB47E907B4853200 /* AFSKProductFetchResponseSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA941845677379C813E2E /* AFSKProductFetchResponseSuccess.m */; };
@@ -510,6 +515,7 @@
 		B03CA030861D5274FEAE80F6 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
 		B03CA0728B89BDDDC5881C94 /* AFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCache.m; sourceTree = "<group>"; };
 		B03CA08B5E731989B9094E68 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		B03CA0D5DE519171EEB1BE2C /* AFDrawingDelegableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDrawingDelegableView.m; sourceTree = "<group>"; };
 		B03CA100A6AF2B3B0799C7B5 /* AFObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectCache.m; sourceTree = "<group>"; };
 		B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDefaultsBackedStringDictionary.m; sourceTree = "<group>"; };
 		B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerViewController.h; sourceTree = "<group>"; };
@@ -545,10 +551,13 @@
 		B03CAA75F771E58A6560D03C /* AFWeakCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWeakCache.h; sourceTree = "<group>"; };
 		B03CAAA3A87FC690F69F0F4B /* AFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCache.h; sourceTree = "<group>"; };
 		B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerView.h; sourceTree = "<group>"; };
+		B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegableView.h; sourceTree = "<group>"; };
+		B03CABC3FC47DE3DDC347A98 /* AFDrawingDelegableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegableTableViewCell.h; sourceTree = "<group>"; };
 		B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B03CAC2BA136E701D2F56205 /* AFWeakCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFWeakCache.m; sourceTree = "<group>"; };
 		B03CAC3CDA19157EF8F2813C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
 		B03CAC4A0E9F56DDAC2516CF /* AFMethodBlockedException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMethodBlockedException.m; sourceTree = "<group>"; };
+		B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegate.h; sourceTree = "<group>"; };
 		B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerViewController.m; sourceTree = "<group>"; };
 		B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerView.m; sourceTree = "<group>"; };
 		B03CAD9F06AF6C386DBC21D6 /* AFDefaultsBackedStringDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefaultsBackedStringDictionary.h; sourceTree = "<group>"; };
@@ -557,6 +566,7 @@
 		B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetcher.m; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
 		B03CAE991ECD6DB57BD0AAB7 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
+		B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDrawingDelegableTableViewCell.m; sourceTree = "<group>"; };
 		B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -879,6 +889,7 @@
 				B03CA3B36983B53ADA14F860 /* AFCachedView.h */,
 				91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */,
 				91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */,
+				B03CA3A366B7710D687B64D7 /* View */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1049,12 +1060,33 @@
 			path = libTouchJSON;
 			sourceTree = "<group>";
 		};
+		B03CA3A366B7710D687B64D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B03CA4CE0E9D7DF5E4B7152A /* Delegation */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		B03CA427850EB8C7841CF98C /* Form */ = {
 			isa = PBXGroup;
 			children = (
 				67D1718DAD58D1248A4B9884 /* Field */,
 			);
 			path = Form;
+			sourceTree = "<group>";
+		};
+		B03CA4CE0E9D7DF5E4B7152A /* Delegation */ = {
+			isa = PBXGroup;
+			children = (
+				B03CA5303EFC8203BD11252D,
+				B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */,
+				B03CABC3FC47DE3DDC347A98 /* AFDrawingDelegableTableViewCell.h */,
+				B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */,
+				B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */,
+				B03CA0D5DE519171EEB1BE2C /* AFDrawingDelegableView.m */,
+			);
+			path = Delegation;
 			sourceTree = "<group>";
 		};
 		B03CA4E12590D65DFC54927C /* Exception */ = {
@@ -1292,6 +1324,9 @@
 				B03CA3B370A2DDF0F377D942 /* AFCategoryOverrideMissingException.h in Headers */,
 				B03CAC47D48B54927AD226F4 /* AFMethodBlockedException.h in Headers */,
 				91C9B6BCB1A1F57AB6EAA7F4 /* AFScrollingLabel.h in Headers */,
+				B03CA4866F6DC409F7366EA6 /* AFDrawingDelegableTableViewCell.h in Headers */,
+				B03CA13A01207BF4761FC928 /* AFDrawingDelegableView.h in Headers */,
+				B03CA1CD7ED436B7470A8599 /* AFDrawingDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1494,6 +1529,8 @@
 				B03CABF83052F74BC0141587 /* AFCategoryOverrideMissingException.m in Sources */,
 				B03CAE7AE016A7344E17641B /* AFMethodBlockedException.m in Sources */,
 				91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */,
+				B03CA2E06B3912409EF7E2B5 /* AFDrawingDelegableTableViewCell.m in Sources */,
+				B03CA021B2385171C0754E9D /* AFDrawingDelegableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

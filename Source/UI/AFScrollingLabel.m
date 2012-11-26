@@ -3,18 +3,16 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
-
-
 #import "AFScrollingLabel.h"
 #import <CoreText/CoreText.h>
 
 @implementation AFScrollingLabel
 {
-    CATextLayer *textLayer;
+    CATextLayer     *textLayer;
+	CAGradientLayer *maskLayer;
+
     NSTimer *animationTimer;
     float fadeSize;
-
-    CALayer* maskedLayer, *maskingLayer;
 }
 
 - (id)init
@@ -22,27 +20,34 @@
     self = [super init];
     if (self)
     {
-        textLayer       = [[CATextLayer alloc] init];
-        maskedLayer     = [[CALayer alloc] init];
-        maskingLayer    = [[CALayer alloc] init];
+        textLayer = [[CATextLayer     alloc] init];
+        maskLayer = [[CAGradientLayer alloc] init];
 
-        maskingLayer.delegate = self;
+	    CGColorRef
+		    white = [UIColor whiteColor].CGColor,
+	        black = [UIColor blackColor].CGColor,
+	        clear = [UIColor clearColor].CGColor;
+
+	    NSArray* maskColors = [[NSArray alloc] initWithObjects:black, white, white, black, nil];
+	    maskLayer.colors = maskColors;
+	    [maskColors release];
+
+	    NSArray* maskColorLocations = @[ @0, @0.1, @0.9, @1 ];
+	    maskLayer.locations = maskColorLocations;
+
+	    textLayer.foregroundColor = white;
+	    textLayer.backgroundColor = clear;
+
+	    CALayer* layer = self.layer;
+
+	    layer.mask = maskLayer;
+
+	    [layer addSublayer:textLayer];
+
+	    self.text = @"";
     }
 
     return self;
-}
-
-// Start: CALayerDelegate implementation
-
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
-{
-    [super drawLayer:layer inContext:ctx];
-}
-
-- (void)layoutSublayersOfLayer:(CALayer *)layer
-{
-    [super layoutSublayersOfLayer:layer];
-
 }
 
 // End: CALayerDelegate implementation
@@ -59,33 +64,67 @@
     [super animationDidStop:anim finished:flag];
 }
 
+- (void)layoutSubviews
+{
+	[super layoutSubviews];
+
+	float
+		width   = self.frame.size.width,
+		height  = self.frame.size.height;
+
+	textLayer.frame   = CGRectMake(0, 0, width, height);
+	maskLayer.frame   = CGRectMake(0, 0, width, height);
+
+	self.layer.frame  = CGRectMake(0, 0, width, height);
+}
+
+
 // End: CAAnimationDelegate implementation
 
 - (NSString *)text { return textLayer.string; }
 - (void)setText:(NSString *)text
 {
-    textLayer.string = text;
+	textLayer.string = text;
+	[self setNeedsLayout];
 }
 
 - (float)fadeSize { return fadeSize; }
+
+- (CFTypeRef)ctFont { return textLayer.font; }
+
 - (void)setFadeSize:(float)fadeSizeIn
 {
     fadeSize = fadeSizeIn;
+	[self setNeedsLayout];
 }
 
 -(float) fontSize                   { return (float)textLayer.fontSize; }
--(void) setFontSize:(float)fontSize { textLayer.fontSize = (CGFloat)fontSize; }
+-(void) setFontSize:(float)fontSize
+{
+	textLayer.fontSize = (CGFloat)fontSize;
+	[self setNeedsLayout];
+}
 
 -(UIFont*) font
 {
     NSString *fontName = [(NSString *) CTFontCopyPostScriptName(textLayer.font) autorelease];
-    return [UIFont fontWithName:textLayer.font size:self.fontSize];
+    return [UIFont fontWithName:fontName size:self.fontSize];
 }
 
 -(void) setFont:(UIFont*)font
 {
     CGAffineTransform transform;
-    textLayer.font = CTFontCreateWithName(font.fontName, font.pointSize, &transform);
+	CFStringRef fontName = (CFStringRef)font.fontName;
+	CTFontRef ctFont = CTFontCreateWithName(fontName, self.font.pointSize, &transform);
+	textLayer.font = (CFTypeRef)ctFont;
+	[self setNeedsLayout];
+}
+
+-(UIColor*)textColor { return [UIColor colorWithCGColor:textLayer.foregroundColor]; }
+-(void) setTextColor:(UIColor*)color
+{
+	textLayer.foregroundColor = color.CGColor;
+	[self setNeedsDisplay];
 }
 
 -(void)beginScroll:(BOOL)rightToLeft
@@ -112,6 +151,18 @@
     [textLayer addAnimation:anim forKey:@"position"];
 }
 
+- (CGSize)sizeThatFits:(CGSize)size
+{
+	UIFont *font = self.font;
+	return [self.text sizeWithFont:font constrainedToSize:size lineBreakMode:UILineBreakModeClip];
+}
+
+- (void)dealloc
+{
+	[textLayer release];
+	[maskLayer release];
+	[super dealloc];
+}
 
 
 @end
