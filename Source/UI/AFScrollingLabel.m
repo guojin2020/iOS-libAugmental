@@ -32,8 +32,9 @@
 	    maskLayer.colors = maskColors;
 	    [maskColors release];
 
-	    NSArray* maskColorLocations = @[ @0, @0.1, @0.9, @1 ];
+	    NSArray* maskColorLocations = [[NSArray alloc] initWithObjects:@0.0, @0.3, @0.7, @1.0, nil];
 	    maskLayer.locations = maskColorLocations;
+	    [maskColorLocations release];
 
 	    textLayer.foregroundColor = white;
 	    textLayer.backgroundColor = clear;
@@ -44,7 +45,7 @@
 
 	    [layer addSublayer:textLayer];
 
-	    self.text = @"";
+	    self.text = @"Hello";
     }
 
     return self;
@@ -73,9 +74,14 @@
 		height  = self.frame.size.height;
 
 	textLayer.frame   = CGRectMake(0, 0, width, height);
+	textLayer.bounds = textLayer.frame;
+	textLayer.wrapped = NO;
 	maskLayer.frame   = CGRectMake(0, 0, width, height);
+	maskLayer.bounds = maskLayer.frame;
+	maskLayer.startPoint = CGPointZero;
+	maskLayer.endPoint = CGPointMake(maskLayer.frame.size.width, 0);
 
-	self.layer.frame  = CGRectMake(0, 0, width, height);
+	self.layer.frame  = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, height);
 }
 
 
@@ -113,7 +119,7 @@
 
 -(void) setFont:(UIFont*)font
 {
-    CGAffineTransform transform;
+    CGAffineTransform transform = CGAffineTransformIdentity;
 	CFStringRef fontName = (CFStringRef)font.fontName;
 	CTFontRef ctFont = CTFontCreateWithName(fontName, self.font.pointSize, &transform);
 	textLayer.font = (CFTypeRef)ctFont;
