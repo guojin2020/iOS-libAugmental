@@ -28,7 +28,7 @@
 	        black = [UIColor blackColor].CGColor,
 	        clear = [UIColor clearColor].CGColor;
 
-	    NSArray* maskColors = [[NSArray alloc] initWithObjects:black, white, white, black, nil];
+	    NSArray* maskColors = [[NSArray alloc] initWithObjects:(id)black, (id)white, (id)white, (id)black, nil];
 	    maskLayer.colors = maskColors;
 	    [maskColors release];
 
