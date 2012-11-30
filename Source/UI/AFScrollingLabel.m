@@ -36,10 +36,7 @@ AFScrollingLabelAnimationStep;
 @interface AFScrollingLabel ()
 
 - (void)nextAnimationStep;
-
 - (void)animateScrollTextLayerToPosition:(float)toX;
-
-
 - (void)refreshMaskGradient;
 
 @end
