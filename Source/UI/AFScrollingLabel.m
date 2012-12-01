@@ -3,6 +3,11 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
+#define AF_SCROLLING_LABEL_DEFAULT_READ_SPEED           50
+#define AF_SCROLLING_LABEL_SCROLL_SPEED_FACTOR          0.25
+#define AF_SCROLLING_LABEL_DEFAULT_FADE_SIZE            5
+#define AF_SCROLLING_LABEL_DEFAULT_EXTRA_HOLD_DURATION  0
+
 #import "AFScrollingLabel.h"
 
 typedef enum AFScrollingLabelMask
@@ -37,17 +42,20 @@ AFScrollingLabelAnimationStep;
 
 - (void)nextAnimationStep;
 - (void)animateScrollTextLayerToPosition:(float)toX;
-- (void)refreshMaskGradient;
+
+@property (nonatomic, retain) NSTimer* stepTimer;
 
 @end
 
 @implementation AFScrollingLabel
 {
+	float
+		fadeSize,
+		readSpeed,          // In points per second
+		extraHoldDuration;
+
     CATextLayer     *textLayer;
 	CAGradientLayer *maskLayer;
-
-    NSTimer *stepTimer;
-    float fadeSize;
 
 	CGColorRef
 		white,
@@ -61,21 +69,19 @@ AFScrollingLabelAnimationStep;
 		*maskStops;
 
 	NSArray
+		*maskNoneColors,
 		*maskStartColors,
 		*maskEndColors,
 		*maskBothColors;
 
 	NSMutableArray
+		*maskNoneStops,
 		*maskStartStops,
 		*maskEndStops,
 		*maskBothStops;
 
 	AFScrollingLabelAnimationStep animationStep;
 	AFScrollingLabelAnimationMode animationMode;
-
-	float
-		readSpeed,          // In points per second
-		extraHoldDuration;
 
 	// Variables below are used in refreshMaskGradient
 	// This is called very frequently so its variables are allocated here for optimisation
@@ -89,6 +95,17 @@ AFScrollingLabelAnimationStep;
 		maskLayerRight,
 		startFadeSize,
 		endFadeSize;
+
+	AFScrollingLabelTextLayerDelegate *textLayerDelegate;
+}
+
+@synthesize stepTimer;
+
+static CGSize cgSizeMax;
+
++(void)initialize
+{
+	cgSizeMax = CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX);
 }
 
 - (id)init
@@ -96,10 +113,15 @@ AFScrollingLabelAnimationStep;
     self = [super init];
     if (self)
     {
+	    fadeSize          = AF_SCROLLING_LABEL_DEFAULT_FADE_SIZE;
+	    readSpeed         = AF_SCROLLING_LABEL_DEFAULT_READ_SPEED;
+	    extraHoldDuration = AF_SCROLLING_LABEL_DEFAULT_EXTRA_HOLD_DURATION;
+
 	    textLayer = [[CATextLayer     alloc] init];
 	    maskLayer = [[CAGradientLayer alloc] init];
 
-	    textLayer.delegate = self;
+	    textLayerDelegate = [[AFScrollingLabelTextLayerDelegate alloc] init];
+	    textLayer.delegate = textLayerDelegate;
 
 	    white = [UIColor whiteColor].CGColor,
 	    black = [UIColor blackColor].CGColor,
@@ -112,13 +134,15 @@ AFScrollingLabelAnimationStep;
 			maskOnColor  = black,
 	        maskOffColor = clear;
 
+	    maskNoneColors  = [[NSArray alloc] initWithObjects:(id)maskOnColor,  (id)maskOnColor,  NULL];
 	    maskStartColors = [[NSArray alloc] initWithObjects:(id)maskOffColor, (id)maskOnColor,  NULL];
 	    maskEndColors   = [[NSArray alloc] initWithObjects:(id)maskOnColor,  (id)maskOffColor, NULL];
 	    maskBothColors  = [[NSArray alloc] initWithObjects:(id)maskOffColor, (id)maskOnColor,  (id)maskOnColor, (id)maskOffColor, NULL];
 
-	    maskStartStops  = [[NSMutableArray alloc] initWithObjects:@0.0, @0.0, NULL];
-	    maskEndStops    = [[NSMutableArray alloc] initWithObjects:@0.0, @0.0, NULL];
-	    maskBothStops   = [[NSMutableArray alloc] initWithObjects:@0.0, @0.0, @0.0, @0.0, NULL];
+	    maskNoneStops   = [[NSMutableArray alloc] initWithObjects:@0.0, @1.0, NULL];
+	    maskStartStops  = [[NSMutableArray alloc] initWithObjects:@0.0, @1.0, NULL];
+	    maskEndStops    = [[NSMutableArray alloc] initWithObjects:@0.0, @1.0, NULL];
+	    maskBothStops   = [[NSMutableArray alloc] initWithObjects:@0.0, @0.0, @1.0, @1.0, NULL];
 
 	    maskLayer.startPoint = CGPointMake(0.0, 0.5);
 	    maskLayer.endPoint   = CGPointMake(1.0, 0.5);
@@ -128,41 +152,12 @@ AFScrollingLabelAnimationStep;
 	    layer.mask = maskLayer;
 	    [layer addSublayer:textLayer];
 
-	    fadeSize = 5.0;
-
 	    animationMode = AFScrollingLabelAnimationModeBounce;
 	    animationStep = AFScrollingLabelAnimationStepIdle;
     }
 
     return self;
 }
-
-// Start: CALayerDelegate implementation
-
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
-{
-	[self refreshMaskGradient];
-	[super drawLayer:layer inContext:ctx];
-}
-
-/*
-- (void)displayLayer:(CALayer *)layer
-{
-	[super displayLayer:layer];
-}
-
-- (void)layoutSublayersOfLayer:(CALayer *)layer
-{
-	[super layoutSublayersOfLayer:layer];
-}
-
-- (id <CAAction>)actionForLayer:(CALayer *)layer forKey:(NSString *)event
-{
-	return [super actionForLayer:layer forKey:event];
-}
-*/
-
-// End: CALayerDelegate implementation
 
 // Start: CAAnimationDelegate implementation
 
@@ -186,7 +181,10 @@ AFScrollingLabelAnimationStep;
 
 		case AFScrollingLabelAnimationModeBounce:
 		{
-			if ( ++animationStep > AFScrollingLabelAnimationStepScrollToStart ) animationStep = AFScrollingLabelAnimationStepHoldStart;
+			if ( ++animationStep > AFScrollingLabelAnimationStepScrollToStart )
+			{
+				animationStep = AFScrollingLabelAnimationStepHoldStart;
+			}
 
 			switch ( animationStep )
 			{
@@ -195,8 +193,8 @@ AFScrollingLabelAnimationStep;
 				case AFScrollingLabelAnimationStepHoldStart:
 				case AFScrollingLabelAnimationStepHoldEnd:
 				{
-					float holdDuration = ( width * readSpeed ) + extraHoldDuration;
-					stepTimer = [NSTimer timerWithTimeInterval:holdDuration target:self selector:_cmd userInfo:NULL repeats:NO];
+					float holdDuration = ( width / readSpeed ) + extraHoldDuration;
+					self.stepTimer = [NSTimer scheduledTimerWithTimeInterval:(NSTimeInterval)holdDuration target:self selector:_cmd userInfo:nil repeats:NO];
 				}
 			    break;
 
@@ -222,15 +220,18 @@ AFScrollingLabelAnimationStep;
 	float
 		currentX = textLayer.frame.origin.x,
 		distance = fabsf( currentX - toX ),
-		scrollDuration = distance / readSpeed;
+		scrollDuration = (distance / readSpeed) / AF_SCROLLING_LABEL_SCROLL_SPEED_FACTOR;
 
-	CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x" ];
+	if ( toX!=currentX )
+	{
+		CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.translation.x" ];
 
-	[animation setFromValue: [NSNumber numberWithFloat:currentX ]];
-	[animation setToValue:   [NSNumber numberWithFloat:toX      ]];
-	[animation setDuration:  scrollDuration                      ];
+		[animation setFromValue: [NSNumber numberWithFloat:currentX ]];
+		[animation setToValue:   [NSNumber numberWithFloat:toX      ]];
+		[animation setDuration:  scrollDuration                      ];
 
-	[textLayer addAnimation:animation forKey:@"scroll"];
+		[textLayer addAnimation:animation forKey:@"scroll"];
+	}
 }
 
 - (void)layoutSubviews
@@ -240,11 +241,12 @@ AFScrollingLabelAnimationStep;
 	width   = self.frame.size.width;
 	height  = self.frame.size.height;
 
-	textLayer.frame   = CGRectMake(0, 0, width, height);
+	CGSize textSize   = [self sizeThatFits:cgSizeMax];
+	textLayer.frame   = CGRectMake(0, 0, textSize.width, textSize.height);
 	textLayer.bounds  = textLayer.frame;
 	textLayer.wrapped = NO;
 	maskLayer.frame   = CGRectMake(0, 0, width, height);
-	maskLayer.bounds = maskLayer.frame;
+	maskLayer.bounds  = maskLayer.frame;
 
 	self.layer.frame  = CGRectMake(self.frame.origin.x, self.frame.origin.y, width, height);
 
@@ -263,37 +265,48 @@ AFScrollingLabelAnimationStep;
 	if ( textLayerLeft  < maskLayerLeft  )
 	{
 		mask |= AFScrollingLabelMaskStart;
-		startFadeSize = fmaxf ( fmaxf ( maskLayerLeft  - textLayerLeft,  fadeSize ), (width / 2) );
+		startFadeSize = fminf ( fminf ( maskLayerLeft  - textLayerLeft,  fadeSize ), (width / 2) );
 	}
 
 	if ( textLayerRight > maskLayerRight )
 	{
 		mask |= AFScrollingLabelMaskEnd;
-		endFadeSize   = fmaxf ( fmaxf ( textLayerRight - maskLayerRight, fadeSize ), (width / 2) );
+		endFadeSize   = fminf ( fminf ( textLayerRight - maskLayerRight, fadeSize ), (width / 2) );
 	}
 
 	switch ( mask )
 	{
-		case AFScrollingLabelMaskNone: break;
+		case AFScrollingLabelMaskNone:
+		{
+	        maskColors = maskNoneColors;
+			maskStops  = maskNoneStops;
+		}
+	    break;
 
 		case AFScrollingLabelMaskStart:
+		{
 	        maskColors = maskStartColors;
 	        maskStops  = maskStartStops;
 	        [maskStartStops replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:   ( startFadeSize/width) ]];
-	        break;
+		}
+	    break;
 
 		case AFScrollingLabelMaskEnd:
+		{
 	        maskColors = maskEndColors;
 	        maskStops  = maskEndStops;
-	        [maskStartStops replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
-	        break;
+	        [maskEndStops   replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
+		}
+	    break;
 
 		case AFScrollingLabelMaskBoth:
+		{
 	        maskColors = maskBothColors;
 	        maskStops  = maskBothStops;
-	        [maskStartStops replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:   ( startFadeSize/width) ]];
-	        [maskStartStops replaceObjectAtIndex:2 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
-	        break;
+	        [maskBothStops replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:   ( startFadeSize/width) ]];
+	        [maskBothStops replaceObjectAtIndex:2 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
+		}
+	    break;
 	}
 
 	if ( mask!=AFScrollingLabelMaskNone && animationStep==AFScrollingLabelAnimationStepIdle )
@@ -353,44 +366,29 @@ AFScrollingLabelAnimationStep;
 	[self setNeedsDisplay];
 }
 
-/*
--(void)beginScroll:(BOOL)rightToLeft
+- (CGSize)sizeThatFits:(CGSize)constraintSize
 {
-    float
-        viewWidth = self.bounds.size.width,
-        textWidth = textLayer.bounds.size.width;
-
-    NSAssert(viewWidth < textWidth, @"We shouldn't be scrolling at all if the text fits normally");
-
-    float endOffset = rightToLeft ? 0 : - (textWidth - viewWidth);
-
-    CGPoint
-        endPoint     = CGPointMake(0, endOffset),
-        currentPoint = [textLayer position];
-
-    CABasicAnimation *anim = [CABasicAnimation animationWithKeyPath:@"position"];
-    [anim setFromValue:[NSValue valueWithCGPoint:currentPoint]];
-    [anim setToValue:[NSValue valueWithCGPoint:endPoint]];
-    [anim setDelegate:self];
-    [anim setDuration:1.0];
-
-    [textLayer setPosition:endPoint];
-    [textLayer addAnimation:anim forKey:@"position"];
-}
-*/
-
-- (CGSize)sizeThatFits:(CGSize)size
-{
-	UIFont *font = self.font;
-	CGSize sizeThatFits = [self.text sizeWithFont:font constrainedToSize:size lineBreakMode:0];
-	return sizeThatFits;
+	CGSize textSize = [self.text sizeWithFont:self.font];
+	if( textSize.width > constraintSize.width ) textSize = CGSizeMake(constraintSize.width, textSize.height); // Only hacking it like this because sizeWithFont: above doesn't respect NSLineBreakByClipping
+	return textSize;
 }
 
 - (void)dealloc
 {
 	[textLayer release];
 	[maskLayer release];
+	[textLayerDelegate release];
 	[super dealloc];
+}
+
+@end
+
+
+@implementation AFScrollingLabelTextLayerDelegate
+
+-(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
+{
+	NSLog(@"Test");
 }
 
 @end
