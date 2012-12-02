@@ -9,21 +9,43 @@
 #import <QuartzCore/QuartzCore.h>
 #import <CoreText/CoreText.h>
 
+typedef enum AFScrollingLabelAnimationMode
+{
+	AFScrollingLabelAnimationModeNone,
+	AFScrollingLabelAnimationModeBounce,
+	//AFScrollingLabelAnimationModeLoop,    // To be implemented
+	//AFScrollingLabelAnimationModeSlide    // To be implemented
+}
+AFScrollingLabelAnimationMode;
+
 @interface AFScrollingLabel : UIView
 
-- (void)refreshMaskGradient;
+- (id)initWithAnimationMode:(AFScrollingLabelAnimationMode)animationModeIn;
 
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) UIFont*   font;
-@property (nonatomic, assign) float     fontSize;
-@property (nonatomic, assign) float     fadeSize;
+- (void) drawLayer:(CALayer*) layer inContext:(CGContextRef) ctx;
+
+@property (nonatomic, retain)   NSString* text;
+@property (nonatomic, retain)   UIFont*   font;
+@property (nonatomic, assign)   float     fontSize;
+@property (nonatomic, assign)   float     fadeSize;
 @property (nonatomic, readonly) CFTypeRef ctFont;
-@property (nonatomic, retain) UIColor* textColor;
+@property (nonatomic, retain)   UIColor*  textColor;
 
 @end
 
+
 @interface AFScrollingLabelTextLayerDelegate : NSObject
+{
+	AFScrollingLabel* owner;
+}
+
+-(id)initWithOwner:(AFScrollingLabel *)owner;
 
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx;
+
+-(void)animationDidStart:(CAAnimation *)anim;
+-(void)animationDidStop: (CAAnimation *)anim finished:(BOOL)finished;
+
+//@property (nonatomic, readonly) bool isAnimating;
 
 @end
