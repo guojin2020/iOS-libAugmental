@@ -4,8 +4,8 @@
 //
 
 #define AF_SCROLLING_LABEL_DEFAULT_READ_SPEED           50
-#define AF_SCROLLING_LABEL_SCROLL_SPEED_FACTOR          0.5
-#define AF_SCROLLING_LABEL_DEFAULT_FADE_SIZE            20
+#define AF_SCROLLING_LABEL_SCROLL_SPEED_FACTOR          1
+#define AF_SCROLLING_LABEL_DEFAULT_FADE_SIZE            5
 #define AF_SCROLLING_LABEL_DEFAULT_EXTRA_HOLD_DURATION  0.5
 
 #import "AFScrollingLabel.h"
@@ -223,6 +223,9 @@ static CGSize cgSizeMax;
 {
 	[super layoutSubviews];
 
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+
 	width   = self.frame.size.width;
 	height  = self.frame.size.height;
 
@@ -266,6 +269,8 @@ static CGSize cgSizeMax;
 	{
 		self.layer.mask = NULL;
 	}
+
+	[CATransaction commit];
 }
 
 -(float)endPositionX
@@ -334,14 +339,23 @@ static CGSize cgSizeMax;
 	    break;
 	}
 
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
+
 	maskLayer.colors    = maskColors;
 	maskLayer.locations = maskStops;
+
+	[CATransaction commit];
 }
 
 - (NSString *)text { return textLayer.string; }
 - (void)setText:(NSString *)text
 {
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	textLayer.string = text;
+	[CATransaction commit];
+
 	[self setNeedsLayout];
 }
 
@@ -358,7 +372,11 @@ static CGSize cgSizeMax;
 -(float) fontSize { return (float)textLayer.fontSize; }
 -(void) setFontSize:(float)fontSize
 {
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	textLayer.fontSize = (CGFloat)fontSize;
+	[CATransaction commit];
+
 	[self setNeedsLayout];
 }
 
@@ -380,7 +398,11 @@ static CGSize cgSizeMax;
 -(UIColor*)textColor { return [UIColor colorWithCGColor:textLayer.foregroundColor]; }
 -(void) setTextColor:(UIColor*)color
 {
+	[CATransaction begin];
+	[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions];
 	textLayer.foregroundColor = color.CGColor;
+	[CATransaction commit];
+
 	[self setNeedsDisplay];
 }
 
