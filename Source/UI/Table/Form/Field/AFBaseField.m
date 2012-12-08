@@ -128,15 +128,15 @@ static UIColor *invalidColor = nil;
  the application exits, this settings value will be persisted using its persistence
  delegate.
  */
-- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
+- (void)eventOccurred:(AFAppEvent)type source:(id <AFObject>)source
 {
     switch (type)
     {
-        case (AFEvent) AFEventAppTerminating:
+        case (AFAppEvent) AFEventAppTerminating:
             //NSLog(@"%@ with key '%@' is persisting its value data using %@",NSStringFromClass([self class]),identity,NSStringFromClass([persistenceDelegate class]));
             [persistenceDelegate persistFieldValue:[NSKeyedArchiver archivedDataWithRootObject:value] forKey:identity];
             break;
-        case (AFEvent) AFEventObjectFieldUpdated:
+        case (AFAppEvent) AFEventObjectFieldUpdated:
             valueChangedSinceLastValidation = YES;
             [self updateControlCell];
             break;

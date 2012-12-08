@@ -51,9 +51,9 @@
     }
 }
 
-- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
+- (void)eventOccurred:(AFAppEvent)type source:(id <AFObject>)source
 {
-    if (type == (AFEvent) AFEventAppMemoryWarning)
+    if (type == (AFAppEvent)AFEventAppMemoryWarning)
     {
         [self pruneCache];
     }

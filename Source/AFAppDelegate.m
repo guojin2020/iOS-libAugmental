@@ -82,7 +82,7 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationWillTerminate:(UIApplication*)application
 {
-    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppTerminating source:self];
+    [[AFAppDelegate appEventManager] broadcastEvent:(AFAppEvent) AFEventAppTerminating source:self];
 }
 
 -(void)request:(NSObject<AFRequest>*)request returnedWithData:(id)data
@@ -93,12 +93,12 @@ static BOOL globalSFXEnabled = NO;
 	if(settings)
 	{
 		[[AFAppDelegate settings] addEntriesFromDictionary:settings];
-        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoaded source:self];
+        [[AFAppDelegate appEventManager] broadcastEvent:(AFAppEvent) AFEventAppSettingsLoaded source:self];
 		settingsLoaded=YES;
 	}
 	else
 	{
-        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoadFailed source:self];
+        [[AFAppDelegate appEventManager] broadcastEvent:(AFAppEvent) AFEventAppSettingsLoadFailed source:self];
 	}
 	[settingsRequest release];
 }
@@ -128,7 +128,7 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppMemoryWarning source:self];
+    [[AFAppDelegate appEventManager] broadcastEvent:(AFAppEvent) AFEventAppMemoryWarning source:self];
 }
 
 -(NSArray*)settingsSections

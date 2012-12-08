@@ -35,12 +35,28 @@
     return requestIn;
 }
 
+-(bool)isSuccessHTTPResponse
+{
+    return ( responseCode >= 200 ) && ( responseCode < 300 );
+}
+
+
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
     responseCode = responseCodeIn;
-    [self setExpectedBytesFromHeader:headers isCritical:NO];
-    state = (AFRequestState) AFRequestStateInProcess;
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
+
+    if([self isSuccessHTTPResponse])
+    {
+        [self setExpectedBytesFromHeader:headers isCritical:NO];
+        state = (AFRequestState) AFRequestStateInProcess;
+        [self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
+    }
+    else
+    {
+        NSError *error = [[NSError alloc] initWithDomain:NSNetServicesErrorDomain code:responseCode userInfo:nil];
+        [self didFail:error];
+        [error release];
+    }
 }
 
 - (void)setExpectedBytesFromHeader:(NSDictionary *)header isCritical:(BOOL)critical;
@@ -72,13 +88,13 @@
 
 - (void)didFinish
 {
-    state = (AFRequestState) AFRequestStateFulfilled;
+    state = AFRequestStateFulfilled;
     [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
 }
 
 - (void)didFail:(NSError *)error
 {
-    state = (AFRequestState) AFRequestStatePending;
+    state = AFRequestStateFailed;
     [self broadcastToObservers:(AFRequestEvent) AFRequestEventFailed];
 }
 
@@ -154,6 +170,7 @@
 - (AFRequestState)      state           { return state;         }
 - (NSUInteger)          receivedBytes   { return receivedBytes; }
 - (int)                 expectedBytes   { return expectedBytes; }
+- (NSUInteger)          responseCode    { return responseCode;  }
 
 - (void)setConnection:(NSURLConnection *)connectionIn
 {

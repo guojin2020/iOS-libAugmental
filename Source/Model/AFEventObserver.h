@@ -1,5 +1,5 @@
 @protocol AFObject;
-typedef enum AFEvent
+typedef enum AFAppEvent
 {
     AFEventAppSettingsLoaded     = 1,
     AFEventAppTerminating        = 2,
@@ -11,7 +11,7 @@ typedef enum AFEvent
     AFEventBasketItemsChanged    = 8,
     AFEventObjectDeallocating = 9
 }
-AFEvent;
+AFAppEvent;
 
 /**
  This protocol describes an object which can respond to a AFEvent.
@@ -21,6 +21,6 @@ AFEvent;
 /**
  Called on an object when the specified AFEvent is broadcast by AFEventManager.
  */
-- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source;
+- (void)eventOccurred:(AFAppEvent)type source:(id <AFObject>)source;
 
 @end

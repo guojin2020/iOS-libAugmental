@@ -1,13 +1,13 @@
 //
-//  AFEventFlag.m
+//  AFEvent.h
 //  iOS-libAugmental
 //
 //  Created by Chris Hatton on 27/07/2012.
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "AFEventFlag.h"
+#import <Foundation/Foundation.h>
 
-@implementation AFEventFlag
+@interface AFEvent : NSObject
 
 @end

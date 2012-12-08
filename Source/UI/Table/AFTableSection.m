@@ -2,19 +2,19 @@
 #import "AFTableSection.h"
 #import "AFTable.h"
 #import "AFThemeManager.h"
-#import "AFEventFlag.h"
+#import "AFEvent.h"
 
 static UIColor* headerColor				= nil;
 static UIColor* headerShadowColor		= nil;
 static NSNumber* headerShadowEnabled	= nil;
 
-AFEventFlag * FLAG_SECTION_EDITED;
+AFEvent *AFTableSectionEventEdited;
 
 @implementation AFTableSection
 
 +(void)initialize
 {
-    FLAG_SECTION_EDITED = [AFEventFlag new];
+    AFTableSectionEventEdited = [AFEvent new];
 }
 
 +(UIColor*)headerColor
@@ -85,14 +85,14 @@ AFEventFlag * FLAG_SECTION_EDITED;
 	cell.parentSection = self;
 	[children addObject:cell];
 	[cell willBeAdded];
-	[self notifyObservers:FLAG_SECTION_EDITED parameters:self,nil];
+    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
 }
 
 -(void)removeCell:(AFTableCell*)cell
 {
 	[children removeObject:cell];
 	[cell willBeRemoved];
-	[self notifyObservers:FLAG_SECTION_EDITED parameters:self,nil];
+    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
 }
 
 -(int)cellCount{return [children count];}

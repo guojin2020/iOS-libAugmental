@@ -7,7 +7,7 @@
 @class AFTableSection;
 @class AFTableViewController;
 
-extern AFEventFlag *FLAG_TABLE_EDITED;
+extern AFEvent *AFTableEventEdited;
 
 /**
  *	Generic framework-like class, representing an on-screen table

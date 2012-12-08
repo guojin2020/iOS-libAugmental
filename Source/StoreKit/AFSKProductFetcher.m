@@ -133,9 +133,20 @@ static AFSKProductFetcher *sharedInstance;
     NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error
+- (void)request:(SKRequest *)storeKitRequest didFailWithError:(NSError *)error
 {
+	AFSKProductRequest *request;
+	AFSKProductFetchResponse *response;
+
+	for(request in activeRequests)
+	{
+		response = [[AFSKProductFetchResponseFailed alloc] initWithReason:@"Could not contact iTunes"];
+		[request.productConsumer didReceiveResponse:response toRequest:request];
+		[response release];
+	}
+
     [self unlock];
+
 }
 
 -(void)dealloc

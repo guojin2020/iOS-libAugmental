@@ -8,7 +8,6 @@
 
 @interface AFDownloadRequest ()
 
-- (void)handleHTTPErrorResponse;
 - (void)updateReceivedBytesFromFile;
 
 @end
@@ -113,64 +112,78 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 {
     [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 
-    NSLog(@"Will begin writing to file '%@'",targetPath);
-
-    //state = (AFRequestState) AFRequestStateInProcess;
-    //[self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
-
-    NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-
-    NSError* error = nil;
-
-    BOOL isDirectory = NO;
-    NSString* directoryPath = [[fileURL URLByDeletingLastPathComponent] path];
-    if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
+    if( [self isSuccessHTTPResponse] )
     {
-        NSLog(@"Creating directory: %@", directoryPath);
-        [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:&error];
-    }
+        NSLog(@"Will begin writing to file '%@'",targetPath);
 
-    NSAssert(!error, [error localizedDescription]);
+        //state = (AFRequestState) AFRequestStateInProcess;
+        //[self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
 
-    if (![self existsInLocalStorage])
-    {
-        NSLog(@"Creating file: %@", targetPath);
-        [fileManager createFileAtPath:targetPath contents:nil attributes:nil];
-    }
+        NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
 
-    myHandle = [[NSFileHandle fileHandleForWritingAtPath:targetPath] retain];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
 
-    [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
+        NSError* error = nil;
 
-    NSAssert(myHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
+        BOOL isDirectory = NO;
+        NSString* directoryPath = [[fileURL URLByDeletingLastPathComponent] path];
+        if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
+        {
+            NSLog(@"Creating directory: %@", directoryPath);
+            [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:&error];
+        }
 
-    switch(responseCodeIn)
-    {
-        case 206:
+        NSAssert(!error, [error localizedDescription]);
+
+        if (![self existsInLocalStorage])
+        {
+            NSLog(@"Creating file: %@", targetPath);
+            [fileManager createFileAtPath:targetPath contents:nil attributes:nil];
+        }
+
+        myHandle = [[NSFileHandle fileHandleForWritingAtPath:targetPath] retain];
+
+        [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
+
+        NSAssert(myHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
+
+
+        bool appendFile;
+
+        switch(responseCodeIn)
+        {
+            case 206:
+                appendFile = true;
+
+            default:
+                appendFile = false;
+        }
+
+        if(appendFile)
+        {
             [myHandle seekToEndOfFile];
-            break;
-
-        case 200:
+        }
+        else
+        {
             [myHandle truncateFileAtOffset:0];
             receivedBytes = 0;
-            break;
-
-        default:
-            [self performSelectorOnMainThread:@selector(handleHTTPErrorResponse) withObject:nil waitUntilDone:NO];
-            break;
+        }
     }
-}
+    /*
+    else
+    {
+        bool shouldRetry;
 
--(void)handleHTTPErrorResponse
-{
-    NSString* errorMessage;
-    UIAlertView* alert;
-    errorMessage = [NSString stringWithFormat:@"Your file couldn't be downloaded due to a network error. If the problem persists, please eMail our support team who will be happy to help you.\n(Error %i)",responseCode];
-    alert = [[UIAlertView alloc] initWithTitle:@"We are sorry" message:errorMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:@"eMail Support",nil];
-    [alert show];
-    [alert release];
+        switch (responseCodeIn)
+        {
+            case 416:
+                shouldRetry = true;
+
+            default:
+                shouldRetry = false;
+        }
+    }
+    */
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

@@ -40,6 +40,9 @@ AFRequestEvent;
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 
+- (bool)isSuccessHTTPResponse;
+
+
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode;
 
 - (void)received:(NSData *)dataIn;
@@ -64,7 +67,6 @@ AFRequestEvent;
 @property(nonatomic, readonly) NSUInteger       receivedBytes;
 @property(nonatomic, readonly) int              expectedBytes;
 @property(nonatomic, readonly) float            progress;
-
-
+@property(nonatomic, readonly) NSUInteger       responseCode;
 
 @end

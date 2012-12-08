@@ -53,6 +53,6 @@
 @property(nonatomic, readonly)  BOOL            requiresLogin;
 @property(nonatomic, readonly)  NSURL           *URL;
 @property(nonatomic, retain)    NSURLConnection *connection;
-@property(nonatomic, readonly)  AFRequestState state;
+@property(nonatomic, readonly)  AFRequestState  state;
 
 @end
