@@ -13,6 +13,7 @@ static NSUserDefaults *defaults;
 @implementation AFDefaultsBackedStringDictionary
 {
     NSString* defaultsKey;
+    NSMutableDictionary* dictionary;
 }
 
 +(void)initialize
@@ -22,15 +23,33 @@ static NSUserDefaults *defaults;
 
 -(id)initWithDefaultsKey:(NSString*)defaultsKeyIn
 {
-    NSDictionary *dictionary = [defaults dictionaryForKey:defaultsKeyIn];
-    if ( dictionary && (self = [super initWithDictionary:dictionary]) )
+    if ( self = [super init] )
     {
         defaultsKey = [defaultsKeyIn retain];
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(synchronize)
-                                                     name:UIApplicationWillTerminateNotification
-                                                   object:NULL];
+        NSDictionary* storedDictionary = [defaults dictionaryForKey:defaultsKey];
+        if(storedDictionary && [storedDictionary count]>0)
+        {
+            NSLog(@"Read %i entries from stored dictionary '%@'",[storedDictionary count],defaultsKeyIn);
+            dictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
+        }
+        else
+        {
+            dictionary = [[NSMutableDictionary alloc] init];
+        }
+
+        NSNotificationCenter* defaults = [NSNotificationCenter defaultCenter];
+        SEL synchronizationSelector = @selector(synchronize);
+
+        [defaults addObserver:self
+                     selector:synchronizationSelector
+                         name:UIApplicationWillTerminateNotification
+                       object:NULL];
+
+        [defaults addObserver:self
+                     selector:synchronizationSelector
+                         name:UIApplicationWillResignActiveNotification
+                       object:NULL];
     }
     return self;
 }
@@ -49,23 +68,39 @@ static NSUserDefaults *defaults;
 - (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey
 {
     if(![anObject isKindOfClass:[NSString class]])  [NSException raise:NSInvalidArgumentException format:(NSString *)INVALID_ARGUMENT_REASON];
-    [super setObject:anObject forKey:aKey];
+    [dictionary setObject:anObject forKey:aKey];
 }
 
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
 {
     if(![obj isKindOfClass:[NSString class]])       [NSException raise:NSInvalidArgumentException format:(NSString *)INVALID_ARGUMENT_REASON];
-    [super setObject:obj forKeyedSubscript:key];
+    [dictionary setObject:obj forKeyedSubscript:key];
 }
+
+- (id)objectForKey:(id)aKey         { return [dictionary objectForKey:aKey]; }
+- (NSUInteger)count                 { return [dictionary count]; }
+- (NSEnumerator *)keyEnumerator     { return [dictionary keyEnumerator]; }
+- (void)removeObjectForKey:(id)aKey { [dictionary removeObjectForKey:aKey]; }
 
 -(void)synchronize
 {
-    [defaults setObject:self forKey:defaultsKey];
+    [defaults setObject:dictionary forKey:defaultsKey];
     [defaults synchronize];
 }
 
 - (void)dealloc
 {
+    NSNotificationCenter*notificationCenter = [NSNotificationCenter defaultCenter];
+
+    [notificationCenter removeObserver:self
+                                  name:UIApplicationWillTerminateNotification
+                                object:NULL];
+
+    [notificationCenter removeObserver:self
+                                  name:UIApplicationWillResignActiveNotification
+                                object:NULL];
+
+    [dictionary release];
     [defaultsKey release];
     [super dealloc];
 }
