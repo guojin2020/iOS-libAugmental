@@ -1,7 +1,7 @@
-@protocol AFField;
+@class AFField;
 
 @protocol AFFieldObserver
 
-- (void)settingChanged:(NSObject <AFField> *)setting;
+- (void)settingChanged:(AFField*)setting;
 
 @end

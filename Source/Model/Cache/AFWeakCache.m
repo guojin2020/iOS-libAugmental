@@ -5,47 +5,42 @@
 
 #import "AFWeakCache.h"
 #import "AFObject.h"
-#import "AFEventManager.h"
+#import "AFObservable.h"
 
 @implementation AFWeakCache
 {
     NSMutableDictionary* dictionary;
 }
 
--(void)addObject:(id<AFObject>)valueIn forKey:(id<AFObject>)keyIn
+-(void)addObject:(AFObject*)valueIn forKey:(AFObject*)keyIn
 {
     NSValue
             *weakKey    = [NSValue valueWithPointer:keyIn],
             *weakValue  = [NSValue valueWithPointer:valueIn];
 
-    [keyIn.eventManager addObserver:self];
-    [valueIn.eventManager addObserver:self];
+    [keyIn addObserver:self];
+    [valueIn addObserver:self];
 
     [dictionary setObject:weakValue forKey:weakKey];
 }
 
-// AFEventObserver Implementation
-
-- (void)eventOccurred:(AFAppEvent)type source:(id <AFObject>)source
+-(void)handleObjectDeallocating:(id)object
 {
-    if(type== AFEventObjectDeallocating)
+    NSValue *deadWeakReference = [NSValue valueWithPointer:object];
+    NSValue *weakKey, *weakValue;
+
+    NSArray *keysSnapshot = [NSArray arrayWithArray:[dictionary allKeys]];
+    for(AFObject* key in keysSnapshot)
     {
-        NSValue *deadWeakReference = [NSValue valueWithPointer:source];
-        NSValue *weakKey, *weakValue;
+        weakKey     = (NSValue *)key;
+        weakValue   = (NSValue *)[dictionary objectForKey:weakKey];
 
-        NSArray *keysSnapshot = [NSArray arrayWithArray:[dictionary allKeys]];
-        for(id<AFObject> key in keysSnapshot)
+        [((AFObject*)[weakKey   pointerValue]) removeObserver:self];
+        [((AFObject*)[weakValue pointerValue]) removeObserver:self];
+
+        if([deadWeakReference isEqualToValue:weakKey] || [deadWeakReference isEqualToValue:weakValue])
         {
-            weakKey     = (NSValue *)key;
-            weakValue   = (NSValue *)[dictionary objectForKey:weakKey];
-
-            [((id<AFObject>)[weakKey   pointerValue]).eventManager removeObserver:self];
-            [((id<AFObject>)[weakValue pointerValue]).eventManager removeObserver:self];
-
-            if([deadWeakReference isEqualToValue:weakKey] || [deadWeakReference isEqualToValue:weakValue])
-            {
-                [dictionary removeObjectForKey:weakKey];
-            }
+            [dictionary removeObjectForKey:weakKey];
         }
     }
 }

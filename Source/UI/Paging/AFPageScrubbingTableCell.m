@@ -161,7 +161,7 @@ static NSNumber *textShadowEnabled;
     [self updateScrubber];
 }
 
-- (void)cellAdded:(NSObject <AFObjectTableCell> *)cellIn toPage:(AFPagedObjectListViewController *)objectListViewController
+- (void)cellAdded:(AFObjectTableCell*)cellIn toPage:(AFPagedObjectListViewController *)objectListViewController
 {}
 
 //=============>> Themeable

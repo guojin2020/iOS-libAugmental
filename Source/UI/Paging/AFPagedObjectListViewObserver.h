@@ -7,7 +7,7 @@
 
 - (void)pageRefreshWillStart:(AFPagedObjectListViewController *)objectListViewController;
 
-- (void)cellAdded:(NSObject <AFObjectTableCell> *)cell toPage:(AFPagedObjectListViewController *)objectListViewController;
+- (void)cellAdded:(AFObjectTableCell*)cell toPage:(AFPagedObjectListViewController *)objectListViewController;
 
 - (void)pageRefreshDidFinish:(AFPagedObjectListViewController *)objectListViewController;
 

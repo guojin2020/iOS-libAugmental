@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "AFBaseField.h"
+#import "AFField.h"
 #import "AFField.h"
 #import "AFThemeable.h"
 
@@ -8,7 +8,7 @@
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFTextField : AFBaseField <UITextFieldDelegate, AFField, AFThemeable>
+@interface AFTextField : AFField <UITextFieldDelegate, AFThemeable>
 {
     UITextField                    *textField;
     NSObject <UITextFieldDelegate> *textFieldDelegate;

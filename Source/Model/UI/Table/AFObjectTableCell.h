@@ -1,13 +1,31 @@
-#import "AFEventObserver.h"
+#import <Foundation/Foundation.h>
+#import "AFTableCell.h"
+#import "AFObject.h"
 
-@protocol AFObject_CellViewable;
+@protocol AFCellViewable;
 
-@protocol AFObjectTableCell <AFEventObserver>
+/**
+ * Implements functionality common to all Table cells
+ * This is not a complete implementation of a cell and needs to be subclassed for use
+ */
+@interface AFObjectTableCell : AFTableCell
+{
+    AFObject<AFCellViewable> *object;
+}
 
-- (id)initWithObject:(NSObject <AFObject_CellViewable> *)objectIn;
+- (id)initWithObject:(AFObject <AFCellViewable> *)objectIn;
+
+- (void)setTagReferences;
+
+- (void)refreshFields;
+
+-(void)handleObjectFieldUpdated:(AFObject*)objectIn;
+
+- (NSString *)cellReuseIdentifier;
+
+@property(nonatomic, retain) AFObject <AFCellViewable> *object;
 
 - (UITableViewCell *)viewCellForTableView:(UITableView *)tableIn;
 
-- (NSString *)cellReuseIdentifier;
 
 @end

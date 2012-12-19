@@ -1,7 +1,9 @@
+#import "AFObservable.h"
 #import "AFPagedObjectRequest.h"
 #import "AFResultsPage.h"
 #import "AFSession.h"
 #import "AFObjectCache.h"
+#import "CJSONDeserializer_BlocksExtensions.h"
 
 @implementation AFPagedObjectRequest
 
@@ -20,7 +22,7 @@
 - (void)didFinish
 {
     state = (AFRequestState) AFRequestStateFulfilled;
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
+    [self notifyObservers:AFRequestEventFinished parameters:self];
 
     NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
     //DebugLog(@"Response from '%@': %@",[URL absoluteString],responseString);

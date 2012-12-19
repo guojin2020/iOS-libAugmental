@@ -1,22 +1,36 @@
-#import "AFBaseObject.h"
-#import "AFEventManager.h"
 
-@implementation AFBaseObject
+#import "AFObservable.h"
+#import "AFObject.h"
+#import "AFRequestEndpoint.h"
+
+SEL
+    AFEventObjectFieldUpdated,
+    AFEventObjectInvalidated,
+    AFEventObjectValidated,
+    AFEventObjectDeallocating;
+
+@implementation AFObject
 
 static NSString *placeholderString = nil;
 static NSNumber *placeholderNumber = nil;
 static NSDate   *placeholderDate   = nil;
 
-static NSString *PRIMARY_KEY_KEY    = @"primaryKey";
-static NSString *IS_PLACEHOLDER_KEY = @"isPlaceholder";
-static NSString *BATCH_UPDATING_KEY = @"batchUpdating";
-static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
+static NSString
+        *PRIMARY_KEY_KEY    = @"primaryKey",
+        *IS_PLACEHOLDER_KEY = @"isPlaceholder",
+        *BATCH_UPDATING_KEY = @"batchUpdating",
+        *UPDATE_NEEDED_KEY  = @"updateNeeded";
 
 + (void)initialize
 {
     if (!placeholderString) placeholderString = @"Loading...";
     if (!placeholderNumber) placeholderNumber = [[NSNumber alloc] initWithInt:0];
-    if (!placeholderDate) placeholderDate     = [[NSDate alloc] init];
+    if (!placeholderDate)   placeholderDate   = [[NSDate alloc] init];
+
+    AFEventObjectFieldUpdated   = @selector(objectFieldUpdated:), //Params: AFObject
+    AFEventObjectInvalidated    = @selector(objectInvalidated:),  //Params: AFObject
+    AFEventObjectValidated      = @selector(objectValidated:),    //Params: AFObject
+    AFEventObjectDeallocating   = @selector(objectDeallocating:);
 }
 
 - (id)initPlaceholderWithPrimaryKey:(int)primaryKeyIn
@@ -41,12 +55,12 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 
 - (void)commonInit
 {
-    eventManager  = [[AFEventManager alloc] init];
+    eventManager  = [[AFObservable alloc] init];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
 
--(AFEventManager *)eventManager { return eventManager; }
+-(AFObservable *)eventManager { return eventManager; }
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
@@ -70,7 +84,7 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 
 - (void)finishBatchUpdating
 {
-    if (batchUpdating && updateNeeded) [eventManager broadcastEvent:(AFAppEvent) AFEventObjectFieldUpdated source:self];
+    if (batchUpdating && updateNeeded) [eventManager notifyObservers:AFEventObjectFieldUpdated parameters:self];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
@@ -78,7 +92,10 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)fieldUpdated
 {
     if (batchUpdating) updateNeeded = YES;
-    else [eventManager broadcastEvent:(AFAppEvent) AFEventObjectFieldUpdated source:self];
+    else
+    {
+        [self notifyObservers:AFEventObjectFieldUpdated parameters:self];
+    }
 }
 
 - (void)setContentFromDictionary:(NSDictionary *)dictionary
@@ -109,20 +126,20 @@ static NSString *UPDATE_NEEDED_KEY  = @"updateNeeded";
 - (void)wasValidated
 {
     isPlaceholder = NO;
-    [eventManager broadcastEvent:(AFAppEvent) AFEventObjectValidated source:self];
+    [self notifyObservers:AFEventObjectValidated parameters:self];
 }
 
 - (void)wasInvalidated
 {
     isPlaceholder = YES;
-    [eventManager broadcastEvent:(AFAppEvent) AFEventObjectInvalidated source:self];
+    [self notifyObservers:AFEventObjectInvalidated parameters:self];
 }
 
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint
 {
     return nil;
 
-    //return [[AFSession sharedSession].cacheImage deleteObject:(NSObject<AFObject>*)self endpoint:endpoint];
+    //return [[AFSession sharedSession].cacheImage deleteObject:(NSObject*)self endpoint:endpoint];
 }
 
 - (int)primaryKey {return primaryKey;}

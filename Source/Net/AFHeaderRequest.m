@@ -1,3 +1,4 @@
+#import "AFObservable.h"
 #import "AFHeaderRequest.h"
 #import "AFRequestEndpoint.h"
 
@@ -50,6 +51,5 @@
 }
 
 @synthesize endpoint, headers;
-//@dynamic connection, URL, state, requiresLogin, attempts;
 
 @end

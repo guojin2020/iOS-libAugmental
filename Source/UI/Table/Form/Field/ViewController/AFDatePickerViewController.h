@@ -2,7 +2,7 @@
 #import "AFFieldViewPanelController.h"
 
 @class AFViewPanelField;
-@protocol AFField;
+@class AFField;
 
 @interface AFDatePickerViewController : AFFieldViewPanelController
 {

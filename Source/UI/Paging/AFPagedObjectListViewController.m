@@ -103,9 +103,9 @@ static AFTableCell *resultsLoadingCell;
 
             [resultsTableSection addCell:headerCell];
 
-            for (NSObject <AFObject_CellViewable> *cellObject in objectArray)
+            for (AFObject<AFCellViewable> *cellObject in objectArray)
             {
-                NSObject <AFObjectTableCell>                  *cell = [resultsTableSection addObject:cellObject];
+                AFObjectTableCell *cell = [resultsTableSection addObject:cellObject];
                 for (NSObject <AFPagedObjectListViewObserver> *observer in observers)[observer cellAdded:cell toPage:self];
             }
 

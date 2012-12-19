@@ -59,19 +59,20 @@ static AFVideoStillsFactory *sharedInstance;
             {
                 NSValue * requestedTimeValue = [NSValue valueWithCMTime:requestedTime];
 
-                id object;
                 switch(result)
                 {
                     case AVAssetImageGeneratorSucceeded:
-                        object = [[UIImage alloc] initWithCGImage:image];
+                    {
+                        id object = [[UIImage alloc] initWithCGImage:image];
+                        [images setObject:object forKey:requestedTimeValue];
+                        [object release];
+                    }
 
+                    default:
                     case AVAssetImageGeneratorFailed:
                     case AVAssetImageGeneratorCancelled:
-                        object = [NSNull null];
                         break;
                 }
-
-                [images setObject:object forKey:requestedTimeValue];
 
                 [cmTimes removeObject:requestedTimeValue];
                 if ([cmTimes count]==0)

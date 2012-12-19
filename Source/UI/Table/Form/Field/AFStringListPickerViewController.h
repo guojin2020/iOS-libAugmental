@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "AFObjectPickerDelegate.h"
-#import "AFBasePickerViewController.h"
+#import "AFPickerViewController.h"
 
-@interface AFStringListPickerViewController : AFBasePickerViewController <AFObjectPickerDelegate>
+@interface AFStringListPickerViewController : AFPickerViewController <AFObjectPickerDelegate>
 {
     NSMutableDictionary *classes;
 }

@@ -8,7 +8,7 @@
 {
     UITextView           *adviceText;
     UIPickerView         *picker;
-    NSObject <AFField> *setting;
+    AFField              *setting;
     NSArray              *yearStrings;
     NSArray              *monthStrings;
 }

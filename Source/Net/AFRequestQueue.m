@@ -1,9 +1,10 @@
+#import "AFObservable.h"
 #import "AFRequestQueue.h"
 #import "AFPerformSelectorOperation.h"
 
 @interface AFRequestQueue ()
 
-- (BOOL)handleRequestInternal:(NSObject <AFQueueableRequest> *)request;
+- (BOOL)handleRequestInternal:(AFQueueableRequest*)request;
 
 @end
 
@@ -45,7 +46,7 @@
     [activatedRequests removeAllObjects];
     @synchronized (queue)
     {
-        for (NSObject<AFQueueableRequest>* request in queue)
+        for (AFQueueableRequest* request in queue)
         {
             if (request.state == (AFRequestState) AFRequestStatePending)
             {
@@ -62,16 +63,16 @@
                 }
                 else
                 {
-                    if ([request respondsToSelector:@selector(requestWasQueuedAtPosition:)])[request requestWasQueuedAtPosition:queuePosition];
+                    if ([request isKindOfClass:[AFQueueableRequest class]])[(AFQueueableRequest *)request requestWasQueuedAtPosition:queuePosition];
                     queuePosition++;
                 }
             }
         }
-        for (NSObject <AFQueueableRequest> *request in activatedRequests)[queue removeObject:request];
+        for (AFQueueableRequest* request in activatedRequests)[queue removeObject:request];
     }
 }
 
-- (BOOL)actionRequest:(NSObject <AFRequest> *)request
+- (BOOL)actionRequest:(AFRequest*)request
 {
     if(targetHandler) return [targetHandler handleRequest:request];
     else
@@ -86,20 +87,16 @@
  */
 - (void)cancelAllRequests
 {
-    for (NSObject <AFQueueableRequest> *request in [NSArray arrayWithArray:queue])
+    for (AFQueueableRequest* request in [NSArray arrayWithArray:queue])
     {
-        if (request)
-        {
-            [request cancel];
-
-        }
+        [request cancel];
     }
 }
 
 /**
  *	Same as calling 
  */
-- (BOOL)handleRequest:(NSObject <AFRequest> *)request
+- (BOOL)handleRequest:(AFRequest*)request
 {
 #ifdef BACKGROUND_HANDLING_ENABLED
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
@@ -109,7 +106,7 @@
 	#endif
 }
 
-- (BOOL)handleRequestInternal:(NSObject <AFQueueableRequest> *)request
+- (BOOL)handleRequestInternal:(AFQueueableRequest*)request
 {
     //NSLog(@"Handing request: %@",request);
 
@@ -135,39 +132,39 @@
 /**
  *	Adds a request to the back of the request queue
  */
-- (void)queueRequestAtFront:(NSObject <AFQueueableRequest> *)requestIn
+- (void)queueRequestAtFront:(AFQueueableRequest*)requestIn
 {
     [requestIn addObserver:self];
     [queue insertObject:requestIn atIndex:0];
     [self startWaitingRequests];
 }
 
-- (void)queueRequestAtBack:(NSObject <AFQueueableRequest> *)requestIn;
+- (void)queueRequestAtBack:(AFQueueableRequest*)requestIn;
 {
     [requestIn addObserver:self];
     [queue addObject:requestIn];
     [self startWaitingRequests];
 }
 
-- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request
+- (void)startConnectionMainThreadInternal:(AFRequest*)request
 {
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:request.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     urlRequest = [request willSendURLRequest:urlRequest];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
     request.connection = connection;
-    [connection release];
+    //[connection release];
 }
 
-- (void)requestSizePolled:(int)sizeBytes forRequest:(NSObject <AFRequest> *)requestIn
+- (void)requestSizePolled:(int)sizeBytes forRequest:(AFRequest*)requestIn
 {}
 
-- (void)requestStarted:(NSObject <AFRequest> *)requestIn
+- (void)requestStarted:(AFRequest*)requestIn
 {}
 
-- (void)requestProgressUpdated:(float)completion forRequest:(NSObject <AFRequest> *)requestIn
+- (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn
 {}
 
-- (void)requestComplete:(NSObject <AFRequest> *)requestIn
+- (void)requestComplete:(AFRequest*)requestIn
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -176,7 +173,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestCancelled:(NSObject <AFRequest> *)requestIn
+- (void)requestCancelled:(AFRequest*)requestIn
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -184,15 +181,15 @@
     [queue removeObject:requestIn];
     [activeRequests removeObject:requestIn];
 
-    if([requestIn conformsToProtocol:@protocol(AFQueueableRequest)])
+    if([requestIn isKindOfClass:[AFQueueableRequest class]])
     {
-        [((id<AFQueueableRequest>)requestIn) requestWasUnqueued];
+        [((AFQueueableRequest*)requestIn) requestWasUnqueued];
     }
 
     [self startWaitingRequests];
 }
 
-- (void)requestReset:(NSObject <AFRequest> *)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
+- (void)requestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -202,7 +199,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestFailed:(NSObject <AFRequest> *)requestIn;
+- (void)requestFailed:(AFRequest*)requestIn;
 {
     //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
 
@@ -212,10 +209,10 @@
     [self startWaitingRequests];
 }
 
-- (NSObject <AFRequest> *)queuedRequestForConnection:(NSURLConnection *)connection
+- (AFRequest*)queuedRequestForConnection:(NSURLConnection *)connection
 {
-    for (NSObject <AFRequest> *testRequest in queue) if (testRequest.connection == connection) return testRequest;
-    for (NSObject <AFRequest> *testRequest in activeRequests) if (testRequest.connection == connection) return testRequest;
+    for (AFRequest*testRequest in queue) if (testRequest.connection == connection) return testRequest;
+    for (AFRequest*testRequest in activeRequests) if (testRequest.connection == connection) return testRequest;
     return nil;
 }
 
@@ -228,14 +225,14 @@
     }
 }
 
-- (BOOL)isRequestActive:(NSObject <AFRequest> *)request
+- (BOOL)isRequestActive:(AFRequest*)request
 {return [activeRequests containsObject:request];}
 
 // NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+    AFRequest*findRequest = [self queuedRequestForConnection:connection];
 
     NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
     NSAssert(findRequest != nil, responseString);
@@ -247,7 +244,7 @@
 {
     //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
 
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+    AFRequest*findRequest = [self queuedRequestForConnection:connection];
     if (findRequest) [findRequest received:data];
 }
 
@@ -255,7 +252,7 @@
 {
     //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
 
-    NSObject <AFRequest> *findRequest;
+    AFRequest*findRequest;
 
     //[self setOffline:YES];
 
@@ -270,7 +267,7 @@
 {
     //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
 
-    NSObject <AFRequest> *findRequest = [[self queuedRequestForConnection:connection] retain];
+    AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
 
     //NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
 
@@ -304,7 +301,7 @@
 {
     [activeRequests release];
     [self cancelAllRequests];
-    for (NSObject <AFQueueableRequest> *request in queue)[request removeObserver:self];
+    for (AFQueueableRequest* request in queue)[request removeObserver:self];
     [queue release];
     [activatedRequests release];
     [super dealloc];

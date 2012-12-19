@@ -1,17 +1,45 @@
-#import "AFEventObserver.h"
+#import <Foundation/Foundation.h>
+
+#import "AFValidatable.h"
+#import "AFObservable.h"
+
+extern SEL
+    AFEventObjectFieldUpdated,
+    AFEventObjectInvalidated,
+    AFEventObjectValidated;
 
 @class AFSession;
-@class AFEventManager;
+@class AFObjectRequest;
+@protocol AFRequestEndpoint;
 
 /**
- This is one of the highest level protocols of the application, describing any data object retrieved from an integer-keyed
- database.
- 
- A key characteristic of AFObjects is that they all have, and are uniquely identifiable by, a type (or modelName) and number (or primary key).
- An AFObjects content may be set by an NSDictionary of key/value pairs, whose format will be specific to the implementing class.
- */
-@protocol AFObject <NSCoding>
+ AFObject provides state and functionality which will be common to all AFObject implementations.
+ It is essentially abstract and intended to be subclassed: it should never be instantiated directly.
+ **/
+@interface AFObject : AFObservable <NSCoding, AFValidatable>
+{
 
+
+    //The objects primary key; this will match the primary key of this objects database representation on the server.
+    int  primaryKey;
+    //BOOL isValid;
+    BOOL isPlaceholder;
+
+    /**
+     The batchUpdating flag is used to temporarily suppress state-change broadcasts to this AFObjects observers.
+     A prime example of where this functionality is needed, is where multiple changes are being made to the objects fields,
+     and there is an observer which updates a UI showing those fields. To have the the observer informed, and the UI updated,
+     after every change in sequence would be a wasteful use of CPU and display resources.
+     **/
+    BOOL batchUpdating;
+
+    BOOL updateNeeded;
+
+    /**
+      Each AFObject has its own eventManager instance which manages observers and broadcasts relevant object events to them.
+      **/
+    AFObservable *eventManager;
+}
 /**
  Initialises a placeholder instance of the AFObject implementation.
  */
@@ -45,17 +73,63 @@
  */
 - (BOOL)isPlaceholder;
 
-- (SEL)defaultComparisonSelector;
-
-//-(NSString*)key;
+//- (SEL)defaultComparisonSelector;
 
 /**
- The model name (or 'type') of this data object. 
+ The model name (or 'type') of this data object.
  */
 + (NSString *)modelName; //The JSON model name for this type of AFObject
 
-@property(nonatomic, retain, readonly) AFEventManager *eventManager;
 @property(nonatomic, readonly) BOOL isPlaceholder;
 @property(nonatomic, readonly) int  primaryKey;
+
+/**
+ <p>All AFObjects inherit a simple 'batch updating' mechanism. Under normal conditions, calls to fieldUpdated are immediately
+ reported to this objects observers, via the eventManager, as an AFEventObjectFieldUpdated AFEvent.</p>
+ <p>In the example case of an observer which updates a UI showing this objects fields,
+ having the the observer informed after every change in sequence would result in multiple screenupdates and a wasteful use of
+ CPU and display resources.</p>
+ <p>startBatchUpdate allows AFEventObjectFieldUpdated AFEvent firing to be suppressed. </p>
+ **/
+- (void)startBatchUpdate;
+
+/**
+ See the documentation for startBatchUpdate which explains use of an AFObjects 'batch updating' mechanism.
+ **/
+- (void)finishBatchUpdating;
+
+/**
+ 
+ **/
+- (void)fieldUpdated;
+
+
+/**
+ This method should set appropriate placeholder values for all the fields in this AFObject.
+ **/
+
+- (NSString *)placeholderString;
+
+- (NSNumber *)placeholderNumber;
+
+- (NSDate *)placeholderDate;
+
+- (void)wasValidated;
+
+- (void)wasInvalidated;
+
++ (NSString *)placeholderString;
+
++ (NSNumber *)placeholderNumber;
+
++ (NSDate *)placeholderDate;
+
+- (SEL)defaultComparisonSelector;
+
+/**
+ Convenience method to delete this object from the server and local caches, using the current shared AFSession.
+ Equivalent to calling: [[AFSession sharedSession].cacheImage deleteObject:self endpoint:endpoint];
+ */
+- (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 
 @end

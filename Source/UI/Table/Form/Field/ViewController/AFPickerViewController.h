@@ -8,7 +8,7 @@
 
 @class AFViewPanelField;
 
-@interface AFBasePickerViewController : AFFieldViewPanelController <UIPickerViewDataSource, UIPickerViewDelegate, AFThemeable>
+@interface AFPickerViewController : AFFieldViewPanelController <UIPickerViewDataSource, UIPickerViewDelegate, AFThemeable>
 {
     NSArray                           *objects;
     UIPickerView                      *picker;

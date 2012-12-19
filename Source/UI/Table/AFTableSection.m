@@ -2,19 +2,18 @@
 #import "AFTableSection.h"
 #import "AFTable.h"
 #import "AFThemeManager.h"
-#import "AFEvent.h"
 
 static UIColor* headerColor				= nil;
 static UIColor* headerShadowColor		= nil;
 static NSNumber* headerShadowEnabled	= nil;
 
-AFEvent *AFTableSectionEventEdited;
+SEL AFTableSectionEventEdited;
 
 @implementation AFTableSection
 
 +(void)initialize
 {
-    AFTableSectionEventEdited = [AFEvent new];
+    AFTableSectionEventEdited = @selector(handleTableSectionEdited:); //TableSection
 }
 
 +(UIColor*)headerColor

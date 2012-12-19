@@ -9,7 +9,6 @@
 @interface AFDefaultsBackedStringDictionary : NSMutableDictionary
 
 - (id)initWithDefaultsKey:(NSString *)defaultsKeyIn;
-
 - (void)synchronize;
 
 @end

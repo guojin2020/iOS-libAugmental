@@ -1,4 +1,5 @@
 #import "AFUnavailableOfflineViewController.h"
+#import "AFObservable.h"
 #import "AFSession.h"
 
 @implementation AFUnavailableOfflineViewController

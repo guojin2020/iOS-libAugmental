@@ -8,7 +8,7 @@
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFDateField : AFViewPanelField <AFField, AFThemeable>
+@interface AFDateField : AFViewPanelField <AFThemeable>
 {
     NSDateFormatter *dateFormatter;
 }

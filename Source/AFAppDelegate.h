@@ -5,22 +5,24 @@
 
 //#define CREATE_THEME_TEMPLATE_MODE
 
-@class AFEventManager;
+extern SEL
+    AFEventAppSettingsLoaded,
+    AFEventAppTerminating,
+    AFEventAppSettingsLoadFailed,
+    AFEventAppMemoryWarning;
+
 @class AFJSONRequest;
 @class AFBooleanField;
-//@class AFSettingsScreen;
-
-@protocol AFEventObserver;
+@class AFObservable;
 
 @interface AFAppDelegate : UIResponder <UIApplicationDelegate, AFRequestEndpoint, AFSettingProvider>
 {
     UIWindow*           window;
 	AFJSONRequest*      settingsRequest;
 	NSArray*            settingsSections;
-	//AFSettingsScreen*   settingsScreen;
 }
 
-+(AFEventManager*) appEventManager;
++(AFObservable*) appEventManager;
 +(NSString*)settingsPath;
 +(NSMutableDictionary*)settings;
 +(int)deviceId;

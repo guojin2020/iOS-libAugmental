@@ -10,7 +10,6 @@
 @class AFRequest;
 @class AFUtil;
 @class AFRequestQueue;
-@class AFImmediateRequest;
 @class AFObjectCache;
 @class AFEnvironment;
 
@@ -66,7 +65,7 @@
 
 - (void)dumpAllCookies;
 
-//-(void)requestAccepted:(NSObject<AFRequest>*)request;
+//-(void)requestAccepted:(AFRequest*)request;
 
 + (AFSession *)sharedSession;
 

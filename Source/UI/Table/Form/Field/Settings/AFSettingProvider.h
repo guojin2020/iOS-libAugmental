@@ -1,12 +1,12 @@
 #import <Foundation/Foundation.h>
 
 //@class AFFormSection;
-@protocol AFField;
+@class AFField;
 
 @protocol AFSettingProvider
 
 - (NSArray *)settingsSections;
 
-- (void)settingValueChanged:(NSObject <AFField> *)setting;
+- (void)settingValueChanged:(AFField*)setting;
 
 @end

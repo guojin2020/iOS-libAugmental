@@ -1,10 +1,10 @@
-#import "AFBasePickerViewController.h"
+#import "AFPickerViewController.h"
 #import "AFThemeManager.h"
 
 static UIColor *textColor = nil;
 static UIColor *bgColor   = nil;
 
-@implementation AFBasePickerViewController
+@implementation AFPickerViewController
 
 - (id)initWithObjects:(NSArray *)objectsIn
              delegate:(NSObject <AFObjectPickerDelegate> *)delegateIn
@@ -52,8 +52,8 @@ static UIColor *bgColor   = nil;
     int index = [objects indexOfObject:value];
     if (value)[picker selectRow:index inComponent:0 animated:NO];
 
-    [self.view setBackgroundColor:[AFBasePickerViewController bgColor]];
-    [adviceText setTextColor:[AFBasePickerViewController textColor]];
+    [self.view setBackgroundColor:[AFPickerViewController bgColor]];
+    [adviceText setTextColor:[AFPickerViewController textColor]];
 }
 
 //=============>> Data Source
@@ -89,14 +89,14 @@ static UIColor *bgColor   = nil;
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBasePickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
     return textColor;
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBasePickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 

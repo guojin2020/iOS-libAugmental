@@ -2,7 +2,7 @@
 
 @protocol AFObjectViewPanelController;
 
-@protocol AFObject_PanelViewable <AFObject>
+@protocol AFPanelViewableObject
 
 + (id<AFObjectViewPanelController>)viewPanelClass;
 

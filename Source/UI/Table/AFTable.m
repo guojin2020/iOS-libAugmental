@@ -3,15 +3,14 @@
 
 #import "AFTableSection.h"
 #import "AFTableViewController.h"
-#import "AFEvent.h"
 
-AFEvent *AFTableEventEdited;
+SEL AFTableEventEdited;
 
 @implementation AFTable
 
 +(void)initialize
 {
-    AFTableEventEdited = [AFEvent new];
+    AFTableEventEdited = @selector(handleTableEdited:); //Table
 }
 
 -(id)init { return [self initWithTitle:@""]; }
@@ -109,13 +108,6 @@ AFEvent *AFTableEventEdited;
 -(UITableView*)tableView
 {
     return (UITableView*)([self viewController].view);
-}
-
-//=========>> Dealloc
-
-- (void)change:(AFEvent *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray*)parameters
-{
-
 }
 
 -(void)dealloc

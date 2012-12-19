@@ -2,10 +2,9 @@
 
 #import <Foundation/Foundation.h>
 #import "AFRequestEndpoint.h"
-#import "AFEventObserver.h"
 
-@protocol AFObject;
-@protocol AFWriteableObject;
+@class AFObject;
+@class AFWriteableObject;
 
 @class AFObjectRequest;
 @class AFSession;
@@ -18,7 +17,7 @@
  necessary server call to get the real information for that object and update it asynchronously. When it does so, an
  objectEvent will inform observing users of that object.
  */
-@interface AFLegacyObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint, AFEventObserver>
+@interface AFLegacyObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint>
 {
     NSMutableDictionary *cache;
     NSNumberFormatter   *numberFormatter;
@@ -31,42 +30,44 @@
  necessary server call to get the real information for that object before updating it asynchronously.
  When it does so, an objectEvent will inform observing users of that object.
  */
-- (NSObject <AFObject> *)objectOfType:(id<AFObject>)objectClass withPrimaryKey:(int)primaryKey;
+- (AFObject*)objectOfType:(Class)objectClass withPrimaryKey:(int)primaryKey;
 
 /**
  Writes the specified object to the server. The endpoint receives the servers response to the write operation,
  which is typically the same object data with a newly assigned primary key.
  */
-- (AFObjectRequest *)writeObject:(NSObject <AFWriteableObject> *)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint;
+- (AFObjectRequest *)writeObject:(AFWriteableObject*)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 
 /**
  Causes the specified object to be deleted from the server. When the server responds with a successful deletion,
  AFObjectRequest will call deleteObjectLocallyWithModelName to remove it from the local cache as well.
  Returns the AFObjectRequest used to communicate this request to the server.
  */
-- (AFObjectRequest *)deleteObject:(NSObject <AFObject> *)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint;
+- (AFObjectRequest *)deleteObject:(AFObject*)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint;
 
 /**
  Efficiency method to allow multiple objects to be retrieved in a single server request.
  */
-- (NSArray *)objectsOfType:(id<AFObject>)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
+- (NSArray *)objectsOfType:(AFObject*)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
 
 /**
  Returns true if an object of the given type and primary key is already held in the local cache, false otherwise.
  */
-- (BOOL)containsObjectOfType:(id<AFObject>)objectClass withPrimaryKey:(int)primaryKey;
+- (BOOL)containsObjectOfType:(AFObject*)objectClass withPrimaryKey:(int)primaryKey;
 
 /**
  Where AFObjects are acquired from the server by means other than a direct primary key reference (e.g. a server API call for name searching),
  AFLegacyObjectCache provides this method to inject those objects into the cache so that subsequent primary key requests for that
  same object will be serviced more efficiently.
  */
-- (void)injectObject:(NSObject <AFObject> *)object;
+- (void)injectObject:(AFObject*)object;
 
 /**
  Removes the object uniquely identified by the given model name and primary key.
  */
 - (BOOL)deleteObjectLocallyWithModelName:(NSString *)modelName primaryKey:(int)pk;
+
+-(void)handleAppMemoryWarning;
 
 /**
  Releases all objects in the cache which have a retain count of 1 (meaning the cache is the only referrer).
@@ -91,7 +92,7 @@
  that from the incoming dictionary. This has the effect of maintaining consistent instances of
  objects on the server so that observers receive those updates seamlessly.
  */
-- (NSObject <AFObject> *)objectFromDictionary:(NSDictionary *)objectDictionary;
+- (AFObject*)objectFromDictionary:(NSDictionary *)objectDictionary;
 
 /**
  Allocates and initialises an array of AFObjects, from their Dictionary representations.

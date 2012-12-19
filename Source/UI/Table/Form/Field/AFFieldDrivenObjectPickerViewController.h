@@ -1,23 +1,23 @@
 #import <Foundation/Foundation.h>
-#import "AFBasePickerViewController.h"
+#import "AFPickerViewController.h"
 #import "AFRequestEndpoint.h"
-#import "AFEventObserver.h"
 #import "AFObjectPickerDelegate.h"
 #import "AFFieldViewPanelObserver.h"
 #import "AFObject.h"
 
-@interface AFFieldDrivenObjectPickerViewController : AFBasePickerViewController <AFRequestEndpoint, AFEventObserver, AFObjectPickerDelegate, AFFieldViewPanelObserver>
+@interface AFFieldDrivenObjectPickerViewController : AFPickerViewController <AFRequestEndpoint, AFObjectPickerDelegate, AFFieldViewPanelObserver>
 {
     NSString *getObjectActionString;
     NSString *objectCSVIdListSettingsKey;
     NSString *objectDefaultSelectionIdKey;
-    id<AFObject> objectClass;
+    Class objectClass;
 }
 
 - (id)  initWithTitle:(NSString *)title
      getObjectActionString:(NSString *)getObjectActionStringIn
  objectCSVIdListSettingsKey:(NSString *)objectCSVIdListSettingsKeyIn
 objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
-                objectClass:(id <AFObject>)objectClassIn;
+                objectClass:(Class)objectClassIn;
 
+-(void)handleAppSettingsLoaded;
 @end

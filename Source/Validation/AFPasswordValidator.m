@@ -1,5 +1,4 @@
 #import "AFPasswordValidator.h"
-//#import "GTMRegex.h"
 #import "AFPasswordField.h"
 
 static NSObject <AFValidator> *sharedInstance = nil;

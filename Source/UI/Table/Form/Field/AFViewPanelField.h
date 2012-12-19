@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "AFTableCell.h"
 
-#import "AFBaseField.h"
+#import "AFField.h"
 #import "AFFieldViewPanelObserver.h"
 #import "AFThemeable.h"
 
@@ -12,11 +12,11 @@
 /**
  * AFSettings are intended to have a UI control which fits inside a single AFTableCell, e.g. a slider, text field
  * or check box etc.
- * AFViewPanelField is an subclass of AFBaseField which allows for settings with more complicated UIs than
+ * AFViewPanelField is an subclass of AFField which allows for settings with more complicated UIs than
  * a single control. It holds a reference to an AFNavigationController and UIViewController which are used to
  * present the controls for the setting.
  */
-@interface AFViewPanelField : AFBaseField <AFFieldViewPanelObserver, AFThemeable>
+@interface AFViewPanelField : AFField <AFFieldViewPanelObserver, AFThemeable>
 {
     UIImage     *labelIcon;
     UILabel     *optionLabel;

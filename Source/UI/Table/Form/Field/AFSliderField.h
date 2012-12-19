@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
-#import "AFBaseField.h"
+#import "AFField.h"
 #import "AFField.h"
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFSliderField : AFBaseField <AFField>
+@interface AFSliderField : AFField
 {
     UISlider *slider;
     float minimum;

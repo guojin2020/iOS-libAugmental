@@ -1,10 +1,13 @@
 //Represents a request for data from a URL, whose completion will trigger the specified callback
 
 
+#import "AFObservable.h"
 #import "AFObjectRequest.h"
 #import "AFSession.h"
 #import "AFObjectCache.h"
 #import "AFWriteableObject.h"
+#import "CJSONSerializer.h"
+#import "CJSONDeserializer_BlocksExtensions.h"
 
 @implementation AFObjectRequest
 
@@ -15,7 +18,7 @@
     if ((self = [self initWithURL:URLIn endpoint:endpointIn]))
     {
         NSMutableArray                    *objectDictionaries = [NSMutableArray arrayWithCapacity:[postObjects count]];
-        for (NSObject <AFWriteableObject> *postObject in postObjects)
+        for (AFWriteableObject* postObject in postObjects)
         {
             [objectDictionaries addObject:[postObject setDictionaryFromContent:[NSMutableDictionary dictionary]]];
         }
@@ -34,7 +37,8 @@
 - (void)didFinish
 {
     state = (AFRequestState) AFRequestStateFulfilled;
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventFinished];
+
+    [self notifyObservers:AFRequestEventFinished parameters:self];
 
     NSError *error = nil;
     returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];
@@ -45,7 +49,6 @@
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
         [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
-        //[responseString release];
         [responseString release];
     }
 

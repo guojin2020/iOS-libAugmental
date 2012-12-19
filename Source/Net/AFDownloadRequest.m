@@ -1,7 +1,9 @@
+#import "AFObservable.h"
 #import "AFDownloadRequest.h"
 #import "AFQueueableRequestObserver.h"
 #import "AFSession.h"
 #import "AFHeaderRequest.h"
+#import "AFRequestQueue.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -24,14 +26,13 @@
     AFHeaderRequest     *pollSizeRequest;
 }
 
-@dynamic requiresLogin, URL, state;
-
 static NSMutableDictionary *uniqueRequestPool = nil;
 
-+(AFDownloadRequest *)requestForURL:(NSURL *)URLIn
-                         targetPath:(NSString *)targetPathIn
-                          observers:(NSSet *)observersIn
-                      fileSizeCache:(NSMutableDictionary *)sizeCacheIn
++ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn
+                          targetPath:(NSString *)targetPathIn
+                           observers:(NSSet *)observersIn
+                       fileSizeCache:(NSMutableDictionary *)sizeCacheIn
+           requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     if (!uniqueRequestPool) uniqueRequestPool = [[NSMutableDictionary alloc] init];
 
@@ -44,7 +45,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
     else //Otherwise, let's create a new request
     {
-        request = [[AFDownloadRequest alloc] initWithURL:URLIn targetPath:targetPathIn observers:observersIn fileSizeCache:sizeCacheIn];
+        request = [[AFDownloadRequest alloc] initWithURL:URLIn targetPath:targetPathIn observers:observersIn fileSizeCache:sizeCacheIn requestQueueForHeaderPoll:queueIn];
         [uniqueRequestPool setObject:request forKey:uniqueKey];
         [request release];
     }
@@ -60,10 +61,11 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     return YES;
 }
 
--(id)initWithURL:(NSURL *)URLIn
-       targetPath:(NSString *)targetPathIn
-        observers:(NSSet *)observersIn
-    fileSizeCache:(NSMutableDictionary *)sizeCacheIn
+- (id)        initWithURL:(NSURL *)URLIn
+               targetPath:(NSString *)targetPathIn
+                observers:(NSSet *)observersIn
+            fileSizeCache:(NSMutableDictionary *)sizeCacheIn
+requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     NSAssert(URLIn && targetPathIn && sizeCacheIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
 
@@ -71,7 +73,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     {
         sizeCache  = [sizeCacheIn retain];
         targetPath = [targetPathIn retain];
-        [observers addObjectsFromArray:[observersIn allObjects]];
+        [self addObservers:[observersIn allObjects]];
         dataBuffer = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
         [self updateReceivedBytesFromFile];
@@ -80,13 +82,13 @@ static NSMutableDictionary *uniqueRequestPool = nil;
         if (expectedSizeNumber)
         {
             expectedBytes = [expectedSizeNumber intValue];
-            [self broadcastToObservers:(AFRequestEvent) AFRequestEventSizePolled];
+            [self notifyObservers:AFRequestEventSizePolled parameters:NULL];
         }
 
-        if (![AFSession sharedSession].offline)
+        if(queueIn)
         {
             pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:URLIn endpoint:self];
-            [[AFSession sharedSession] handleRequest:pollSizeRequest];
+            [queueIn handleRequest:pollSizeRequest];
             [pollSizeRequest release];
         }
     }
@@ -268,7 +270,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 {
     queuePosition = (NSUInteger) queuePositionIn;
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventQueued];
+    [self notifyObservers:AFRequestEventQueued parameters:NULL];
 }
 
 - (void)requestWasUnqueued
@@ -276,6 +278,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     state = AFRequestStateIdle;
 }
 
+/*
 - (void)broadcastToObservers:(AFRequestEvent)event
 {
     NSSet *observerSnapshot = [[NSSet alloc] initWithSet:observers];
@@ -296,12 +299,13 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
     [observerSnapshot release];
 }
+*/
 
-- (void)request:(NSObject <AFRequest> *)request returnedWithData:(id)header
+- (void)request:(AFRequest*)request returnedWithData:(id)header
 {
     NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
     [self setExpectedBytesFromHeader:header isCritical:YES];
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventSizePolled];
+    [self notifyObservers:AFRequestEventSizePolled parameters:NULL];
 }
 
 - (void)deleteLocalCopy
@@ -309,7 +313,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     if (state == (AFRequestState) AFRequestStateInProcess)[self cancel];
     if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:targetPath error:nil];
     receivedBytes = 0;
-    [self broadcastToObservers:(AFRequestEvent) AFRequestEventReset];
+    [self notifyObservers:AFRequestEventReset parameters:NULL];
 }
 
 - (BOOL)existsInLocalStorage
@@ -339,7 +343,6 @@ static NSMutableDictionary *uniqueRequestPool = nil;
 {
     [sizeCache release];
     [numberFormatter release];
-    [observers release];
     [targetPath release];
     [dataBuffer release];
     [myHandle release];

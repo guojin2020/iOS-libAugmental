@@ -1,4 +1,6 @@
+
 #import "AFSessionStates.h"
+#import "AFObservable.h"
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
 #import "AFSession.h"
@@ -13,12 +15,7 @@ static AFSession *sharedSession = nil;
 
 + (AFSession *)sharedSession
 {
-    if (!sharedSession)
-    {
-        sharedSession = [AFSession alloc];
-        [sharedSession init];
-    }
-    return sharedSession;
+    return sharedSession ?: (sharedSession = [[AFSession alloc] init]);
 }
 
 - (id)init
@@ -63,13 +60,13 @@ static AFSession *sharedSession = nil;
     return YES;
 }
 
-- (BOOL)handleRequest:(NSObject <AFRequest> *)request
+- (BOOL)handleRequest:(AFRequest*)request
 {
     if (!request || request.state == (AFRequestState) AFRequestStateFulfilled)
     {
         return NO;
     }
-    if (!offline)
+    else if (!offline)
     {
         return YES;
     }
@@ -79,13 +76,13 @@ static AFSession *sharedSession = nil;
     }
 }
 
-- (BOOL)actionRequest:(NSObject <AFRequest> *)request
+- (BOOL)actionRequest:(AFRequest*)request
 {
     [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:) withObject:request waitUntilDone:NO modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
     return YES;
 }
 
-- (void)requestFailed:(NSObject <AFRequest> *)requestIn
+- (void)requestFailed:(AFRequest*)requestIn
 {
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
@@ -159,13 +156,11 @@ static AFSession *sharedSession = nil;
     }
 }
 
-- (AFSessionState)state
-{return state;}
+- (AFSessionState)state { return state; }
 
-- (BOOL)offline
-{return offline;}
+- (BOOL)offline { return offline; }
 
-- (void)request:(NSObject <AFRequest> *)request returnedWithData:(id)data
+- (void)request:(AFRequest*)request returnedWithData:(id)data
 {
 }
 

@@ -19,7 +19,7 @@
         return nil;
     }
     objectType = [[objects objectAtIndex:0] class];
-    if (![[objects objectAtIndex:0] conformsToProtocol:@protocol(AFObject)])
+    if (![[objects objectAtIndex:0] isKindOfClass:[AFObject class]])
     {
         return nil;
     }
@@ -75,9 +75,9 @@
 
     if ((id)viewController == [NSNull null])
     {
-        NSObject <AFObject_PanelViewable> *pageViewObject = [objects objectAtIndex:page];
+        NSObject <AFPanelViewableObject> *pageViewObject = [objects objectAtIndex:page];
 
-        id<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFObject_PanelViewable>) [pageViewObject class]) viewPanelClass];
+        id<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFPanelViewableObject>) [pageViewObject class]) viewPanelClass];
         if (viewPanelControllerClass)
         {
             viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject((Class)viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];

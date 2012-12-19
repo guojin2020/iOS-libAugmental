@@ -59,16 +59,12 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	[(UITableView*)self.view performSelector:@selector(reloadData)];
 }
 
--(void)change:(AFEvent *)changeFlag wasFiredBySource:(AFObservable*)observable withParameters:(NSArray*)parameters
-{
-}
-
 -(void)setTable:(AFTable*)tableIn
 {
 	AFTable* oldTable = table;
 	table = [tableIn retain];
-	[oldTable removeObserver:(id<AFPObserver>)self];
-	[tableIn addObserver:(id<AFPObserver>)self];
+	[oldTable removeObserver:(id)self];
+	[tableIn addObserver:(id)self];
 	[oldTable release];
 	//[self editableChanged:table];
 	table.viewController = self;

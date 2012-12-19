@@ -8,9 +8,6 @@
 
 #import "AFObservable.h"
 
-#import "AFPObserver.h"
-#import "AFEvent.h"
-
 @implementation AFObservable
 
 - (id)init
@@ -25,7 +22,23 @@
     else return NULL;
 }
 
-- (void)notifyObservers:(AFEvent *)changeFlag parameters:(id)firstParameter, ...
+- (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
+{
+    if (lockCount == 0)
+    {
+        [self fireNotification:eventIn parameters:parameters];
+    }
+    else
+    {
+        observableEvent *event = malloc((unsigned long)sizeof(observableEvent));
+        (*event).eventIn = eventIn;
+        (*event).parameters = parameters;
+
+        [events addObject:[NSValue valueWithPointer:event]];
+    }
+}
+
+- (void)notifyObservers:(SEL)eventIn parameters:(id)firstParameter, ...
 {
     NSMutableArray *parameters;
 
@@ -45,39 +58,44 @@
     }
     else parameters = NULL;
 
-    if (lockCount == 0)
-    {
-        [self fireNotification:changeFlag parameters:parameters];
-    }
-    else
-    {
-        observableEvent *event = malloc(sizeof(observableEvent));
-        (*event).changeFlag = changeFlag;
-        (*event).parameters = parameters;
-
-        [events addObject:[NSValue valueWithPointer:event]];
-    }
+    [self notifyObservers:eventIn parameterArray:parameters];
 
     [parameters release];
 }
 
-- (void)fireNotification:(AFEvent *)changeFlag parameters:(NSArray *)parameters
+- (void)fireNotification:(SEL)eventIn parameters:(NSArray *)parameters
 {
-    for (id <AFPObserver> observer in observers)
+    for (id observer in observers)
     {
-        [observer change:changeFlag wasFiredBySource:self withParameters:parameters];
+        //[observer event:eventIn wasFiredBySource:self withParameters:parameters];
+
+        if (eventIn && [observer respondsToSelector:eventIn])
+        {
+            NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:[observer methodSignatureForSelector:eventIn]];
+
+            int parameterCount = [parameters count];
+
+            id arguments [ parameterCount ];
+
+            for ( NSUInteger i = 0; i < parameterCount; i++ )
+            {
+                arguments[i] = [parameters objectAtIndex:i];
+                [invocation setArgument:&arguments[i] atIndex:i + 2];
+            }
+            [invocation setSelector:eventIn];
+            [invocation invokeWithTarget:observer];
+        }
     }
 }
 
-- (void)addObserver:(id <AFPObserver>)observer
+- (void)addObserver:    (id)observer { [observers addObject:observer];    }
+
+- (void)addObservers:(NSArray *)observersIn
 {
-    [observers addObject:observer];
+    for(id observer in observersIn) [self addObserver:observer];
 }
 
-- (void)removeObserver:(id <AFPObserver>)observer
-{
-    [observers removeObject:observer];
-}
+- (void)removeObserver: (id)observer { [observers removeObject:observer]; }
 
 - (void)dealloc
 {
@@ -86,8 +104,7 @@
     [super dealloc];
 }
 
-- (void)beginAtomic
-{++lockCount;}
+- (void)beginAtomic { ++lockCount; }
 
 - (void)completeAtomic
 {
@@ -104,10 +121,7 @@
             {
                 observableEvent *event = [eventValue pointerValue];
 
-                for (id <AFPObserver> observer in observers)
-                {
-                    [observer change:(*event).changeFlag wasFiredBySource:self withParameters:(*event).parameters];
-                }
+                [self fireNotification:event->eventIn parameters:event->parameters];
 
                 free(event);
             }

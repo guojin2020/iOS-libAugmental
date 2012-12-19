@@ -21,20 +21,20 @@ static const NSDictionary      *tidyHTMLReplacements;
                                                         forKeys:[NSArray arrayWithObjects:@"<br>", @"&#39", @"&quot;", @"&rsquo;", @"<br />", @"&ldquo;", @"&rdquo;", @"&bull;", nil]] retain];
 }
 
-+ (void)registerObjectClass:(id<AFObject>)objectClass
++ (void)registerObjectClass:(AFObject*)objectClass
 {
     if (!objectClasses) objectClasses = [[NSMutableSet alloc] init];
     [objectClasses addObject:objectClass];
 }
 
-+ (void)deRegisterObjectClass:(id<AFObject>)objectClass
++ (void)deRegisterObjectClass:(AFObject*)objectClass
 {
     [objectClasses removeObject:objectClass];
 }
 
-+ (id<AFObject>)classForModelName:(NSString *)modelNameIn
++ (Class)classForModelName:(NSString *)modelNameIn
 {
-    for (id<AFObject> curClass in objectClasses)
+    for (Class curClass in objectClasses)
     {
         if ([[curClass modelName] isEqualToString:modelNameIn]) return curClass;
     }

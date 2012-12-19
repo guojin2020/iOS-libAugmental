@@ -11,11 +11,14 @@
 
 @interface AFSKProductFetcher : NSObject <SKProductsRequestDelegate>
 {
+    SKProductsRequest *storeKitRequest;
+
     NSMutableSet* bufferedRequests;
     NSMutableSet* activeRequests;
 
     NSUInteger bufferLockCount;
 }
+
 +(AFSKProductFetcher *)sharedInstance;
 
 -(void)lock;

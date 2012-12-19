@@ -9,11 +9,11 @@
 {
 }
 
-+ (void)registerObjectClass:(id<AFObject>)objectClass;
++ (void)registerObjectClass:(AFObject*)objectClass;
 
-+ (void)deRegisterObjectClass:(id<AFObject>)objectClass;
++ (void)deRegisterObjectClass:(AFObject*)objectClass;
 
-+ (id<AFObject>)classForModelName:(NSString *)modelNameIn;
++ (Class)classForModelName:(NSString *)modelNameIn;
 
 + (NSNumber *)numberFromString:(NSString *)string;
 
