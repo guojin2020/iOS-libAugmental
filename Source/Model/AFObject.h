@@ -36,7 +36,7 @@ extern SEL
     BOOL updateNeeded;
 
     /**
-      Each AFObject has its own eventManager instance which manages observers and broadcasts relevant object events to them.
+      Each AFObject has its own eventManager instance which manages observers and broadcasts relevant object invocationQueue to them.
       **/
     AFObservable *eventManager;
 }

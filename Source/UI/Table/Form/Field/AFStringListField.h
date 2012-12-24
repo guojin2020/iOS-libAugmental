@@ -1,7 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "AFField.h"
-#import "AFField.h"
-#import "AFStringListPickerViewController.h"
+
 #import "AFViewPanelField.h"
 
 @interface AFStringListField : AFViewPanelField

@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "AFQueueableRequest.h"
+
 #import "AFRequestObserver.h"
 #import "AFRequestHandler.h"
+
+@class AFQueueableRequest;
 
 //#define THREADED_REQUEST_HANDLER_ENABLED
 #define BACKGROUND_HANDLING_ENABLED
@@ -26,9 +28,9 @@
 
 - (void)startWaitingRequests;
 
-- (BOOL)isRequestActive:(AFRequest*)request;
+- (BOOL)isRequestActive:(AFRequest*)requestIn;
 
-- (void)startConnectionMainThreadInternal:(AFRequest*)request;
+- (void)startConnectionMainThreadInternal:(AFRequest*)requestIn;
 
 @property(nonatomic, readonly) NSArray *queue;
 @property(nonatomic, readonly) NSSet   *activeRequests;

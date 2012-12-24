@@ -46,7 +46,7 @@
 - (void)removeObserver:(NSObject <AFFieldObserver> *)observer;
 
 /**
- *	This should be the targeted selector for the change events of any UI framework controls in this Settings cell
+ *	This should be the targeted selector for the change invocationQueue of any UI framework controls in this Settings cell
  */
 - (void)controlValueChanged:(id)sender;
 

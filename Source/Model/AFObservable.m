@@ -14,8 +14,8 @@
 {
     if (self = [super init])
     {
-        observers = [[NSMutableSet alloc] init];
-        events    = [[NSMutableSet alloc] init];
+        observers       = [[NSMutableSet alloc] init];
+        invocationQueue = [[NSMutableSet alloc] init];
         lockCount = 0;
         return self;
     }
@@ -24,69 +24,71 @@
 
 - (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
 {
-    if (lockCount == 0)
-    {
-        [self fireNotification:eventIn parameters:parameters];
-    }
-    else
-    {
-        observableEvent *event = malloc((unsigned long)sizeof(observableEvent));
-        (*event).eventIn = eventIn;
-        (*event).parameters = parameters;
+    NSAssert ( eventIn, NSInvalidArgumentException );
 
-        [events addObject:[NSValue valueWithPointer:event]];
+    NSMethodSignature *selectorMethodSignature;
+    NSInvocation *invocation;
+    int index;
+
+    NSSet* observersSnapshot = [[NSSet alloc] initWithSet:observers];
+    for (id observer in observersSnapshot)
+    {
+        if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
+        {
+            invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
+            invocation.target = observer;
+            invocation.selector = eventIn;
+
+            index = 2; // Indices 0, 1 are reserved according to NSInvocation documentation
+            for (id parameter in parameters)
+            {
+                [invocation setArgument:&parameter atIndex:index++];
+            }
+
+            if (lockCount == 0)
+            {
+                [invocation invoke];
+            }
+            else
+            {
+                [invocationQueue addObject:invocation];
+            }
+        }
     }
+    [observersSnapshot release];
 }
 
 - (void)notifyObservers:(SEL)eventIn parameters:(id)firstParameter, ...
 {
+    NSAssert(eventIn,NSInvalidArgumentException);
+
     NSMutableArray *parameters;
 
     if (firstParameter)
     {
         parameters = [[NSMutableArray alloc] init];
 
+        int index=0;
         va_list parameterList;
         [parameters addObject:firstParameter];
         va_start(parameterList, firstParameter);
-        id eachParameter;
-        while ((eachParameter = va_arg(parameterList, id)))
+        id parameter;
+        while ((parameter = va_arg(parameterList, id)))
         {
-            [parameters addObject:eachParameter];
+            [parameters addObject:parameter];
         }
         va_end(parameterList);
     }
-    else parameters = NULL;
+    else
+    {
+        parameters = NULL;
+    }
 
     [self notifyObservers:eventIn parameterArray:parameters];
 
     [parameters release];
 }
 
-- (void)fireNotification:(SEL)eventIn parameters:(NSArray *)parameters
-{
-    for (id observer in observers)
-    {
-        //[observer event:eventIn wasFiredBySource:self withParameters:parameters];
-
-        if (eventIn && [observer respondsToSelector:eventIn])
-        {
-            NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:[observer methodSignatureForSelector:eventIn]];
-
-            int parameterCount = [parameters count];
-
-            id arguments [ parameterCount ];
-
-            for ( NSUInteger i = 0; i < parameterCount; i++ )
-            {
-                arguments[i] = [parameters objectAtIndex:i];
-                [invocation setArgument:&arguments[i] atIndex:i + 2];
-            }
-            [invocation setSelector:eventIn];
-            [invocation invokeWithTarget:observer];
-        }
-    }
-}
 
 - (void)addObserver:    (id)observer { [observers addObject:observer];    }
 
@@ -95,12 +97,15 @@
     for(id observer in observersIn) [self addObserver:observer];
 }
 
-- (void)removeObserver: (id)observer { [observers removeObject:observer]; }
+- (void)removeObserver: (id)observer
+{
+    [observers removeObject:observer];
+}
 
 - (void)dealloc
 {
     [observers release];
-    [events release];
+    [invocationQueue release];
     [super dealloc];
 }
 
@@ -117,16 +122,12 @@
         --lockCount;
         if (lockCount == 0)
         {
-            for (NSValue *eventValue in events)
+            for (NSInvocation *invocation in invocationQueue)
             {
-                observableEvent *event = [eventValue pointerValue];
-
-                [self fireNotification:event->eventIn parameters:event->parameters];
-
-                free(event);
+                [invocation invoke];
             }
 
-            [events removeAllObjects];
+            [invocationQueue removeAllObjects];
         }
     }
 }

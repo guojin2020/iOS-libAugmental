@@ -1,5 +1,6 @@
-#import "AFObservable.h"
+
 #import "AFHeaderRequest.h"
+
 #import "AFRequestEndpoint.h"
 
 @implementation AFHeaderRequest
@@ -18,16 +19,15 @@
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
     [super willSendURLRequest:requestIn];
-
     [requestIn setHTTPMethod:@"HEAD"];
     return requestIn;
 }
 
 - (void)willReceiveWithHeaders:(NSDictionary *)headersIn responseCode:(int)responseCodeIn
 {
-    self.headers = headersIn;
     [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 
+    [self setHeaders:headersIn];
 }
 
 - (void)didFinish
@@ -36,12 +36,10 @@
     [endpoint request:self returnedWithData:headers];
 }
 
-- (void)didFail:(NSError *)error
-{
-}
-
 - (NSString *)actionDescription
-{return @"Determining download size";}
+{
+    return @"Determining download size";
+}
 
 - (void)dealloc
 {

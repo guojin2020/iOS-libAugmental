@@ -98,7 +98,7 @@
 {
     NSAssert(object, @"Invalid object calling %@", NSStringFromSelector(_cmd));
 
-    AFObject* objectClass = ((AFObject*) [object class]);
+    Class objectClass = [object class];
     NSString        *queryString = [NSString stringWithFormat:@"?action=put%@", [objectClass modelName]];
     NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
     AFObjectRequest *request     = [[AFObjectRequest alloc] initWithURL:callURL AFWriteableObjects:[NSArray arrayWithObjects:object, nil] endpoint:endpoint];
@@ -111,7 +111,7 @@
 {
     NSAssert(object, @"Invalid object calling %@", NSStringFromSelector(_cmd));
 
-    AFObject* objectClass = ((AFObject*) [object class]);
+    Class objectClass = [object class];
 
     if ([object isKindOfClass:[AFWriteableObject class]])
     {

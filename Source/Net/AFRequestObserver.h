@@ -2,7 +2,6 @@
 
 @protocol AFRequestObserver
 
-@optional
 - (void)requestStarted:(AFRequest*)requestIn;
 
 - (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn;

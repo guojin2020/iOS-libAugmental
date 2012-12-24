@@ -16,7 +16,7 @@ SEL
 +(void)initialize
 {
     AFRequestEventStarted          = @selector(requestStarted:);                    //Params: AFRequest
-    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:forRequest:); //Params: float, AFRequest
+    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:forRequest:); //Params: NSNumber, AFRequest
     AFRequestEventFinished         = @selector(requestComplete:);                   //Params: AFRequest
     AFRequestEventCancel           = @selector(requestCancelled:);                  //Params: AFRequest
     AFRequestEventFailed           = @selector(requestFailed:);                     //Params: AFRequest
@@ -71,7 +71,7 @@ SEL
     {
         [self setExpectedBytesFromHeader:headers isCritical:NO];
         state = (AFRequestState) AFRequestStateInProcess;
-        [self notifyObservers:AFRequestEventStarted parameters:self];
+        [self notifyObservers:AFRequestEventStarted parameters:self,nil];
     }
     else
     {
@@ -105,26 +105,26 @@ SEL
 - (void)received:(NSData *)dataIn
 {
     receivedBytes += [dataIn length];
-    [self notifyObservers:AFRequestEventProgressUpdated parameters:NULL];
+    [self notifyObservers:AFRequestEventProgressUpdated parameters:[NSNumber numberWithFloat:self.progress],self,nil];
 }
 
 - (void)didFinish
 {
     state = AFRequestStateFulfilled;
-    [self notifyObservers:AFRequestEventFinished parameters:NULL];
+    [self notifyObservers:AFRequestEventFinished parameters:self,nil];
 }
 
 - (void)didFail:(NSError *)error
 {
     state = AFRequestStateFailed;
-    [self notifyObservers:AFRequestEventFailed  parameters:NULL];
+    [self notifyObservers:AFRequestEventFailed  parameters:self,nil];
 }
 
 - (void)cancel
 {
     state = (AFRequestState) AFRequestStatePending;
     [connection cancel];
-    [self notifyObservers:AFRequestEventCancel parameters:NULL];
+    [self notifyObservers:AFRequestEventCancel parameters:self,nil];
 }
 
 -(float)progress

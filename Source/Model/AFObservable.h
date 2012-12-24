@@ -10,24 +10,19 @@
 
 @protocol AFPObserver;
 
-typedef struct observableEvent
-{
-    SEL eventIn;
-    NSArray *parameters;
-}
-        observableEvent;
-
 @interface AFObservable : NSObject
 {
-@private
+    @private
     NSMutableSet *observers;
-    NSMutableSet *events;
+    NSMutableSet *invocationQueue;
     uint32_t lockCount;
 }
 
 - (id)init;
 
-- (void)notifyObservers:(SEL)eventIn parameters:(NSObject *)objects, ...;
+-(void)notifyObservers:(SEL)eventIn parameterArray:(NSArray *)parameters;
+-(void)notifyObservers:(SEL)eventIn parameters:(NSObject *)objects, ...;
+
 - (void)addObserver:(id)observer;
 - (void)addObservers:(NSArray *)observers;
 - (void)removeObserver:(id)observer;

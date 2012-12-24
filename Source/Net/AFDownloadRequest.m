@@ -1,9 +1,7 @@
 #import "AFObservable.h"
 #import "AFDownloadRequest.h"
-#import "AFQueueableRequestObserver.h"
 #import "AFSession.h"
 #import "AFHeaderRequest.h"
-#import "AFRequestQueue.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
