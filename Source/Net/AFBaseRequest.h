@@ -64,7 +64,7 @@ AFRequestEvent;
 @property(nonatomic, readonly) NSUInteger       receivedBytes;
 @property(nonatomic, readonly) int              expectedBytes;
 @property(nonatomic, readonly) float            progress;
-
+@property(nonatomic, readonly) int              responseCode;
 
 
 @end

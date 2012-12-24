@@ -25,7 +25,7 @@
     else return NULL;
 }
 
-- (void)notifyObservers:(AFEventFlag *)changeFlag parameters:(id)firstParameter, ...
+- (void)notifyObservers:(SEL)changeFlag parameters:(id)firstParameter, ...
 {
     NSMutableArray *parameters;
 
@@ -61,7 +61,7 @@
     [parameters release];
 }
 
-- (void)fireNotification:(AFEventFlag *)changeFlag parameters:(NSArray *)parameters
+- (void)fireNotification:(SEL)changeFlag parameters:(NSArray *)parameters
 {
     for (id <AFPObserver> observer in observers)
     {

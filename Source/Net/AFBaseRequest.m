@@ -43,6 +43,8 @@
     [self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
 }
 
+-(int)responseCode { return responseCode; }
+
 - (void)setExpectedBytesFromHeader:(NSDictionary *)header isCritical:(BOOL)critical;
 {
     NSString *keyStr = [header valueForKey:@"Content-Length"];
