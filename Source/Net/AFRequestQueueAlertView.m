@@ -1,4 +1,5 @@
 #import "AFRequestQueueAlertView.h"
+#import "AFObservable.h"
 #import "AFRequestQueue.h"
 #import "AFCellViewFactory.h"
 
@@ -104,7 +105,7 @@ static AFRequestQueue          *visibleQueue = nil;
     if (row == 0)return headingRow;
     else row--;
 
-    NSObject <AFRequest> *request;
+    AFRequest*request;
     if (row < [activatedRequestCache count])
     {
         request = [activatedRequestCache objectAtIndex:(NSUInteger) row];

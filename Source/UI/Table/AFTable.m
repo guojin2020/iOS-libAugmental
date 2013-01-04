@@ -3,15 +3,14 @@
 
 #import "AFTableSection.h"
 #import "AFTableViewController.h"
-#import "AFEventFlag.h"
 
-AFEventFlag *FLAG_TABLE_EDITED;
+SEL AFTableEventEdited;
 
 @implementation AFTable
 
 +(void)initialize
 {
-    FLAG_TABLE_EDITED = [AFEventFlag new];
+    AFTableEventEdited = @selector(handleTableEdited:); //Table
 }
 
 -(id)init { return [self initWithTitle:@""]; }
@@ -24,7 +23,7 @@ AFEventFlag *FLAG_TABLE_EDITED;
 		title = [titleIn retain];
 		children = [[NSMutableArray alloc] init];
 
-        [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
+        [self notifyObservers:AFTableEventEdited parameters:nil];
         
 		backTitle = [backTitleIn retain];
         viewController = NULL;
@@ -37,7 +36,7 @@ AFEventFlag *FLAG_TABLE_EDITED;
 	group.parentTable = self;
 	[children insertObject:group atIndex:index];
 	[group addObserver:self];
-	[self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
+    [self notifyObservers:AFTableEventEdited parameters:nil];
 }
 
 -(void)addSection:(AFTableSection*)group
@@ -45,7 +44,7 @@ AFEventFlag *FLAG_TABLE_EDITED;
 	group.parentTable = self;
 	[children addObject:group];
 	[group addObserver:self];
-    [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
+    [self notifyObservers:AFTableEventEdited parameters:nil];
 }
 
 -(void)removeSection:(AFTableSection*)group
@@ -53,7 +52,7 @@ AFEventFlag *FLAG_TABLE_EDITED;
 	if(group.parentTable==self) group.parentTable = nil;
 	[children removeObject:group];
 	[group removeObserver:self];
-    [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
+    [self notifyObservers:AFTableEventEdited parameters:nil];
 }
 
 -(BOOL)containsSection:(AFTableSection*)section{return [children containsObject:section];}
@@ -61,7 +60,7 @@ AFEventFlag *FLAG_TABLE_EDITED;
 -(void)clear
 {
 	[children removeAllObjects];
-    [self notifyObservers:FLAG_TABLE_EDITED parameters:nil];
+    [self notifyObservers:AFTableEventEdited parameters:nil];
 }
 
 -(AFTableSection*)sectionAtIndex:(NSUInteger)index
@@ -109,13 +108,6 @@ AFEventFlag *FLAG_TABLE_EDITED;
 -(UITableView*)tableView
 {
     return (UITableView*)([self viewController].view);
-}
-
-//=========>> Dealloc
-
-- (void)change:(AFEventFlag *)changeFlag wasFiredBySource:(AFObservable *)observable withParameters:(NSArray*)parameters
-{
-
 }
 
 -(void)dealloc

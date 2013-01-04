@@ -2,15 +2,12 @@
 
 #import <Foundation/Foundation.h>
 #import "AFJSONRequest.h"
-//#import "AFRequest.h"
-//#import "CJSONDeserializer.h"
 
-//@class AFSession;
 @protocol AFRequestEndpoint;
 
 #define SHOW_SERVER_DEBUG
 
-@interface AFObjectRequest : AFJSONRequest <AFRequest>
+@interface AFObjectRequest : AFJSONRequest
 {
 }
 

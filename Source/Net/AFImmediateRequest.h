@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
-#import "AFBaseRequest.h"
+
 #import "AFRequest.h"
 
-@interface AFImmediateRequest : AFBaseRequest <AFRequest>
+@interface AFImmediateRequest : AFRequest
 {
     NSObject        *callbackObject;
     SEL             callbackSelector;

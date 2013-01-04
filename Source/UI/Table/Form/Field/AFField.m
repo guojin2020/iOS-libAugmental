@@ -1,10 +1,11 @@
-#import "AFBaseField.h"
+#import "AFField.h"
 #import "AFValidator.h"
 #import "AFTable.h"
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
+#import "AFObject.h"
 
-@implementation AFBaseField
+@implementation AFField
 
 static UIColor *validColor   = nil;
 static UIColor *invalidColor = nil;
@@ -104,7 +105,7 @@ static UIColor *invalidColor = nil;
         [oldValue release];
 
         for (NSObject <AFFieldObserver> *observer in settingObservers)
-        {[observer settingChanged:(NSObject <AFField> *) self];}
+        {[observer settingChanged:(AFField*) self];}
 
         [self updateControlCell];
     }
@@ -115,34 +116,23 @@ static UIColor *invalidColor = nil;
 
 /**
  * This method should refresh the appearance of the UI table cell for this setting.
- * In AFBaseField this only sets the background color of the cell based on validation.
+ * In AFField this only sets the background color of the cell based on validation.
  * Should be subclassed to implement display of the settings value.
  */
 - (void)updateControlCell
 {
-    [self setFillColor:[self valid] ? [AFBaseField validColor] : [AFBaseField invalidColor]];
+    [self setFillColor:[self valid] ? [AFField validColor] : [AFField invalidColor]];
 }
 
-/**
- This method implements the AFEventObserver protocol, meaning that when
- the application exits, this settings value will be persisted using its persistence
- delegate.
- */
-- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
+-(void)handleObjectFieldUpdated:(AFObject*)objectIn
 {
-    switch (type)
-    {
-        case (AFEvent) AFEventAppTerminating:
-            //NSLog(@"%@ with key '%@' is persisting its value data using %@",NSStringFromClass([self class]),identity,NSStringFromClass([persistenceDelegate class]));
-            [persistenceDelegate persistFieldValue:[NSKeyedArchiver archivedDataWithRootObject:value] forKey:identity];
-            break;
-        case (AFEvent) AFEventObjectFieldUpdated:
-            valueChangedSinceLastValidation = YES;
-            [self updateControlCell];
-            break;
-        default:
-            break;
-    }
+    valueChangedSinceLastValidation = YES;
+    [self updateControlCell];
+}
+
+-(void)handleAppTerminating
+{
+    [persistenceDelegate persistFieldValue:[NSKeyedArchiver archivedDataWithRootObject:value] forKey:identity];
 }
 
 /**
@@ -192,14 +182,14 @@ static UIColor *invalidColor = nil;
 + (UIColor *)validColor
 {
     if (!validColor)
-    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBaseField class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
+    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFField class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
     return validColor;
 }
 
 + (UIColor *)invalidColor
 {
     if (!invalidColor)
-    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFBaseField class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
+    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFField class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
     return invalidColor;
 }
 

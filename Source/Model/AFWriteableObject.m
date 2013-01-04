@@ -1,14 +1,14 @@
-#import "AFBaseWriteableObject.h"
+#import "AFWriteableObject.h"
 
 static NSString *PRIMARY_KEY_KEY = @"pk";
 static NSString *CLASS_KEY       = @"class";
 
-@implementation AFBaseWriteableObject
+@implementation AFWriteableObject
 
 - (NSMutableDictionary *)setDictionaryFromContent:(NSMutableDictionary *)dictionary
 {
     [dictionary setObject:[NSNumber numberWithInt:primaryKey] forKey:PRIMARY_KEY_KEY];
-    [dictionary setObject:[((id<AFObject>) [self class]) modelName] forKey:CLASS_KEY];
+    [dictionary setObject:[[self class] modelName] forKey:CLASS_KEY];
     return dictionary;
 }
 
@@ -18,5 +18,11 @@ static NSString *CLASS_KEY       = @"class";
 
     //return [[AFSession sharedSession].cacheImage writeObject:(NSObject<AFWriteableObject>*)self endpoint:endpointIn];
 }
+
+- (void)willBeDeleted
+{
+
+}
+
 
 @end

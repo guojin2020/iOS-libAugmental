@@ -1,3 +1,5 @@
+
+#import "AFObservable.h"
 #import "AFImmediateRequest.h"
 
 @implementation AFImmediateRequest

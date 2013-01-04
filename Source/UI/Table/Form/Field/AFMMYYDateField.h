@@ -7,7 +7,7 @@
 
 #define THEME_KEY_DATE_ICON @"dateIcon"
 
-@interface AFMMYYDateField : AFViewPanelField <AFField, AFThemeable>
+@interface AFMMYYDateField : AFViewPanelField <AFThemeable>
 {
 }
 

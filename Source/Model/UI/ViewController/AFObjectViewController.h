@@ -3,7 +3,7 @@
 
 /*
 * Implementation of a ViewController which displays a detailed view of a database object
-* e.g. a customers account details or a product.
+* e.g. a customers account details or a storeKitProduct.
 */
 @interface AFObjectViewController : UIViewController <UIScrollViewDelegate>
 {

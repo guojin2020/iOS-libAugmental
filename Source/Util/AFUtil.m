@@ -98,14 +98,14 @@ static char base64EncodingTable[64] = {
     @synchronized (objects)
     {
         int objectsCount = [objects count];
-        if (objectsCount > 0 && [[objects objectAtIndex:0] conformsToProtocol:@protocol(AFObject)])
+        if (objectsCount > 0 && [[objects objectAtIndex:0] isKindOfClass:[AFObject class]])
         {
-            [objectsIdCsv appendFormat:@"%i", ((NSObject <AFObject> *) [objects objectAtIndex:0]).primaryKey];
+            [objectsIdCsv appendFormat:@"%i", ((AFObject*) [objects objectAtIndex:0]).primaryKey];
             for (int i = 1; i < objectsCount; i++)
             {
-                if ([[objects objectAtIndex:(NSUInteger) i] conformsToProtocol:@protocol(AFObject)])
+                if ([[objects objectAtIndex:(NSUInteger) i] isKindOfClass:[AFObject class]])
                 {
-                    [objectsIdCsv appendFormat:@",%i", ((NSObject <AFObject> *) [objects objectAtIndex:(NSUInteger) i]).primaryKey];
+                    [objectsIdCsv appendFormat:@",%i", ((AFObject*) [objects objectAtIndex:(NSUInteger) i]).primaryKey];
                 }
                 else
                 {

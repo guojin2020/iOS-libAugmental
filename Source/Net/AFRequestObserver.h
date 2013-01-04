@@ -1,20 +1,19 @@
-@protocol AFRequest;
+@class AFRequest;
 
 @protocol AFRequestObserver
 
-@optional
-- (void)requestStarted:(NSObject <AFRequest> *)requestIn;
+- (void)requestStarted:(AFRequest*)requestIn;
 
-- (void)requestProgressUpdated:(float)completion forRequest:(NSObject <AFRequest> *)requestIn;
+- (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn;
 
-- (void)requestComplete:(NSObject <AFRequest> *)requestIn;
+- (void)requestComplete:(AFRequest*)requestIn;
 
-- (void)requestCancelled:(NSObject <AFRequest> *)requestIn;
+- (void)requestCancelled:(AFRequest*)requestIn;
 
-- (void)requestSizePolled:(int)sizeBytes forRequest:(NSObject <AFRequest> *)requestIn;
+- (void)requestSizePolled:(int)sizeBytes forRequest:(AFRequest*)requestIn;
 
-- (void)requestReset:(NSObject <AFRequest> *)requestIn;
+- (void)requestReset:(AFRequest*)requestIn;
 
-- (void)requestFailed:(NSObject <AFRequest> *)requestIn;
+- (void)requestFailed:(AFRequest*)requestIn;
 
 @end

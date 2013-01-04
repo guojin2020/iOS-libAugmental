@@ -8,73 +8,96 @@
 
 #import "AFObservable.h"
 
-#import "AFPObserver.h"
-#import "AFEventFlag.h"
-
 @implementation AFObservable
 
 - (id)init
 {
     if (self = [super init])
     {
-        observers = [[NSMutableSet alloc] init];
-        events    = [[NSMutableSet alloc] init];
+        observers       = [[NSMutableSet alloc] init];
+        invocationQueue = [[NSMutableSet alloc] init];
         lockCount = 0;
         return self;
     }
     else return NULL;
 }
 
-- (void)notifyObservers:(SEL)changeFlag parameters:(id)firstParameter, ...
+- (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
 {
+    NSAssert ( eventIn, NSInvalidArgumentException );
+
+    NSMethodSignature *selectorMethodSignature;
+    NSInvocation *invocation;
+    int index;
+
+    NSSet* observersSnapshot = [[NSSet alloc] initWithSet:observers];
+    for (id observer in observersSnapshot)
+    {
+        if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
+        {
+            invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
+            invocation.target = observer;
+            invocation.selector = eventIn;
+
+            index = 2; // Indices 0, 1 are reserved according to NSInvocation documentation
+            for (id parameter in parameters)
+            {
+                [invocation setArgument:&parameter atIndex:index++];
+            }
+
+            if (lockCount == 0)
+            {
+                [invocation invoke];
+            }
+            else
+            {
+                [invocationQueue addObject:invocation];
+            }
+        }
+    }
+    [observersSnapshot release];
+}
+
+- (void)notifyObservers:(SEL)eventIn parameters:(id)firstParameter, ...
+{
+    NSAssert(eventIn,NSInvalidArgumentException);
+
     NSMutableArray *parameters;
 
     if (firstParameter)
     {
         parameters = [[NSMutableArray alloc] init];
 
+        int index=0;
         va_list parameterList;
         [parameters addObject:firstParameter];
         va_start(parameterList, firstParameter);
-        id eachParameter;
-        while ((eachParameter = va_arg(parameterList, id)))
+        id parameter;
+        while ((parameter = va_arg(parameterList, id)))
         {
-            [parameters addObject:eachParameter];
+            [parameters addObject:parameter];
         }
         va_end(parameterList);
     }
-    else parameters = NULL;
-
-    if (lockCount == 0)
-    {
-        [self fireNotification:changeFlag parameters:parameters];
-    }
     else
     {
-        observableEvent *event = malloc(sizeof(observableEvent));
-        (*event).changeFlag = changeFlag;
-        (*event).parameters = parameters;
-
-        [events addObject:[NSValue valueWithPointer:event]];
+        parameters = NULL;
     }
+
+    [self notifyObservers:eventIn parameterArray:parameters];
 
     [parameters release];
 }
 
-- (void)fireNotification:(SEL)changeFlag parameters:(NSArray *)parameters
+
+- (void)addObserver:    (id)observer { [observers addObject:observer];    }
+
+- (void)addObservers:(NSArray *)observersIn
 {
-    for (id <AFPObserver> observer in observers)
-    {
-        [observer change:changeFlag wasFiredBySource:self withParameters:parameters];
-    }
+    for(id observer in observersIn) [self addObserver:observer];
 }
 
-- (void)addObserver:(id <AFPObserver>)observer
-{
-    [observers addObject:observer];
-}
-
-- (void)removeObserver:(id <AFPObserver>)observer
+- (void)removeObserver: (id)observer
 {
     [observers removeObject:observer];
 }
@@ -82,7 +105,7 @@
 - (void)dealloc
 {
     [observers release];
-    [events release];
+    [invocationQueue release];
     [super dealloc];
 }
 
@@ -99,19 +122,12 @@
         --lockCount;
         if (lockCount == 0)
         {
-            for (NSValue *eventValue in events)
+            for (NSInvocation *invocation in invocationQueue)
             {
-                observableEvent *event = [eventValue pointerValue];
-
-                for (id <AFPObserver> observer in observers)
-                {
-                    [observer change:(*event).changeFlag wasFiredBySource:self withParameters:(*event).parameters];
-                }
-
-                free(event);
+                [invocation invoke];
             }
 
-            [events removeAllObjects];
+            [invocationQueue removeAllObjects];
         }
     }
 }

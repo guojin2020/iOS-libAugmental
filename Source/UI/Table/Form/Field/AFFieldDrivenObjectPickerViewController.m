@@ -5,7 +5,6 @@
 #import "AFSession.h"
 #import "AFObjectCache.h"
 #import "AFEnvironment.h"
-#import "AFEventManager.h"
 
 @interface AFFieldDrivenObjectPickerViewController ()
 
@@ -19,7 +18,7 @@
      getObjectActionString:(NSString *)getObjectActionStringIn
  objectCSVIdListSettingsKey:(NSString *)objectCSVIdListSettingsKeyIn
 objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
-                objectClass:(id<AFObject>)objectClassIn
+                objectClass:(Class)objectClassIn
 {
     if ((self = [super initWithObjects:nil delegate:self title:titleIn]))
     {
@@ -51,7 +50,7 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     [objectsRequest release];
 }
 
-- (void)request:(NSObject <AFRequest> *)request returnedWithData:(id)objectsIn
+- (void)request:(AFRequest*)request returnedWithData:(id)objectsIn
 {
     objects = [[NSMutableArray alloc] initWithArray:objectsIn];
     [picker reloadAllComponents];
@@ -63,12 +62,9 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     //[loadingView removeFromSuperview];
 }
 
-- (void)eventOccurred:(AFEvent)type source:(id <AFObject>)source
+-(void)handleAppSettingsLoaded
 {
-    if (type == AFEventAppSettingsLoaded)
-    {
-        [self setupUsingSettings];
-    }
+    [self setupUsingSettings];
 }
 
 - (void)viewDidLoad

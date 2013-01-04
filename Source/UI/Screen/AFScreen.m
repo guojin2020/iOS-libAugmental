@@ -1,4 +1,6 @@
+
 #import "AFScreen.h"
+#import "AFObservable.h"
 #import "AFSession.h"
 #import "AFScreenObserver.h"
 #import "AFThemeManager.h"
@@ -130,7 +132,7 @@ static UIColor  *loadingTitleColor;
 - (NSArray *)settingsSections
 {return nil;}
 
-- (void)settingValueChanged:(NSObject <AFField> *)setting
+- (void)settingValueChanged:(AFField*)setting
 {[self doesNotRecognizeSelector:_cmd];}
 
 - (void)refreshActive

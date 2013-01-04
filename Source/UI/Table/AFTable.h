@@ -1,19 +1,18 @@
 
 #import <Foundation/Foundation.h>
 #import "AFObservable.h"
-#import "AFPObserver.h"
 #import "AFThemeable.h"
 
 @class AFTableSection;
 @class AFTableViewController;
 
-extern AFEventFlag *FLAG_TABLE_EDITED;
+extern SEL AFTableEventEdited;
 
 /**
  *	Generic framework-like class, representing an on-screen table
  *  which is assembled from individual pruneCellCache and Section objects.
  */
-@interface AFTable : AFObservable <AFPObserver, NSFastEnumeration, AFThemeable>
+@interface AFTable : AFObservable <NSFastEnumeration, AFThemeable>
 {
 	NSString*       title;
 	NSMutableArray* children;

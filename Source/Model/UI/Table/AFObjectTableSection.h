@@ -1,24 +1,19 @@
+
 #import <Foundation/Foundation.h>
 #import "AFTableSection.h"
 #import "AFObjectTableCell.h"
 
-@protocol AFObject_CellViewable;
+@protocol AFCellViewable;
 
 @interface AFObjectTableSection : AFTableSection
 {
-    //NSMutableDictionary* childCellMap;
     NSMutableArray *objects;
 }
 
 - (id)initWithObjectArray:(NSArray *)objectArrayIn;
-
-- (NSObject <AFObjectTableCell> *)addObject:(NSObject <AFObject_CellViewable> *)object;
-
+- (AFObjectTableCell*)addObject:(AFObject<AFCellViewable> *)object;
 - (void)setObjectArray:(NSArray *)objectArrayIn;
-
 - (void)addObjectArray:(NSArray *)objectArrayIn;
-
 - (void)removeAllCells;
-
 
 @end

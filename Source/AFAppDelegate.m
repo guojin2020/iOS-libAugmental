@@ -1,26 +1,38 @@
 
 #import "AFAppDelegate.h"
-#import "AFEventObserver.h"
 #import "AFScreenManager.h"
 #import "AFFormSection.h"
 #import "AFJSONRequest.h"
 #import "AFBooleanField.h"
 #import "AFCachingAudioPlayer.h"
 #import "AFObjectCache.h"
-#import "AFEventManager.h"
 #import "AFSession.h"
 
 static NSMutableDictionary* settings = nil;
 static BOOL settingsLoaded = NO;
-static AFEventManager* appEventManager = nil;
+static AFObservable* appEventManager = nil;
 static AFBooleanField * soundFXSetting = nil;
 static BOOL globalSFXEnabled = NO;
 
+SEL
+    AFEventAppSettingsLoaded,
+    AFEventAppTerminating,
+    AFEventAppSettingsLoadFailed,
+    AFEventAppMemoryWarning;
+
 @implementation AFAppDelegate
 
-+(AFEventManager*)appEventManager
++(void)initialize
 {
-	if(!appEventManager) appEventManager = [[AFEventManager alloc] init];
+    AFEventAppSettingsLoaded        = @selector(handleAppSettingsLoaded);
+    AFEventAppTerminating           = @selector(handleAppTerminating);
+    AFEventAppSettingsLoadFailed    = @selector(handleAppSettingsLoadFailed);
+    AFEventAppMemoryWarning         = @selector(handleAppMemoryWarning);
+}
+
++(AFObservable*)appEventManager
+{
+	if(!appEventManager) appEventManager = [[AFObservable alloc] init];
 	return appEventManager;
 }
 
@@ -70,7 +82,7 @@ static BOOL globalSFXEnabled = NO;
 	return YES;
 }
 
--(void)settingValueChanged:(NSObject<AFField>*)setting {}
+-(void)settingValueChanged:(AFField*)setting {}
 
 +(NSString*)settingsPath
 {
@@ -82,10 +94,10 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationWillTerminate:(UIApplication*)application
 {
-    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppTerminating source:self];
+    [[AFAppDelegate appEventManager] notifyObservers:AFEventAppTerminating parameters:NULL];
 }
 
--(void)request:(NSObject<AFRequest>*)request returnedWithData:(id)data
+-(void)request:(AFRequest*)request returnedWithData:(id)data
 {
 	NSAssert(request==settingsRequest,@"AFAppDelegate received a response from an unexpected request: %@",request);
 	
@@ -93,12 +105,12 @@ static BOOL globalSFXEnabled = NO;
 	if(settings)
 	{
 		[[AFAppDelegate settings] addEntriesFromDictionary:settings];
-        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoaded source:self];
+        [[AFAppDelegate appEventManager] notifyObservers:AFEventAppSettingsLoaded parameters:NULL];
 		settingsLoaded=YES;
 	}
 	else
 	{
-        [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppSettingsLoadFailed source:self];
+        [[AFAppDelegate appEventManager] notifyObservers:AFEventAppSettingsLoadFailed parameters:NULL];
 	}
 	[settingsRequest release];
 }
@@ -128,7 +140,7 @@ static BOOL globalSFXEnabled = NO;
 
 -(void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
-    [[AFAppDelegate appEventManager] broadcastEvent:(AFEvent) AFEventAppMemoryWarning source:self];
+    [[AFAppDelegate appEventManager] notifyObservers:AFEventAppMemoryWarning parameters:NULL];
 }
 
 -(NSArray*)settingsSections
@@ -141,12 +153,5 @@ static BOOL globalSFXEnabled = NO;
 	[window release];
 	[super dealloc];
 }
-/*
-+(UIViewController*)rootViewController
-{
-    return ((AFAppDelegate*)([UIApplication sharedApplication].delegate)).rootViewController;
-}
 
-@synthesize rootViewController;
-*/
 @end

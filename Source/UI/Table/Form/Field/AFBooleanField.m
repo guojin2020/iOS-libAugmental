@@ -27,7 +27,7 @@
     [valueSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
     [cell setAccessoryView:valueSwitch];
     [self updateControlCell];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 //@dynamic value, validator, valid;

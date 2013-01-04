@@ -1,9 +1,11 @@
+
 #import <Foundation/Foundation.h>
-#import "AFBaseRequest.h"
+
+#import "AFRequest.h"
 
 @protocol AFRequestEndpoint;
 
-@interface AFHeaderRequest : AFBaseRequest <AFRequest>
+@interface AFHeaderRequest : AFRequest
 {
     NSDictionary                 *headers;
     NSObject <AFRequestEndpoint> *endpoint;

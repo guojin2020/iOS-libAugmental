@@ -1,7 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "AFQueueableRequest.h"
+
 #import "AFRequestObserver.h"
 #import "AFRequestHandler.h"
+
+@class AFQueueableRequest;
 
 //#define THREADED_REQUEST_HANDLER_ENABLED
 #define BACKGROUND_HANDLING_ENABLED
@@ -14,21 +16,21 @@
 
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn;
 
-- (void)queueRequestAtFront:(NSObject <AFQueueableRequest> *)requestIn;
+- (void)queueRequestAtFront:(AFQueueableRequest*)requestIn;
 
-- (void)queueRequestAtBack:(NSObject <AFQueueableRequest> *)requestIn;
+- (void)queueRequestAtBack:(AFQueueableRequest*)requestIn;
 
-- (BOOL)handleRequest:(NSObject <AFRequest> *)request;
+- (BOOL)handleRequest:(AFRequest*)request;
 
-- (NSObject <AFRequest> *)queuedRequestForConnection:(NSURLConnection *)connection;
+- (AFRequest*)queuedRequestForConnection:(NSURLConnection *)connection;
 
 - (void)setOffline:(BOOL)offlineState;
 
 - (void)startWaitingRequests;
 
-- (BOOL)isRequestActive:(NSObject <AFRequest> *)request;
+- (BOOL)isRequestActive:(AFRequest*)requestIn;
 
-- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request;
+- (void)startConnectionMainThreadInternal:(AFRequest*)requestIn;
 
 @property(nonatomic, readonly) NSArray *queue;
 @property(nonatomic, readonly) NSSet   *activeRequests;

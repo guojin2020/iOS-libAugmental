@@ -1,9 +1,13 @@
+
 #import "AFRequestQueue.h"
+
 #import "AFPerformSelectorOperation.h"
+#import "AFQueueableRequest.h"
+#import "AFHeaderRequest.h"
 
 @interface AFRequestQueue ()
 
-- (BOOL)handleRequestInternal:(NSObject <AFQueueableRequest> *)request;
+- (BOOL)handleRequestInternal:(AFQueueableRequest*)request;
 
 @end
 
@@ -45,7 +49,7 @@
     [activatedRequests removeAllObjects];
     @synchronized (queue)
     {
-        for (NSObject<AFQueueableRequest>* request in queue)
+        for (AFQueueableRequest* request in queue)
         {
             if (request.state == (AFRequestState) AFRequestStatePending)
             {
@@ -62,16 +66,16 @@
                 }
                 else
                 {
-                    if ([request respondsToSelector:@selector(requestWasQueuedAtPosition:)])[request requestWasQueuedAtPosition:queuePosition];
+                    if ([request isKindOfClass:[AFQueueableRequest class]])[(AFQueueableRequest *)request requestWasQueuedAtPosition:queuePosition];
                     queuePosition++;
                 }
             }
         }
-        for (NSObject <AFQueueableRequest> *request in activatedRequests)[queue removeObject:request];
+        for (AFQueueableRequest* request in activatedRequests)[queue removeObject:request];
     }
 }
 
-- (BOOL)actionRequest:(NSObject <AFRequest> *)request
+- (BOOL)actionRequest:(AFRequest*)request
 {
     if(targetHandler) return [targetHandler handleRequest:request];
     else
@@ -86,20 +90,16 @@
  */
 - (void)cancelAllRequests
 {
-    for (NSObject <AFQueueableRequest> *request in [NSArray arrayWithArray:queue])
+    for (AFQueueableRequest* request in [NSArray arrayWithArray:queue])
     {
-        if (request)
-        {
-            [request cancel];
-
-        }
+        [request cancel];
     }
 }
 
 /**
  *	Same as calling 
  */
-- (BOOL)handleRequest:(NSObject <AFRequest> *)request
+- (BOOL)handleRequest:(AFRequest*)request
 {
 #ifdef BACKGROUND_HANDLING_ENABLED
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
@@ -109,7 +109,7 @@
 	#endif
 }
 
-- (BOOL)handleRequestInternal:(NSObject <AFQueueableRequest> *)request
+- (BOOL)handleRequestInternal:(AFQueueableRequest*)request
 {
     //NSLog(@"Handing request: %@",request);
 
@@ -135,66 +135,83 @@
 /**
  *	Adds a request to the back of the request queue
  */
-- (void)queueRequestAtFront:(NSObject <AFQueueableRequest> *)requestIn
+- (void)queueRequestAtFront:(AFQueueableRequest*)requestIn
 {
+    NSAssert(requestIn, NSInvalidArgumentException);
+
     [requestIn addObserver:self];
     [queue insertObject:requestIn atIndex:0];
     [self startWaitingRequests];
 }
 
-- (void)queueRequestAtBack:(NSObject <AFQueueableRequest> *)requestIn;
+- (void)queueRequestAtBack:(AFQueueableRequest*)requestIn;
 {
+    NSAssert(requestIn, NSInvalidArgumentException);
+
     [requestIn addObserver:self];
     [queue addObject:requestIn];
     [self startWaitingRequests];
 }
 
-- (void)startConnectionMainThreadInternal:(NSObject <AFRequest> *)request
+- (void)startConnectionMainThreadInternal:(AFRequest*)requestIn
 {
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:request.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
-    urlRequest = [request willSendURLRequest:urlRequest];
+    NSAssert(requestIn, NSInvalidArgumentException);
+
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:requestIn.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
+    urlRequest = [requestIn willSendURLRequest:urlRequest];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
-    request.connection = connection;
-    [connection release];
+    requestIn.connection = connection;
+    //[connection release];
 }
 
-- (void)requestSizePolled:(int)sizeBytes forRequest:(NSObject <AFRequest> *)requestIn
-{}
-
-- (void)requestStarted:(NSObject <AFRequest> *)requestIn
-{}
-
-- (void)requestProgressUpdated:(float)completion forRequest:(NSObject <AFRequest> *)requestIn
-{}
-
-- (void)requestComplete:(NSObject <AFRequest> *)requestIn
+- (void)requestSizePolled:(int)sizeBytes forRequest:(AFRequest*)requestIn
 {
-    //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
+    NSAssert(requestIn, NSInvalidArgumentException);
+}
+
+- (void)requestStarted:(AFRequest*)requestIn
+{
+    NSAssert(requestIn, NSInvalidArgumentException);
+}
+
+- (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn
+{
+    NSAssert(requestIn, NSInvalidArgumentException);
+}
+
+- (void)requestComplete:(AFRequest*)requestIn
+{
+    NSAssert(requestIn, NSInvalidArgumentException);
+
+    if(![requestIn isKindOfClass:[AFHeaderRequest class]]) NSLog(@"Not an AFHeaderRequest");
+    if(![requestIn isKindOfClass:[AFRequest class]]) NSLog(@"Not an AFRequest");
+    if(![requestIn respondsToSelector:@selector(removeObserver:)]) NSLog(@"Doesn't respond to removeObserver:");
+    NSLog(@"Is a: %@", NSStringFromClass([requestIn class]));
 
     [requestIn removeObserver:self];
     [activeRequests removeObject:requestIn];
     [self startWaitingRequests];
 }
 
-- (void)requestCancelled:(NSObject <AFRequest> *)requestIn
+- (void)requestCancelled:(AFRequest*)requestIn
 {
-    //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
+    NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
     [activeRequests removeObject:requestIn];
 
-    if([requestIn conformsToProtocol:@protocol(AFQueueableRequest)])
+    if([requestIn isKindOfClass:[AFQueueableRequest class]])
     {
-        [((id<AFQueueableRequest>)requestIn) requestWasUnqueued];
+        [((AFQueueableRequest*)requestIn) requestWasUnqueued];
     }
 
     [self startWaitingRequests];
 }
 
-- (void)requestReset:(NSObject <AFRequest> *)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
+- (void)requestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
 {
-    //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
+    NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
@@ -202,9 +219,9 @@
     [self startWaitingRequests];
 }
 
-- (void)requestFailed:(NSObject <AFRequest> *)requestIn;
+- (void)requestFailed:(AFRequest*)requestIn;
 {
-    //NSLog(@"%@, %@ %@",NSStringFromClass([self class]),NSStringFromSelector(_cmd), [[requestIn URL] absoluteString]);
+    NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
@@ -212,10 +229,12 @@
     [self startWaitingRequests];
 }
 
-- (NSObject <AFRequest> *)queuedRequestForConnection:(NSURLConnection *)connection
+- (AFRequest*)queuedRequestForConnection:(NSURLConnection *)connection
 {
-    for (NSObject <AFRequest> *testRequest in queue) if (testRequest.connection == connection) return testRequest;
-    for (NSObject <AFRequest> *testRequest in activeRequests) if (testRequest.connection == connection) return testRequest;
+    NSAssert(connection, NSInvalidArgumentException);
+
+    for (AFRequest*testRequest in queue)            if (testRequest.connection == connection) return testRequest;
+    for (AFRequest*testRequest in activeRequests)   if (testRequest.connection == connection) return testRequest;
     return nil;
 }
 
@@ -228,34 +247,48 @@
     }
 }
 
-- (BOOL)isRequestActive:(NSObject <AFRequest> *)request
-{return [activeRequests containsObject:request];}
+- (BOOL)isRequestActive:(AFRequest*)requestIn
+{
+    NSAssert(requestIn, NSInvalidArgumentException);
+
+    return [activeRequests containsObject:requestIn];
+}
 
 // NSURLConnectionDelegate
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+    NSAssert(connection, NSInvalidArgumentException);
+    NSAssert(response,   NSInvalidArgumentException);
+
+    AFRequest* findRequest = [[self queuedRequestForConnection:connection] retain];
 
     NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
-    NSAssert(findRequest != nil, responseString);
+    NSAssert ( findRequest, responseString );
 
-    [findRequest willReceiveWithHeaders:[((NSHTTPURLResponse *) response) allHeaderFields] responseCode:[((NSHTTPURLResponse *) response) statusCode]];
+    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse *)response;
+    NSDictionary *headers = [[httpResponse allHeaderFields] retain];
+
+    [findRequest willReceiveWithHeaders:headers responseCode:[httpResponse statusCode]];
+
+    [headers release];
+    [findRequest release];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+    NSAssert(connection, NSInvalidArgumentException);
+    NSAssert(data,       NSInvalidArgumentException);
 
-    NSObject <AFRequest> *findRequest = [self queuedRequestForConnection:connection];
+    AFRequest*findRequest = [self queuedRequestForConnection:connection];
     if (findRequest) [findRequest received:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+    NSAssert(connection, NSInvalidArgumentException);
 
-    NSObject <AFRequest> *findRequest;
+    AFRequest*findRequest;
 
     //[self setOffline:YES];
 
@@ -268,9 +301,9 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+    NSAssert(connection, NSInvalidArgumentException);
 
-    NSObject <AFRequest> *findRequest = [[self queuedRequestForConnection:connection] retain];
+    AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
 
     //NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
 
@@ -304,7 +337,7 @@
 {
     [activeRequests release];
     [self cancelAllRequests];
-    for (NSObject <AFQueueableRequest> *request in queue)[request removeObserver:self];
+    for (AFQueueableRequest* request in queue)[request removeObserver:self];
     [queue release];
     [activatedRequests release];
     [super dealloc];

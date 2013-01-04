@@ -11,9 +11,8 @@
 
 @protocol AFTableSectionObserver;
 @class AFTable;
-@class AFEventFlag;
 
-extern AFEventFlag * FLAG_SECTION_EDITED;
+extern SEL AFTableSectionEventEdited;
 
 /**
  *	Represents a basic section in a table, with a text header and any number of cells.

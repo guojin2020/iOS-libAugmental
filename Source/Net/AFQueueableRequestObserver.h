@@ -1,10 +1,11 @@
+
 #import "AFRequestObserver.h"
 
-@protocol AFQueueableRequest;
+@class AFQueueableRequest;
 
 @protocol AFQueueableRequestObserver <AFRequestObserver>
 
 @required
-- (void)requestQueued:(NSObject <AFQueueableRequest> *)requestIn AtPosition:(int)queuePosition;
+- (void)requestQueued:(AFQueueableRequest*)requestIn AtPosition:(int)queuePosition;
 
 @end

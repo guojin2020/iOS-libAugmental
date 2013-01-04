@@ -15,11 +15,11 @@
 	{
 		for(AFTableCell* cell in section)
 		{
-			if([cell conformsToProtocol:@protocol(AFField)] && ((NSObject<AFField>*)cell).validator && !((NSObject<AFField>*)cell).valid)
+			if([cell isKindOfClass:[AFField class]] && ((AFField*)cell).validator && !((AFField*)cell).valid)
 			{
-				[errorMessage appendString:[((NSObject<AFField>*)cell) identity]];
+				[errorMessage appendString:[((AFField*)cell) identity]];
 				[errorMessage appendString:@" must "];
-				[errorMessage appendString:[((NSObject<AFField>*)cell).validator conditionDescription]];
+				[errorMessage appendString:[((AFField*)cell).validator conditionDescription]];
 				[errorMessage appendString:@"\n"];
 			}
 		}

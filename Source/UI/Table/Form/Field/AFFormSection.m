@@ -1,3 +1,4 @@
+
 #import "AFFormSection.h"
 #import "AFSettingProvider.h"
 #import "AFField.h"
@@ -13,7 +14,7 @@
     return self;
 }
 
-- (void)addField:(AFTableCell <AFField> *)field
+- (void)addField:(AFField*)field
 {
 	[self addCell:field];
 }

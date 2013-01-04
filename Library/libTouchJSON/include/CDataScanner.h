@@ -34,9 +34,9 @@
 @interface CDataScanner : NSObject {
 	NSData *data;
 
-	u_int8_t *start;
-	u_int8_t *end;
-	u_int8_t *current;
+	uint8_t *start;
+	uint8_t *end;
+	uint8_t *current;
 	NSUInteger length;
 }
 

@@ -3,14 +3,12 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
-
 #import <Foundation/Foundation.h>
-#import "AFEventObserver.h"
 
-@protocol AFObject;
+@class AFObject;
 
-@interface AFWeakCache : NSObject <AFEventObserver>
+@interface AFWeakCache : NSObject
 
-- (void)addObject:(id <AFObject>)valueIn forKey:(id <AFObject>)keyIn;
+- (void)addObject:(id )valueIn forKey:(id )keyIn;
 
 @end

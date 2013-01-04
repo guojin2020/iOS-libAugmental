@@ -17,9 +17,7 @@
 
 @end
 
-@implementation AFSKProductFetcher
-{
-}
+@implementation AFSKProductFetcher {}
 
 static AFSKProductFetcher *sharedInstance;
 
@@ -83,17 +81,19 @@ static AFSKProductFetcher *sharedInstance;
         [productIds addObject:activeRequest.productConsumer.storeKitProductId];
     }
 
-    SKProductsRequest *request = [[SKProductsRequest alloc] initWithProductIdentifiers:productIds];
+    storeKitRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:productIds];
     [productIds release];
 
-    request.delegate = self;
-    [request start];
+    storeKitRequest.delegate = self;
+    [storeKitRequest start];
 }
 
 // SKProductsRequestDelegate implementation
 
-- (void)productsRequest:(SKProductsRequest *)storeKitRequest didReceiveResponse:(SKProductsResponse *)storeKitResponse
+- (void)productsRequest:(SKProductsRequest *)storeKitRequestIn didReceiveResponse:(SKProductsResponse *)storeKitResponse
 {
+    NSAssert ( storeKitRequest==storeKitRequestIn, @"" );
+
     BOOL found;
     AFSKProductRequest *request;
     AFSKProductFetchResponse *response;
@@ -118,7 +118,7 @@ static AFSKProductFetcher *sharedInstance;
 
     for(request in activeRequests)
     {
-        response = [[AFSKProductFetchResponseFailed alloc] initWithReason:@"Was not returned by iTunes"];
+        response = [[AFSKProductFetchResponseFailed alloc] initWithReason:@"currently unavailable"];
         [request.productConsumer didReceiveResponse:response toRequest:request];
         [response release];
     }
@@ -126,6 +126,8 @@ static AFSKProductFetcher *sharedInstance;
     [activeRequests removeAllObjects];
 
     [self unlock];
+
+    [storeKitRequest release];
 }
 
 - (void)requestDidFinish:(SKRequest *)request
@@ -133,8 +135,10 @@ static AFSKProductFetcher *sharedInstance;
     NSLog(@"%@",NSStringFromSelector(_cmd));
 }
 
-- (void)request:(SKRequest *)storeKitRequest didFailWithError:(NSError *)error
+- (void)request:(SKRequest *)storeKitRequestIn didFailWithError:(NSError *)error
 {
+    NSAssert ( storeKitRequest==storeKitRequestIn, @"" );
+
 	AFSKProductRequest *request;
 	AFSKProductFetchResponse *response;
 
@@ -147,14 +151,15 @@ static AFSKProductFetcher *sharedInstance;
 
     [self unlock];
 
+    [storeKitRequest release];
 }
 
 -(void)dealloc
 {
     [activeRequests release];
     [bufferedRequests release];
+    [storeKitRequest release];
     [super dealloc];
 }
-
 
 @end

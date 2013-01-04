@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
-#import "AFBaseField.h"
+
 #import "AFField.h"
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFBooleanField : AFBaseField <AFField>
+@interface AFBooleanField : AFField
 {
     UISwitch *valueSwitch;
 }

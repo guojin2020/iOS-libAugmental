@@ -1,19 +1,20 @@
+
 #import <Foundation/Foundation.h>
 #import "AFTableSection.h"
 
 @class      AFTableCell;
 @protocol   AFSettingProvider;
-@protocol   AFField;
+@class      AFField;
 
 @interface AFFormSection : AFTableSection
 {
-    NSString                      *name;
+    NSString                     *name;
     NSObject <AFSettingProvider> *provider;
 }
 
 - (id)initWithTitle:(NSString *)title provider:(NSObject <AFSettingProvider> *)providerIn;
 
-- (void)addField:(AFTableCell <AFField> *)field;
+- (void)addField:(AFField*)field;
 
 @property(nonatomic, retain) NSObject <AFSettingProvider> *provider;
 

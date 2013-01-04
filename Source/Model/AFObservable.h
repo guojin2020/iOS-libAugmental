@@ -8,34 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
-@class AFEventFlag;
 @protocol AFPObserver;
-
-typedef struct observableEvent
-{
-    AFEventFlag *changeFlag;
-    NSArray      *parameters;
-}
-        observableEvent;
 
 @interface AFObservable : NSObject
 {
-@private
+    @private
     NSMutableSet *observers;
-    NSMutableSet *events;
+    NSMutableSet *invocationQueue;
     uint32_t lockCount;
 }
 
 - (id)init;
 
-- (void)notifyObservers:(AFEventFlag *)changeFlag parameters:(NSObject *)objects, ...;
+-(void)notifyObservers:(SEL)eventIn parameterArray:(NSArray *)parameters;
+-(void)notifyObservers:(SEL)eventIn parameters:(NSObject *)objects, ...;
 
-- (void)addObserver:(id<AFPObserver>)observable;
-
-- (void)removeObserver:(id<AFPObserver>)observable;
-
+- (void)addObserver:(id)observer;
+- (void)addObservers:(NSArray *)observers;
+- (void)removeObserver:(id)observer;
 - (void)beginAtomic;
-
 - (void)completeAtomic;
 
 @end

@@ -1,6 +1,7 @@
+
 #import "AFRequest.h"
 
-@protocol AFQueueableRequest <AFRequest>
+@interface AFQueueableRequest : AFRequest
 
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 - (void)requestWasUnqueued;

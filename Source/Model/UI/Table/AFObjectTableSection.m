@@ -1,5 +1,5 @@
 #import "AFObjectTableSection.h"
-#import "AFObject_CellViewable.h"
+#import "AFCellViewable.h"
 
 @implementation AFObjectTableSection
 
@@ -32,10 +32,10 @@
     [objects addObject:cell];
 }
 
-- (NSObject <AFObjectTableCell> *)addObject:(NSObject <AFObject_CellViewable> *)object;
+- (AFObjectTableCell*)addObject:(AFObject<AFCellViewable>*)object;
 {
-    id<AFObjectTableCell> cellClass = [((id<AFObject_CellViewable>) [object class]) cellViewClass];
-    AFTableCell <AFObjectTableCell> *cell = [((AFTableCell <AFObjectTableCell> *) NSAllocateObject((Class)cellClass, 0, NULL)) initWithObject:object];
+    Class cellClass = [((id<AFCellViewable>) [object class]) cellViewClass];
+    AFObjectTableCell *cell = [((AFObjectTableCell*) NSAllocateObject(cellClass, 0, NULL)) initWithObject:object];
 
     [children addObject:cell];
     cell.parentSection = self;
@@ -55,7 +55,7 @@
 
 - (void)addObjectArray:(NSArray *)objectArrayIn;
 {
-    for (NSObject <AFObject_CellViewable> *cellObject in objectArrayIn) [self addObject:cellObject];
+    for (AFObject<AFCellViewable> *cellObject in objectArrayIn) [self addObject:cellObject];
 }
 
 - (void)removeAllCells

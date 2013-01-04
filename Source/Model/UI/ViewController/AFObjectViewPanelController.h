@@ -1,13 +1,13 @@
-#import "AFObject_PanelViewable.h"
+#import "AFPanelViewableObject.h"
 
 @class AFSession;
 
 
 @protocol AFObjectViewPanelController
 
-- (id)initWithObject:(NSObject <AFObject_PanelViewable> *)objectIn nibName:(NSString *)nibNameIn;
+- (id)initWithObject:(NSObject <AFPanelViewableObject> *)objectIn nibName:(NSString *)nibNameIn;
 
-- (id)initWithObject:(NSObject <AFObject_PanelViewable> *)objectIn;
+- (id)initWithObject:(NSObject <AFPanelViewableObject> *)objectIn;
 
 /**
  * This is called by when one or more data fields in this object have been updated, as 
@@ -18,6 +18,6 @@
 
 - (void)invalidated;
 
-@property(nonatomic, readonly) NSObject <AFObject_PanelViewable> *object;
+@property(nonatomic, readonly) NSObject <AFPanelViewableObject> *object;
 
 @end

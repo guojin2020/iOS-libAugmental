@@ -1,11 +1,10 @@
 #import "AFPagedObjectQuery.h"
 #import "AFResultsPage.h"
+#import "AFObservable.h"
 #import "AFSession.h"
 #import "AFEnvironment.h"
 #import "AFPagedObjectQueryObserver.h"
 #import "AFPagedObjectRequest.h"
-//#import "AFAppDelegate.h"
-
 
 @implementation AFPagedObjectQuery
 
@@ -64,7 +63,7 @@
 - (void)removeObserver:(NSObject <AFPagedObjectQueryObserver> *)observer
 {[observers removeObject:observer];}
 
-- (void)request:(NSObject <AFRequest> *)request returnedWithData:(id)resultsPage
+- (void)request:(AFRequest*)request returnedWithData:(id)resultsPage
 {
     if (request == currentRequest)
     {
