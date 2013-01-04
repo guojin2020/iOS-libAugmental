@@ -86,8 +86,7 @@
     [super dealloc];
 }
 
-- (void)beginAtomic
-{++lockCount;}
+- (void)beginAtomic { ++lockCount; }
 
 - (void)completeAtomic
 {
