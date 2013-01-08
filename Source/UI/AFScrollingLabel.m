@@ -418,7 +418,14 @@ static CGSize cgSizeMax;
 	[textLayer release];
 	[maskLayer release];
 	[textLayerDelegate release];
-	[super dealloc];
+    [stepTimer release];
+    [maskStartColors release];
+    [maskEndColors release];
+    [maskBothColors release];
+    [maskStartStops release];
+    [maskEndStops release];
+    [maskBothStops release];
+    [super dealloc];
 }
 
 @end

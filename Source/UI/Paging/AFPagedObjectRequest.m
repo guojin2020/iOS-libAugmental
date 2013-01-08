@@ -22,7 +22,7 @@
 - (void)didFinish
 {
     state = (AFRequestState) AFRequestStateFulfilled;
-    [self notifyObservers:AFRequestEventFinished parameters:self];
+    [self notifyObservers:AFRequestEventFinished parameters:self,nil];
 
     NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
     //DebugLog(@"Response from '%@': %@",[URL absoluteString],responseString);

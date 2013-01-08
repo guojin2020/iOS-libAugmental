@@ -107,8 +107,6 @@ static CJSONSerializer   *jsonSerializer;
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
         [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
-        //[responseString release];
-        [responseString release];
     }
 
     if (endpoint)

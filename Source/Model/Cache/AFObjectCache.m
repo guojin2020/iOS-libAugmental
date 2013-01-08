@@ -22,7 +22,7 @@
     self = [super init];
     if (self)
     {
-        [[NSNotificationCenter defaultCenter] add]
+        //[[NSNotificationCenter defaultCenter] add]
     }
 
     return self;

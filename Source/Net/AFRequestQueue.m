@@ -161,7 +161,7 @@
     urlRequest = [requestIn willSendURLRequest:urlRequest];
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
     requestIn.connection = connection;
-    //[connection release];
+    [connection release];
 }
 
 - (void)requestSizePolled:(int)sizeBytes forRequest:(AFRequest*)requestIn

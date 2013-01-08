@@ -20,9 +20,9 @@ SEL
     AFRequestEventFinished         = @selector(requestComplete:);                   //Params: AFRequest
     AFRequestEventCancel           = @selector(requestCancelled:);                  //Params: AFRequest
     AFRequestEventFailed           = @selector(requestFailed:);                     //Params: AFRequest
-    AFRequestEventQueued           = @selector(handleRequestFinished);
-    AFRequestEventReset            = @selector(handleRequestFinished);
-    AFRequestEventSizePolled       = @selector(handleRequestFinished);
+    AFRequestEventQueued           = @selector(handleRequest:queuedAt:);    //Params: AFRequest, NSNumber
+    AFRequestEventReset            = @selector(handleRequestReset:);        //Params: AFRequest
+    AFRequestEventSizePolled       = @selector(handleRequest:sizePolled:);  //Params: AFRequest, NSNumber
 }
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;
@@ -105,7 +105,7 @@ SEL
 - (void)received:(NSData *)dataIn
 {
     receivedBytes += [dataIn length];
-    [self notifyObservers:AFRequestEventProgressUpdated parameters:[NSNumber numberWithFloat:self.progress],self,nil];
+    [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];
 }
 
 - (void)didFinish

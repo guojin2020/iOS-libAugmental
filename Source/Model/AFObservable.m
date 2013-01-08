@@ -68,7 +68,6 @@
     {
         parameters = [[NSMutableArray alloc] init];
 
-        int index=0;
         va_list parameterList;
         [parameters addObject:firstParameter];
         va_start(parameterList, firstParameter);

@@ -55,12 +55,12 @@ static NSString
 
 - (void)commonInit
 {
-    eventManager  = [[AFObservable alloc] init];
+    //eventManager  = [[AFObservable alloc] init];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
 
--(AFObservable *)eventManager { return eventManager; }
+//-(AFObservable *)eventManager { return eventManager; }
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
@@ -84,7 +84,7 @@ static NSString
 
 - (void)finishBatchUpdating
 {
-    if (batchUpdating && updateNeeded) [eventManager notifyObservers:AFEventObjectFieldUpdated parameters:self];
+    if (batchUpdating && updateNeeded) [self notifyObservers:AFEventObjectFieldUpdated parameters:self,nil];
     batchUpdating = NO;
     updateNeeded  = NO;
 }
@@ -94,7 +94,7 @@ static NSString
     if (batchUpdating) updateNeeded = YES;
     else
     {
-        [self notifyObservers:AFEventObjectFieldUpdated parameters:self];
+        [self notifyObservers:AFEventObjectFieldUpdated parameters:self,nil];
     }
 }
 
@@ -126,13 +126,13 @@ static NSString
 - (void)wasValidated
 {
     isPlaceholder = NO;
-    [self notifyObservers:AFEventObjectValidated parameters:self];
+    [self notifyObservers:AFEventObjectValidated parameters:self,nil];
 }
 
 - (void)wasInvalidated
 {
     isPlaceholder = YES;
-    [self notifyObservers:AFEventObjectInvalidated parameters:self];
+    [self notifyObservers:AFEventObjectInvalidated parameters:self,nil];
 }
 
 - (AFObjectRequest *)deleteWithEndpoint:(NSObject <AFRequestEndpoint> *)endpoint
@@ -168,7 +168,6 @@ static NSString
 
 - (void)dealloc
 {
-    [eventManager release];
     [super dealloc];
 }
 

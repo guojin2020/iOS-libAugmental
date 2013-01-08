@@ -193,8 +193,11 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     switch (buttonIndex)
     {
         case 1:
-        url = [NSString stringWithFormat: @"mailto:chris@pocket-innovation.com?&subject=Pocket%%20Trainer%%20support%%20request&body=Error%%20code%%20%i",responseCode];
-        [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            url = [NSString stringWithFormat: @"mailto:chris@pocket-innovation.com?&subject=Pocket%%20Trainer%%20support%%20request&body=Error%%20code%%20%i",responseCode];
+            [[UIApplication sharedApplication] openURL: [NSURL URLWithString: url]];
+            break;
+
+        default: @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Unexpected button index" userInfo:NULL];
     }
 }
 

@@ -82,7 +82,7 @@ static NSString* cellClickedSound			= nil;
 		}
 		else
 		{
-			self.cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
 			if([labelText length]>0) cell.textLabel.text = labelText;
 		}
 		
