@@ -16,7 +16,7 @@ SEL
 +(void)initialize
 {
     AFRequestEventStarted          = @selector(requestStarted:);                    //Params: AFRequest
-    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:forRequest:); //Params: NSNumber, AFRequest
+    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:); //Params: NSNumber, AFRequest
     AFRequestEventFinished         = @selector(requestComplete:);                   //Params: AFRequest
     AFRequestEventCancel           = @selector(requestCancelled:);                  //Params: AFRequest
     AFRequestEventFailed           = @selector(requestFailed:);                     //Params: AFRequest

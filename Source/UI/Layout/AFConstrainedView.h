@@ -10,11 +10,11 @@
 @interface AFConstrainedView : UIView <AFPConstrainedView>
 {
     CGSize
-        _preferredSize,
-        _minimumSize,
-        _maximumSize;
+        preferredSize,
+        minimumSize,
+        maximumSize;
 
-    UIEdgeInsets _edgeInsets;
+    //UIEdgeInsets edgeInsets;
 }
 
 @property (nonatomic) CGSize preferredSize;

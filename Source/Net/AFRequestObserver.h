@@ -4,7 +4,7 @@
 
 - (void)requestStarted:(AFRequest*)requestIn;
 
-- (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn;
+- (void)requestProgressUpdated:(AFRequest *)requestIn;
 
 - (void)requestComplete:(AFRequest*)requestIn;
 

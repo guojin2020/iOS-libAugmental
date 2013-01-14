@@ -13,4 +13,6 @@
     bool fillsRemainder;
 }
 
+-(id)initWithRemainderFill:(BOOL)fillsRemainderIn;
+
 @end

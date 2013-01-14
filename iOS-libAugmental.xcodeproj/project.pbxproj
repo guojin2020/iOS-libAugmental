@@ -91,8 +91,7 @@
 		099B110A163D639600E81588 /* AFStackLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D172AF0CB010C389C1906E /* AFStackLayoutView.m */; };
 		099B110B163D639600E81588 /* AFLayoutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17CADF5BE9A1E2380C2B1 /* AFLayoutView.m */; };
 		099B110C163D639600E81588 /* AFConstrainedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 67D17A0BCFE70DD8B1A59F90 /* AFConstrainedView.m */; };
-		099B110D163D639600E81588 /* AFVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */; };
-		099B110E163D639600E81588 /* AFVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */; };
+		099B110E163D639600E81588 /* AFVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerView.m */; };
 		099B110F163D639600E81588 /* AFVideoStillsFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */; };
 		099B1110163D639600E81588 /* AFAVAssetCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */; };
 		099B1111163D639600E81588 /* AFMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5D2CB96A51A59E910CF /* AFMoviePlayerViewController.m */; };
@@ -213,8 +212,7 @@
 		099B1192163D639600E81588 /* AFLayoutView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17F1FC2ACC3834D4CFD77 /* AFLayoutView.h */; };
 		099B1193163D639600E81588 /* AFConstrainedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17D864AC731EA99D4E6ED /* AFConstrainedView.h */; };
 		099B1194163D639600E81588 /* AFPConstrainedView.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17109CE48A45BBC2BBE69 /* AFPConstrainedView.h */; };
-		099B1195163D639600E81588 /* AFVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */; };
-		099B1196163D639600E81588 /* AFVideoPlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */; };
+		099B1196163D639600E81588 /* AFVideoPlayerView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA11B6960381AF6F8AECE /* AFVideoPlayerView.h */; };
 		099B1197163D639600E81588 /* AFVideoStillsFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA935657322CEC376CD89 /* AFVideoStillsFactory.h */; };
 		099B1198163D639600E81588 /* AFAVAssetCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA99F66C1827E59555137 /* AFAVAssetCache.h */; };
 		099B1199163D639600E81588 /* AFMoviePlayerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA5A2DBB36E1670659E38 /* AFMoviePlayerViewController.h */; };
@@ -495,7 +493,7 @@
 		B03CA0D5DE519171EEB1BE2C /* AFDrawingDelegableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDrawingDelegableView.m; sourceTree = "<group>"; };
 		B03CA100A6AF2B3B0799C7B5 /* AFObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectCache.m; sourceTree = "<group>"; };
 		B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDefaultsBackedStringDictionary.m; sourceTree = "<group>"; };
-		B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerViewController.h; sourceTree = "<group>"; };
+		B03CA11B6960381AF6F8AECE /* AFVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerView.h; sourceTree = "<group>"; };
 		B03CA1270537ABFBD73376A2 /* AFPSKProductConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPSKProductConsumer.h; sourceTree = "<group>"; };
 		B03CA18005EF2F47350D3980 /* AFSKProductFetchResponseFailed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponseFailed.h; sourceTree = "<group>"; };
 		B03CA1DA3808EDE110BF69C9 /* AFSKProductFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetcher.h; sourceTree = "<group>"; };
@@ -526,7 +524,6 @@
 		B03CAA31BA37036E74146504 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		B03CAA75F771E58A6560D03C /* AFWeakCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWeakCache.h; sourceTree = "<group>"; };
 		B03CAAA3A87FC690F69F0F4B /* AFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCache.h; sourceTree = "<group>"; };
-		B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerView.h; sourceTree = "<group>"; };
 		B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegableView.h; sourceTree = "<group>"; };
 		B03CABC3FC47DE3DDC347A98 /* AFDrawingDelegableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegableTableViewCell.h; sourceTree = "<group>"; };
 		B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -534,8 +531,7 @@
 		B03CAC3CDA19157EF8F2813C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
 		B03CAC4A0E9F56DDAC2516CF /* AFMethodBlockedException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMethodBlockedException.m; sourceTree = "<group>"; };
 		B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegate.h; sourceTree = "<group>"; };
-		B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerViewController.m; sourceTree = "<group>"; };
-		B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerView.m; sourceTree = "<group>"; };
+		B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerView.m; sourceTree = "<group>"; };
 		B03CAD9F06AF6C386DBC21D6 /* AFDefaultsBackedStringDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDefaultsBackedStringDictionary.h; sourceTree = "<group>"; };
 		B03CADB1DB86B732668F58BF /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
 		B03CADFFEB65C0359AC15524 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
@@ -704,10 +700,8 @@
 				759BFF6715E6CC1900D32988 /* AFImageCache.h */,
 				759BFF4D15E6CC1900D32988 /* AFCachingAudioPlayer.m */,
 				759BFF4C15E6CC1900D32988 /* AFCachingAudioPlayer.h */,
-				B03CAD4615272BFC607B8A31 /* AFVideoPlayerView.m */,
-				B03CAAF4C9517D5FDC58F8CA /* AFVideoPlayerView.h */,
-				B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerViewController.m */,
-				B03CA11B6960381AF6F8AECE /* AFVideoPlayerViewController.h */,
+				B03CACE45CEA6D445CC9D3FF /* AFVideoPlayerView.m */,
+				B03CA11B6960381AF6F8AECE /* AFVideoPlayerView.h */,
 				B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */,
 				B03CA935657322CEC376CD89 /* AFVideoStillsFactory.h */,
 				B03CA3C8A3FF696C2F4687B4 /* AFAVAssetCache.m */,
@@ -1247,8 +1241,7 @@
 				099B1192163D639600E81588 /* AFLayoutView.h in Headers */,
 				099B1193163D639600E81588 /* AFConstrainedView.h in Headers */,
 				099B1194163D639600E81588 /* AFPConstrainedView.h in Headers */,
-				099B1195163D639600E81588 /* AFVideoPlayerView.h in Headers */,
-				099B1196163D639600E81588 /* AFVideoPlayerViewController.h in Headers */,
+				099B1196163D639600E81588 /* AFVideoPlayerView.h in Headers */,
 				099B1197163D639600E81588 /* AFVideoStillsFactory.h in Headers */,
 				099B1198163D639600E81588 /* AFAVAssetCache.h in Headers */,
 				099B1199163D639600E81588 /* AFMoviePlayerViewController.h in Headers */,
@@ -1462,8 +1455,7 @@
 				099B110A163D639600E81588 /* AFStackLayoutView.m in Sources */,
 				099B110B163D639600E81588 /* AFLayoutView.m in Sources */,
 				099B110C163D639600E81588 /* AFConstrainedView.m in Sources */,
-				099B110D163D639600E81588 /* AFVideoPlayerView.m in Sources */,
-				099B110E163D639600E81588 /* AFVideoPlayerViewController.m in Sources */,
+				099B110E163D639600E81588 /* AFVideoPlayerView.m in Sources */,
 				099B110F163D639600E81588 /* AFVideoStillsFactory.m in Sources */,
 				099B1110163D639600E81588 /* AFAVAssetCache.m in Sources */,
 				099B1111163D639600E81588 /* AFMoviePlayerViewController.m in Sources */,
