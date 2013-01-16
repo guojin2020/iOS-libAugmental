@@ -8,7 +8,7 @@
 {
     if ((self = [super initWithIdentity:identityIn]))
     {
-        [self.validator = [[AFPasswordValidator alloc] initWithComparisonSetting:nil allowsEmpty:allowsEmptyIn] release];
+        validator = [[AFPasswordValidator alloc] initWithComparisonSetting:nil allowsEmpty:allowsEmptyIn];
     }
     return self;
 }

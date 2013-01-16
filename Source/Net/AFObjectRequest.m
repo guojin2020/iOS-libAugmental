@@ -38,7 +38,7 @@
 {
     state = (AFRequestState) AFRequestStateFulfilled;
 
-    [self notifyObservers:AFRequestEventFinished parameters:self];
+    [self notifyObservers:AFRequestEventFinished parameters:self,nil];
 
     NSError *error = nil;
     returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];
@@ -48,8 +48,8 @@
     if (error || !objectDictionaries || [objectDictionaries isKindOfClass:[NSNull class]])
     {
         NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
-        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
-        [responseString release];
+        NSString *description = [NSString stringWithFormat:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
+        @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:description userInfo:NULL];
     }
 
     NSArray *deleteObjects = [returnedDictionary objectForKey:@"delete"];

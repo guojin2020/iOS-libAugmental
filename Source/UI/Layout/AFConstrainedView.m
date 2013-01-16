@@ -12,33 +12,32 @@
     self = [super init];
     if (self)
     {
-       _minimumSize   = CGSizeZero;
-       _preferredSize = CGSizeZero; // CGSizeZero here is heuristic for unspecified (use current size)
-       _maximumSize   = CGSizeMake ( CGFLOAT_MAX, CGFLOAT_MAX );
+       minimumSize   = CGSizeZero;
+       preferredSize = CGSizeZero; // CGSizeZero here is heuristic for unspecified (use current size)
+       maximumSize   = CGSizeMake ( CGFLOAT_MAX, CGFLOAT_MAX );
     }
-
     return self;
 }
 
-- (CGSize)minimumSize                           { return _minimumSize;              }
-- (void)setMinimumSize:(CGSize)minimumSize      { _minimumSize = minimumSize;       }
+- (CGSize)minimumSize { return minimumSize; }
+- (void)setMinimumSize:(CGSize)minimumSizeIn { minimumSize = minimumSizeIn; }
 
-- (CGSize)maximumSize                           { return _maximumSize;              }
-- (void)setMaximumSize:(CGSize)maximumSize      { _maximumSize = maximumSize;       }
+- (CGSize)maximumSize { return maximumSize; }
+- (void)setMaximumSize:(CGSize)maximumSizeIn { maximumSize = maximumSizeIn; }
 
 - (CGSize)preferredSize
 {
-    CGSize preferredSize = CGSizeEqualToSize ( _preferredSize, CGSizeZero ) ? self.frame.size : _preferredSize;
+    CGSize size = CGSizeEqualToSize (preferredSize, CGSizeZero ) ? self.frame.size : preferredSize;
 
-    preferredSize.width  = fminf ( preferredSize.width,  _maximumSize.width  );
-    preferredSize.width  = fmaxf ( preferredSize.width,  _minimumSize.width  );
+    size.width  = fminf ( size.width,  maximumSize.width  );
+    size.width  = fmaxf ( size.width,  minimumSize.width  );
 
-    preferredSize.height = fminf ( preferredSize.height, _maximumSize.height );
-    preferredSize.height = fmaxf ( preferredSize.height, _minimumSize.height );
+    size.height = fminf ( size.height, maximumSize.height );
+    size.height = fmaxf ( size.height, minimumSize.height );
 
-    return preferredSize;
+    return size;
 }
 
-- (void)setPreferredSize:(CGSize)preferredSize  { _preferredSize = preferredSize;   }
+- (void)setPreferredSize:(CGSize)preferredSizeIn { preferredSize = preferredSizeIn;   }
 
 @end

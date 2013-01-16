@@ -174,8 +174,7 @@
     NSAssert(requestIn, NSInvalidArgumentException);
 }
 
-- (void)requestProgressUpdated:(float)completion forRequest:(AFRequest*)requestIn
-{
+- (void)requestProgressUpdated:(AFRequest *)requestIn {
     NSAssert(requestIn, NSInvalidArgumentException);
 }
 

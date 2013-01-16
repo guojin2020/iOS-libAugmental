@@ -17,8 +17,6 @@ static BOOL alreadyShowingOne = NO;
 
 - (void)show
 {
-    //NSAssert(!alreadyShowingOne,@"Already showing one!");
-
     alreadyShowingOne = YES;
 
     [super show];
@@ -26,14 +24,6 @@ static BOOL alreadyShowingOne = NO;
     indicator.center = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height - 42);
     [indicator startAnimating];
 }
-
-/*
--(void)setBounds:(CGRect)rectIn
-{
-	[super setBounds:rectIn];
-	indicator.center = CGPointMake(self.bounds.size.width / 2, self.bounds.size.height - 42);
-}
-*/
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated
 {

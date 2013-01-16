@@ -56,11 +56,20 @@ static AFSKProductFetcher *sharedInstance;
 
 -(AFSKProductRequest*)requestProductForConsumer:(id<AFPSKProductConsumer>)consumer
 {
-    AFSKProductRequest *request = [[AFSKProductRequest alloc] initWithConsumer:consumer];
-    [bufferedRequests addObject:request];
-    [request release];
+    AFSKProductRequest* request;
 
-    if (bufferLockCount==0) [self sendRequests];
+    if (consumer.storeKitProductId)
+    {
+        request = [[AFSKProductRequest alloc] initWithConsumer:consumer];
+        [bufferedRequests addObject:request];
+        [request release];
+
+        if (bufferLockCount==0) [self sendRequests];
+    }
+    else
+    {
+        request = NULL;
+    }
 
     return request;
 }

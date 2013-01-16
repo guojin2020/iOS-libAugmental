@@ -8,7 +8,7 @@
     if ((self = [super init]))
     {
         loadingView = nil;
-        [self.observers = [[NSMutableSet alloc] initWithCapacity:2] release];
+        observers = [[NSMutableSet alloc] initWithCapacity:2];
     }
     return self;
 }
@@ -17,7 +17,7 @@
 {
     if ([super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])
     {
-        [self.observers = [[NSMutableSet alloc] initWithCapacity:2] release];
+        observers = [[NSMutableSet alloc] initWithCapacity:2];
     }
     return self;
 }
@@ -89,8 +89,8 @@
     [value release];
     [value release];
     [defaultValue release];
-    //[loadingLabel release];
     [loadingView release];
+    [loadingLabel release];
     [super dealloc];
 }
 

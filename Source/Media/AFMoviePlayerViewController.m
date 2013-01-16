@@ -32,4 +32,9 @@
     self.view = player.view;
 }
 
+- (void)dealloc {
+    [player release];
+    [super dealloc];
+}
+
 @end

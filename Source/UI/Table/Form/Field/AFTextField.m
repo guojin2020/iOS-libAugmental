@@ -141,6 +141,7 @@ static NSString *beginEditingSound = nil;
     //[string release];
     [textField release];
     [textFieldDelegate release];
+    [string release];
     [super dealloc];
 }
 

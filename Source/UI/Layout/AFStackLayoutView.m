@@ -3,19 +3,17 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
-
 #import "AFStackLayoutView.h"
 #import "AFPConstrainedView.h"
 
-
 @implementation AFStackLayoutView
 
--(id)init
+-(id)initWithRemainderFill:(BOOL)fillsRemainderIn
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
-        fillsRemainder = true;
+        fillsRemainder = fillsRemainderIn;
     }
     return self;
 }
@@ -45,7 +43,7 @@
 
         spaceRemaining = layoutHeight - caret;
 
-        if( space>spaceRemaining || (fillsRemainder && i==childCount -1) )
+        if( space>spaceRemaining || (fillsRemainder && i==(childCount-1)) )
         {
             space = spaceRemaining;
         }

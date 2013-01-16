@@ -3,7 +3,7 @@
 @implementation AFImageAccessoryButton
 
 //Set the size of this control (touch area), 44 is max. fit for height of UIViewCell
-static const int size = 44;
+static const float size = 44;
 
 - (id)initWithImage:(UIImage *)imageIn target:(id)objectIn action:(SEL)selectorIn
 {

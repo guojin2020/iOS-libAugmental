@@ -54,6 +54,7 @@
             [cache removeObjectForKey:key];
         }
     }
+    [cacheKeysSnapshot release];
 }
 
 - (void)dealloc

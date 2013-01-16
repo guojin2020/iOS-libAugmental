@@ -39,9 +39,29 @@
 {
     if (viewController && manager)
     {
-        viewController.navigationItem.leftBarButtonItem  = previousBarButtonItem ? previousBarButtonItem : [manager.delegate newPreviousBarButtonItemForPage:self];
-        viewController.navigationItem.rightBarButtonItem = nextBarButtonItem ? nextBarButtonItem : [manager.delegate newNextBarButtonItemForPage:self];
-        viewController.title                             = title ? title : [manager.delegate titleForPage:self];
+        if (previousBarButtonItem)
+        {
+            viewController.navigationItem.leftBarButtonItem  = previousBarButtonItem;
+        }
+        else
+        {
+            UIBarButtonItem *item = [manager.delegate newPreviousBarButtonItemForPage:self];
+            viewController.navigationItem.leftBarButtonItem = item;
+            [item release];
+        }
+
+        if (nextBarButtonItem)
+        {
+            viewController.navigationItem.rightBarButtonItem = nextBarButtonItem;
+        }
+        else
+        {
+            UIBarButtonItem *item = [manager.delegate newNextBarButtonItemForPage:self];
+            viewController.navigationItem.rightBarButtonItem = item;
+            [item release];
+        }
+
+        viewController.title = title ? title : [manager.delegate titleForPage:self];
     }
 }
 
@@ -49,7 +69,19 @@
 {
     UIBarButtonItem *oldItem = previousBarButtonItem;
     previousBarButtonItem = [newItem retain];
-    if (viewController) viewController.navigationItem.leftBarButtonItem = previousBarButtonItem ? previousBarButtonItem : [manager.delegate newPreviousBarButtonItemForPage:self];
+    if (viewController)
+    {
+        if (previousBarButtonItem)
+        {
+            viewController.navigationItem.leftBarButtonItem = previousBarButtonItem;
+        }
+        else
+        {
+            UIBarButtonItem *item = [manager.delegate newPreviousBarButtonItemForPage:self];
+            viewController.navigationItem.leftBarButtonItem = item;
+            [item release];
+        }
+    }
     [oldItem release];
 }
 
@@ -57,7 +89,19 @@
 {
     UIBarButtonItem *oldItem = nextBarButtonItem;
     nextBarButtonItem = [newItem retain];
-    if (viewController) viewController.navigationItem.rightBarButtonItem = nextBarButtonItem ? nextBarButtonItem : [manager.delegate newNextBarButtonItemForPage:self];
+    if (viewController)
+    {
+        if (nextBarButtonItem)
+        {
+            viewController.navigationItem.rightBarButtonItem = nextBarButtonItem;
+        }
+        else
+        {
+            UIBarButtonItem *item = [manager.delegate newNextBarButtonItemForPage:self];
+            viewController.navigationItem.rightBarButtonItem = item;
+            [item release];
+        }
+    }
     [oldItem release];
 }
 
