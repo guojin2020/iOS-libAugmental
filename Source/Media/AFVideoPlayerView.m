@@ -23,8 +23,6 @@ static const NSString *ItemStatusContext;
     return self;
 }
 
-
-
 -(id)initWithAsset:(AVAsset*)asset
 {
     self = [super init];
@@ -67,7 +65,7 @@ static const NSString *ItemStatusContext;
 
         playButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
         playButton.frame = CGRectMake(0, 0, 32, 32);
-        playButton.center = self.center;
+
         [self addSubview:playButton];
     }
     return self;
@@ -83,8 +81,6 @@ static const NSString *ItemStatusContext;
     if ((self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay))
     {
         self.playButton.enabled = YES;
-
-        //[[self window] setNeedsLayout];
 
         if(autoPlay) [player play];
     }
@@ -108,6 +104,13 @@ static const NSString *ItemStatusContext;
     [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     return;
 }
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    playButton.center = self.center;
+}
+
 
 - (void)dealloc
 {
@@ -133,9 +136,9 @@ static const NSString *ItemStatusContext;
 {
     return [(AVPlayerLayer *)[self layer] player];
 }
-- (void)setPlayer:(AVPlayer *)player
+- (void)setPlayer:(AVPlayer *)playerIn
 {
-    [(AVPlayerLayer *)[self layer] setPlayer:player];
+    [(AVPlayerLayer *)[self layer] setPlayer:playerIn];
 }
 
 - (AVAsset *)asset { return playerItem.asset; }
