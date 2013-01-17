@@ -262,7 +262,6 @@
 		B03CA86A7C767B010039C034 /* AFSKProductFetchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA38A9EFFFE3CFF9955BA /* AFSKProductFetchResponse.m */; };
 		B03CA8C4254B4F05A5132C33 /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */; };
 		B03CA8FAA917B392D1D1DA7E /* AFSKProductFetchResponseFailed.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA18005EF2F47350D3980 /* AFSKProductFetchResponseFailed.h */; };
-		B03CA90F395489F1A3A9B0D4 /* AFSpinnerLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA604AB6565AC6C1227E5 /* AFSpinnerLabel.m */; };
 		B03CA966AD5DF5B4B4A20B30 /* AFObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA100A6AF2B3B0799C7B5 /* AFObjectCache.m */; };
 		B03CAA57BA63D46BE5F4CBBF /* AFWeakCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAA75F771E58A6560D03C /* AFWeakCache.h */; };
 		B03CAB026CE7353C251DCBB6 /* AFObjectCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA9665DF8AAD8D9F934B5 /* AFObjectCache.h */; };
@@ -277,7 +276,6 @@
 		B03CAE7AE016A7344E17641B /* AFMethodBlockedException.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAC4A0E9F56DDAC2516CF /* AFMethodBlockedException.m */; };
 		B03CAF3B0695CF702F059B6D /* AFQueueableRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */; };
 		B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */; };
-		B03CAFBB2839C3D89C614D0A /* AFSpinnerLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA59073D2851ECC564F5F /* AFSpinnerLabel.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -510,11 +508,9 @@
 		B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductRequest.h; sourceTree = "<group>"; };
 		B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFActivityLabel.m; sourceTree = "<group>"; };
 		B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFQueueableRequest.m; sourceTree = "<group>"; };
-		B03CA59073D2851ECC564F5F /* AFSpinnerLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSpinnerLabel.h; sourceTree = "<group>"; };
 		B03CA5A2DBB36E1670659E38 /* AFMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMoviePlayerViewController.h; sourceTree = "<group>"; };
 		B03CA5D2CB96A51A59E910CF /* AFMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMoviePlayerViewController.m; sourceTree = "<group>"; };
 		B03CA5E5D646F27E83434093 /* AFSKProductFetchResponseFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetchResponseFailed.m; sourceTree = "<group>"; };
-		B03CA604AB6565AC6C1227E5 /* AFSpinnerLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSpinnerLabel.m; sourceTree = "<group>"; };
 		B03CA6BC7D80316536686AC2 /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
 		B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponse.h; sourceTree = "<group>"; };
 		B03CA77D586C75EA8497BFCD /* AFMethodBlockedException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMethodBlockedException.h; sourceTree = "<group>"; };
@@ -836,14 +832,8 @@
 		67D17D1A964F3C5B187D669D /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				759BFF6515E6CC1900D32988 /* AFImageAccessoryButton.h */,
-				759BFF6615E6CC1900D32988 /* AFImageAccessoryButton.m */,
-				759BFFCD15E6CC1900D32988 /* AFSpinAlertView.h */,
-				759BFFCE15E6CC1900D32988 /* AFSpinAlertView.m */,
 				759B000615E6CC1900D32988 /* UILabel+ShrinkToFit.m */,
 				759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */,
-				759B000415E6CC1900D32988 /* UICustomDisclosureArrowView.m */,
-				759B000315E6CC1900D32988 /* UICustomDisclosureArrowView.h */,
 				759BFFEE15E6CC1900D32988 /* AFUnavailableOfflineViewController.h */,
 				759BFFEF15E6CC1900D32988 /* AFUnavailableOfflineViewController.m */,
 				759BFFEC15E6CC1900D32988 /* AFUILib.h */,
@@ -853,8 +843,6 @@
 				67D17A4CFA01617CD3FB98DB /* Theme */,
 				67D175FCF1962192C7CF4724 /* Screen */,
 				67D179835C58046D32C42A61 /* Layout */,
-				91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */,
-				91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */,
 				B03CA3A366B7710D687B64D7 /* View */,
 			);
 			path = UI;
@@ -1032,8 +1020,14 @@
 				B03CA4CE0E9D7DF5E4B7152A /* Delegation */,
 				B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */,
 				B03CA254459315EC5313D35A /* AFActivityLabel.h */,
-				B03CA604AB6565AC6C1227E5 /* AFSpinnerLabel.m */,
-				B03CA59073D2851ECC564F5F /* AFSpinnerLabel.h */,
+				91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */,
+				91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */,
+				759BFFCD15E6CC1900D32988 /* AFSpinAlertView.h */,
+				759BFFCE15E6CC1900D32988 /* AFSpinAlertView.m */,
+				759B000415E6CC1900D32988 /* UICustomDisclosureArrowView.m */,
+				759B000315E6CC1900D32988 /* UICustomDisclosureArrowView.h */,
+				759BFF6615E6CC1900D32988 /* AFImageAccessoryButton.m */,
+				759BFF6515E6CC1900D32988 /* AFImageAccessoryButton.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1287,7 +1281,6 @@
 				B03CA13A01207BF4761FC928 /* AFDrawingDelegableView.h in Headers */,
 				B03CA1CD7ED436B7470A8599 /* AFDrawingDelegate.h in Headers */,
 				B03CA52C9AC2BE9671D5CB39 /* AFActivityLabel.h in Headers */,
-				B03CAFBB2839C3D89C614D0A /* AFSpinnerLabel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1490,7 +1483,6 @@
 				B03CA021B2385171C0754E9D /* AFDrawingDelegableView.m in Sources */,
 				B03CAF3B0695CF702F059B6D /* AFQueueableRequest.m in Sources */,
 				B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */,
-				B03CA90F395489F1A3A9B0D4 /* AFSpinnerLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

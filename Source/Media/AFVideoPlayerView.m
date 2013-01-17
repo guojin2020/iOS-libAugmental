@@ -63,10 +63,10 @@ static const NSString *ItemStatusContext;
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:[self.player currentItem]];
 
-        playButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-        playButton.frame = CGRectMake(0, 0, 32, 32);
+        //playButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
+        //playButton.frame = CGRectMake(0, 0, 32, 32);
 
-        [self addSubview:playButton];
+        //[self addSubview:playButton];
     }
     return self;
 }
@@ -80,7 +80,7 @@ static const NSString *ItemStatusContext;
 {
     if ((self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay))
     {
-        self.playButton.enabled = YES;
+        //self.playButton.enabled = YES;
 
         if(autoPlay) [player play];
     }

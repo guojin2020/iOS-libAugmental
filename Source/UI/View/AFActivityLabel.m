@@ -1,26 +1,26 @@
-//
-// Created by Chris Hatton on 16/01/2013
-// Contact: christopherhattonuk@gmail.com
-//
 
 #import "AFActivityLabel.h"
 
 static NSString* TEXT_KEY_PATH = @"text";
 
 @implementation AFActivityLabel
-@synthesize spacing;
 
+@synthesize spacing;
+@synthesize label;
 
 - (id)init
 {
 	self = [super init];
 	if (self)
 	{
-		label = [[UILabel alloc] init];
-		indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-		self.spacing = 6f;
-	}
+		label        = [[UILabel alloc] init];
+		indicator    = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        indicator.hidesWhenStopped = YES;
+		self.spacing = 6;
 
+        [self addSubview:label];
+        [self addSubview:indicator];
+	}
 	return self;
 }
 
@@ -32,11 +32,18 @@ static NSString* TEXT_KEY_PATH = @"text";
 	{
 		if(newWindow)
 		{
-			[label addObserver:self forKeyPath:TEXT_KEY_PATH options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+			[label addObserver:self
+                    forKeyPath:TEXT_KEY_PATH
+                       options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                       context:NULL];
+
+            [indicator startAnimating];
+            //[self setNeedsLayout];
 		}
 		else
 		{
 			[label removeObserver:self forKeyPath:TEXT_KEY_PATH];
+            [indicator stopAnimating];
 		}
 	}
 }
@@ -48,7 +55,6 @@ static NSString* TEXT_KEY_PATH = @"text";
 	if ([keyPath isEqualToString:TEXT_KEY_PATH]) [self setNeedsLayout];
 }
 
-
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
@@ -56,25 +62,23 @@ static NSString* TEXT_KEY_PATH = @"text";
 	CGSize
 		labelSize     = [label sizeThatFits:CGSizeZero],
 		indicatorSize = indicator.frame.size,
-	    size          = CGSizeMake(labelSize.width+self.spacing+indicatorSize.width, fmaxf(labelSize.height, indicatorSize.height));
+	    size          = CGSizeMake( labelSize.width + self.spacing + indicatorSize.width, fmaxf( labelSize.height, indicatorSize.height ) );
 
-	self.frame = CGRectMake(0, 0, <#(CGFloat)width#>, <#(CGFloat)height#>)
+    CGPoint point = self.frame.origin;
+    float halfHeight = size.height/2;
 
+    indicator.frame = CGRectMake( 0, halfHeight-(indicatorSize.height/2), indicatorSize.width, indicatorSize.height );
 
-
+    label.frame     = CGRectMake( indicatorSize.width + spacing, halfHeight-(labelSize.height/2), labelSize.width, labelSize.height );
+	self.frame      = CGRectMake( point.x, point.y, size.width, size.height );
 }
-
 
 - (void)dealloc
 {
 	[label release];
 	[indicator release];
-	[super dealloc];
+    [label release];
+    [super dealloc];
 }
-
-+ (id)objectWithLabel:(UILabel *)aLabel {
-	return [[[AFActivityLabel alloc] initWithLabel:aLabel] autorelease];
-}
-
 
 @end
