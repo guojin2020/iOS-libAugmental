@@ -12,11 +12,7 @@
 	UIActivityIndicatorView* indicator;
 	float spacing;
 }
-@property(nonatomic) float spacing;
-
-- (id)initWithLabel:(UILabel *)aLabel;
-
-+ (id)objectWithLabel:(UILabel *)aLabel;
-
+@property (nonatomic) float spacing;
+@property (nonatomic, readonly) UILabel *label;
 
 @end

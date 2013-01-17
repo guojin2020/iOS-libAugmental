@@ -40,7 +40,7 @@ static AFAVAssetCache* sharedInstance;
     }
     else
     {
-        asset = [AVAsset assetWithURL:assetURL];
+        asset = [[AVAsset assetWithURL:assetURL] retain];
 
         item = malloc(sizeof(AVCacheItem));
 
