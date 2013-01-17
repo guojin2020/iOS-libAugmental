@@ -14,5 +14,6 @@
 }
 @property (nonatomic) float spacing;
 @property (nonatomic, readonly) UILabel *label;
+@property (nonatomic) BOOL isActive;
 
 @end

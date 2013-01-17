@@ -16,7 +16,9 @@ static NSString* TEXT_KEY_PATH = @"text";
 		label        = [[UILabel alloc] init];
 		indicator    = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         indicator.hidesWhenStopped = YES;
-		self.spacing = 6;
+
+		self.isActive = NO;
+		self.spacing  = 6;
 
         [self addSubview:label];
         [self addSubview:indicator];
@@ -61,7 +63,7 @@ static NSString* TEXT_KEY_PATH = @"text";
 
 	CGSize
 		labelSize     = [label sizeThatFits:CGSizeZero],
-		indicatorSize = indicator.frame.size,
+		indicatorSize = self.isActive ? indicator.frame.size : CGSizeZero,
 	    size          = CGSizeMake( labelSize.width + self.spacing + indicatorSize.width, fmaxf( labelSize.height, indicatorSize.height ) );
 
     CGPoint point = self.frame.origin;
@@ -72,6 +74,16 @@ static NSString* TEXT_KEY_PATH = @"text";
     label.frame     = CGRectMake( indicatorSize.width + spacing, halfHeight-(labelSize.height/2), labelSize.width, labelSize.height );
 	self.frame      = CGRectMake( point.x, point.y, size.width, size.height );
 }
+
+- (void)setIsActive:(BOOL)isActive
+{
+	if( isActive != indicator.isAnimating )
+	{
+		[self setNeedsLayout];
+	}
+}
+
+- (BOOL)isActive { return indicator.isAnimating; }
 
 - (void)dealloc
 {

@@ -8,11 +8,13 @@
 #import "AFObjectCache.h"
 #import "AFSession.h"
 
-static NSMutableDictionary* settings = nil;
-static BOOL settingsLoaded = NO;
-static AFObservable* appEventManager = nil;
-static AFBooleanField * soundFXSetting = nil;
-static BOOL globalSFXEnabled = NO;
+static NSMutableDictionary* settings         = nil;
+static AFBooleanField*      soundFXSetting   = nil;
+static AFObservable*        appEventManager  = nil;
+
+static BOOL
+		globalSFXEnabled = NO,
+		settingsLoaded   = NO;
 
 SEL
     AFEventAppSettingsLoaded,
