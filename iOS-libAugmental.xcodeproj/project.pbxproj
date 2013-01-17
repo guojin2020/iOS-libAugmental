@@ -278,7 +278,6 @@
 		B03CAF3B0695CF702F059B6D /* AFQueueableRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */; };
 		B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */; };
 		B03CAFBB2839C3D89C614D0A /* AFSpinnerLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA59073D2851ECC564F5F /* AFSpinnerLabel.h */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
