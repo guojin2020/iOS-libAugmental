@@ -22,7 +22,7 @@ SEL
     AFRequestEventFailed           = @selector(requestFailed:);                     //Params: AFRequest
     AFRequestEventQueued           = @selector(handleRequest:queuedAt:);    //Params: AFRequest, NSNumber
     AFRequestEventReset            = @selector(handleRequestReset:);        //Params: AFRequest
-    AFRequestEventSizePolled       = @selector(handleRequest:sizePolled:);  //Params: AFRequest, NSNumber
+    AFRequestEventSizePolled       = @selector(handleRequestSizePolled:);  //Params: AFRequest
 }
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;
