@@ -164,7 +164,7 @@
     //[connection release];
 }
 
-- (void)requestSizePolled:(int)sizeBytes forRequest:(AFRequest*)requestIn
+- (void)handleRequestSizePolled:(AFRequest*)requestIn
 {
     NSAssert(requestIn, NSInvalidArgumentException);
 }
@@ -208,7 +208,7 @@
     [self startWaitingRequests];
 }
 
-- (void)requestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
+- (void)handleRequestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
 {
     NSAssert(requestIn, NSInvalidArgumentException);
 

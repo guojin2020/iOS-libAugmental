@@ -1,12 +1,6 @@
-//
-// Created by Chris Hatton on 17/10/2012.
-// Contact: christopherhattonuk@gmail.com
-//
-
 
 #import <MediaPlayer/MediaPlayer.h>
 #import "AFMoviePlayerViewController.h"
-
 
 @implementation AFMoviePlayerViewController
 
@@ -32,7 +26,8 @@
     self.view = player.view;
 }
 
-- (void)dealloc {
+- (void)dealloc
+{
     [player release];
     [super dealloc];
 }

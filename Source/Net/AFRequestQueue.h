@@ -10,7 +10,7 @@
 
 #define REQUEST_RETRY_LIMIT 3
 
-@interface AFRequestQueue : NSObject <AFRequestObserver, AFRequestHandler>
+@interface AFRequestQueue : NSObject <AFRequestHandler, AFRequestObserver>
 
 - (void)cancelAllRequests;
 

@@ -89,14 +89,14 @@
 }
 
 
-- (void)addObserver:    (id)observer { [observers addObject:observer];    }
+- (void)addObserver:(id)observer { [observers addObject:observer];    }
 
 - (void)addObservers:(NSArray *)observersIn
 {
     for(id observer in observersIn) [self addObserver:observer];
 }
 
-- (void)removeObserver: (id)observer
+- (void)removeObserver:(id)observer
 {
     [observers removeObject:observer];
 }

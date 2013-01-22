@@ -43,7 +43,12 @@ static NSMutableDictionary *uniqueRequestPool = nil;
     }
     else //Otherwise, let's create a new request
     {
-        request = [[AFDownloadRequest alloc] initWithURL:URLIn targetPath:targetPathIn observers:observersIn fileSizeCache:sizeCacheIn requestQueueForHeaderPoll:queueIn];
+        request = [[AFDownloadRequest alloc] initWithURL:URLIn
+                                              targetPath:targetPathIn
+                                               observers:observersIn
+                                           fileSizeCache:sizeCacheIn
+                               requestQueueForHeaderPoll:queueIn];
+
         [uniqueRequestPool setObject:request forKey:uniqueKey];
         [request release];
     }
@@ -80,7 +85,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
         if (expectedSizeNumber)
         {
             expectedBytes = [expectedSizeNumber intValue];
-            [self notifyObservers:AFRequestEventSizePolled parameters:NULL];
+            [self notifyObservers:AFRequestEventSizePolled parameters:self,NULL];
         }
 
         if(queueIn)
@@ -118,6 +123,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
         //state = (AFRequestState) AFRequestStateInProcess;
         //[self broadcastToObservers:(AFRequestEvent) AFRequestEventStarted];
+
+        //[self notifyObservers:AFRequestEventStarted parameters:self];
 
         NSURL* fileURL = [NSURL fileURLWithPath:targetPath];
 
@@ -271,7 +278,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 {
     queuePosition = (NSUInteger) queuePositionIn;
-    [self notifyObservers:AFRequestEventQueued parameters:NULL];
+    [self notifyObservers:AFRequestEventQueued parameters:self,NULL];
 }
 
 - (void)requestWasUnqueued
@@ -279,34 +286,11 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     state = AFRequestStateIdle;
 }
 
-/*
-- (void)broadcastToObservers:(AFRequestEvent)event
-{
-    NSSet *observerSnapshot = [[NSSet alloc] initWithSet:observers];
-    switch (event)
-    {
-        case AFRequestEventQueued:
-            for (NSObject *observer in observerSnapshot)if ([observer conformsToProtocol:@protocol(AFQueueableRequestObserver)])[(NSObject <AFQueueableRequestObserver> *) observer requestQueued:self AtPosition:queuePosition];
-            break;
-        case AFRequestEventSizePolled:
-            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestSizePolled:forRequest:)])[(NSObject <AFRequestObserver> *) observer requestSizePolled:expectedBytes forRequest:self];
-            break;
-        case AFRequestEventReset:
-            for (NSObject *observer in observerSnapshot)if ([observer respondsToSelector:@selector(requestReset:)]) [(NSObject <AFRequestObserver> *) observer requestReset:self];
-            break;
-        default:
-            [super broadcastToObservers:event];
-            break;
-    }
-    [observerSnapshot release];
-}
-*/
-
 - (void)request:(AFRequest*)request returnedWithData:(id)header
 {
     NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
     [self setExpectedBytesFromHeader:header isCritical:YES];
-    [self notifyObservers:AFRequestEventSizePolled parameters:NULL];
+    [self notifyObservers:AFRequestEventSizePolled parameters:self,NULL];
 }
 
 - (void)deleteLocalCopy
@@ -314,7 +298,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     if (state == (AFRequestState) AFRequestStateInProcess)[self cancel];
     if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:targetPath error:nil];
     receivedBytes = 0;
-    [self notifyObservers:AFRequestEventReset parameters:NULL];
+    [self notifyObservers:AFRequestEventReset parameters:self,NULL];
 }
 
 - (BOOL)existsInLocalStorage
