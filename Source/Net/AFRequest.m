@@ -129,7 +129,8 @@ SEL
 
 -(float)progress
 {
-    return expectedBytes > 0 ? (float) receivedBytes / (float) expectedBytes : 0;
+    float progress = expectedBytes > 0 ? (float) receivedBytes / (float) expectedBytes : 0;
+    return progress;
 }
 
 - (BOOL)complete
