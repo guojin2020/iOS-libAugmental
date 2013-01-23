@@ -117,6 +117,8 @@ SEL
 	[settingsRequest release];
 }
 
+- (void)requestFailed:(AFRequest *)request {}
+
 +(BOOL)settingsLoaded{return settingsLoaded;}
 
 +(BOOL)soundsEnabled

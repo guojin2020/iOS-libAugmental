@@ -8,7 +8,17 @@
 
 #import "AFObservable.h"
 
+SEL
+    AFObservableEventBeginAtomic,
+    AFObservableEventCompleteAtomic;
+
 @implementation AFObservable
+
++(void)initialize
+{
+    AFObservableEventBeginAtomic    = @selector(atomicChangeWillBegin:),
+    AFObservableEventCompleteAtomic = @selector(atomicChangeDidComplete:);
+}
 
 - (id)init
 {
@@ -108,7 +118,15 @@
     [super dealloc];
 }
 
-- (void)beginAtomic { ++lockCount; }
+- (void)beginAtomic
+{
+    if (lockCount==0)
+    {
+        [self notifyObservers:AFObservableEventBeginAtomic parameters:self, NULL];
+    }
+
+    ++lockCount;
+}
 
 - (void)completeAtomic
 {
@@ -127,6 +145,8 @@
             }
 
             [invocationQueue removeAllObjects];
+
+            [self notifyObservers:AFObservableEventCompleteAtomic parameters:self, NULL];
         }
     }
 }

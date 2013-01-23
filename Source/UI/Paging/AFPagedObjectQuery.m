@@ -102,8 +102,7 @@
     return self;
 }
 
-//====================== NSCoding
-
+- (void)requestFailed:(AFRequest *)request {}
 
 - (void)dealloc
 {

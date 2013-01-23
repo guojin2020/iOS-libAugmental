@@ -12,7 +12,8 @@ extern SEL
     AFRequestEventCancel,
     AFRequestEventQueued,
     AFRequestEventReset,
-    AFRequestEventSizePolled,
+    AFRequestEventWillPollSize,
+    AFRequestEventDidPollSize,
     AFRequestEventFailed;
 
 @interface AFRequest : AFObservable

@@ -164,20 +164,6 @@
     //[connection release];
 }
 
-- (void)handleRequestSizePolled:(AFRequest*)requestIn
-{
-    NSAssert(requestIn, NSInvalidArgumentException);
-}
-
-- (void)requestStarted:(AFRequest*)requestIn
-{
-    NSAssert(requestIn, NSInvalidArgumentException);
-}
-
-- (void)requestProgressUpdated:(AFRequest *)requestIn {
-    NSAssert(requestIn, NSInvalidArgumentException);
-}
-
 - (void)requestComplete:(AFRequest*)requestIn
 {
     NSAssert(requestIn, NSInvalidArgumentException);
@@ -323,11 +309,6 @@
     {
     }
     return request; //Currently always allowing the redirection, by returning the request value
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    return nil;
 }
 
 // End NSURLConnectionDelegate methods

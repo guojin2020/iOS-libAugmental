@@ -8,21 +8,23 @@ SEL
     AFRequestEventCancel,
     AFRequestEventQueued,
     AFRequestEventReset,
-    AFRequestEventSizePolled,
+    AFRequestEventWillPollSize,
+    AFRequestEventDidPollSize,
     AFRequestEventFailed;
 
 @implementation AFRequest
 
 +(void)initialize
 {
-    AFRequestEventStarted          = @selector(requestStarted:);                    //Params: AFRequest
-    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:); //Params: NSNumber, AFRequest
-    AFRequestEventFinished         = @selector(requestComplete:);                   //Params: AFRequest
-    AFRequestEventCancel           = @selector(requestCancelled:);                  //Params: AFRequest
-    AFRequestEventFailed           = @selector(requestFailed:);                     //Params: AFRequest
+    AFRequestEventStarted          = @selector(requestStarted:);            //Params: AFRequest
+    AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:);    //Params: AFRequest
+    AFRequestEventFinished         = @selector(requestComplete:);           //Params: AFRequest
+    AFRequestEventCancel           = @selector(requestCancelled:);          //Params: AFRequest
+    AFRequestEventFailed           = @selector(requestFailed:);             //Params: AFRequest
     AFRequestEventQueued           = @selector(handleRequest:queuedAt:);    //Params: AFRequest, NSNumber
     AFRequestEventReset            = @selector(handleRequestReset:);        //Params: AFRequest
-    AFRequestEventSizePolled       = @selector(handleRequestSizePolled:);  //Params: AFRequest
+    AFRequestEventWillPollSize     = @selector(handleRequestWillPollSize:); //Params: AFRequest
+    AFRequestEventDidPollSize      = @selector(handleRequestDidPollSize:);  //Params: AFRequest
 }
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;

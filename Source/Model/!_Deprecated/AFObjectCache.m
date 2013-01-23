@@ -92,7 +92,11 @@
 }
 
 - (void)request:(AFRequest*)request returnedWithData:(id)data
-{}
+{
+    // Worrying that this is unimplemented, wasn't it supposed to be here, deserialize the JSON and insert into Cache?
+}
+
+- (void)requestFailed:(AFRequest *)request {}
 
 - (AFObjectRequest *)writeObject:(AFWriteableObject*)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint
 {

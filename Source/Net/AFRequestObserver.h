@@ -4,13 +4,14 @@
 
 @optional
 
-- (void)requestStarted:(AFRequest*)requestIn;         //Params: AFRequest
-- (void)requestProgressUpdated:(AFRequest*)requestIn; //Params: AFRequest
-- (void)requestComplete:(AFRequest*)requestIn;        //Params: AFRequest
-- (void)requestCancelled:(AFRequest*)requestIn;       //Params: AFRequest
-- (void)requestFailed:(AFRequest*)requestIn;          //Params: AFRequest
-- (void)handleRequest:(AFRequest*)requestIn queuedAt:(NSNumber *)positionIn;//Params: AFRequest, NSNumber
-- (void)handleRequestReset:(AFRequest*)requestIn;     //Params: AFRequest
-- (void)handleRequestSizePolled:(AFRequest*)requestIn;//Params: AFRequest
+-(void)requestStarted:             (AFRequest*)requestIn;
+-(void)requestProgressUpdated:     (AFRequest*)requestIn;
+-(void)requestComplete:            (AFRequest*)requestIn;
+-(void)requestCancelled:           (AFRequest*)requestIn;
+-(void)requestFailed:              (AFRequest*)requestIn;
+-(void)handleRequest:              (AFRequest*)requestIn queuedAt:(NSNumber *)positionIn;
+-(void)handleRequestReset:         (AFRequest*)requestIn;
+-(void)handleRequestWillPollSize:  (AFRequest*)requestIn;
+-(void)handleRequestDidPollSize:   (AFRequest*)requestIn;
 
 @end

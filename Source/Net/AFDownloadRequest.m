@@ -85,11 +85,13 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
         if (expectedSizeNumber)
         {
             expectedBytes = [expectedSizeNumber intValue];
-            [self notifyObservers:AFRequestEventSizePolled parameters:self,NULL];
+            [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
         }
 
         if(queueIn)
         {
+            [self notifyObservers:AFRequestEventWillPollSize parameters:self,NULL];
+
             pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:URLIn endpoint:self];
             [queueIn handleRequest:pollSizeRequest];
             [pollSizeRequest release];
@@ -290,8 +292,15 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
     [self setExpectedBytesFromHeader:header isCritical:YES];
-    [self notifyObservers:AFRequestEventSizePolled parameters:self,NULL];
+    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
+
+- (void)requestFailed:(AFRequest *)request
+{
+    NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
+    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+}
+
 
 - (void)deleteLocalCopy
 {

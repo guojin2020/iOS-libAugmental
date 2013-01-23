@@ -10,6 +10,10 @@
 
 @protocol AFPObserver;
 
+extern SEL
+    AFObservableEventBeginAtomic,
+    AFObservableEventCompleteAtomic;
+
 @interface AFObservable : NSObject
 {
     @private

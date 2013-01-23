@@ -6,7 +6,8 @@
 @protocol AFObserver
 
 @optional
+
 -(void)atomicChangeWillBegin:(AFObservable*)observableIn;
--(void)atomicChangeDidFinish:(AFObservable*)observableIn;
+-(void)atomicChangeDidComplete:(AFObservable*)observableIn;
 
 @end
