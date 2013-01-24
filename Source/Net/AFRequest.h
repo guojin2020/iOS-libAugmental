@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 
 #import "AFObservable.h"
-#import "AFRequestObserver.h"
+
 #import "AFRequestStates.h"
 
 extern SEL
@@ -20,7 +20,7 @@ extern SEL
 {
     NSURL               *URL;
     NSURLConnection     *connection;
-
+    
     AFRequestState      state;
     int                 expectedBytes;
     int                 receivedBytes;

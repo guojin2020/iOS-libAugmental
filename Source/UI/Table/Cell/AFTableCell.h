@@ -71,7 +71,7 @@
 +(float_t)  defaultTextSize;
 +(NSString*)cellClickedSound;
 
-- (void)viewCellDidLoad;
+-(void)viewCellDidLoad;
 
 @property (nonatomic,retain) NSObject<AFCellSelectionDelegate>* selectionDelegate;
 @property (nonatomic,retain) UITableViewCell* cell;

@@ -1,3 +1,4 @@
+
 //Download enumerations
 typedef enum AFRequestState
 {

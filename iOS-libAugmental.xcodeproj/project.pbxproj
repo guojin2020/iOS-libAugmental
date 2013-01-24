@@ -247,7 +247,6 @@
 		B03CA22193E79B68997CB1AD /* AFVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CABBDFD9E143F8A8B621F /* AFVideoPlayerViewController.m */; };
 		B03CA23FB89EABB08A287F16 /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA405C5514ED46961A232 /* AFPSKProductIdProvider.h */; };
 		B03CA28DBEACA8215C804101 /* AFDefaultsBackedStringDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */; };
-		B03CA299F9762593D179D180 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		B03CA2E06B3912409EF7E2B5 /* AFDrawingDelegableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */; };
 		B03CA3B370A2DDF0F377D942 /* AFCategoryOverrideMissingException.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA8C25CE010678E40DD7F /* AFCategoryOverrideMissingException.h */; };
 		B03CA45BC73F4A8C09D16789 /* AFSKProductRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA9BE058CA34B82CC7496 /* AFSKProductRequest.m */; };
@@ -257,7 +256,6 @@
 		B03CA5A7AB08E9CF8410D5FA /* AFSKProductRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */; };
 		B03CA66BDB47E907B4853200 /* AFSKProductFetchResponseSuccess.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA941845677379C813E2E /* AFSKProductFetchResponseSuccess.m */; };
 		B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */; };
-		B03CA6C2271C866FE6F008A3 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		B03CA76B4098E86976C655EE /* AFSKProductFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */; };
 		B03CA86A7C767B010039C034 /* AFSKProductFetchResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA38A9EFFFE3CFF9955BA /* AFSKProductFetchResponse.m */; };
 		B03CA8C4254B4F05A5132C33 /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */; };
@@ -280,13 +278,23 @@
 		B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		090E416216B095B100FD6F96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 75A4AC761485AB8F00EBD4B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 099B10B5163D639600E81588;
+			remoteInfo = "iOS-libAugmental";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		090231E9165306CA007CF387 /* AFEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFEnvironment.h; sourceTree = "<group>"; };
 		090231EA165306CA007CF387 /* AFEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFEnvironment.m; sourceTree = "<group>"; };
 		097252D914A5F48800E75618 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		099B11A8163D639600E81588 /* libiOS-libAugmental.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libiOS-libAugmental.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		099C5F7F149EA61800F25175 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "iOS-libAugmental-test.octest"; path = "iOS-libAugmental-Test.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "iOS-libAugmental-test.octest"; path = "iOS-libAugmentalTest.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		09C62F0F162ADF5B00CC6B73 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		09C62F15162ADF5B00CC6B73 /* iOS-libAugmental-test-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iOS-libAugmental-test-Info.plist"; sourceTree = "<group>"; };
 		09C62F17162ADF5B00CC6B73 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -563,7 +571,6 @@
 				099B1118163D639600E81588 /* MediaPlayer.framework in Frameworks */,
 				B03CAD48859F339A04B1C956 /* StoreKit.framework in Frameworks */,
 				91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */,
-				B03CA6C2271C866FE6F008A3 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +586,6 @@
 				B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */,
 				B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */,
 				91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */,
-				B03CA299F9762593D179D180 /* CoreText.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -667,7 +673,6 @@
 				67D17C0C49A2DF61B3CEAD5D /* ViewController */,
 				B03CABF4BF62DDE81351D071 /* Settings */,
 			);
-			lastKnownFileType = text;
 			path = Field;
 			sourceTree = "<group>";
 		};
@@ -1049,7 +1054,6 @@
 		B03CA4CE0E9D7DF5E4B7152A /* Delegation */ = {
 			isa = PBXGroup;
 			children = (
-				B03CA5303EFC8203BD11252D,
 				B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */,
 				B03CABC3FC47DE3DDC347A98 /* AFDrawingDelegableTableViewCell.h */,
 				B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */,
@@ -1311,9 +1315,9 @@
 			productReference = 099B11A8163D639600E81588 /* libiOS-libAugmental.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-Test */ = {
+		09C62F0D162ADF5B00CC6B73 /* iOS-libAugmentalTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-Test" */;
+			buildConfigurationList = 09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmentalTest" */;
 			buildPhases = (
 				09C62F09162ADF5B00CC6B73 /* Sources */,
 				09C62F0A162ADF5B00CC6B73 /* Frameworks */,
@@ -1323,8 +1327,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				090E416316B095B100FD6F96 /* PBXTargetDependency */,
 			);
-			name = "iOS-libAugmental-Test";
+			name = "iOS-libAugmentalTest";
 			productName = "iOS-libAugmental-test";
 			productReference = 09C62F0E162ADF5B00CC6B73 /* iOS-libAugmental-test.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -1350,7 +1355,7 @@
 			projectRoot = "";
 			targets = (
 				099B10B5163D639600E81588 /* iOS-libAugmental */,
-				09C62F0D162ADF5B00CC6B73 /* iOS-libAugmental-Test */,
+				09C62F0D162ADF5B00CC6B73 /* iOS-libAugmentalTest */,
 			);
 		};
 /* End PBXProject section */
@@ -1504,6 +1509,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		090E416316B095B100FD6F96 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 099B10B5163D639600E81588 /* iOS-libAugmental */;
+			targetProxy = 090E416216B095B100FD6F96 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1651,7 +1664,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmental-Test" */ = {
+		09C62F1E162ADF5B00CC6B73 /* Build configuration list for PBXNativeTarget "iOS-libAugmentalTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				09C62F1F162ADF5B00CC6B73 /* Debug */,
