@@ -70,7 +70,7 @@ static NSMutableDictionary *uniqueRequestPool = nil;
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
-    NSAssert(URLIn && targetPathIn && sizeCacheIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
+    NSAssert(URLIn && targetPathIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
 
     if ((self = [super initWithURL:URLIn]))
     {

@@ -59,7 +59,7 @@
                     {
                         if ([self actionRequest:request])
                         {
-                            [activeRequests addObject:request];
+                            [activeRequests    addObject:request];
                             [activatedRequests addObject:request];
                         }
                     }
@@ -80,7 +80,10 @@
     if(targetHandler) return [targetHandler handleRequest:request];
     else
     {
-        [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:) withObject:request waitUntilDone:NO modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+        [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
+                               withObject:request
+                            waitUntilDone:NO
+                                    modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
         return YES;
     }
 }

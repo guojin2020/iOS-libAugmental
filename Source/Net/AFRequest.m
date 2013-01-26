@@ -137,7 +137,16 @@ SEL
 
 - (BOOL)complete
 {
-    return receivedBytes >= expectedBytes;
+    switch(state)
+    {
+        case AFRequestStateFulfilled:
+        case AFRequestStateFailed:
+           return YES;
+
+        default:
+           return NO;
+    }
+    //return receivedBytes >= expectedBytes;
 }
 
 - (NSString *)          actionDescription { return nil;           }

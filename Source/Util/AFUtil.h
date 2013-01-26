@@ -24,6 +24,8 @@
 
 + (BOOL)isIPad;
 
++(NSString *)applicationDocumentsDirectory;
+
 + (BOOL)is32OrLater;
 
 + (NSString *)newDurationString:(NSTimeInterval)seconds;

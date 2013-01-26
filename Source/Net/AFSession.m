@@ -78,7 +78,11 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
-    [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:) withObject:request waitUntilDone:NO modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+    [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
+                           withObject:request
+                        waitUntilDone:NO
+                                modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+
     return YES;
 }
 
