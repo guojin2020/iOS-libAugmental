@@ -11,7 +11,7 @@
 }
 - (id)initWithReason:(NSString *)reasonIn
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
         reason = [reasonIn retain];

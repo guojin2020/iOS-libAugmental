@@ -10,7 +10,7 @@
 
 @interface AFDownloadRequest : AFQueueableRequest <AFRequestEndpoint, UIAlertViewDelegate>
 
-+ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn targetPath:(NSString *)targetPathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn requestQueueForHeaderPoll:(AFRequestQueue *)queueIn;
++ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn localFilePath:(NSString *)localFilePathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn queueForHeaderRequest:(AFRequestQueue *)queueIn;
 
 + (void)clearRequestPool;
 
@@ -24,7 +24,6 @@
 
 - (void)closeHandleSafely;
 
-@property(nonatomic, readonly) NSString *uniqueKey;
-@property(nonatomic, readonly) NSString *targetPath;
+@property(nonatomic, readonly) NSString *localFilePath;
 
 @end

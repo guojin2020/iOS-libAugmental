@@ -20,7 +20,8 @@ static UIColor  *loadingTitleColor;
 
 - (id)initNeedingNavigationController:(BOOL)needsNavigationControllerIn
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         needsNavigationController = needsNavigationControllerIn;
 

@@ -28,7 +28,7 @@ static UIColor *invalidColor = nil;
 
 - (id)initWithIdentity:(NSString *)identityIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         self.identity            = identityIn;
         self.persistenceDelegate = nil;

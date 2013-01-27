@@ -64,7 +64,7 @@ static NSString
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         [self commonInit];
 

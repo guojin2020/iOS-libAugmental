@@ -26,7 +26,8 @@ static AFTableCell *resultsLoadingCell;
   selectionDelegate:(NSObject <AFCellSelectionDelegate> *)selectionDelegateIn
       pageObservers:(NSSet *)initialObservers;
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         firstUpdate        = YES;
         currentResultsPage = nil;

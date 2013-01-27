@@ -25,7 +25,7 @@ static const NSString *ItemStatusContext;
 
 -(id)initWithAsset:(AVAsset*)asset
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
         NSString *tracksKey = @"tracks";

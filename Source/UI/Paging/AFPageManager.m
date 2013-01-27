@@ -18,7 +18,8 @@
 
 - (id)initWithNavigationController:(UINavigationController *)navControllerIn delegate:(NSObject <AFPageManagerDelegate> *)delegateIn
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         navController = [navControllerIn retain];
 

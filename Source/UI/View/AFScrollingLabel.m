@@ -104,7 +104,7 @@ static CGSize cgSizeMax;
 
 - (id)initWithAnimationMode:(AFScrollingLabelAnimationMode)animationModeIn
 {
-    self = [super init];
+    self = [self init];
     if (self)
     {
 	    animationMode = animationModeIn;
@@ -438,7 +438,7 @@ static CGSize cgSizeMax;
 
 -(id)initWithOwner:(AFScrollingLabel*)ownerIn
 {
-	self = [super init];
+	self = [self init];
 	if(self)
 	{
 		owner = [ownerIn retain];

@@ -21,7 +21,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(id)initWithStyle:(UITableViewStyle)tableStyleIn
 {
-	if((self = [super init]))
+	if((self = [self init]))
 	{
         tableStyle          = tableStyleIn;
 		table				= nil;

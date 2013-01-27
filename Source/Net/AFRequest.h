@@ -22,9 +22,6 @@ extern SEL
     NSURLConnection     *connection;
     
     AFRequestState      state;
-    int                 expectedBytes;
-    int                 receivedBytes;
-
     int                 responseCode;
     int                 attempts;
 
@@ -37,15 +34,13 @@ extern SEL
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 
-- (bool)isSuccessHTTPResponse;
+- (void)willReceiveWithHeaders:(NSDictionary *)header responseCode:(int)responseCode;
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCode;
 - (void)received:(NSData *)dataIn;
 - (void)didFinish;
 - (BOOL)complete;
 - (void)didFail:(NSError *)error;
 - (void)cancel;
-- (void)setExpectedBytesFromHeader:(NSDictionary *)header isCritical:(BOOL)critical;
 
 @property(nonatomic, readonly) int          attempts;
 @property(nonatomic, readonly) int          receivedBytes;

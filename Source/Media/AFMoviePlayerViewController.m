@@ -6,7 +6,7 @@
 
 - (id)initWithVideoURL:(NSURL *)videoURL
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
         player = [[MPMoviePlayerController alloc] initWithContentURL:videoURL];

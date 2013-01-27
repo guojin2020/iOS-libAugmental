@@ -17,7 +17,7 @@
 
 -(id)initWithConsumer:(id<AFPSKProductConsumer>)productConsumerIn
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
         productConsumer = [productConsumerIn retain];

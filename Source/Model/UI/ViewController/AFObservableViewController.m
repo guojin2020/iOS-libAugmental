@@ -13,7 +13,7 @@
 
 - (id)initWithObservable:(AFObservable *)objectIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         object = [objectIn retain];
     }

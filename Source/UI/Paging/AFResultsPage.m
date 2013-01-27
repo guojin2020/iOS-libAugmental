@@ -11,7 +11,8 @@ static NSString *PAGE_OBJECTS_KEY     = @"pageObjects";
 {
     NSAssert(pageObjectsIn && resultsPerPageIn > 0, @"");
 
-    if ((self = [self init]))
+    self = [self init];
+    if (self)
     {
         pageObjects    = [pageObjectsIn retain];
         resultsCount   = resultsCountIn;
@@ -33,7 +34,8 @@ static NSString *PAGE_OBJECTS_KEY     = @"pageObjects";
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         resultsCount   = (uint16_t) [coder decodeIntForKey:RESULTS_COUNT_KEY];
         currentPage    = (uint16_t) [coder decodeIntForKey:CURRENT_PAGE_KEY];

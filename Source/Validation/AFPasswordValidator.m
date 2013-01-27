@@ -10,7 +10,7 @@ static NSString *passwordRegEx = @"[A-Za-z0-9]{8,16}";
 
 - (id)initWithComparisonSetting:(AFPasswordField *)comparisonSettingIn allowsEmpty:(BOOL)allowEmptyIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         comparisonSetting = [comparisonSettingIn retain];
         allowEmpty        = allowEmptyIn;

@@ -7,6 +7,7 @@
 #import "AFEnvironment.h"
 #import "AFObjectCache.h"
 #import "AFRequestQueueAlertView.h"
+#import "AFPerformSelectorOperation.h"
 
 @implementation AFSession
 
@@ -78,11 +79,13 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
+    [self performSelectorOnCommonBackgroundThread:@selector(startConnectionMainThreadInternal:) withObject:request];
+
+    /*
     [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
                            withObject:request
-                        waitUntilDone:NO
-                                modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
-
+                        waitUntilDone:NO]; //modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]
+                                             */
     return YES;
 }
 

@@ -35,7 +35,7 @@ static NSString* cellClickedSound			= nil;
 
 -(id)initWithLabelText:(NSString*)labelTextIn
 {
-	if((self=[super init]))
+	if((self=[self init]))
 	{
 		labelText=[labelTextIn retain];
 		

@@ -1,5 +1,7 @@
+
 #import "AFObservable.h"
 #import "AFRequest.h"
+#import "AFRequest+Protected.h"
 
 SEL
     AFRequestEventStarted,
@@ -13,6 +15,11 @@ SEL
     AFRequestEventFailed;
 
 @implementation AFRequest
+{
+    int
+        expectedBytes,
+        receivedBytes;
+}
 
 +(void)initialize
 {
@@ -38,14 +45,24 @@ SEL
     return self;
 }
 
+- (int)expectedBytes
+{
+    return expectedBytes;
+}
+
+-(void)setExpectedBytes:(int)expectedBytesIn
+{
+    expectedBytes = expectedBytesIn;
+}
+
 - (id)initWithURL:(NSURL *)URLIn
 {
-    if ( URLIn && (self = [super init]) )
+    if ( URLIn && (self = [self init]) )
     {
         URL             = [URLIn retain];
         state           = (AFRequestState) AFRequestStatePending;
         expectedBytes   = -1;
-        receivedBytes   = 0;
+        self.receivedBytes = 0;
         numberFormatter = [[NSNumberFormatter alloc] init];
         requiresLogin   = NO;
         attempts        = 0;
@@ -64,14 +81,14 @@ SEL
     return ( responseCode >= 200 ) && ( responseCode < 300 );
 }
 
-
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
+- (void)willReceiveWithHeaders:(NSDictionary *)header responseCode:(int)responseCodeIn
 {
     responseCode = responseCodeIn;
 
     if([self isSuccessHTTPResponse])
     {
-        [self setExpectedBytesFromHeader:headers isCritical:NO];
+        int size = [self contentLengthFromHeader:header];
+        self.expectedBytes = size;
         state = (AFRequestState) AFRequestStateInProcess;
         [self notifyObservers:AFRequestEventStarted parameters:self,nil];
     }
@@ -83,31 +100,36 @@ SEL
     }
 }
 
-- (void)setExpectedBytesFromHeader:(NSDictionary *)header isCritical:(BOOL)critical;
+- (int)contentLengthFromHeader:(NSDictionary *)header
 {
-    NSString *keyStr = [header valueForKey:@"Content-Length"];
-    if (keyStr)
+    NSString *stringValue = [header valueForKey:@"Content-Length"];
+    if (stringValue)
     {
-        NSNumber *keyNum = [numberFormatter numberFromString:keyStr];
+        NSNumber *keyNum = [numberFormatter numberFromString:stringValue];
         if (keyNum)
         {
-            expectedBytes = [keyNum intValue];
-        }
-        else if (critical)
-        {
-            [NSException raise:NSInternalInconsistencyException format:@"Couldn't parse content-length from header"];
+            return [keyNum intValue];
         }
     }
-    else if (critical)
+    return -1;
+}
+
+-(NSRange)contentRangeFromHeader:(NSDictionary*)header
+{
+    NSString *stringValue = [header valueForKey:@"Content-Range"];
+    int
+        start = -1,
+        end   = -1;
+
+    if(stringValue)
     {
-        //[NSException raise:NSInternalInconsistencyException format:@"Request had no Content-length in header! URL: %@", [URL absoluteString]];
+
     }
 }
 
 - (void)received:(NSData *)dataIn
 {
-    receivedBytes += [dataIn length];
-    [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];
+    self.receivedBytes += [dataIn length];
 }
 
 - (void)didFinish
@@ -131,7 +153,7 @@ SEL
 
 -(float)progress
 {
-    float progress = expectedBytes > 0 ? (float) receivedBytes / (float) expectedBytes : 0;
+    float progress = self.expectedBytes > 0 ? (float) self.receivedBytes / (float) self.expectedBytes : 0;
     return progress;
 }
 
@@ -151,8 +173,14 @@ SEL
 
 - (NSString *)          actionDescription { return nil;           }
 - (int)                 attempts          { return attempts;      }
-- (int)                 receivedBytes     { return receivedBytes; }
-- (int)                 expectedBytes     { return expectedBytes; }
+
+- (int) receivedBytes { return receivedBytes; }
+- (void)setReceivedBytes:(int)receivedBytesIn
+{
+    receivedBytes = receivedBytesIn;
+    [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];
+}
+
 - (int)                 responseCode      { return responseCode;  }
 
 -(void)dealloc

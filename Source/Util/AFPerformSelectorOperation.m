@@ -6,7 +6,7 @@ static NSOperationQueue *backgroundOperationQueue = nil;
 
 - (id)initWithTarget:(id)targetIn selector:(SEL)selectorIn object:(id)objectIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         target   = [targetIn retain];
         selector = selectorIn;

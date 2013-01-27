@@ -34,15 +34,23 @@ SEL AFTableSectionEventEdited;
 	return [headerShadowEnabled boolValue];
 }
 
--(id)init { return [self initWithTitle:@""]; }
+-(id)init
+{
+    self=[super init];
+    if(self)
+    {
+        title = @"";
+        children = [[NSMutableArray alloc] init];
+        parentTable = nil;
+    }
+    return self;
+}
 
 -(id)initWithTitle:(NSString*)titleIn
 {
-	if((self = [super init]))
+	if((self = [self init]))
 	{
 		title = [titleIn retain];
-		children = [[NSMutableArray alloc] init];
-		parentTable = nil;
 	}
 	return self;
 }

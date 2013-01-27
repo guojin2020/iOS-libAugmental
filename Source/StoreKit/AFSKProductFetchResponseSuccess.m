@@ -14,7 +14,7 @@
 
 - (id)initWithProduct:(SKProduct *)productIn
 {
-    self = [super init];
+    self = [self init];
     if(self)
     {
         product = [productIn retain];

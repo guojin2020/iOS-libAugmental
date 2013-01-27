@@ -6,7 +6,7 @@ static BOOL alreadyShowingOne = NO;
 
 - (id)initWithTitle:(NSString *)titleIn message:(NSString *)messageIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         self.title   = titleIn;
         self.message = messageIn;

@@ -4,7 +4,7 @@
 
 - (id)initWithMode:(AFLengthValidation)modeIn length:(uint8_t)lengthIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         mode   = modeIn;
         length = lengthIn;

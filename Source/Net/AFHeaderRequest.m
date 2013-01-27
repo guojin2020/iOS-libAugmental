@@ -25,9 +25,8 @@
 
 - (void)willReceiveWithHeaders:(NSDictionary *)headersIn responseCode:(int)responseCodeIn
 {
-    [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
-
-    [self setHeaders:headersIn];
+    self.headers = headersIn;
+    [super willReceiveWithHeaders:headersIn responseCode:responseCodeIn];
 }
 
 - (void)didFinish

@@ -342,6 +342,7 @@
 		91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */; };
 		B03CA021B2385171C0754E9D /* AFDrawingDelegableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0D5DE519171EEB1BE2C /* AFDrawingDelegableView.m */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
+		B03CA0A543D01E142DB8BE31 /* AFRequest+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAE6C073D426CE1BD38C6 /* AFRequest+Protected.h */; };
 		B03CA0BFAB202CD6BCC37511 /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0728B89BDDDC5881C94 /* AFCache.m */; };
 		B03CA0D72E763740185B3672 /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAC2BA136E701D2F56205 /* AFWeakCache.m */; };
 		B03CA13A01207BF4761FC928 /* AFDrawingDelegableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */; };
@@ -669,6 +670,7 @@
 		B03CAE1B9DE9A3972838BC4C /* AFVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFVideoPlayerViewController.h; sourceTree = "<group>"; };
 		B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetcher.m; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		B03CAE6C073D426CE1BD38C6 /* AFRequest+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFRequest+Protected.h"; sourceTree = "<group>"; };
 		B03CAE991ECD6DB57BD0AAB7 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
 		B03CAEAD133DE1A91CA75C87 /* AFDrawingDelegableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDrawingDelegableTableViewCell.m; sourceTree = "<group>"; };
 		B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -1013,6 +1015,7 @@
 				759BFF6415E6CC1900D32988 /* AFHeaderRequest.m */,
 				759BFFAD15E6CC1900D32988 /* AFRequestQueue.h */,
 				B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */,
+				B03CAE6C073D426CE1BD38C6 /* AFRequest+Protected.h */,
 			);
 			path = Net;
 			sourceTree = "<group>";
@@ -1436,6 +1439,7 @@
 				B03CA52C9AC2BE9671D5CB39 /* AFActivityLabel.h in Headers */,
 				B03CACFEB8433C2FA43BD697 /* AFVideoPlayerViewController.h in Headers */,
 				B03CA90CC2AD7872AF72FC11 /* AFObserver.h in Headers */,
+				B03CA0A543D01E142DB8BE31 /* AFRequest+Protected.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

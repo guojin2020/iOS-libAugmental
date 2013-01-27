@@ -13,20 +13,31 @@ SEL AFTableEventEdited;
     AFTableEventEdited = @selector(handleTableEdited:); //Table
 }
 
--(id)init { return [self initWithTitle:@""]; }
--(id)initWithTitle:(NSString*)titleIn { return [self initWithTitle:titleIn backTitle:nil]; }
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        title = @"";
+        children = [[NSMutableArray alloc] init];
+        viewController = NULL;
+    }
+    return self;
+}
+
+-(id)initWithTitle:(NSString*)titleIn
+{
+    return [self initWithTitle:titleIn backTitle:nil];
+}
 
 -(id)initWithTitle:(NSString*)titleIn backTitle:(NSString*)backTitleIn
 {
-	if((self = [super init]))
+	if((self = [self init]))
 	{
-		title = [titleIn retain];
-		children = [[NSMutableArray alloc] init];
+		title     = [titleIn retain];
+		backTitle = [backTitleIn retain];
 
         [self notifyObservers:AFTableEventEdited parameters:nil];
-        
-		backTitle = [backTitleIn retain];
-        viewController = NULL;
 	}
 	return self;
 }

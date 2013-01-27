@@ -4,7 +4,7 @@
 
 - (id)initWithSampleCount:(int)sampleCount
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         maxSampleCount     = sampleCount;
         currentSampleCount = 0;

@@ -15,7 +15,8 @@ static UIImage *imagePrevious;
 
 - (id)initWithConfiguration:(AFPagingCellConfiguration)configurationIn resultsPage:(AFResultsPage *)resultsPageIn
 {
-    if ((self = [self init]))
+    self = [self init];
+    if (self)
     {
         configuration = configurationIn;
         showingLabel = nil;

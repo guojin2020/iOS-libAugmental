@@ -9,7 +9,7 @@
 
 - (id)initWithViewController:(UIViewController *)viewControllerIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         viewController        = [viewControllerIn retain];
         title                 = nil;

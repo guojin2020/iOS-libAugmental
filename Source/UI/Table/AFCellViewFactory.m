@@ -14,7 +14,8 @@ static AFCellViewFactory *factorySingleton;
 
 - (id)initWithNib:(NSString *)aNibName
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         viewTemplateStore = [[NSMutableDictionary alloc] initWithCapacity:1];
         NSArray *templates = [[NSBundle mainBundle] loadNibNamed:aNibName owner:self options:nil];

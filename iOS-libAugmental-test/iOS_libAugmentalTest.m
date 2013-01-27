@@ -67,13 +67,13 @@
     [observers release];
 
     STAssertEquals( [request receivedBytes], 0, @"AFDownloadRequest shouldn't have received any bytes yet." );
-    STAssertEqualObjects( [request targetPath], targetPath, @"Target path reported incorrectly" );
+    STAssertEqualObjects( [request localFilePath], targetPath, @"Target path reported incorrectly" );
 
     [testURL release];
 
     STAssertFalse( [request complete], @"Request" );
 
-    //[session handleRequest:request];
+    [session handleRequest:request];
     [session queueRequestAtBack:request];
 
     [requestWaitLock lock];

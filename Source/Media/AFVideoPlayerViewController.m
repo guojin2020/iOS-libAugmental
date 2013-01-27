@@ -7,7 +7,7 @@
 
 -(id)initWithAsset:(AVAsset *)assetIn
 {
-	self = [super init];
+	self = [self init];
 	if(self)
 	{
 		videoPlayerView = [[AFVideoPlayerView alloc] initWithAsset:assetIn];
@@ -17,7 +17,7 @@
 
 -(id)initWithURL:(NSURL *)urlIn
 {
-	self = [super init];
+	self = [self init];
 	if(self)
 	{
 		videoPlayerView = [[AFVideoPlayerView alloc] initWithURL:urlIn];

@@ -23,7 +23,7 @@ static NSUserDefaults *defaults;
 
 -(id)initWithDefaultsKey:(NSString*)defaultsKeyIn
 {
-    if ( self = [super init] )
+    if ( self = [self init] )
     {
         defaultsKey = [defaultsKeyIn retain];
 

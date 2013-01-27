@@ -30,7 +30,7 @@
 
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn
 {
-    if ((self = [super init]))
+    if ((self = [self init]))
     {
         targetHandler          = targetHandlerIn;
         queue                  = [[NSMutableArray alloc] init];
@@ -162,9 +162,10 @@
 
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:requestIn.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     urlRequest = [requestIn willSendURLRequest:urlRequest];
+
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
+
     requestIn.connection = connection;
-    //[connection release];
 }
 
 - (void)requestComplete:(AFRequest*)requestIn

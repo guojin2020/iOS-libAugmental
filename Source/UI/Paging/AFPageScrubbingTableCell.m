@@ -22,7 +22,8 @@ static NSNumber *textShadowEnabled;
 
 - (id)initWithPagedObjectListViewController:(AFPagedObjectListViewController *)pagedObjectListViewControllerIn
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         suppressSecondEvent           = NO;
         pagedObjectListViewController = [pagedObjectListViewControllerIn retain];

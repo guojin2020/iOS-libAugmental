@@ -12,7 +12,8 @@
 {
     NSAssert(queryStringIn && pageByIn > 0, @"Bad parameters initing a query string");
 
-    if ((self = [self init]))
+    self = [self init];
+    if (self)
     {
         currentPageNumber = 1;
         queryString       = [queryStringIn retain];
@@ -89,7 +90,8 @@
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
-    if ((self = [super init]))
+    self = [self init];
+    if (self)
     {
         queryString       = [[coder decodeObjectForKey:@"queryString"] retain];
         currentPageNumber = (uint8_t) [coder decodeIntForKey:@"currentPageNumber"];
