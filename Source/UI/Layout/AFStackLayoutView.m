@@ -48,7 +48,7 @@
             space = spaceRemaining;
         }
 
-        view.frame = CGRectMake(_edgeInsets.left, caret, self.frame.size.width - ( _edgeInsets.left + _edgeInsets.right ), space);
+        view.frame = CGRectMake( _edgeInsets.left, caret, self.frame.size.width - ( _edgeInsets.left + _edgeInsets.right ), space );
 
         caret += space;
     }
