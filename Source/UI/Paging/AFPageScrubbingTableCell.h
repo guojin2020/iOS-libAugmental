@@ -7,8 +7,6 @@
 #define THEME_KEY_TEXT_SHADOW_COLOR            @"textShadowColor"
 #define THEME_KEY_TEXT_SHADOW_ENABLED        @"textShadowEnabled"
 
-@class AFPagedDownloadListViewController;
-
 @interface AFPageScrubbingTableCell : AFTableCell <AFPagedObjectListViewObserver, AFThemeable>
 {
     AFPagedObjectListViewController *pagedObjectListViewController;

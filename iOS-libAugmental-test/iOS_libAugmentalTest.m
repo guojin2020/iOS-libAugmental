@@ -12,6 +12,7 @@
 #import "AFSession.h"
 #import "TestDownloadRequestObserver.h"
 #import "AFUtil.h"
+#import "AFFileUtils.h"
 
 @implementation iOS_libAugmentalTest
 {
@@ -45,7 +46,7 @@
     NSString*   fileName    = @"downloadTest.txt";
     NSString*   urlPath     = [NSString stringWithFormat:@"http://chrishatton.homeip.net/downloads/%@", fileName, nil];
     NSURL*      testURL     = [[NSURL alloc] initWithString:urlPath];
-    NSString*   basePath    = [AFUtil applicationDocumentsDirectory];
+    NSString*   basePath    = [AFFileUtils documentsDirectory];
     NSString*   targetPath  = [NSString stringWithFormat:@"%@/%@", basePath, fileName, nil];
 
     AFSession* session = [[AFSession alloc] init];

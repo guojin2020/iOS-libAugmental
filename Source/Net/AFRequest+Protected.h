@@ -12,6 +12,7 @@
 
 -(int)contentLengthFromHeader:(NSDictionary *)header;
 -(bool)isSuccessHTTPResponse;
+-(NSRange)contentRangeFromHeader:(NSDictionary *)header;
 
 @property(nonatomic, readwrite) int receivedBytes;
 @property(nonatomic, readwrite) int expectedBytes;

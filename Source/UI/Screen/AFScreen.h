@@ -11,7 +11,6 @@
 
 @class AFSession;
 @class AFFormSection;
-@class AFScreenLoadingViewController;
 
 @protocol AFScreenObserver;
 

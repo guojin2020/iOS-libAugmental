@@ -80,9 +80,12 @@ static const NSString *ItemStatusContext;
 {
     if ((self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay))
     {
-        //self.playButton.enabled = YES;
+        self.playButton.enabled = YES;
 
-        if(autoPlay) [player play];
+        if(autoPlay)
+        {
+            [player play];
+        }
     }
     else
     {

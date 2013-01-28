@@ -1,8 +1,10 @@
+#import <Foundation/Foundation.h>
 #import "AFObservable.h"
 #import "AFDownloadRequest.h"
 #import "AFSession.h"
 #import "AFHeaderRequest.h"
 #import "AFRequest+Protected.h"
+#import "AFFileUtils.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -22,8 +24,8 @@
     NSMutableDictionary *sizeCache;
 
     NSUInteger
-            queuePosition,
-            dataBufferPosition;
+            queuePosition;//,
+  //          dataBufferPosition;
 
     NSMutableData       *dataBuffer;
     AFHeaderRequest     *headerRequest;
@@ -144,35 +146,23 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
         NSURL* fileURL = [NSURL fileURLWithPath:localFilePath];
 
-        NSFileManager *fileManager = [NSFileManager defaultManager];
-
         NSError* error = nil;
-
-        BOOL isDirectory = NO;
-        NSString* directoryPath = [[fileURL URLByDeletingLastPathComponent] path];
-        if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
-        {
-            NSLog(@"Creating directory: %@", directoryPath);
-            [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:&error];
-        }
-
-        NSAssert(!error, [error localizedDescription]);
 
         if (![self existsInLocalStorage])
         {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+
             NSLog(@"Creating file: %@", localFilePath);
+            [AFFileUtils createAncestorDirectoriesForPath:fileURL error:&error];
             [fileManager createFileAtPath:localFilePath contents:nil attributes:nil];
+            NSAssert(!error, [error localizedDescription]);
         }
 
-        fileHandle = [[NSFileHandle fileHandleForWritingAtPath:localFilePath] retain];
-
-        [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
+        fileHandle = [[NSFileHandle fileHandleForWritingToURL:fileURL error:&error] retain];
 
         NSAssert(fileHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
-
         bool appendFile;
-
         switch(responseCodeIn)
         {
             case 206:
@@ -248,12 +238,15 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)didFinish;
 {
+    /*
     if (dataBufferPosition > 0)
     {
         NSData *finalData = [[NSData alloc] initWithBytes:[dataBuffer bytes] length:dataBufferPosition];
         [fileHandle writeData:finalData];
         [finalData release];
     }
+    */
+
     [self closeHandleSafely];
 
     [super didFinish];
@@ -308,7 +301,9 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 - (void)request:(AFRequest*)request returnedWithData:(id)header
 {
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
+
     self.expectedBytes = [self contentLengthFromHeader:header];
+
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
 
@@ -319,7 +314,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 }
 
 
-- (void)deleteLocalCopy
+- (void)deleteLocalFile
 {
     if (state == (AFRequestState) AFRequestStateInProcess)[self cancel];
     if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];

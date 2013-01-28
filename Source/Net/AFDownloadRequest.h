@@ -20,7 +20,7 @@
 
 - (BOOL)existsInLocalStorage;
 
-- (void)deleteLocalCopy;
+- (void)deleteLocalFile;
 
 - (void)closeHandleSafely;
 

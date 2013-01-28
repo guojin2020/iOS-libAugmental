@@ -10,7 +10,6 @@
 @class AFSession;
 @class AFResultsPage;
 
-@class AFCellSelectionDelegate;
 @class AFResultsPage;
 @class AFPageScrubbingTableCell;
 @class AFTableSection;

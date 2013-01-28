@@ -14,8 +14,6 @@
 
 + (void)dumpDictionary:(NSDictionary *)dictionary;
 
-+ (BOOL)connectedToNetwork;
-
 + (NSString *)base64StringFromData:(NSData *)data length:(int)length;
 
 + (NSArray *)allocIdArrayFromCsv:(NSString *)csvIdList;
@@ -23,8 +21,6 @@
 + (NSString *)allocCsvIdListFromObjectArray:(NSArray *)objects;
 
 + (BOOL)isIPad;
-
-+(NSString *)applicationDocumentsDirectory;
 
 + (BOOL)is32OrLater;
 

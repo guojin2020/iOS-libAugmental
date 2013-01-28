@@ -116,15 +116,40 @@ SEL
 
 -(NSRange)contentRangeFromHeader:(NSDictionary*)header
 {
-    NSString *stringValue = [header valueForKey:@"Content-Range"];
-    int
-        start = -1,
-        end   = -1;
+    NSString *rangeString = [header valueForKey:@"Content-Range"];
 
-    if(stringValue)
+    NSRange range;
+    
+    if(rangeString)
     {
+        NSArray *rangeComponents = [rangeString componentsSeparatedByString:@"-"];
+        if( rangeComponents.count == 2 )
+        {
+            NSString
+                *startString = rangeComponents[0],
+                *endString   = rangeComponents[1];
 
+            int location, length;
+
+            if(startString.length>0)
+            {
+                location = [[numberFormatter numberFromString:startString] intValue];
+            }
+            else location = 0;
+
+            if(endString.length>0)
+            {
+                length = [[numberFormatter numberFromString:endString] intValue] - location;
+            }
+            else length = expectedBytes - location;
+
+            range = NSMakeRange((NSUInteger)location, (NSUInteger)length);
+        }
+        else range = NSMakeRange(NSNotFound,0);
     }
+    else range = NSMakeRange(NSNotFound,0);
+
+    return range;
 }
 
 - (void)received:(NSData *)dataIn

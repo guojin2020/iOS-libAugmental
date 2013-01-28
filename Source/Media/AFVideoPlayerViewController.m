@@ -11,7 +11,7 @@
 	if(self)
 	{
 		videoPlayerView = [[AFVideoPlayerView alloc] initWithAsset:assetIn];
-	}
+    }
 	return self;
 }
 
@@ -24,6 +24,12 @@
 	}
 	return self;
 }
+
+- (NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
 
 - (AVPlayer *)player { return videoPlayerView.player; }
 

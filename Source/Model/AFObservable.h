@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol AFPObserver;
-
 extern SEL
     AFObservableEventBeginAtomic,
     AFObservableEventCompleteAtomic;
