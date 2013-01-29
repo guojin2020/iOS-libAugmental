@@ -1,9 +1,9 @@
-#import "Logger.h"
+#import "AFLogger.h"
 
 static BOOL logging  = YES;
 static int  logLevel = 6;
 
-@implementation Logger
+@implementation AFLogger
 
 + (void)log:(NSString *)logString
 {
@@ -25,5 +25,6 @@ static int  logLevel = 6;
 {
     return logLevel;
 }
+
 
 @end

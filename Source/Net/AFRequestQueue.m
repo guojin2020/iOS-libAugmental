@@ -4,6 +4,7 @@
 #import "AFPerformSelectorOperation.h"
 #import "AFQueueableRequest.h"
 #import "AFHeaderRequest.h"
+#import "AFLogger.h"
 
 @interface AFRequestQueue ()
 
@@ -184,6 +185,8 @@
 
 - (void)requestCancelled:(AFRequest*)requestIn
 {
+    AFLogPosition();
+
     NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];

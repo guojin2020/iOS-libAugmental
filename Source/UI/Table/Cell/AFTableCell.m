@@ -69,13 +69,14 @@ static NSString* cellClickedSound			= nil;
 
 -(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn templateName:(NSString*)templateNameIn
 {
-	if(!cell||tableView!=tableIn)
+	if( !cell || self.tableView!=tableIn )
 	{
 		//Store the table this cell currently belongs to
 		self.tableView = tableIn;
 		
 		//Create the cell, either using the supplied template name, or a blank default
-		NSString* reuseIdentifier = [NSString stringWithFormat:@"%i",[self hash]];
+		NSString* reuseIdentifier = [[NSNumber numberWithInt:[self hash]] stringValue];
+
 		if(templateNameIn)
 		{
 			self.cell = [[AFCellViewFactory defaultFactory] cellOfKind:templateNameIn forTable:tableIn reuseIdentifier:reuseIdentifier];

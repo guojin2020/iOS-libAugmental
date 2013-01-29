@@ -102,7 +102,7 @@
 		0947D69316B3309600BE9E16 /* AFPerformSelectorOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFA615E6CC1900D32988 /* AFPerformSelectorOperation.m */; };
 		0947D69416B3309600BE9E16 /* AFMovingAverage.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF7515E6CC1900D32988 /* AFMovingAverage.m */; };
 		0947D69516B3309600BE9E16 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000015E6CC1900D32988 /* NSData+Base64.m */; };
-		0947D69616B3309600BE9E16 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFE15E6CC1900D32988 /* Logger.m */; };
+		0947D69616B3309600BE9E16 /* AFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFE15E6CC1900D32988 /* AFLogger.m */; };
 		0947D69716B3309600BE9E16 /* AFUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFF315E6CC1900D32988 /* AFUtil.m */; };
 		0947D69916B3309600BE9E16 /* AFDefaultsBackedStringDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */; };
 		0947D69A16B3309600BE9E16 /* AFSKProductFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAE2B3F911E7B1D724583 /* AFSKProductFetcher.m */; };
@@ -179,7 +179,7 @@
 		099B10FB163D639600E81588 /* AFUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFF315E6CC1900D32988 /* AFUtil.m */; };
 		099B10FC163D639600E81588 /* AFValidatableValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFF615E6CC1900D32988 /* AFValidatableValidator.m */; };
 		099B10FD163D639600E81588 /* AFViewPanelField.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFF915E6CC1900D32988 /* AFViewPanelField.m */; };
-		099B10FE163D639600E81588 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFE15E6CC1900D32988 /* Logger.m */; };
+		099B10FE163D639600E81588 /* AFLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFFE15E6CC1900D32988 /* AFLogger.m */; };
 		099B10FF163D639600E81588 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000015E6CC1900D32988 /* NSData+Base64.m */; };
 		099B1101163D639600E81588 /* UICustomDisclosureArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000415E6CC1900D32988 /* UICustomDisclosureArrowView.m */; };
 		099B1102163D639600E81588 /* UILabel+ShrinkToFit.m in Sources */ = {isa = PBXBuildFile; fileRef = 759B000615E6CC1900D32988 /* UILabel+ShrinkToFit.m */; };
@@ -295,7 +295,7 @@
 		099B117F163D639600E81588 /* AFValidatableValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF515E6CC1900D32988 /* AFValidatableValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1180163D639600E81588 /* AFValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF715E6CC1900D32988 /* AFValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1181163D639600E81588 /* AFViewPanelField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF815E6CC1900D32988 /* AFViewPanelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1183163D639600E81588 /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFD15E6CC1900D32988 /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		099B1183163D639600E81588 /* AFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFD15E6CC1900D32988 /* AFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1184163D639600E81588 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFF15E6CC1900D32988 /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000315E6CC1900D32988 /* UICustomDisclosureArrowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -607,8 +607,8 @@
 		759BFFF715E6CC1900D32988 /* AFValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFValidator.h; sourceTree = "<group>"; };
 		759BFFF815E6CC1900D32988 /* AFViewPanelField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFViewPanelField.h; sourceTree = "<group>"; };
 		759BFFF915E6CC1900D32988 /* AFViewPanelField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFViewPanelField.m; sourceTree = "<group>"; };
-		759BFFFD15E6CC1900D32988 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		759BFFFE15E6CC1900D32988 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
+		759BFFFD15E6CC1900D32988 /* AFLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLogger.h; sourceTree = "<group>"; };
+		759BFFFE15E6CC1900D32988 /* AFLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLogger.m; sourceTree = "<group>"; };
 		759BFFFF15E6CC1900D32988 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		75A4AC821485AB9000EBD4B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFScrollingLabel.m; sourceTree = "<group>"; };
@@ -761,8 +761,8 @@
 				759BFF7515E6CC1900D32988 /* AFMovingAverage.m */,
 				759B000015E6CC1900D32988 /* NSData+Base64.m */,
 				759BFFFF15E6CC1900D32988 /* NSData+Base64.h */,
-				759BFFFE15E6CC1900D32988 /* Logger.m */,
-				759BFFFD15E6CC1900D32988 /* Logger.h */,
+				759BFFFE15E6CC1900D32988 /* AFLogger.m */,
+				759BFFFD15E6CC1900D32988 /* AFLogger.h */,
 				759BFFF315E6CC1900D32988 /* AFUtil.m */,
 				759BFFF215E6CC1900D32988 /* AFUtil.h */,
 				B03CA108CD5256AEDCBEAE7B /* AFDefaultsBackedStringDictionary.m */,
@@ -1411,7 +1411,7 @@
 				099B117F163D639600E81588 /* AFValidatableValidator.h in Headers */,
 				099B1180163D639600E81588 /* AFValidator.h in Headers */,
 				099B1181163D639600E81588 /* AFViewPanelField.h in Headers */,
-				099B1183163D639600E81588 /* Logger.h in Headers */,
+				099B1183163D639600E81588 /* AFLogger.h in Headers */,
 				099B1184163D639600E81588 /* NSData+Base64.h in Headers */,
 				099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */,
 				099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */,
@@ -1637,7 +1637,7 @@
 				099B10FB163D639600E81588 /* AFUtil.m in Sources */,
 				099B10FC163D639600E81588 /* AFValidatableValidator.m in Sources */,
 				099B10FD163D639600E81588 /* AFViewPanelField.m in Sources */,
-				099B10FE163D639600E81588 /* Logger.m in Sources */,
+				099B10FE163D639600E81588 /* AFLogger.m in Sources */,
 				099B10FF163D639600E81588 /* NSData+Base64.m in Sources */,
 				099B1101163D639600E81588 /* UICustomDisclosureArrowView.m in Sources */,
 				099B1102163D639600E81588 /* UILabel+ShrinkToFit.m in Sources */,
@@ -1777,7 +1777,7 @@
 				0947D69316B3309600BE9E16 /* AFPerformSelectorOperation.m in Sources */,
 				0947D69416B3309600BE9E16 /* AFMovingAverage.m in Sources */,
 				0947D69516B3309600BE9E16 /* NSData+Base64.m in Sources */,
-				0947D69616B3309600BE9E16 /* Logger.m in Sources */,
+				0947D69616B3309600BE9E16 /* AFLogger.m in Sources */,
 				0947D69716B3309600BE9E16 /* AFUtil.m in Sources */,
 				0947D69916B3309600BE9E16 /* AFDefaultsBackedStringDictionary.m in Sources */,
 				0947D69A16B3309600BE9E16 /* AFSKProductFetcher.m in Sources */,

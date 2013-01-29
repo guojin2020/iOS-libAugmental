@@ -55,10 +55,5 @@ static AFCellViewFactory *factorySingleton;
 
     return cell;
 }
-/*
--(UITableViewCell*)cellOfKind: (NSString*)theCellKind forTable: (UITableView*)aTableView  
-{  
-  return [self cellOfKind:theCellKind forTable:aTableView reuseIdentifier:theCellKind]; //[NSString stringWithFormat:@"%i",[aTableView hash]]
-}
-*/
+
 @end
