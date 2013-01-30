@@ -91,6 +91,7 @@ static NSString
 - (void)dealloc
 {
     [request release];
+    [callbackObject release];
     [super dealloc];
 }
 

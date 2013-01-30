@@ -15,12 +15,12 @@
     self = [super init];
     if(self)
     {
-        _edgeInsets = UIEdgeInsetsZero;
+        self.edgeInsets = UIEdgeInsetsZero;
     }
     return self;
 }
 
-- (UIEdgeInsets)edgeInsets                      { return _edgeInsets;       }
-- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets  { _edgeInsets = edgeInsets; }
+//- (UIEdgeInsets)edgeInsets { return edgeInsets;       }
+//- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets { edgeInsets = edgeInsets; }
 
 @end
