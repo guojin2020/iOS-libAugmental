@@ -53,6 +53,7 @@
 
 -(void)handleAppMemoryWarning
 {
+    AFLogPosition();
     [self pruneCache];
 }
 

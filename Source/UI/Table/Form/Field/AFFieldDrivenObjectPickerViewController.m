@@ -5,6 +5,7 @@
 #import "AFSession.h"
 #import "AFObjectCache.h"
 #import "AFEnvironment.h"
+#import "AFLogger.h"
 
 @interface AFFieldDrivenObjectPickerViewController ()
 
@@ -64,6 +65,8 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
 
 -(void)handleAppSettingsLoaded
 {
+    AFLogPosition();
+
     [self setupUsingSettings];
 }
 

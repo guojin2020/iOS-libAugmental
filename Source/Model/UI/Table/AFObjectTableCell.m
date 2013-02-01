@@ -1,6 +1,7 @@
 #import "AFObjectTableCell.h"
 #import "AFCellViewable.h"
 #import "AFObservable.h"
+#import "AFLogger.h"
 
 @implementation AFObjectTableCell
 
@@ -21,6 +22,7 @@
 
 -(void)handleObjectFieldUpdated:(AFObject*)objectIn
 {
+    AFLogPosition();
     [self refreshFields];
 }
 

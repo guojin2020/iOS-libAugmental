@@ -5,6 +5,7 @@
 #import "AFHeaderRequest.h"
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
+#import "AFLogger.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -277,12 +278,14 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 {
+    AFLogPosition();
     queuePosition = (NSUInteger) queuePositionIn;
     [self notifyObservers:AFRequestEventQueued parameters:self,NULL];
 }
 
 - (void)requestWasUnqueued
 {
+    AFLogPosition();
     state = AFRequestStateIdle;
 }
 
@@ -300,6 +303,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)request:(AFRequest*)request returnedWithData:(id)header
 {
+    AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
     self.expectedBytes = [self contentLengthFromHeader:header];
@@ -309,6 +313,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)requestFailed:(AFRequest *)request
 {
+    AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }

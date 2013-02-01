@@ -8,6 +8,7 @@
 #import "TestDownloadRequestObserver.h"
 #import "AFRequest.h"
 #import "NSObject+SenTest.h"
+#import "AFLogger.h"
 
 static NSString
     *expectedString     = @"Download test, 1. 2.. 3...",
@@ -38,11 +39,13 @@ static NSString
 
 -(void)requestStarted:             (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)requestProgressUpdated:     (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 
     float progress = [requestIn progress];
@@ -51,6 +54,7 @@ static NSString
 
 -(void)requestComplete:            (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 
     [callbackObject performSelector:callbackSelector];
@@ -58,31 +62,37 @@ static NSString
 
 -(void)requestCancelled:           (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)requestFailed:              (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)handleRequest:              (AFRequest*)requestIn queuedAt:(NSNumber *)positionIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)handleRequestReset:         (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)handleRequestWillPollSize:  (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
 -(void)handleRequestDidPollSize:   (AFRequest*)requestIn
 {
+    AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 
     STAssertEquals( requestIn.expectedBytes, 26, wrongDataReason );

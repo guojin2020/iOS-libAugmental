@@ -346,7 +346,9 @@
 		B03CA0E6BA69E4DFE1D5452B /* AFLandscapeMPMoviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAF72AC8EF820A46B740C /* AFLandscapeMPMoviePlayerViewController.m */; };
 		B03CA13A01207BF4761FC928 /* AFDrawingDelegableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */; };
 		B03CA165C0A5F1F60955028B /* AFSKProductFetchResponseSuccess.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA999866CE469694932A8 /* AFSKProductFetchResponseSuccess.h */; };
+		B03CA1984E70B3E348819361 /* AFPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0288A0D9484620552E4 /* AFPrice.m */; };
 		B03CA19C4C9A4F850CF7DADE /* AFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAAA3A87FC690F69F0F4B /* AFCache.h */; };
+		B03CA1B88EF0301F36E3CBED /* AFPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA0288A0D9484620552E4 /* AFPrice.m */; };
 		B03CA1CD7ED436B7470A8599 /* AFDrawingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAC507B0D299990A017A3 /* AFDrawingDelegate.h */; };
 		B03CA22193E79B68997CB1AD /* AFVideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CABBDFD9E143F8A8B621F /* AFVideoPlayerViewController.m */; };
 		B03CA23FB89EABB08A287F16 /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA405C5514ED46961A232 /* AFPSKProductIdProvider.h */; };
@@ -362,6 +364,7 @@
 		B03CA4CFDEA1AD0F25323CB5 /* AFOrientationRespectfulNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3604605D7E8218F1A65 /* AFOrientationRespectfulNavigationController.m */; };
 		B03CA52C9AC2BE9671D5CB39 /* AFActivityLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA254459315EC5313D35A /* AFActivityLabel.h */; };
 		B03CA53343CEB901551B4AA6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097252D914A5F48800E75618 /* SystemConfiguration.framework */; };
+		B03CA5511ACF616186248F3C /* AFPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA65EDD37C5C9675C5708 /* AFPrice.h */; };
 		B03CA558EA230C5C545E91EE /* AFNetUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAF51A5C3BBEC832D0197 /* AFNetUtils.m */; };
 		B03CA58F31C0FD074BA6C390 /* AFPSKProductConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA1270537ABFBD73376A2 /* AFPSKProductConsumer.h */; };
 		B03CA5A7AB08E9CF8410D5FA /* AFSKProductRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */; };
@@ -614,6 +617,7 @@
 		91C4D4AAC3D5B664FED1DCFE /* AFScrollingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFScrollingLabel.m; sourceTree = "<group>"; };
 		91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFScrollingLabel.h; sourceTree = "<group>"; };
 		91CFE7288593DE871232F922 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		B03CA0288A0D9484620552E4 /* AFPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPrice.m; sourceTree = "<group>"; };
 		B03CA030861D5274FEAE80F6 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
 		B03CA0728B89BDDDC5881C94 /* AFCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFCache.m; sourceTree = "<group>"; };
 		B03CA08B5E731989B9094E68 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
@@ -643,6 +647,7 @@
 		B03CA5D2CB96A51A59E910CF /* AFMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMoviePlayerViewController.m; sourceTree = "<group>"; };
 		B03CA5E5D646F27E83434093 /* AFSKProductFetchResponseFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetchResponseFailed.m; sourceTree = "<group>"; };
 		B03CA61E037F63E0919F9879 /* TestDownloadRequestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDownloadRequestObserver.m; sourceTree = "<group>"; };
+		B03CA65EDD37C5C9675C5708 /* AFPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPrice.h; sourceTree = "<group>"; };
 		B03CA6BC7D80316536686AC2 /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
 		B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponse.h; sourceTree = "<group>"; };
 		B03CA741346D16FC348022A1 /* TestDownloadRequestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDownloadRequestObserver.h; sourceTree = "<group>"; };
@@ -827,6 +832,7 @@
 				B03CADCD3C8653EFFF9772F5 /* !_Deprecated */,
 				B03CA12E2FD05A0C1CED811C /* Cache */,
 				B03CA1E25B3CBEB98D3A2BEB /* AFObserver.h */,
+				B03CA16127E8E67697C5F39D /* Commerce */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1164,6 +1170,15 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		B03CA16127E8E67697C5F39D /* Commerce */ = {
+			isa = PBXGroup;
+			children = (
+				B03CA0288A0D9484620552E4 /* AFPrice.m */,
+				B03CA65EDD37C5C9675C5708 /* AFPrice.h */,
+			);
+			path = Commerce;
+			sourceTree = "<group>";
+		};
 		B03CA21A564078D40A4EC0B4 /* libTouchJSON */ = {
 			isa = PBXGroup;
 			children = (
@@ -1470,6 +1485,7 @@
 				B03CA792F9C6111C4C439C33 /* AFNetUtils.h in Headers */,
 				B03CA3BDD0C6D5BACF6869DA /* AFLandscapeMPMoviePlayerViewController.h in Headers */,
 				B03CA6DC69B695027F752441 /* AFOrientationRespectfulNavigationController.h in Headers */,
+				B03CA5511ACF616186248F3C /* AFPrice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1677,6 +1693,7 @@
 				B03CA558EA230C5C545E91EE /* AFNetUtils.m in Sources */,
 				B03CA037D17DE71F0CCCF2B0 /* AFLandscapeMPMoviePlayerViewController.m in Sources */,
 				B03CA4CFDEA1AD0F25323CB5 /* AFOrientationRespectfulNavigationController.m in Sources */,
+				B03CA1B88EF0301F36E3CBED /* AFPrice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1792,6 +1809,7 @@
 				B03CA45F94A118567B1AD7BC /* NSObject+SenTest.m in Sources */,
 				B03CA0E6BA69E4DFE1D5452B /* AFLandscapeMPMoviePlayerViewController.m in Sources */,
 				B03CA75C2D757A40EB600A6B /* AFOrientationRespectfulNavigationController.m in Sources */,
+				B03CA1984E70B3E348819361 /* AFPrice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -105,6 +105,8 @@
  */
 - (BOOL)handleRequest:(AFRequest*)request
 {
+    AFLogPosition();
+
 #ifdef BACKGROUND_HANDLING_ENABLED
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
     return YES;
@@ -115,7 +117,7 @@
 
 - (BOOL)handleRequestInternal:(AFQueueableRequest*)request
 {
-    //NSLog(@"Handing request: %@",request);
+    AFLogPosition();
 
 #ifdef BACKGROUND_HANDLING_ENABLED
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -203,6 +205,7 @@
 
 - (void)handleRequestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
 {
+    AFLogPosition();
     NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];
