@@ -4,19 +4,20 @@
 //
 
 #import "AFVideoPlayerView.h"
-
-#import "AFVideoPlayerView.h"
 #import "AFAVAssetCache.h"
 
+static NSString *STATUS_KEY = @"status";
+
 @implementation AFVideoPlayerView
+{
+    bool observingPlayerItem;
+}
 
 static const NSString *ItemStatusContext;
 
 -(id)initWithURL:(NSURL*)url
 {
     AVAsset* asset = [[AFAVAssetCache sharedInstance] obtainAssetForURL:url];
-
-    autoPlay = YES;
 
     self = [self initWithAsset:asset];
     if(self){}
@@ -30,7 +31,7 @@ static const NSString *ItemStatusContext;
     {
         NSString *tracksKey = @"tracks";
 
-        playerView = [[AFVideoPlayerView alloc] init];
+        //playerView = [[AFVideoPlayerView alloc] init];
         playerItem = [[AVPlayerItem alloc] initWithAsset:asset];
 
         [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler:
@@ -43,13 +44,15 @@ static const NSString *ItemStatusContext;
                                 if (status == AVKeyValueStatusLoaded)
                                 {
                                     self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-                                    [self.playerItem addObserver:self forKeyPath:@"status" options:0 context:&ItemStatusContext];
+
+                                    [self.playerItem addObserver:self forKeyPath:STATUS_KEY options:NSKeyValueObservingOptionNew context:&ItemStatusContext];
+                                    observingPlayerItem = YES;
+
                                     [[NSNotificationCenter defaultCenter] addObserver:self
                                                                              selector:@selector(playerItemDidReachEnd:)
                                                                                  name:AVPlayerItemDidPlayToEndTimeNotification
                                                                                object:self.playerItem];
                                     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                                    [self.playerView setPlayer:self.player];
                                 }
                                 else
                                 {
@@ -67,6 +70,17 @@ static const NSString *ItemStatusContext;
         //playButton.frame = CGRectMake(0, 0, 32, 32);
 
         //[self addSubview:playButton];
+    }
+    return self;
+}
+
+-(id)init
+{
+    self = [super init];
+    if(self)
+    {
+        autoPlay = YES;
+        observingPlayerItem = NO;
     }
     return self;
 }
@@ -117,9 +131,15 @@ static const NSString *ItemStatusContext;
 
 - (void)dealloc
 {
+    if(observingPlayerItem)
+    {
+        [self.playerItem removeObserver:self forKeyPath:STATUS_KEY];
+    }
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
     [player release];
     [playerItem release];
-    [playerView release];
     [playButton release];
     [super dealloc];
 }
@@ -148,7 +168,7 @@ static const NSString *ItemStatusContext;
 
 @synthesize player;
 @synthesize playerItem;
-@synthesize playerView;
+//@synthesize playerView;
 @synthesize playButton;
 
 @end

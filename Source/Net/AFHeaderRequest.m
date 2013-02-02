@@ -2,6 +2,7 @@
 #import "AFHeaderRequest.h"
 
 #import "AFRequestEndpoint.h"
+#import "AFLogger.h"
 
 @implementation AFHeaderRequest
 
@@ -18,6 +19,7 @@
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
+    AFLogPosition();
     [super willSendURLRequest:requestIn];
     [requestIn setHTTPMethod:@"HEAD"];
     return requestIn;

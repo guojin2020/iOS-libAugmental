@@ -4,6 +4,7 @@
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
 #import "AFObject.h"
+#import "AFLogger.h"
 
 @implementation AFField
 
@@ -126,12 +127,16 @@ static UIColor *invalidColor = nil;
 
 -(void)handleObjectFieldUpdated:(AFObject*)objectIn
 {
+    AFLogPosition();
+
     valueChangedSinceLastValidation = YES;
     [self updateControlCell];
 }
 
 -(void)handleAppTerminating
 {
+    AFLogPosition();
+
     [persistenceDelegate persistFieldValue:[NSKeyedArchiver archivedDataWithRootObject:value] forKey:identity];
 }
 

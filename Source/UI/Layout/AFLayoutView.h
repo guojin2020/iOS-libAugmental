@@ -7,7 +7,7 @@
 
 @interface AFLayoutView : UIView
 {
-    UIEdgeInsets _edgeInsets;
+    //UIEdgeInsets  edgeInsets;
 }
 
 @property (nonatomic) UIEdgeInsets edgeInsets;

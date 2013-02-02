@@ -7,6 +7,7 @@
 #import "AFCachingAudioPlayer.h"
 #import "AFObjectCache.h"
 #import "AFSession.h"
+#import "AFLogger.h"
 
 static NSMutableDictionary* settings         = nil;
 static AFBooleanField*      soundFXSetting   = nil;
@@ -117,7 +118,10 @@ SEL
 	[settingsRequest release];
 }
 
-- (void)requestFailed:(AFRequest *)request {}
+- (void)requestFailed:(AFRequest *)request
+{
+    AFLogPosition();
+}
 
 +(BOOL)settingsLoaded{return settingsLoaded;}
 

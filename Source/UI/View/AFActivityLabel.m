@@ -5,8 +5,7 @@ static NSString* TEXT_KEY_PATH = @"text";
 
 @implementation AFActivityLabel
 
-@synthesize spacing;
-@synthesize label;
+@synthesize spacing, label;
 
 - (id)init
 {
@@ -89,7 +88,6 @@ static NSString* TEXT_KEY_PATH = @"text";
 {
 	[label release];
 	[indicator release];
-    [label release];
     [super dealloc];
 }
 

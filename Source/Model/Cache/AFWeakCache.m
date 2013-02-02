@@ -6,6 +6,7 @@
 #import "AFWeakCache.h"
 #import "AFObject.h"
 #import "AFObservable.h"
+#import "AFLogger.h"
 
 @implementation AFWeakCache
 {
@@ -26,6 +27,8 @@
 
 -(void)handleObjectDeallocating:(id)object
 {
+    AFLogPosition();
+
     NSValue *deadWeakReference = [NSValue valueWithPointer:object];
     NSValue *weakKey, *weakValue;
 

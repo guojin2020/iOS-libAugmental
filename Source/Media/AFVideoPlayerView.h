@@ -25,7 +25,7 @@
 
 @property (nonatomic, retain) AVPlayer          *player;
 @property (nonatomic, retain) AVPlayerItem      *playerItem;
-@property (nonatomic, retain) AFVideoPlayerView *playerView;
+//@property (nonatomic, retain) AFVideoPlayerView *playerView;
 @property (nonatomic, retain) UIButton          *playButton;
 @property (nonatomic, readonly) AVAsset         *asset;
 

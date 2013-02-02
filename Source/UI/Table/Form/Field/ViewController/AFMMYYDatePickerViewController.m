@@ -45,16 +45,12 @@
     [super viewDidLoad];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    //[picker removeTarget:setting];
-}
-
 //=============>> Data Source
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{return 2;}
+{
+    return 2;
+}
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {

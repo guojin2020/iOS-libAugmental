@@ -382,17 +382,16 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	{
 		[self addButtonToKeyboard];
 	}
-	
-    CGRect keyboardRect;
-	CGPoint keyboardBegin;
-	CGPoint keyboardEnd;
+
+	CGRect
+        keyboardFrameBegin,
+        keyboardFrameEnd;
     
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 
-    
-	[[[notification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&keyboardRect];
-	[[[notification userInfo] objectForKey:UIKeyboardCenterBeginUserInfoKey] getValue:&keyboardBegin];
-	[[[notification userInfo] objectForKey:UIKeyboardCenterEndUserInfoKey] getValue:&keyboardEnd];
+
+    [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&keyboardFrameBegin];
+    [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey]   getValue:&keyboardFrameEnd];
 	
 #pragma GCC diagnostic warning "-Wdeprecated-declarations" 
     
@@ -411,7 +410,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 		CGRect newTableFrame = normalTableFrame;
 		
 		float screenHeight = [UIScreen mainScreen].applicationFrame.size.height;
-		float keyboardHeight = keyboardRect.size.height;
+		float keyboardHeight = keyboardFrameEnd.size.height;
 		float navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
 		
 		newTableFrame.size.height = screenHeight - keyboardHeight - navigationBarHeight;
