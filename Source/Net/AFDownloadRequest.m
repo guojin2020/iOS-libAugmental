@@ -5,6 +5,7 @@
 #import "AFHeaderRequest.h"
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
+#import "AFLogger.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -122,6 +123,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
+    AFLogPosition();
+
     [super willSendURLRequest:requestIn];
 
     [self updateReceivedBytesFromFile];
@@ -138,6 +141,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
+    AFLogPosition();
+
     [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 
     if( [self isSuccessHTTPResponse] )
