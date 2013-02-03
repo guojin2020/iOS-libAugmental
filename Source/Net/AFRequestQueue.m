@@ -2,14 +2,15 @@
 #import "AFRequestQueue.h"
 
 #import "AFPerformSelectorOperation.h"
-#import "AFQueueableRequest.h"
 #import "AFHeaderRequest.h"
 #import "AFLogger.h"
 
 @interface AFRequestQueue ()
 
-- (BOOL)handleRequestInternal:(AFQueueableRequest*)request;
+- (BOOL)handleRequestInternal:(AFRequest*)request;
+-(void)queueRequest:(AFRequest *)requestIn atPosition:(NSUInteger)positionIn;
 
+-(void)requestWasDeactivatedInternal:(AFRequest *)requestIn;
 @end
 
 @implementation AFRequestQueue
@@ -17,11 +18,9 @@
     NSMutableArray *queue;
     NSMutableSet   *activeRequests;
     NSMutableSet   *activatedRequests;
-    int queuePosition;
+    NSUInteger queuePosition;
     NSObject <AFRequestHandler> *targetHandler;
     int maxConcurrentDownloads;
-
-    BOOL keepProcessing;
 
 #ifdef THREADED_REQUEST_HANDLER_ENABLED
 	NSCondition* requestThreadCondition;
@@ -44,35 +43,47 @@
 
 - (void)startWaitingRequests
 {
-    //if(!offline)
-    //{        
     queuePosition = 1;
     [activatedRequests removeAllObjects];
     @synchronized (queue)
     {
-        for (AFQueueableRequest* request in queue)
+        bool
+            requestWasActioned,
+            requestIsAlreadyActive,
+            maxRequestsReached;
+
+        for( AFRequest* request in queue )
         {
-            if (request.state == (AFRequestState) AFRequestStatePending)
+            NSAssert( request.state == AFRequestStateQueued, @"All requests in the queue should be 'pending', but found one which was marked " );
+
+            requestIsAlreadyActive = [activeRequests containsObject:request];
+
+            if( requestIsAlreadyActive )
             {
-                if ([activeRequests count] < maxConcurrentDownloads)
+                [queue removeObject:request];
+            }
+            else
+            {
+                maxRequestsReached = [activeRequests count] >= maxConcurrentDownloads;
+
+                if( !maxRequestsReached )
                 {
-                    if (![activeRequests containsObject:request])
+                    requestWasActioned = [self actionRequest:request];
+
+                    if( requestWasActioned )
                     {
-                        if ([self actionRequest:request])
-                        {
-                            [activeRequests    addObject:request];
-                            [activatedRequests addObject:request];
-                        }
+                        [activeRequests    addObject:request];
+                        [activatedRequests addObject:request];
                     }
                 }
                 else
                 {
-                    if ([request isKindOfClass:[AFQueueableRequest class]])[(AFQueueableRequest *)request requestWasQueuedAtPosition:queuePosition];
+                    if ([request isKindOfClass:[AFRequest class]])[request requestWasQueuedAtPosition:queuePosition];
                     queuePosition++;
                 }
             }
         }
-        for (AFQueueableRequest* request in activatedRequests)[queue removeObject:request];
+        for (AFRequest* request in activatedRequests)[queue removeObject:request];
     }
 }
 
@@ -94,7 +105,7 @@
  */
 - (void)cancelAllRequests
 {
-    for (AFQueueableRequest* request in [NSArray arrayWithArray:queue])
+    for (AFRequest* request in [NSArray arrayWithArray:queue])
     {
         [request cancel];
     }
@@ -115,7 +126,7 @@
 	#endif
 }
 
-- (BOOL)handleRequestInternal:(AFQueueableRequest*)request
+- (BOOL)handleRequestInternal:(AFRequest*)request
 {
     AFLogPosition();
 
@@ -124,7 +135,7 @@
 #endif
 
     BOOL returnVal;
-    if (request && request.state != (AFRequestState) AFRequestStateFulfilled)
+    if( request && request.state != AFRequestStateFulfilled )
     {
         [self queueRequestAtBack:request];
         returnVal = YES;
@@ -138,24 +149,26 @@
     return returnVal;
 }
 
+- (void)queueRequestAtFront:(AFRequest*)requestIn
+{
+    [self queueRequest:requestIn atPosition:0];
+}
+
+- (void)queueRequestAtBack:(AFRequest*)requestIn;
+{
+    [self queueRequest:requestIn atPosition:[queue count]];
+}
+
 /**
  *	Adds a request to the back of the request queue
  */
-- (void)queueRequestAtFront:(AFQueueableRequest*)requestIn
+- (void)queueRequest:(AFRequest*)requestIn atPosition:(NSUInteger)positionIn
 {
     NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn addObserver:self];
-    [queue insertObject:requestIn atIndex:0];
-    [self startWaitingRequests];
-}
-
-- (void)queueRequestAtBack:(AFQueueableRequest*)requestIn;
-{
-    NSAssert(requestIn, NSInvalidArgumentException);
-
-    [requestIn addObserver:self];
-    [queue addObject:requestIn];
+    [queue insertObject:requestIn atIndex:positionIn];
+    [requestIn requestWasQueuedAtPosition:positionIn];
     [self startWaitingRequests];
 }
 
@@ -188,36 +201,19 @@
 - (void)requestCancelled:(AFRequest*)requestIn
 {
     AFLogPosition();
-
     NSAssert(requestIn, NSInvalidArgumentException);
-
-    [requestIn removeObserver:self];
-    [queue removeObject:requestIn];
-    [activeRequests removeObject:requestIn];
-
-    if([requestIn isKindOfClass:[AFQueueableRequest class]])
-    {
-        [((AFQueueableRequest*)requestIn) requestWasUnqueued];
-    }
-
-    [self startWaitingRequests];
-}
-
-- (void)handleRequestReset:(AFRequest*)requestIn //Same behaviour as AFRequestEventCancel (dequeue)
-{
-    AFLogPosition();
-    NSAssert(requestIn, NSInvalidArgumentException);
-
-    [requestIn removeObserver:self];
-    [queue removeObject:requestIn];
-    [activeRequests removeObject:requestIn];
-    [self startWaitingRequests];
+    [self requestWasDeactivatedInternal:requestIn];
 }
 
 - (void)requestFailed:(AFRequest*)requestIn;
 {
+    AFLogPosition();
     NSAssert(requestIn, NSInvalidArgumentException);
+    [self requestWasDeactivatedInternal:requestIn];
+}
 
+-(void)requestWasDeactivatedInternal:(AFRequest*)requestIn
+{
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
     [activeRequests removeObject:requestIn];
@@ -327,7 +323,7 @@
 {
     [activeRequests release];
     [self cancelAllRequests];
-    for (AFQueueableRequest* request in queue)[request removeObserver:self];
+    for (AFRequest* request in queue)[request removeObserver:self];
     [queue release];
     [activatedRequests release];
     [super dealloc];

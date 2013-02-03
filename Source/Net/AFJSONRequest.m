@@ -76,19 +76,18 @@ static CJSONSerializer   *jsonSerializer;
 - (void)received:(NSData *)dataIn
 {
     [super received:dataIn];
-    if ((state = (AFRequestState) AFRequestStateInProcess))
-    {[responseDataBuffer appendData:dataIn];}
+    [responseDataBuffer appendData:dataIn];
 }
 
 - (NSData *)receivedData
 {
-    if (state == (AFRequestState) AFRequestStateFulfilled) return responseDataBuffer;
+    if( self.state == AFRequestStateFulfilled ) return responseDataBuffer;
     return nil;
 }
 
 - (NSData *)postData
 {
-    if (state == (AFRequestState) AFRequestStateFulfilled) return responseDataBuffer;
+    if( self.state == AFRequestStateFulfilled ) return responseDataBuffer;
     return nil;
 }
 
@@ -105,8 +104,8 @@ static CJSONSerializer   *jsonSerializer;
 
     if (error)
     {
-        NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
-        [NSException raise:NSInternalInconsistencyException format:@"Deserialisation AFSessionStateError in %@\nRequest URL was: %@\nData was: %@", [error localizedDescription], [URL absoluteString], responseString];
+        NSString *responseString = [[[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding] autorelease];
+        @throw([NSException exceptionWithName:[error localizedDescription] reason:responseString userInfo:nil]);
     }
 
     if (endpoint)

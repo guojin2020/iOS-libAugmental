@@ -78,12 +78,6 @@ static NSString
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
 }
 
--(void)handleRequestReset:         (AFRequest*)requestIn
-{
-    AFLogPosition();
-    STAssertEqualObjects( requestIn, request, wrongRequestReason );
-}
-
 -(void)handleRequestWillPollSize:  (AFRequest*)requestIn
 {
     AFLogPosition();

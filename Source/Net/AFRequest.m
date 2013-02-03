@@ -9,16 +9,23 @@ SEL
     AFRequestEventFinished,
     AFRequestEventCancel,
     AFRequestEventQueued,
-    AFRequestEventReset,
     AFRequestEventWillPollSize,
     AFRequestEventDidPollSize,
     AFRequestEventFailed;
+
+@interface AFRequest()
+
+@property(nonatomic, readwrite) AFRequestState state;
+
+@end
 
 @implementation AFRequest
 {
     int
         expectedBytes,
         receivedBytes;
+
+    AFRequestState state;
 }
 
 +(void)initialize
@@ -29,45 +36,71 @@ SEL
     AFRequestEventCancel           = @selector(requestCancelled:);          //Params: AFRequest
     AFRequestEventFailed           = @selector(requestFailed:);             //Params: AFRequest
     AFRequestEventQueued           = @selector(handleRequest:queuedAt:);    //Params: AFRequest, NSNumber
-    AFRequestEventReset            = @selector(handleRequestReset:);        //Params: AFRequest
     AFRequestEventWillPollSize     = @selector(handleRequestWillPollSize:); //Params: AFRequest
     AFRequestEventDidPollSize      = @selector(handleRequestDidPollSize:);  //Params: AFRequest
 }
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;
 
-- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn
+-(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn
 {
-    if ((self = [self initWithURL:URLIn]))
+    NSAssert(URLIn, NSInvalidArgumentException);
+
+    self = [self initWithURL:URLIn];
+    if( self )
     {
         requiresLogin = requiresLoginIn;
     }
     return self;
 }
 
-- (int)expectedBytes
+-(id)initWithURL:(NSURL *)URLIn
 {
-    return expectedBytes;
-}
+    NSAssert(URLIn, NSInvalidArgumentException);
 
--(void)setExpectedBytes:(int)expectedBytesIn
-{
-    expectedBytes = expectedBytesIn;
-}
-
-- (id)initWithURL:(NSURL *)URLIn
-{
-    if ( URLIn && (self = [self init]) )
+    self = [self init];
+    if( self )
     {
-        URL             = [URLIn retain];
-        state           = (AFRequestState) AFRequestStatePending;
+        URL = [URLIn retain];
+    }
+    return self;
+}
+
+-(id)init
+{
+    self = [super init];
+    if( self )
+    {
+        receivedBytes   = 0;
+        state           = AFRequestStateIdle;
         expectedBytes   = -1;
-        self.receivedBytes = 0;
         numberFormatter = [[NSNumberFormatter alloc] init];
         requiresLogin   = NO;
         attempts        = 0;
     }
     return self;
+}
+
+-(void)setState:(AFRequestState)stateIn
+{
+    if( state!=stateIn )
+    {
+        state = stateIn;
+        switch( state )
+        {
+            case AFRequestStateIdle:        [self notifyObservers:AFRequestEventCancel parameters:self,nil];            break;
+            case AFRequestStateQueued:      break; //Event fired in requestWasQueued
+            case AFRequestStateInProcess:   [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];   break;
+            case AFRequestStateFulfilled:   [self notifyObservers:AFRequestEventFinished parameters:self,nil];          break;
+            case AFRequestStateFailed:      [self notifyObservers:AFRequestEventFailed parameters:self,nil];            break;
+        }
+    }
+}
+
+-(int)expectedBytes { return expectedBytes; }
+-(void)setExpectedBytes:(int)expectedBytesIn
+{
+    expectedBytes = expectedBytesIn;
 }
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
@@ -89,7 +122,7 @@ SEL
     {
         int size = [self contentLengthFromHeader:header];
         self.expectedBytes = size;
-        state = (AFRequestState) AFRequestStateInProcess;
+        self.state = AFRequestStateInProcess;
         [self notifyObservers:AFRequestEventStarted parameters:self,nil];
     }
     else
@@ -98,6 +131,12 @@ SEL
         [self didFail:error];
         [error release];
     }
+}
+
+- (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn
+{
+    self.state = AFRequestStateQueued;
+    [self notifyObservers:AFRequestEventQueued parameters:self, [NSNumber numberWithInt:queuePositionIn],nil];
 }
 
 - (int)contentLengthFromHeader:(NSDictionary *)header
@@ -154,26 +193,27 @@ SEL
 
 - (void)received:(NSData *)dataIn
 {
+    self.state = AFRequestStateInProcess;
     self.receivedBytes += [dataIn length];
 }
 
 - (void)didFinish
 {
-    state = AFRequestStateFulfilled;
-    [self notifyObservers:AFRequestEventFinished parameters:self,nil];
+    self.state = AFRequestStateFulfilled;
+    //[self notifyObservers:AFRequestEventFinished parameters:self,nil];
 }
 
 - (void)didFail:(NSError *)error
 {
-    state = AFRequestStateFailed;
-    [self notifyObservers:AFRequestEventFailed  parameters:self,nil];
+    self.state = AFRequestStateFailed;
+    //[self notifyObservers:AFRequestEventFailed  parameters:self,nil];
 }
 
 - (void)cancel
 {
-    state = (AFRequestState) AFRequestStatePending;
+    self.state = AFRequestStateIdle;
     [connection cancel];
-    [self notifyObservers:AFRequestEventCancel parameters:self,nil];
+    //[self notifyObservers:AFRequestEventCancel parameters:self,nil];
 }
 
 -(float)progress
@@ -196,8 +236,8 @@ SEL
     //return receivedBytes >= expectedBytes;
 }
 
-- (NSString *)          actionDescription { return nil;           }
-- (int)                 attempts          { return attempts;      }
+- (NSString*) actionDescription { return nil;           }
+- (int)       attempts          { return attempts;      }
 
 - (int) receivedBytes { return receivedBytes; }
 - (void)setReceivedBytes:(int)receivedBytesIn
@@ -206,7 +246,7 @@ SEL
     [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];
 }
 
-- (int)                 responseCode      { return responseCode;  }
+- (int)responseCode { return responseCode;  }
 
 -(void)dealloc
 {

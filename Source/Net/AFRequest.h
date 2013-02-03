@@ -3,7 +3,15 @@
 
 #import "AFObservable.h"
 
-#import "AFRequestStates.h"
+typedef enum AFRequestState
+{
+    AFRequestStateIdle      = 0,  // The request is AFRequestStateIdle
+    AFRequestStateQueued    = 1,  // The request is due to be AFRequestStateFulfilled (AFRequestEventQueued, waiting initialising etc.)
+    AFRequestStateInProcess = 2,  // The request is currently in the process of being AFRequestStateFulfilled.
+    AFRequestStateFulfilled = 3,  // The request has been AFRequestStateFulfilled.
+    AFRequestStateFailed    = 4   // The request has been AFRequestStateFulfilled.
+}
+AFRequestState;
 
 extern SEL
     AFRequestEventStarted,
@@ -11,7 +19,6 @@ extern SEL
     AFRequestEventFinished,
     AFRequestEventCancel,
     AFRequestEventQueued,
-    AFRequestEventReset,
     AFRequestEventWillPollSize,
     AFRequestEventDidPollSize,
     AFRequestEventFailed;
@@ -20,8 +27,7 @@ extern SEL
 {
     NSURL               *URL;
     NSURLConnection     *connection;
-    
-    AFRequestState      state;
+
     int                 responseCode;
     int                 attempts;
 
@@ -35,6 +41,8 @@ extern SEL
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 
 - (void)willReceiveWithHeaders:(NSDictionary *)header responseCode:(int)responseCode;
+
+- (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 
 - (void)received:(NSData *)dataIn;
 - (void)didFinish;

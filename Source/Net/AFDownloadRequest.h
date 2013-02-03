@@ -1,14 +1,14 @@
 
 #import <Foundation/Foundation.h>
 
-#import "AFQueueableRequest.h"
+#import "AFRequest.h"
 #import "AFRequestEndpoint.h"
 
 @class AFHeaderRequest;
 @class AFSession;
 @class AFRequestQueue;
 
-@interface AFDownloadRequest : AFQueueableRequest <AFRequestEndpoint, UIAlertViewDelegate>
+@interface AFDownloadRequest : AFRequest <AFRequestEndpoint, UIAlertViewDelegate>
 
 + (AFDownloadRequest *)requestForURL:(NSURL *)URLIn localFilePath:(NSString *)localFilePathIn observers:(NSSet *)observersIn fileSizeCache:(NSMutableDictionary *)sizeCacheIn queueForHeaderRequest:(AFRequestQueue *)queueIn;
 

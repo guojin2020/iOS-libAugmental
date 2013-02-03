@@ -80,7 +80,6 @@
 		0947D67D16B3309600BE9E16 /* AFRequestQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFAE15E6CC1900D32988 /* AFRequestQueue.m */; };
 		0947D67E16B3309600BE9E16 /* AFRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF4515E6CC1900D32988 /* AFRequest.m */; };
 		0947D67F16B3309600BE9E16 /* AFHeaderRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF6415E6CC1900D32988 /* AFHeaderRequest.m */; };
-		0947D68016B3309600BE9E16 /* AFQueueableRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */; };
 		0947D68116B3309600BE9E16 /* AFObservable.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF8B15E6CC1900D32988 /* AFObservable.m */; };
 		0947D68216B3309600BE9E16 /* AFObjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF7E15E6CC1900D32988 /* AFObjectHelper.m */; };
 		0947D68316B3309600BE9E16 /* AFObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF3F15E6CC1900D32988 /* AFObject.m */; };
@@ -255,8 +254,6 @@
 		099B1154163D639600E81588 /* AFPasswordField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA115E6CC1900D32988 /* AFPasswordField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1155163D639600E81588 /* AFPasswordValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA315E6CC1900D32988 /* AFPasswordValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1156163D639600E81588 /* AFPerformSelectorOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA515E6CC1900D32988 /* AFPerformSelectorOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1157163D639600E81588 /* AFQueueableRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA715E6CC1900D32988 /* AFQueueableRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1158163D639600E81588 /* AFQueueableRequestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA815E6CC1900D32988 /* AFQueueableRequestObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B115A163D639600E81588 /* AFRequestEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAA15E6CC1900D32988 /* AFRequestEndpoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B115B163D639600E81588 /* AFRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAB15E6CC1900D32988 /* AFRequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B115C163D639600E81588 /* AFRequestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAC15E6CC1900D32988 /* AFRequestObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -332,7 +329,6 @@
 		09C62F12162ADF5B00CC6B73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75A4AC821485AB9000EBD4B0 /* Foundation.framework */; };
 		09C62F18162ADF5B00CC6B73 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 09C62F16162ADF5B00CC6B73 /* InfoPlist.strings */; };
 		09C62F1B162ADF5B00CC6B73 /* iOS_libAugmentalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 09C62F1A162ADF5B00CC6B73 /* iOS_libAugmentalTest.m */; };
-		09E125571653098F008154C0 /* AFRequestStates.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB115E6CC1900D32988 /* AFRequestStates.h */; };
 		91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		91C9B6BCB1A1F57AB6EAA7F4 /* AFScrollingLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 91CB61B7A8709DDD4FB867D4 /* AFScrollingLabel.h */; };
 		91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
@@ -395,7 +391,6 @@
 		B03CAE707331B88140796B6E /* AFFileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAD39DB6C823992454143 /* AFFileUtils.m */; };
 		B03CAE7480C36713D62EF361 /* AFDefaultsBackedStringDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAD9F06AF6C386DBC21D6 /* AFDefaultsBackedStringDictionary.h */; };
 		B03CAE7AE016A7344E17641B /* AFMethodBlockedException.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAC4A0E9F56DDAC2516CF /* AFMethodBlockedException.m */; };
-		B03CAF3B0695CF702F059B6D /* AFQueueableRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */; };
 		B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */; };
 /* End PBXBuildFile section */
 
@@ -544,8 +539,6 @@
 		759BFFA415E6CC1900D32988 /* AFPasswordValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPasswordValidator.m; sourceTree = "<group>"; };
 		759BFFA515E6CC1900D32988 /* AFPerformSelectorOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPerformSelectorOperation.h; sourceTree = "<group>"; };
 		759BFFA615E6CC1900D32988 /* AFPerformSelectorOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPerformSelectorOperation.m; sourceTree = "<group>"; };
-		759BFFA715E6CC1900D32988 /* AFQueueableRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFQueueableRequest.h; sourceTree = "<group>"; };
-		759BFFA815E6CC1900D32988 /* AFQueueableRequestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFQueueableRequestObserver.h; sourceTree = "<group>"; };
 		759BFFAA15E6CC1900D32988 /* AFRequestEndpoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRequestEndpoint.h; sourceTree = "<group>"; };
 		759BFFAB15E6CC1900D32988 /* AFRequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRequestHandler.h; sourceTree = "<group>"; };
 		759BFFAC15E6CC1900D32988 /* AFRequestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRequestObserver.h; sourceTree = "<group>"; };
@@ -553,7 +546,6 @@
 		759BFFAE15E6CC1900D32988 /* AFRequestQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRequestQueue.m; sourceTree = "<group>"; };
 		759BFFAF15E6CC1900D32988 /* AFRequestQueueAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRequestQueueAlertView.h; sourceTree = "<group>"; };
 		759BFFB015E6CC1900D32988 /* AFRequestQueueAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFRequestQueueAlertView.m; sourceTree = "<group>"; };
-		759BFFB115E6CC1900D32988 /* AFRequestStates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFRequestStates.h; sourceTree = "<group>"; };
 		759BFFB215E6CC1900D32988 /* AFResultsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFResultsPage.h; sourceTree = "<group>"; };
 		759BFFB315E6CC1900D32988 /* AFResultsPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFResultsPage.m; sourceTree = "<group>"; };
 		759BFFB415E6CC1900D32988 /* AFResultsPagingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFResultsPagingCell.h; sourceTree = "<group>"; };
@@ -642,7 +634,6 @@
 		B03CA4256458488C74FC4D3A /* AFVideoStillsFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoStillsFactory.m; sourceTree = "<group>"; };
 		B03CA438F99FE0EDAB66C661 /* AFSKProductRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductRequest.h; sourceTree = "<group>"; };
 		B03CA518CD9B71C08568FCCB /* AFActivityLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFActivityLabel.m; sourceTree = "<group>"; };
-		B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFQueueableRequest.m; sourceTree = "<group>"; };
 		B03CA5A2DBB36E1670659E38 /* AFMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFMoviePlayerViewController.h; sourceTree = "<group>"; };
 		B03CA5D2CB96A51A59E910CF /* AFMoviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFMoviePlayerViewController.m; sourceTree = "<group>"; };
 		B03CA5E5D646F27E83434093 /* AFSKProductFetchResponseFailed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetchResponseFailed.m; sourceTree = "<group>"; };
@@ -1019,11 +1010,8 @@
 				759BFFBD15E6CC1900D32988 /* AFSessionObserver.h */,
 				759BFFBC15E6CC1900D32988 /* AFSession.m */,
 				759BFFBB15E6CC1900D32988 /* AFSession.h */,
-				759BFFB115E6CC1900D32988 /* AFRequestStates.h */,
 				759BFFB015E6CC1900D32988 /* AFRequestQueueAlertView.m */,
 				759BFFAF15E6CC1900D32988 /* AFRequestQueueAlertView.h */,
-				759BFFA815E6CC1900D32988 /* AFQueueableRequestObserver.h */,
-				759BFFA715E6CC1900D32988 /* AFQueueableRequest.h */,
 				759BFF8115E6CC1900D32988 /* AFObjectRequest.m */,
 				759BFFAE15E6CC1900D32988 /* AFRequestQueue.m */,
 				759BFF4415E6CC1900D32988 /* AFRequest.h */,
@@ -1035,7 +1023,6 @@
 				759BFFAB15E6CC1900D32988 /* AFRequestHandler.h */,
 				759BFF6415E6CC1900D32988 /* AFHeaderRequest.m */,
 				759BFFAD15E6CC1900D32988 /* AFRequestQueue.h */,
-				B03CA5889F330A4CCAA092DC /* AFQueueableRequest.m */,
 				B03CAE6C073D426CE1BD38C6 /* AFRequest+Protected.h */,
 				B03CAF51A5C3BBEC832D0197 /* AFNetUtils.m */,
 				B03CA1DD9F0571372510626B /* AFNetUtils.h */,
@@ -1386,8 +1373,6 @@
 				099B1154163D639600E81588 /* AFPasswordField.h in Headers */,
 				099B1155163D639600E81588 /* AFPasswordValidator.h in Headers */,
 				099B1156163D639600E81588 /* AFPerformSelectorOperation.h in Headers */,
-				099B1157163D639600E81588 /* AFQueueableRequest.h in Headers */,
-				099B1158163D639600E81588 /* AFQueueableRequestObserver.h in Headers */,
 				099B115A163D639600E81588 /* AFRequestEndpoint.h in Headers */,
 				099B115B163D639600E81588 /* AFRequestHandler.h in Headers */,
 				099B115C163D639600E81588 /* AFRequestObserver.h in Headers */,
@@ -1431,7 +1416,6 @@
 				099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */,
 				099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */,
 				099B1188163D639600E81588 /* iOS-libAugmental-Prefix.pch in Headers */,
-				09E125571653098F008154C0 /* AFRequestStates.h in Headers */,
 				099B1189163D639600E81588 /* AFTableViewController.h in Headers */,
 				099B118A163D639600E81588 /* AFTableCell.h in Headers */,
 				099B118B163D639600E81588 /* AFTableSectionObserver.h in Headers */,
@@ -1686,7 +1670,6 @@
 				91CE42AE43F43F887F9F7B80 /* AFScrollingLabel.m in Sources */,
 				B03CA2E06B3912409EF7E2B5 /* AFDrawingDelegableTableViewCell.m in Sources */,
 				B03CA021B2385171C0754E9D /* AFDrawingDelegableView.m in Sources */,
-				B03CAF3B0695CF702F059B6D /* AFQueueableRequest.m in Sources */,
 				B03CAF401011BD2D550B1597 /* AFActivityLabel.m in Sources */,
 				B03CA22193E79B68997CB1AD /* AFVideoPlayerViewController.m in Sources */,
 				B03CAE707331B88140796B6E /* AFFileUtils.m in Sources */,
@@ -1772,7 +1755,6 @@
 				0947D67D16B3309600BE9E16 /* AFRequestQueue.m in Sources */,
 				0947D67E16B3309600BE9E16 /* AFRequest.m in Sources */,
 				0947D67F16B3309600BE9E16 /* AFHeaderRequest.m in Sources */,
-				0947D68016B3309600BE9E16 /* AFQueueableRequest.m in Sources */,
 				0947D68116B3309600BE9E16 /* AFObservable.m in Sources */,
 				0947D68216B3309600BE9E16 /* AFObjectHelper.m in Sources */,
 				0947D68316B3309600BE9E16 /* AFObject.m in Sources */,

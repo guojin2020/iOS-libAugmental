@@ -10,7 +10,6 @@
 -(void)requestCancelled:           (AFRequest*)requestIn;
 -(void)requestFailed:              (AFRequest*)requestIn;
 -(void)handleRequest:              (AFRequest*)requestIn queuedAt:(NSNumber *)positionIn;
--(void)handleRequestReset:         (AFRequest*)requestIn;
 -(void)handleRequestWillPollSize:  (AFRequest*)requestIn;
 -(void)handleRequestDidPollSize:   (AFRequest*)requestIn;
 

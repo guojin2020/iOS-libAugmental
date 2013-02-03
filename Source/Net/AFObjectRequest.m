@@ -36,9 +36,7 @@
 
 - (void)didFinish
 {
-    state = (AFRequestState) AFRequestStateFulfilled;
-
-    [self notifyObservers:AFRequestEventFinished parameters:self,nil];
+    [super didFinish];
 
     NSError *error = nil;
     returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];

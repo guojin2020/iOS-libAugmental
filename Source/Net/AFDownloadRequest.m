@@ -23,11 +23,6 @@
     NSFileHandle        *fileHandle;
     NSString            *localFilePath;
     NSMutableDictionary *sizeCache;
-
-    NSUInteger
-            queuePosition;//,
-  //          dataBufferPosition;
-
     NSMutableData       *dataBuffer;
     AFHeaderRequest     *headerRequest;
 }
@@ -280,19 +275,6 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     }
 }
 
-- (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
-{
-    AFLogPosition();
-    queuePosition = (NSUInteger) queuePositionIn;
-    [self notifyObservers:AFRequestEventQueued parameters:self,NULL];
-}
-
-- (void)requestWasUnqueued
-{
-    AFLogPosition();
-    state = AFRequestStateIdle;
-}
-
 - (void)setExpectedBytes:(int)expectedBytesIn
 {
     [super setExpectedBytes:expectedBytesIn];
@@ -325,10 +307,10 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)deleteLocalFile
 {
-    if (state == (AFRequestState) AFRequestStateInProcess)[self cancel];
-    if ([self existsInLocalStorage])[[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];
+    if( self.state == AFRequestStateInProcess )[self cancel];
+    if( [self existsInLocalStorage] )[[NSFileManager defaultManager] removeItemAtPath:localFilePath error:nil];
     self.receivedBytes = 0;
-    [self notifyObservers:AFRequestEventReset parameters:self,NULL];
+    [self notifyObservers:AFRequestEventCancel parameters:self,NULL];
 }
 
 - (BOOL)existsInLocalStorage
@@ -338,11 +320,11 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)updateReceivedBytesFromFile
 {
-    if ([self existsInLocalStorage])
+    if( [self existsInLocalStorage] )
     {
         NSDictionary *fileAttributes;
         NSError      *error = nil;
-        if ((fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:localFilePath error:&error]) && !error)
+        if( (fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:localFilePath error:&error] ) && !error )
         {
             int fileSizeBytes = [[fileAttributes objectForKey:NSFileSize] intValue];
             self.receivedBytes = fileSizeBytes;
@@ -357,11 +339,11 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)dealloc
 {
-    [sizeCache release];
-    [numberFormatter release];
-    [localFilePath release];
-    [dataBuffer release];
-    [fileHandle release];
+    [sizeCache          release];
+    [numberFormatter    release];
+    [localFilePath      release];
+    [dataBuffer         release];
+    [fileHandle         release];
     [super dealloc];
 }
 

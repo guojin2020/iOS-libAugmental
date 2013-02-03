@@ -3,7 +3,7 @@
 #import "AFRequestObserver.h"
 #import "AFRequestHandler.h"
 
-@class AFQueueableRequest;
+@class AFRequest;
 
 //#define THREADED_REQUEST_HANDLER_ENABLED
 #define BACKGROUND_HANDLING_ENABLED
@@ -16,9 +16,9 @@
 
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn;
 
-- (void)queueRequestAtFront:(AFQueueableRequest*)requestIn;
+- (void)queueRequestAtFront:(AFRequest*)requestIn;
 
-- (void)queueRequestAtBack:(AFQueueableRequest*)requestIn;
+- (void)queueRequestAtBack:(AFRequest*)requestIn;
 
 - (BOOL)handleRequest:(AFRequest*)request;
 

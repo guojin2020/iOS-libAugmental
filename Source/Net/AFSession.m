@@ -63,7 +63,7 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)handleRequest:(AFRequest*)request
 {
-    if (!request || request.state == (AFRequestState) AFRequestStateFulfilled)
+    if( !request || request.state == AFRequestStateFulfilled )
     {
         return NO;
     }
