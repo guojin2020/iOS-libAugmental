@@ -22,14 +22,14 @@ SEL
 
 - (id)init
 {
-    if (self = [super init])
+    self = [super init];
+    if (self)
     {
         observers       = [[NSMutableSet alloc] init];
         invocationQueue = [[NSMutableSet alloc] init];
-        lockCount = 0;
-        return self;
+        lockCount       = 0;
     }
-    else return NULL;
+    return self;
 }
 
 - (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
