@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 
 #if DEBUG
-#define AFLogPosition() NSLog(@"[%@] %@ -> %@", [[NSThread currentThread] name], NSStringFromClass([self class]), NSStringFromSelector(_cmd))
+#define AFLogMsg(M) NSLog(@"[%@] %@ -> %@ - '%@'", [NSThread currentThread], NSStringFromClass([self class]), NSStringFromSelector(_cmd), M )
+#define AFLogPosition( ) NSLog(@"[%@] %@ -> %@", [NSThread currentThread], NSStringFromClass([self class]), NSStringFromSelector(_cmd) )
 #else
 #define AFLogPosition()
 #endif
