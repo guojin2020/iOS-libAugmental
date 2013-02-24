@@ -15,10 +15,14 @@
 }
 
 - (void)setTagReferences
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 - (void)refreshFields
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 -(void)handleObjectFieldUpdated:(AFObject*)objectIn
 {

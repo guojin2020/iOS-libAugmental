@@ -69,7 +69,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     NSAssert(URLIn && targetPathIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
 
-    if ((self = [super initWithURL:URLIn]))
+    self = [self initWithURL:URLIn];
+    if(self)
     {
         localFilePath = [targetPathIn retain];
         sizeCache     = [sizeCacheIn retain];

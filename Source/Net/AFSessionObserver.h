@@ -1,8 +1,7 @@
-#import "AFSessionStates.h"
-#import "AFSessionObserver.h"
+
+#import "AFSessionState.h"
 
 @class AFSession;
-//@class AFCustomer;
 
 @protocol AFSessionObserver
 

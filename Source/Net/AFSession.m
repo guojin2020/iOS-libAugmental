@@ -1,5 +1,5 @@
 
-#import "AFSessionStates.h"
+#import "AFSessionState.h"
 #import "AFObservable.h"
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
@@ -21,7 +21,8 @@ static AFSession *sharedSession = nil;
 
 - (id)init
 {
-    if ((self = [super initWithTargetHandler:nil maxConcurrentDownloads:8]))
+    self = [super initWithTargetHandler:nil maxConcurrentDownloads:4];
+    if (self)
     {
         cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cookieStore setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];

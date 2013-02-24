@@ -5,6 +5,7 @@
 
 #import "AFVideoPlayerView.h"
 #import "AFAVAssetCache.h"
+#import "AFAssertion.h"
 
 static NSString *STATUS_KEY = @"status";
 
@@ -92,6 +93,8 @@ static const NSString *ItemStatusContext;
 
 - (void)refresh
 {
+    AFAssertMainThread();
+
     if ((self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay))
     {
         self.playButton.enabled = YES;

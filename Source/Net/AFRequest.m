@@ -101,6 +101,7 @@ SEL
 -(void)setExpectedBytes:(int)expectedBytesIn
 {
     expectedBytes = expectedBytesIn;
+    [self notifyObservers:AFRequestEventProgressUpdated parameters:NULL];
 }
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn

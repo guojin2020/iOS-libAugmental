@@ -30,7 +30,8 @@
 
 - (id)initWithTargetHandler:(NSObject <AFRequestHandler> *)targetHandlerIn maxConcurrentDownloads:(int)maxConcurrentDownloadsIn
 {
-    if ((self = [self init]))
+    self = [super init];
+    if (self)
     {
         targetHandler          = targetHandlerIn;
         queue                  = [[NSMutableArray alloc] init];

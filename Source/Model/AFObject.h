@@ -51,7 +51,7 @@ extern SEL
  to fill out all fields of the implementing class from an NSDictionary representation. The exact key/value representation
  may be entirely determined by the implementation to suit the type of data.
  */
-- (void)setContentFromDictionary:(NSDictionary *)dictionary; //Set the content from a dictionary - used as callback
+- (void)setContentFromDictionary:(NSDictionary *)dictionary; //Set the content from a array - used as callback
 
 /**
  The primary key of the object: this must be unique and the same as given in any originating database table.

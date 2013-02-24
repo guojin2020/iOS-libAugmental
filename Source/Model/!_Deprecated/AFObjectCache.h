@@ -87,9 +87,9 @@
 /**
  Returns an AFObject from its Dictionary representation.
  This method will use an existing cached instance of object wherever possible; such that if an object
- dictionary is received from server, representing an object which is currently being displayed on
+ array is received from server, representing an object which is currently being displayed on
  the iPhone screen, the existing instance will remain in place and have its content updated with
- that from the incoming dictionary. This has the effect of maintaining consistent instances of
+ that from the incoming array. This has the effect of maintaining consistent instances of
  objects on the server so that observers receive those updates seamlessly.
  */
 - (AFObject*)objectFromDictionary:(NSDictionary *)objectDictionary;

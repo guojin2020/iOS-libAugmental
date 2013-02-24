@@ -54,7 +54,7 @@ SEL
 	//Make temp file path
 	NSString *tempFilePath = [NSString stringWithFormat:@"%@temp.plist",documentsDirectory];
 
-	//Write dictionary to file
+	//Write array to file
 	//NSLog(@"Saving to: %@",tempFilePath);
 	[templateDictionary writeToFile:tempFilePath atomically:NO];
 	

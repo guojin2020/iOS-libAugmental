@@ -9,6 +9,7 @@
 #define AF_SCROLLING_LABEL_DEFAULT_EXTRA_HOLD_DURATION  0.5
 
 #import "AFScrollingLabel.h"
+#import "AFAssertion.h"
 
 typedef enum AFScrollingLabelMask
 {
@@ -287,6 +288,8 @@ static CGSize cgSizeMax;
 
 - (void)refreshMaskGradient
 {
+    AFAssertMainThread();
+
 	NSAssert(self.layer.mask, @"Inconsistency: %@ was called but mask is not currently enabled", NSStringFromSelector(_cmd));
 
 	AFScrollingLabelMask mask = AFScrollingLabelMaskNone;

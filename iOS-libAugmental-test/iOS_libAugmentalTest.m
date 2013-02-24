@@ -16,21 +16,24 @@
 
 @implementation iOS_libAugmentalTest
 {
-    NSCondition *requestWaitLock;
+    //NSCondition *requestWaitLock;
+    bool isComplete;
 }
 
 - (void)setUp
 {
     [super setUp];
 
-    requestWaitLock = [[[NSCondition alloc] init] retain];
-    requestWaitLock.name = @"Wait for Network requests";
+    //requestWaitLock = [[[NSCondition alloc] init] retain];
+    //requestWaitLock.name = @"Wait for Network requests";
+
+    isComplete = NO;
 }
 
 - (void)tearDown
 {
-    [requestWaitLock release];
-    [requestWaitLock release];
+    //[requestWaitLock release];
+    //[requestWaitLock release];
     [super tearDown];
 }
 
@@ -45,6 +48,9 @@
     // A small 26 byte text file containing the string "Download test, 1. 2.. 3..."
     NSString*   fileName    = @"downloadTest.txt";
     NSString*   urlPath     = [NSString stringWithFormat:@"http://chrishatton.homeip.net/downloads/%@", fileName, nil];
+    
+    NSLog(@"Testing Download Request for URL: %@", urlPath);
+    
     NSURL*      testURL     = [[NSURL alloc] initWithString:urlPath];
     NSString*   basePath    = [AFFileUtils documentsDirectory];
     NSString*   targetPath  = [NSString stringWithFormat:@"%@/%@", basePath, fileName, nil];
@@ -53,8 +59,8 @@
 
     AFDownloadRequest* request = [AFDownloadRequest alloc];
 
-    id<AFRequestObserver> observer = [[TestDownloadRequestObserver alloc] initWithRequest:request
-                                                                           callbackObject:self
+    NSObject<AFRequestObserver> *observer = [[TestDownloadRequestObserver alloc] initWithRequest:request
+                                                                                  callbackObject:self
                                                                          callbackSelector:@selector(completeDownloadRequestTest)];
     NSSet* observers = [[NSSet alloc] initWithObjects:observer, nil];
     [observer release];
@@ -77,9 +83,16 @@
     [session handleRequest:request];
     [session queueRequestAtBack:request];
 
-    [requestWaitLock lock];
-    while(![request complete]) [requestWaitLock wait];
-    [requestWaitLock unlock];
+    //[requestWaitLock lock];
+    
+    do
+    {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:1.00]];
+    }
+    while (!isComplete);
+    
+    //while(![request complete]) [requestWaitLock wait];
+    //[requestWaitLock unlock];
 
     [request release];
 
@@ -88,9 +101,11 @@
 
 -(void)completeDownloadRequestTest
 {
-    [requestWaitLock lock];
-    [requestWaitLock signal];
-    [requestWaitLock unlock];
+    isComplete = YES;
+    
+    //[requestWaitLock lock];
+    //[requestWaitLock signal];
+    //[requestWaitLock unlock];
 }
 
 @end

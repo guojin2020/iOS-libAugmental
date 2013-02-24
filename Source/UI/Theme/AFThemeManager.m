@@ -53,7 +53,7 @@ static NSMutableSet *observers;
     while ([themeables count] > 0)
     {
         currentClass = [themeables anyObject];
-        //NSLog(@"Composing dictionary for %@...",NSStringFromClass(currentClass));
+        //NSLog(@"Composing array for %@...",NSStringFromClass(currentClass));
         [themeables removeObject:currentClass];
         [AFThemeManager composeThemeForClass:currentClass usingCache:themeCache];
     }
@@ -74,7 +74,7 @@ static NSMutableSet *observers;
         NSMutableDictionary *parentDictionary = parentClass ? [self composeThemeForClass:parentClass usingCache:themeCache] : [themeCache objectForKey:ROOT_DICTIONARY_CACHE_KEY];
 
         NSString *classSectionName = [themeableClass themeSectionName];
-        if (classSectionName) //If this has it's own section, create a new dictionary for it and fill with default contents
+        if (classSectionName) //If this has it's own section, create a new array for it and fill with default contents
         {
             NSMutableDictionary *existingDictionary = [parentDictionary objectForKey:classSectionName];
             if (existingDictionary)
