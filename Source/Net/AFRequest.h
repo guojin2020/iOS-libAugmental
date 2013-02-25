@@ -28,8 +28,9 @@ extern SEL
     NSURL               *URL;
     NSURLConnection     *connection;
 
-    int                 responseCode;
-    int                 attempts;
+    int
+        responseCode,
+        attempts;
 
     NSNumberFormatter   *numberFormatter;
     BOOL                requiresLogin;

@@ -29,11 +29,11 @@
 
 static NSMutableDictionary *uniqueRequestPool = nil;
 
-+ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn
-                       localFilePath:(NSString *)localFilePathIn
-                           observers:(NSSet *)observersIn
-                       fileSizeCache:(NSMutableDictionary *)sizeCacheIn
-               queueForHeaderRequest:(AFRequestQueue *)queueIn
++ (AFDownloadRequest *)requestForURL:(NSURL*)               URLIn
+                       localFilePath:(NSString*)            localFilePathIn
+                           observers:(NSSet*)               observersIn
+                       fileSizeCache:(NSMutableDictionary* )sizeCacheIn
+               queueForHeaderRequest:(AFRequestQueue*)      queueIn
 {
     NSAssert( URLIn!=nil,           @"URL must not be nil" );
     NSAssert( localFilePathIn!=nil, @"Local file path must not be nil" );
@@ -67,23 +67,27 @@ static NSMutableDictionary *uniqueRequestPool = nil;
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
-    NSAssert(URLIn && targetPathIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
+    NSAssert(URLIn,        NSInvalidArgumentException);
+    NSAssert(targetPathIn, NSInvalidArgumentException);
 
     self = [self initWithURL:URLIn];
+
     if(self)
     {
         localFilePath = [targetPathIn retain];
         sizeCache     = [sizeCacheIn retain];
         dataBuffer    = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
-        [self addObservers:[observersIn allObjects]];
+        if(observersIn) [self addObservers:[observersIn allObjects]];
+
         [self updateReceivedBytesFromFile];
 
         NSNumber *expectedSizeNumber = (NSNumber *) [sizeCache objectForKey:[URLIn absoluteString]];
         if (expectedSizeNumber)
         {
+            //[self notifyObservers:AFRequestEventWillPollSize parameters:self, NULL];
             self.expectedBytes = [expectedSizeNumber intValue];
-            [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+            //[self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
         }
 
         if(queueIn)

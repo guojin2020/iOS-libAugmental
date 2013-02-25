@@ -201,20 +201,17 @@ SEL
 - (void)didFinish
 {
     self.state = AFRequestStateFulfilled;
-    //[self notifyObservers:AFRequestEventFinished parameters:self,nil];
 }
 
 - (void)didFail:(NSError *)error
 {
     self.state = AFRequestStateFailed;
-    //[self notifyObservers:AFRequestEventFailed  parameters:self,nil];
 }
 
 - (void)cancel
 {
     self.state = AFRequestStateIdle;
     [connection cancel];
-    //[self notifyObservers:AFRequestEventCancel parameters:self,nil];
 }
 
 -(float)progress
@@ -234,11 +231,10 @@ SEL
         default:
            return NO;
     }
-    //return receivedBytes >= expectedBytes;
 }
 
-- (NSString*) actionDescription { return nil;           }
-- (int)       attempts          { return attempts;      }
+- (NSString*) actionDescription { return nil;      }
+- (int)       attempts          { return attempts; }
 
 - (int) receivedBytes { return receivedBytes; }
 - (void)setReceivedBytes:(int)receivedBytesIn
