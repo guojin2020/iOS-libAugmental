@@ -98,7 +98,7 @@
     // Worrying that this is unimplemented, wasn't it supposed to be here, deserialize the JSON and insert into Cache?
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
 }

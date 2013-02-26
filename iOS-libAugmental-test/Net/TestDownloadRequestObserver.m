@@ -64,7 +64,7 @@ static NSString
     [callbackObject performSelector:callbackSelector];
 }
 
--(void)requestFailed:              (AFRequest*)requestIn
+- (void)requestFailed:(AFRequest *)requestIn withError:(NSError *)errorIn
 {
     AFLogPosition();
     [callbackObject performSelector:callbackSelector];

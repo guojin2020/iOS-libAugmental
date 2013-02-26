@@ -118,7 +118,7 @@ SEL
 	[settingsRequest release];
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)error
 {
     AFLogPosition();
 }

@@ -14,7 +14,9 @@
 -(bool)isSuccessHTTPResponse;
 -(NSRange)contentRangeFromHeader:(NSDictionary *)header;
 
+@property(nonatomic, readwrite) AFRequestState state;
 @property(nonatomic, readwrite) int receivedBytes;
 @property(nonatomic, readwrite) int expectedBytes;
+@property(nonatomic, readwrite, retain) NSError* error;
 
 @end

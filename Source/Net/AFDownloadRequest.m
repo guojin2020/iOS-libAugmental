@@ -9,6 +9,7 @@
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
+#define SIZE_CACHE_ERROR @""
 
 @interface AFDownloadRequest ()
 
@@ -302,11 +303,16 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
-    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+
+    self.error = errorIn;
+
+    NSString* uniqueKey = self.uniqueKey;
+    [sizeCache setObject:SIZE_CACHE_ERROR forKey:uniqueKey];
+    [self setState:AFRequestStateFailed];
 }
 
 

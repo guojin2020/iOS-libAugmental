@@ -5,7 +5,7 @@
 
 static AFNumericStringValidator *sharedInstance = nil;
 
-static NSString *emailRegEx = @"[0-9]+";
+//static NSString *emailRegEx = @"[0-9]+";
 //static GTMRegex *regex = nil;
 
 + (NSObject <AFValidator> *)sharedInstance

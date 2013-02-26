@@ -206,7 +206,7 @@
     [self requestWasDeactivatedInternal:requestIn];
 }
 
-- (void)requestFailed:(AFRequest*)requestIn;
+- (void)requestFailed:(AFRequest*)requestIn withError:(NSError*)error
 {
     AFLogPosition();
     NSAssert(requestIn, NSInvalidArgumentException);
@@ -279,15 +279,10 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     NSAssert(connection, NSInvalidArgumentException);
-
-    AFRequest*findRequest;
-
     //[self setOffline:YES];
-
-    NSAssert(findRequest = [self queuedRequestForConnection:connection], @"Couldn't find the request for connection in %@", [self class]);
-
+    AFRequest* findRequest = [self queuedRequestForConnection:connection];
+    NSAssert(findRequest, @"Couldn't find the request for connection in %@", [self class], nil);
     [findRequest didFail:error];
-
     //[connection release];
 }
 
