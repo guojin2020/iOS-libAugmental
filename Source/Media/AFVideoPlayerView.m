@@ -3,18 +3,24 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
+#define TRACKS_KEY @"tracks"
+
 #import "AFVideoPlayerView.h"
 #import "AFAVAssetCache.h"
 #import "AFAssertion.h"
+#import "AVAsset+Tracks.h"
 
-static NSString *STATUS_KEY = @"status";
+id PlayerStatusContext;
+NSString *STATUS_KEY = @"status";
+
+@interface AFVideoPlayerView ()
+- (void)assetVideoTrackLoaded:(AVAssetTrack *)videoTrack;
+@end
 
 @implementation AFVideoPlayerView
 {
     bool observingPlayerItem;
 }
-
-static const NSString *ItemStatusContext;
 
 -(id)initWithURL:(NSURL*)url
 {
@@ -30,49 +36,40 @@ static const NSString *ItemStatusContext;
     self = [self init];
     if(self)
     {
-        NSString *tracksKey = @"tracks";
-
-        //playerView = [[AFVideoPlayerView alloc] init];
         playerItem = [[AVPlayerItem alloc] initWithAsset:asset];
 
-        [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler:
-                ^{
-                    dispatch_async(dispatch_get_main_queue(),
-                            ^{
-                                NSError *error;
-                                AVKeyValueStatus status = [asset statusOfValueForKey:tracksKey error:&error];
-
-                                if (status == AVKeyValueStatusLoaded)
-                                {
-                                    self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-
-                                    [self.playerItem addObserver:self forKeyPath:STATUS_KEY options:NSKeyValueObservingOptionNew context:&ItemStatusContext];
-                                    observingPlayerItem = YES;
-
-                                    [[NSNotificationCenter defaultCenter] addObserver:self
-                                                                             selector:@selector(playerItemDidReachEnd:)
-                                                                                 name:AVPlayerItemDidPlayToEndTimeNotification
-                                                                               object:self.playerItem];
-                                    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                                }
-                                else
-                                {
-                                    NSLog(@"The asset's tracks were not loaded:\n%@", [error localizedDescription]);
-                                }
-                            });
-                }];
+        [asset beginLoadVideoTrackTo:self selector:@selector(assetVideoTrackLoaded:)];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(playerItemDidReachEnd:)
                                                      name:AVPlayerItemDidPlayToEndTimeNotification
                                                    object:[self.player currentItem]];
-
-        //playButton = [[UIButton buttonWithType:UIButtonTypeRoundedRect] retain];
-        //playButton.frame = CGRectMake(0, 0, 32, 32);
-
-        //[self addSubview:playButton];
     }
     return self;
+}
+
+-(void)assetVideoTrackLoaded:(AVAssetTrack*)videoTrack
+{
+    NSLog(@"Track is %ix%i",(int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
+
+    self.playerItem = [AVPlayerItem playerItemWithAsset:videoTrack.asset];
+    [self.playerItem addObserver:self forKeyPath:STATUS_KEY options:NSKeyValueObservingOptionNew context:&PlayerStatusContext];
+    observingPlayerItem = YES;
+
+    float
+        aspectRatio     = videoTrack.naturalSize.width / videoTrack.naturalSize.height,
+        preferredHeight = self.frame.size.width / aspectRatio;
+
+    self.preferredSize = CGSizeMake(self.frame.size.width, preferredHeight );
+
+    [self.superview setNeedsLayout];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(playerItemDidReachEnd:)
+                                                 name:AVPlayerItemDidPlayToEndTimeNotification
+                                               object:self.playerItem];
+
+    self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
 }
 
 -(id)init
@@ -95,7 +92,7 @@ static const NSString *ItemStatusContext;
 {
     AFAssertMainThread();
 
-    if ((self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay))
+    if( (self.player.currentItem != nil) && ([self.player.currentItem status] == AVPlayerItemStatusReadyToPlay) )
     {
         self.playButton.enabled = YES;
 
@@ -110,19 +107,15 @@ static const NSString *ItemStatusContext;
     }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary *)change
+                       context:(void *)context
 {
-    if (context == &ItemStatusContext)
+    if (context == &PlayerStatusContext)
     {
-        dispatch_async(dispatch_get_main_queue(),
-                ^{
-                    [self refresh];
-                });
-        return;
+        [self performSelectorOnMainThread:@selector(refresh) withObject:nil waitUntilDone:NO];
     }
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-    return;
 }
 
 - (void)layoutSubviews

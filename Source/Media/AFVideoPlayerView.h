@@ -11,9 +11,9 @@
 
 @interface AFVideoPlayerView : AFConstrainedView
 {
-    AVPlayer            *player;
-    AVPlayerItem        *playerItem;
-    UIButton            *playButton;
+    AVPlayer     *player;
+    AVPlayerItem *playerItem;
+    UIButton     *playButton;
 
     bool autoPlay;
 }
@@ -23,10 +23,9 @@
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)refresh;
 
-@property (nonatomic, retain) AVPlayer          *player;
-@property (nonatomic, retain) AVPlayerItem      *playerItem;
-//@property (nonatomic, retain) AFVideoPlayerView *playerView;
-@property (nonatomic, retain) UIButton          *playButton;
-@property (nonatomic, readonly) AVAsset         *asset;
+@property (nonatomic, retain)   AVPlayer     *player;
+@property (nonatomic, retain)   AVPlayerItem *playerItem;
+@property (nonatomic, retain)   UIButton     *playButton;
+@property (nonatomic, readonly) AVAsset      *asset;
 
 @end
