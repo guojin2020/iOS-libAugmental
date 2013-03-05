@@ -2,6 +2,8 @@
 #import "AFObservable.h"
 #import "AFRequest.h"
 #import "AFRequest+Protected.h"
+#import "AFFileUtils.h"
+#import "AFParseHTTPContentRange.h"
 
 SEL
     AFRequestEventStarted,
@@ -117,10 +119,13 @@ SEL
 
     if([self isSuccessHTTPResponse])
     {
-        int size = [self contentLengthFromHeader:header];
-        self.expectedBytes = size;
+        AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+
+        self.expectedBytes = rangeInfo->contentTotal;
         self.state = AFRequestStateInProcess;
         [self notifyObservers:AFRequestEventStarted parameters:self,nil];
+
+        free(rangeInfo);
     }
     else
     {
@@ -134,58 +139,6 @@ SEL
 {
     queuePosition = queuePositionIn;
     self.state = AFRequestStateQueued;
-}
-
-- (int)contentLengthFromHeader:(NSDictionary *)header
-{
-    NSString *stringValue = [header valueForKey:@"Content-Length"];
-    if (stringValue)
-    {
-        NSNumber *keyNum = [numberFormatter numberFromString:stringValue];
-        if (keyNum)
-        {
-            return [keyNum intValue];
-        }
-    }
-    return -1;
-}
-
--(NSRange)contentRangeFromHeader:(NSDictionary*)header
-{
-    NSString *rangeString = [header valueForKey:@"Content-Range"];
-
-    NSRange range;
-    
-    if(rangeString)
-    {
-        NSArray *rangeComponents = [rangeString componentsSeparatedByString:@"-"];
-        if( rangeComponents.count == 2 )
-        {
-            NSString
-                *startString = rangeComponents[0],
-                *endString   = rangeComponents[1];
-
-            int location, length;
-
-            if(startString.length>0)
-            {
-                location = [[numberFormatter numberFromString:startString] intValue];
-            }
-            else location = 0;
-
-            if(endString.length>0)
-            {
-                length = [[numberFormatter numberFromString:endString] intValue] - location;
-            }
-            else length = expectedBytes - location;
-
-            range = NSMakeRange((NSUInteger)location, (NSUInteger)length);
-        }
-        else range = NSMakeRange(NSNotFound,0);
-    }
-    else range = NSMakeRange(NSNotFound,0);
-
-    return range;
 }
 
 - (void)received:(NSData *)dataIn
@@ -202,7 +155,6 @@ SEL
 - (void)didFail:(NSError *)errorIn;
 {
     self.error = errorIn;
-
     self.state = AFRequestStateFailed;
 }
 

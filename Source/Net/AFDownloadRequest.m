@@ -6,6 +6,7 @@
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
 #import "AFLogger.h"
+#import "AFParseHTTPContentRange.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -168,26 +169,30 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
         NSAssert(fileHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
-        bool appendFile;
         switch(responseCodeIn)
         {
             case 206:
-                appendFile = true;
-                break;
+            {
+                AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(headers);
+                NSRange      range     = rangeInfo->contentRange;
+                NSUInteger   total     = rangeInfo->contentTotal;
+                free(rangeInfo);
+
+                if(self.expectedBytes != rangeInfo->contentTotal)
+                {
+                    @throw [NSException exceptionWithName:NSRangeException reason:@"" userInfo:NULL];
+                }
+
+                [fileHandle seekToFileOffset:range.location];
+            }
+            break;
 
             default:
-                appendFile = false;
-                break;
-        }
-
-        if(appendFile)
-        {
-            [fileHandle seekToEndOfFile];
-        }
-        else
-        {
-            [fileHandle truncateFileAtOffset:0];
-            self.receivedBytes = 0;
+            {
+                [fileHandle truncateFileAtOffset:0];
+                self.receivedBytes = 0;
+            }
+            break;
         }
     }
 }
@@ -298,7 +303,9 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
-    self.expectedBytes = [self contentLengthFromHeader:header];
+    AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+    self.expectedBytes = rangeInfo->contentTotal;
+    free(rangeInfo);
 
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
