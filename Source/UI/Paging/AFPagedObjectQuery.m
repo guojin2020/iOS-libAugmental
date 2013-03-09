@@ -104,7 +104,10 @@
     return self;
 }
 
-- (void)requestFailed:(AFRequest *)request {}
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
+{
+
+}
 
 - (void)dealloc
 {

@@ -1,8 +1,7 @@
-#import "AFSessionStates.h"
 
-@implementation AFSessionStates
+#import "AFSessionState.h"
 
-+ (NSString *)stringForState:(AFSessionState)stateIn
+NSString* NSStringFromAFSessionState(AFSessionState stateIn)
 {
     if (stateIn == (AFSessionState) AFSessionStateDisconnected) return @"Disconnected";
     else if (stateIn == (AFSessionState) AFSessionStateConnecting) return @"Connecting";
@@ -11,5 +10,3 @@
     else if (stateIn == (AFSessionState) AFSessionStateRejected) return @"Rejected";
     else return @"Unknown";
 }
-
-@end

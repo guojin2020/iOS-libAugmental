@@ -54,7 +54,7 @@ SEL
 	//Make temp file path
 	NSString *tempFilePath = [NSString stringWithFormat:@"%@temp.plist",documentsDirectory];
 
-	//Write dictionary to file
+	//Write array to file
 	//NSLog(@"Saving to: %@",tempFilePath);
 	[templateDictionary writeToFile:tempFilePath atomically:NO];
 	
@@ -118,7 +118,7 @@ SEL
 	[settingsRequest release];
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)error
 {
     AFLogPosition();
 }

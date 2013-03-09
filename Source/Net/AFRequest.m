@@ -2,6 +2,8 @@
 #import "AFObservable.h"
 #import "AFRequest.h"
 #import "AFRequest+Protected.h"
+#import "AFFileUtils.h"
+#import "AFParseHTTPContentRange.h"
 
 SEL
     AFRequestEventStarted,
@@ -13,17 +15,12 @@ SEL
     AFRequestEventDidPollSize,
     AFRequestEventFailed;
 
-@interface AFRequest()
-
-@property(nonatomic, readwrite) AFRequestState state;
-
-@end
-
 @implementation AFRequest
 {
     int
         expectedBytes,
-        receivedBytes;
+        receivedBytes,
+        queuePosition;
 
     AFRequestState state;
 }
@@ -34,7 +31,7 @@ SEL
     AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:);    //Params: AFRequest
     AFRequestEventFinished         = @selector(requestComplete:);           //Params: AFRequest
     AFRequestEventCancel           = @selector(requestCancelled:);          //Params: AFRequest
-    AFRequestEventFailed           = @selector(requestFailed:);             //Params: AFRequest
+    AFRequestEventFailed           = @selector(requestFailed:withError:);   //Params: AFRequest, NSError
     AFRequestEventQueued           = @selector(handleRequest:queuedAt:);    //Params: AFRequest, NSNumber
     AFRequestEventWillPollSize     = @selector(handleRequestWillPollSize:); //Params: AFRequest
     AFRequestEventDidPollSize      = @selector(handleRequestDidPollSize:);  //Params: AFRequest
@@ -71,6 +68,7 @@ SEL
     self = [super init];
     if( self )
     {
+        self.error      = NULL;
         receivedBytes   = 0;
         state           = AFRequestStateIdle;
         expectedBytes   = -1;
@@ -88,11 +86,11 @@ SEL
         state = stateIn;
         switch( state )
         {
-            case AFRequestStateIdle:        [self notifyObservers:AFRequestEventCancel parameters:self,nil];            break;
-            case AFRequestStateQueued:      break; //Event fired in requestWasQueued
-            case AFRequestStateInProcess:   [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];   break;
-            case AFRequestStateFulfilled:   [self notifyObservers:AFRequestEventFinished parameters:self,nil];          break;
-            case AFRequestStateFailed:      [self notifyObservers:AFRequestEventFailed parameters:self,nil];            break;
+            case AFRequestStateIdle:        [self notifyObservers:AFRequestEventCancel          parameters:self,nil];       break;
+            case AFRequestStateQueued:      [self notifyObservers:AFRequestEventQueued          parameters:self,[NSNumber numberWithInt:queuePosition],nil]; break;
+            case AFRequestStateInProcess:   [self notifyObservers:AFRequestEventProgressUpdated parameters:self,nil];       break;
+            case AFRequestStateFulfilled:   [self notifyObservers:AFRequestEventFinished        parameters:self,nil];       break;
+            case AFRequestStateFailed:      [self notifyObservers:AFRequestEventFailed          parameters:self,self.error,nil]; break;
         }
     }
 }
@@ -101,6 +99,7 @@ SEL
 -(void)setExpectedBytes:(int)expectedBytesIn
 {
     expectedBytes = expectedBytesIn;
+    [self notifyObservers:AFRequestEventProgressUpdated parameters:NULL];
 }
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
@@ -120,75 +119,26 @@ SEL
 
     if([self isSuccessHTTPResponse])
     {
-        int size = [self contentLengthFromHeader:header];
-        self.expectedBytes = size;
+        AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+
+        self.expectedBytes = rangeInfo->contentTotal;
         self.state = AFRequestStateInProcess;
         [self notifyObservers:AFRequestEventStarted parameters:self,nil];
+
+        free(rangeInfo);
     }
     else
     {
-        NSError *error = [[NSError alloc] initWithDomain:NSNetServicesErrorDomain code:responseCode userInfo:nil];
-        [self didFail:error];
-        [error release];
+        NSError *httpError = [[NSError alloc] initWithDomain:NSNetServicesErrorDomain code:responseCode userInfo:nil];
+        [self didFail:httpError];
+        [httpError release];
     }
 }
 
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn
 {
+    queuePosition = queuePositionIn;
     self.state = AFRequestStateQueued;
-    [self notifyObservers:AFRequestEventQueued parameters:self, [NSNumber numberWithInt:queuePositionIn],nil];
-}
-
-- (int)contentLengthFromHeader:(NSDictionary *)header
-{
-    NSString *stringValue = [header valueForKey:@"Content-Length"];
-    if (stringValue)
-    {
-        NSNumber *keyNum = [numberFormatter numberFromString:stringValue];
-        if (keyNum)
-        {
-            return [keyNum intValue];
-        }
-    }
-    return -1;
-}
-
--(NSRange)contentRangeFromHeader:(NSDictionary*)header
-{
-    NSString *rangeString = [header valueForKey:@"Content-Range"];
-
-    NSRange range;
-    
-    if(rangeString)
-    {
-        NSArray *rangeComponents = [rangeString componentsSeparatedByString:@"-"];
-        if( rangeComponents.count == 2 )
-        {
-            NSString
-                *startString = rangeComponents[0],
-                *endString   = rangeComponents[1];
-
-            int location, length;
-
-            if(startString.length>0)
-            {
-                location = [[numberFormatter numberFromString:startString] intValue];
-            }
-            else location = 0;
-
-            if(endString.length>0)
-            {
-                length = [[numberFormatter numberFromString:endString] intValue] - location;
-            }
-            else length = expectedBytes - location;
-
-            range = NSMakeRange((NSUInteger)location, (NSUInteger)length);
-        }
-        else range = NSMakeRange(NSNotFound,0);
-    }
-    else range = NSMakeRange(NSNotFound,0);
-
-    return range;
 }
 
 - (void)received:(NSData *)dataIn
@@ -200,20 +150,18 @@ SEL
 - (void)didFinish
 {
     self.state = AFRequestStateFulfilled;
-    //[self notifyObservers:AFRequestEventFinished parameters:self,nil];
 }
 
-- (void)didFail:(NSError *)error
+- (void)didFail:(NSError *)errorIn;
 {
+    self.error = errorIn;
     self.state = AFRequestStateFailed;
-    //[self notifyObservers:AFRequestEventFailed  parameters:self,nil];
 }
 
 - (void)cancel
 {
     self.state = AFRequestStateIdle;
     [connection cancel];
-    //[self notifyObservers:AFRequestEventCancel parameters:self,nil];
 }
 
 -(float)progress
@@ -233,11 +181,10 @@ SEL
         default:
            return NO;
     }
-    //return receivedBytes >= expectedBytes;
 }
 
-- (NSString*) actionDescription { return nil;           }
-- (int)       attempts          { return attempts;      }
+- (NSString*) actionDescription { return nil;      }
+- (int)       attempts          { return attempts; }
 
 - (int) receivedBytes { return receivedBytes; }
 - (void)setReceivedBytes:(int)receivedBytesIn
@@ -250,6 +197,7 @@ SEL
 
 -(void)dealloc
 {
+    [_error              release];
     [numberFormatter    release];
     [connection         release];
     [URL                release];

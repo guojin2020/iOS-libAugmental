@@ -1,8 +1,8 @@
 #import <Foundation/Foundation.h>
 
-#import "AFRequestQueue.h"
-#import "AFSessionStates.h"
+#import "AFSessionState.h"
 #import "AFSessionObserver.h"
+#import "AFRequestQueue.h"
 #import "AFRequestEndpoint.h"
 #import "AFRequestObserver.h"
 #import "AFRequestHandler.h"

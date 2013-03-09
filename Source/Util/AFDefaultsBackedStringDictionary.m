@@ -30,7 +30,7 @@ static NSUserDefaults *defaults;
         NSDictionary* storedDictionary = [defaults dictionaryForKey:defaultsKey];
         if(storedDictionary && [storedDictionary count]>0)
         {
-            NSLog(@"Read %i entries from stored dictionary '%@'",[storedDictionary count],defaultsKeyIn);
+            NSLog(@"Read %i entries from stored array '%@'",[storedDictionary count],defaultsKeyIn);
             dictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
         }
         else

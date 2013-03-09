@@ -1,3 +1,4 @@
+
 //State enumerations
 typedef enum AFSessionState
 {
@@ -11,17 +12,4 @@ typedef enum AFSessionState
 }
 AFSessionState;
 
-/**
- Holding class for the login states of an AFSession, defined
- as a static enumeration.
- */
-@interface AFSessionStates : NSObject
-{}
-
-/**
- Returns a string description of the specified state, for debug-logging purposes.
- */
-+ (NSString *)stringForState:(AFSessionState)stateIn;
-
-@end
-
+NSString* NSStringFromAFSessionState(AFSessionState stateIn);

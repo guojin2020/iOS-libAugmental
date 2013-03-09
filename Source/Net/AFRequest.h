@@ -28,8 +28,9 @@ extern SEL
     NSURL               *URL;
     NSURLConnection     *connection;
 
-    int                 responseCode;
-    int                 attempts;
+    int
+        responseCode,
+        attempts;
 
     NSNumberFormatter   *numberFormatter;
     BOOL                requiresLogin;
@@ -55,13 +56,12 @@ extern SEL
 @property(nonatomic, readonly) int          expectedBytes;
 @property(nonatomic, readonly) float        progress;
 @property(nonatomic, readonly) int          responseCode;
-
-- (NSString *)actionDescription;
-
+@property(nonatomic, readwrite, retain) NSError* error;
 @property(nonatomic, readonly)  BOOL            requiresLogin;
 @property(nonatomic, readonly)  NSURL           *URL;
 @property(nonatomic, retain)    NSURLConnection *connection;
 @property(nonatomic, readonly)  AFRequestState  state;
 
+- (NSString *)actionDescription;
 
 @end

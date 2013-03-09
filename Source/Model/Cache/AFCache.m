@@ -8,7 +8,6 @@
 @implementation AFCache
 {
     NSMutableDictionary* cache;
-
     AFCache * nextCache;
 }
 

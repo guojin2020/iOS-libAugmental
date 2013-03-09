@@ -54,22 +54,20 @@ static NSString
 
 -(void)requestComplete:            (AFRequest*)requestIn
 {
-    AFLogPosition();
-    STAssertEqualObjects( requestIn, request, wrongRequestReason );
-
+    AFLogPosition();    
     [callbackObject performSelector:callbackSelector];
 }
 
 -(void)requestCancelled:           (AFRequest*)requestIn
 {
     AFLogPosition();
-    STAssertEqualObjects( requestIn, request, wrongRequestReason );
+    [callbackObject performSelector:callbackSelector];
 }
 
--(void)requestFailed:              (AFRequest*)requestIn
+- (void)requestFailed:(AFRequest *)requestIn withError:(NSError *)errorIn
 {
     AFLogPosition();
-    STAssertEqualObjects( requestIn, request, wrongRequestReason );
+    [callbackObject performSelector:callbackSelector];
 }
 
 -(void)handleRequest:              (AFRequest*)requestIn queuedAt:(NSNumber *)positionIn
@@ -88,7 +86,6 @@ static NSString
 {
     AFLogPosition();
     STAssertEqualObjects( requestIn, request, wrongRequestReason );
-
     STAssertEquals( requestIn.expectedBytes, 26, wrongDataReason );
 }
 

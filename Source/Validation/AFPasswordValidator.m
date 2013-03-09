@@ -5,7 +5,7 @@ static NSObject <AFValidator> *sharedInstance = nil;
 
 @implementation AFPasswordValidator
 
-static NSString *passwordRegEx = @"[A-Za-z0-9]{8,16}";
+//static NSString *passwordRegEx = @"[A-Za-z0-9]{8,16}";
 //static GTMRegex *regex = nil;
 
 - (id)initWithComparisonSetting:(AFPasswordField *)comparisonSettingIn allowsEmpty:(BOOL)allowEmptyIn

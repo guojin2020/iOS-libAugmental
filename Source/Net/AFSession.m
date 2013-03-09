@@ -1,5 +1,5 @@
 
-#import "AFSessionStates.h"
+#import "AFSessionState.h"
 #import "AFObservable.h"
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
@@ -21,7 +21,8 @@ static AFSession *sharedSession = nil;
 
 - (id)init
 {
-    if ((self = [super initWithTargetHandler:nil maxConcurrentDownloads:8]))
+    self = [super initWithTargetHandler:nil maxConcurrentDownloads:4];
+    if (self)
     {
         cookieStore = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         [cookieStore setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
@@ -89,7 +90,7 @@ static AFSession *sharedSession = nil;
     return YES;
 }
 
-- (void)requestFailed:(AFRequest*)requestIn
+- (void)requestFailed:(AFRequest*)requestIn withError:(NSError*)error;
 {
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
@@ -100,7 +101,7 @@ static AFSession *sharedSession = nil;
     {
         //NSLog(@"Session going offline in response to retry limit reached...");
         [self setOffline:YES];
-        [super requestFailed:requestIn];
+        [super requestFailed:requestIn withError:error];
     }
 
     [AFRequestQueueAlertView showAlertForQueue:self];

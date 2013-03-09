@@ -1,4 +1,5 @@
 #import "AFMessageCell.h"
+#import "AFAssertion.h"
 
 @implementation AFMessageCell
 
@@ -20,6 +21,8 @@
 
 - (void)refreshFields
 {
+    AFAssertMainThread();
+
     messageLabel.text = labelText;
 }
 

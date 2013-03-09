@@ -33,7 +33,7 @@
     NSString     *classString    = NSStringFromClass((Class)objectClass);
     NSDictionary *typeDictionary = [cache objectForKey:classString];
 
-    //If we had a dictionary for that type, search it
+    //If we had a array for that type, search it
     AFObject* findObject = nil;
     if (typeDictionary) findObject = [typeDictionary objectForKey:[NSNumber numberWithInt:primaryKey]];
     //If we had the object in the cacheImage, return it
@@ -98,7 +98,7 @@
     // Worrying that this is unimplemented, wasn't it supposed to be here, deserialize the JSON and insert into Cache?
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
 }
@@ -206,15 +206,15 @@
 
 - (AFObject*)objectFromDictionary:(NSDictionary *)objectDictionary
 {
-    NSAssert(objectDictionary && [objectDictionary isKindOfClass:[NSDictionary class]], @"Invalid dictionary calling %@ %@", NSStringFromSelector(_cmd), objectDictionary);
+    NSAssert(objectDictionary && [objectDictionary isKindOfClass:[NSDictionary class]], @"Invalid array calling %@ %@", NSStringFromSelector(_cmd), objectDictionary);
 
     if (!objectDictionary) return nil; //Return nil if we were supplied a null pointer.
     AFObject* object    = nil;
     NSString            *className = [[objectDictionary valueForKey:@"class"] retain]; //Get the objects model name and validate its existence
     int primaryKey = [[objectDictionary objectForKey:@"pk"] intValue];
 
-    NSAssert(className && primaryKey > 0, primaryKey > 0 ? @"Tried to make an object from a dictionary which was missing the required 'class' key"
-            : @"Tried to make an object from a dictionary which had an invalid primaryKey");
+    NSAssert(className && primaryKey > 0, primaryKey > 0 ? @"Tried to make an object from a array which was missing the required 'class' key"
+            : @"Tried to make an object from a array which had an invalid primaryKey");
 
     //Get the actual class for this model name
     Class objectClass = [AFObjectHelper classForModelName:className];
@@ -226,20 +226,20 @@
         object = [self objectOfType:objectClass withPrimaryKey:primaryKey];
         if (object.isPlaceholder)
         {
-            //Update its content with the incoming dictionary
+            //Update its content with the incoming array
             [object setContentFromDictionary:objectDictionary];
         }
     }
     else //If the object isn't already in the cacheImage....
     {
-        //Initialise a new AFObject instance of the right type for the incoming dictionary
+        //Initialise a new AFObject instance of the right type for the incoming array
         object = NSAllocateObject((Class)objectClass, 0, NULL);
         [object initPlaceholderWithPrimaryKey:primaryKey];
 
         //Register it with the cacheImage
         [self injectObject:object];
 
-        //Set its content from the incoming dictionary
+        //Set its content from the incoming array
         [object setContentFromDictionary:objectDictionary];
     }
 

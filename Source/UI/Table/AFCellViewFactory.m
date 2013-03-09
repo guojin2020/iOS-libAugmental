@@ -4,13 +4,10 @@
 
 static AFCellViewFactory *factorySingleton;
 
-+ (void)initialize
-{
-    factorySingleton = [[AFCellViewFactory alloc] initWithNib:@"AFCellViews"];
-}
-
 + (AFCellViewFactory *)defaultFactory
-{return factorySingleton;}
+{
+    return factorySingleton ?: (factorySingleton = [[AFCellViewFactory alloc] initWithNib:@"AFCellViews"]);
+}
 
 - (id)initWithNib:(NSString *)aNibName
 {

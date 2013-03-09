@@ -6,9 +6,11 @@
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
 #import "AFLogger.h"
+#import "AFParseHTTPContentRange.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
+#define SIZE_CACHE_ERROR @""
 
 @interface AFDownloadRequest ()
 
@@ -29,11 +31,11 @@
 
 static NSMutableDictionary *uniqueRequestPool = nil;
 
-+ (AFDownloadRequest *)requestForURL:(NSURL *)URLIn
-                       localFilePath:(NSString *)localFilePathIn
-                           observers:(NSSet *)observersIn
-                       fileSizeCache:(NSMutableDictionary *)sizeCacheIn
-               queueForHeaderRequest:(AFRequestQueue *)queueIn
++ (AFDownloadRequest *)requestForURL:(NSURL*)               URLIn
+                       localFilePath:(NSString*)            localFilePathIn
+                           observers:(NSSet*)               observersIn
+                       fileSizeCache:(NSMutableDictionary* )sizeCacheIn
+               queueForHeaderRequest:(AFRequestQueue*)      queueIn
 {
     NSAssert( URLIn!=nil,           @"URL must not be nil" );
     NSAssert( localFilePathIn!=nil, @"Local file path must not be nil" );
@@ -67,22 +69,27 @@ static NSMutableDictionary *uniqueRequestPool = nil;
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
-    NSAssert(URLIn && targetPathIn, @"Bad parameters when initing %@\nURLIn: %@\ntargetPathIn: %@\nsizeCacheIn: %@\n", [self class], URLIn, targetPathIn, sizeCacheIn);
+    NSAssert(URLIn,        NSInvalidArgumentException);
+    NSAssert(targetPathIn, NSInvalidArgumentException);
 
-    if ((self = [super initWithURL:URLIn]))
+    self = [self initWithURL:URLIn];
+
+    if(self)
     {
         localFilePath = [targetPathIn retain];
         sizeCache     = [sizeCacheIn retain];
         dataBuffer    = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
-        [self addObservers:[observersIn allObjects]];
+        if(observersIn) [self addObservers:[observersIn allObjects]];
+
         [self updateReceivedBytesFromFile];
 
         NSNumber *expectedSizeNumber = (NSNumber *) [sizeCache objectForKey:[URLIn absoluteString]];
         if (expectedSizeNumber)
         {
+            //[self notifyObservers:AFRequestEventWillPollSize parameters:self, NULL];
             self.expectedBytes = [expectedSizeNumber intValue];
-            [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+            //[self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
         }
 
         if(queueIn)
@@ -162,26 +169,30 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
         NSAssert(fileHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
-        bool appendFile;
         switch(responseCodeIn)
         {
             case 206:
-                appendFile = true;
-                break;
+            {
+                AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(headers);
+                NSRange      range     = rangeInfo->contentRange;
+                NSUInteger   total     = rangeInfo->contentTotal;
+                free(rangeInfo);
+
+                if(self.expectedBytes != rangeInfo->contentTotal)
+                {
+                    @throw [NSException exceptionWithName:NSRangeException reason:@"" userInfo:NULL];
+                }
+
+                [fileHandle seekToFileOffset:range.location];
+            }
+            break;
 
             default:
-                appendFile = false;
-                break;
-        }
-
-        if(appendFile)
-        {
-            [fileHandle seekToEndOfFile];
-        }
-        else
-        {
-            [fileHandle truncateFileAtOffset:0];
-            self.receivedBytes = 0;
+            {
+                [fileHandle truncateFileAtOffset:0];
+                self.receivedBytes = 0;
+            }
+            break;
         }
     }
 }
@@ -292,16 +303,23 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
-    self.expectedBytes = [self contentLengthFromHeader:header];
+    AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+    self.expectedBytes = rangeInfo->contentTotal;
+    free(rangeInfo);
 
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
 
-- (void)requestFailed:(AFRequest *)request
+- (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
     NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
-    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+
+    self.error = errorIn;
+
+    NSString* uniqueKey = self.uniqueKey;
+    [sizeCache setObject:SIZE_CACHE_ERROR forKey:uniqueKey];
+    [self setState:AFRequestStateFailed];
 }
 
 

@@ -7,6 +7,7 @@
 #import "AFTable.h"
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
+#import "AFAssertion.h"
 
 static UIColor* defaultTextColor			= nil;
 static UIColor* defaultSecondaryTextColor	= nil;
@@ -52,6 +53,8 @@ static NSString* cellClickedSound			= nil;
 
 - (void)refresh
 {
+    AFAssertMainThread();
+
     [self.cell setNeedsLayout];
 }
 

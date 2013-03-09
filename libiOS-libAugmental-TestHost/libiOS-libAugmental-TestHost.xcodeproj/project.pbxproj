@@ -1,0 +1,286 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0939968F16D6F00C00AB5EBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0939968E16D6F00C00AB5EBA /* UIKit.framework */; };
+		0939969116D6F00C00AB5EBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0939969016D6F00C00AB5EBA /* Foundation.framework */; };
+		0939969316D6F00C00AB5EBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0939969216D6F00C00AB5EBA /* CoreGraphics.framework */; };
+		0939969916D6F00C00AB5EBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0939969716D6F00C00AB5EBA /* InfoPlist.strings */; };
+		0939969B16D6F00C00AB5EBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0939969A16D6F00C00AB5EBA /* main.m */; };
+		0939969F16D6F00C00AB5EBA /* AFAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0939969E16D6F00C00AB5EBA /* AFAppDelegate.m */; };
+		093996A116D6F00C00AB5EBA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 093996A016D6F00C00AB5EBA /* Default.png */; };
+		093996A316D6F00C00AB5EBA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 093996A216D6F00C00AB5EBA /* Default@2x.png */; };
+		093996A516D6F00C00AB5EBA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 093996A416D6F00C00AB5EBA /* Default-568h@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0939968B16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "libiOS-libAugmental-TestHost.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0939968E16D6F00C00AB5EBA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		0939969016D6F00C00AB5EBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0939969216D6F00C00AB5EBA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		0939969616D6F00C00AB5EBA /* libiOS-libAugmental-TestHost-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libiOS-libAugmental-TestHost-Info.plist"; sourceTree = "<group>"; };
+		0939969816D6F00C00AB5EBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0939969A16D6F00C00AB5EBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0939969C16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libiOS-libAugmental-TestHost-Prefix.pch"; sourceTree = "<group>"; };
+		0939969D16D6F00C00AB5EBA /* AFAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AFAppDelegate.h; sourceTree = "<group>"; };
+		0939969E16D6F00C00AB5EBA /* AFAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AFAppDelegate.m; sourceTree = "<group>"; };
+		093996A016D6F00C00AB5EBA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		093996A216D6F00C00AB5EBA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		093996A416D6F00C00AB5EBA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0939968816D6F00C00AB5EBA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0939968F16D6F00C00AB5EBA /* UIKit.framework in Frameworks */,
+				0939969116D6F00C00AB5EBA /* Foundation.framework in Frameworks */,
+				0939969316D6F00C00AB5EBA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0939968216D6F00C00AB5EBA = {
+			isa = PBXGroup;
+			children = (
+				0939969416D6F00C00AB5EBA /* libiOS-libAugmental-TestHost */,
+				0939968D16D6F00C00AB5EBA /* Frameworks */,
+				0939968C16D6F00C00AB5EBA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0939968C16D6F00C00AB5EBA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0939968B16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0939968D16D6F00C00AB5EBA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0939968E16D6F00C00AB5EBA /* UIKit.framework */,
+				0939969016D6F00C00AB5EBA /* Foundation.framework */,
+				0939969216D6F00C00AB5EBA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0939969416D6F00C00AB5EBA /* libiOS-libAugmental-TestHost */ = {
+			isa = PBXGroup;
+			children = (
+				0939969D16D6F00C00AB5EBA /* AFAppDelegate.h */,
+				0939969E16D6F00C00AB5EBA /* AFAppDelegate.m */,
+				0939969516D6F00C00AB5EBA /* Supporting Files */,
+			);
+			path = "libiOS-libAugmental-TestHost";
+			sourceTree = "<group>";
+		};
+		0939969516D6F00C00AB5EBA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0939969616D6F00C00AB5EBA /* libiOS-libAugmental-TestHost-Info.plist */,
+				0939969716D6F00C00AB5EBA /* InfoPlist.strings */,
+				0939969A16D6F00C00AB5EBA /* main.m */,
+				0939969C16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost-Prefix.pch */,
+				093996A016D6F00C00AB5EBA /* Default.png */,
+				093996A216D6F00C00AB5EBA /* Default@2x.png */,
+				093996A416D6F00C00AB5EBA /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0939968A16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 093996A816D6F00C00AB5EBA /* Build configuration list for PBXNativeTarget "libiOS-libAugmental-TestHost" */;
+			buildPhases = (
+				0939968716D6F00C00AB5EBA /* Sources */,
+				0939968816D6F00C00AB5EBA /* Frameworks */,
+				0939968916D6F00C00AB5EBA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libiOS-libAugmental-TestHost";
+			productName = "libiOS-libAugmental-TestHost";
+			productReference = 0939968B16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0939968316D6F00C00AB5EBA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = AF;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Chris Hatton";
+			};
+			buildConfigurationList = 0939968616D6F00C00AB5EBA /* Build configuration list for PBXProject "libiOS-libAugmental-TestHost" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0939968216D6F00C00AB5EBA;
+			productRefGroup = 0939968C16D6F00C00AB5EBA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0939968A16D6F00C00AB5EBA /* libiOS-libAugmental-TestHost */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0939968916D6F00C00AB5EBA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0939969916D6F00C00AB5EBA /* InfoPlist.strings in Resources */,
+				093996A116D6F00C00AB5EBA /* Default.png in Resources */,
+				093996A316D6F00C00AB5EBA /* Default@2x.png in Resources */,
+				093996A516D6F00C00AB5EBA /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0939968716D6F00C00AB5EBA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0939969B16D6F00C00AB5EBA /* main.m in Sources */,
+				0939969F16D6F00C00AB5EBA /* AFAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0939969716D6F00C00AB5EBA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0939969816D6F00C00AB5EBA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		093996A616D6F00C00AB5EBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		093996A716D6F00C00AB5EBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		093996A916D6F00C00AB5EBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libiOS-libAugmental-TestHost/libiOS-libAugmental-TestHost-Prefix.pch";
+				INFOPLIST_FILE = "libiOS-libAugmental-TestHost/libiOS-libAugmental-TestHost-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		093996AA16D6F00C00AB5EBA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libiOS-libAugmental-TestHost/libiOS-libAugmental-TestHost-Prefix.pch";
+				INFOPLIST_FILE = "libiOS-libAugmental-TestHost/libiOS-libAugmental-TestHost-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0939968616D6F00C00AB5EBA /* Build configuration list for PBXProject "libiOS-libAugmental-TestHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				093996A616D6F00C00AB5EBA /* Debug */,
+				093996A716D6F00C00AB5EBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		093996A816D6F00C00AB5EBA /* Build configuration list for PBXNativeTarget "libiOS-libAugmental-TestHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				093996A916D6F00C00AB5EBA /* Debug */,
+				093996AA16D6F00C00AB5EBA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0939968316D6F00C00AB5EBA /* Project object */;
+}

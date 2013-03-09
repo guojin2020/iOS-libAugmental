@@ -101,7 +101,9 @@ static UIColor  *loadingTitleColor;
 }
 
 - (BOOL)viewControllerIsLoaded
-{return viewController != nil;}
+{
+    return viewController != nil;
+}
 
 - (void)viewControllerWillAppear:(BOOL)animated
 {
@@ -128,16 +130,24 @@ static UIColor  *loadingTitleColor;
 }
 
 - (UIImage *)tabBarIcon
-{return [[self class] performSelector:@selector(defaultTabBarIcon)];}
+{
+    return [[self class] performSelector:@selector(defaultTabBarIcon)];
+}
 
 - (NSArray *)settingsSections
-{return nil;}
+{
+    return nil;
+}
 
 - (void)settingValueChanged:(AFField*)setting
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 - (void)refreshActive
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 - (BOOL)active
 {return active;}

@@ -37,6 +37,12 @@
     [endpoint request:self returnedWithData:headers];
 }
 
+-(void)didFail:(NSError *)error
+{
+    [super didFail:error];
+    [endpoint requestFailed:self withError:error];
+}
+
 - (NSString *)actionDescription
 {
     return @"Determining download size";
