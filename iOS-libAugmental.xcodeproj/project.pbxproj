@@ -9,6 +9,100 @@
 /* Begin PBXBuildFile section */
 		090231EB165306CA007CF387 /* AFEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 090231E9165306CA007CF387 /* AFEnvironment.h */; };
 		090231EC165306CA007CF387 /* AFEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 090231EA165306CA007CF387 /* AFEnvironment.m */; };
+		093AC06B16ED42AA00BB0A2A /* AFStringLengthValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCF15E6CC1900D32988 /* AFStringLengthValidator.h */; };
+		093AC06C16ED42AA00BB0A2A /* AFNumericStringValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7815E6CC1900D32988 /* AFNumericStringValidator.h */; };
+		093AC06D16ED42AA00BB0A2A /* AFEMailAddressValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5915E6CC1900D32988 /* AFEMailAddressValidator.h */; };
+		093AC06E16ED42AA00BB0A2A /* AFNotNullValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7615E6CC1900D32988 /* AFNotNullValidator.h */; };
+		093AC06F16ED42AA00BB0A2A /* AFPasswordValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA315E6CC1900D32988 /* AFPasswordValidator.h */; };
+		093AC07016ED42AA00BB0A2A /* AFValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF715E6CC1900D32988 /* AFValidator.h */; };
+		093AC07116ED42AA00BB0A2A /* AFValidatableValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF515E6CC1900D32988 /* AFValidatableValidator.h */; };
+		093AC07216ED42AA00BB0A2A /* AFValidatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF415E6CC1900D32988 /* AFValidatable.h */; };
+		093AC07316ED42AA00BB0A2A /* AFStringNotEmptyValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD515E6CC1900D32988 /* AFStringNotEmptyValidator.h */; };
+		093AC07416ED42AA00BB0A2A /* AFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */; };
+		093AC07516ED42AA00BB0A2A /* UILabel+ShrinkToFit.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */; };
+		093AC07616ED42AA00BB0A2A /* AFUnavailableOfflineViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEE15E6CC1900D32988 /* AFUnavailableOfflineViewController.h */; };
+		093AC07716ED42AA00BB0A2A /* AFUILib.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEC15E6CC1900D32988 /* AFUILib.h */; };
+		093AC07816ED42AA00BB0A2A /* AFCellSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4E15E6CC1900D32988 /* AFCellSelectionDelegate.h */; };
+		093AC07916ED42AA00BB0A2A /* AFCellViewFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4F15E6CC1900D32988 /* AFCellViewFactory.h */; };
+		093AC07A16ED42AA00BB0A2A /* AFMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7215E6CC1900D32988 /* AFMessageCell.h */; };
+		093AC07B16ED42AA00BB0A2A /* AFObjectPickerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7F15E6CC1900D32988 /* AFObjectPickerDelegate.h */; };
+		093AC07C16ED42AA00BB0A2A /* AFStringListPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD115E6CC1900D32988 /* AFStringListPickerViewController.h */; };
+		093AC07D16ED42AA00BB0A2A /* AFDateField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5515E6CC1900D32988 /* AFDateField.h */; };
+		093AC07E16ED42AA00BB0A2A /* AFGenericOptionTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6115E6CC1900D32988 /* AFGenericOptionTableCell.h */; };
+		093AC07F16ED42AA00BB0A2A /* AFViewPanelField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF815E6CC1900D32988 /* AFViewPanelField.h */; };
+		093AC08016ED42AA00BB0A2A /* AFField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4615E6CC1900D32988 /* AFField.h */; };
+		093AC08116ED42AA00BB0A2A /* AFBooleanField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4A15E6CC1900D32988 /* AFBooleanField.h */; };
+		093AC08216ED42AA00BB0A2A /* AFMMYYDateField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7015E6CC1900D32988 /* AFMMYYDateField.h */; };
+		093AC08316ED42AA00BB0A2A /* AFPasswordField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA115E6CC1900D32988 /* AFPasswordField.h */; };
+		093AC08416ED42AA00BB0A2A /* AFSliderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCB15E6CC1900D32988 /* AFSliderField.h */; };
+		093AC08516ED42AA00BB0A2A /* AFTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFE615E6CC1900D32988 /* AFTextField.h */; };
+		093AC08616ED42AA00BB0A2A /* AFFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC915E6CC1900D32988 /* AFFormSection.h */; };
+		093AC08716ED42AA00BB0A2A /* AFFieldPersistenceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC215E6CC1900D32988 /* AFFieldPersistenceDelegate.h */; };
+		093AC08816ED42AA00BB0A2A /* AFFieldObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC115E6CC1900D32988 /* AFFieldObserver.h */; };
+		093AC08916ED42AA00BB0A2A /* AFFieldDrivenObjectPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC615E6CC1900D32988 /* AFFieldDrivenObjectPickerViewController.h */; };
+		093AC08A16ED42AA00BB0A2A /* AFFieldViewPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC315E6CC1900D32988 /* AFFieldViewPanelController.h */; };
+		093AC08B16ED42AA00BB0A2A /* AFStringListField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD315E6CC1900D32988 /* AFStringListField.h */; };
+		093AC08C16ED42AA00BB0A2A /* AFFieldViewPanelObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC515E6CC1900D32988 /* AFFieldViewPanelObserver.h */; };
+		093AC08D16ED42AA00BB0A2A /* AFMMYYDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6E15E6CC1900D32988 /* AFMMYYDatePickerViewController.h */; };
+		093AC08E16ED42AA00BB0A2A /* AFDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5315E6CC1900D32988 /* AFDatePickerViewController.h */; };
+		093AC08F16ED42AA00BB0A2A /* AFPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4215E6CC1900D32988 /* AFPickerViewController.h */; };
+		093AC09016ED42AA00BB0A2A /* AFSettingProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC815E6CC1900D32988 /* AFSettingProvider.h */; };
+		093AC09116ED42AA00BB0A2A /* AFUserDefaultsSettingPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF015E6CC1900D32988 /* AFUserDefaultsSettingPersistence.h */; };
+		093AC09216ED42AA00BB0A2A /* AFResultsPagingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB415E6CC1900D32988 /* AFResultsPagingCell.h */; };
+		093AC09316ED42AA00BB0A2A /* AFResultsPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB215E6CC1900D32988 /* AFResultsPage.h */; };
+		093AC09416ED42AA00BB0A2A /* AFPageScrubbingTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9715E6CC1900D32988 /* AFPageScrubbingTableCell.h */; };
+		093AC09516ED42AA00BB0A2A /* AFPageObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9615E6CC1900D32988 /* AFPageObserver.h */; };
+		093AC09616ED42AA00BB0A2A /* AFPageManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9515E6CC1900D32988 /* AFPageManagerDelegate.h */; };
+		093AC09716ED42AA00BB0A2A /* AFPageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9315E6CC1900D32988 /* AFPageManager.h */; };
+		093AC09816ED42AA00BB0A2A /* AFPagedObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9F15E6CC1900D32988 /* AFPagedObjectRequest.h */; };
+		093AC09916ED42AA00BB0A2A /* AFPagedObjectQueryObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9E15E6CC1900D32988 /* AFPagedObjectQueryObserver.h */; };
+		093AC09A16ED42AA00BB0A2A /* AFPagedObjectQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9C15E6CC1900D32988 /* AFPagedObjectQuery.h */; };
+		093AC09B16ED42AA00BB0A2A /* AFPagedObjectListViewObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9B15E6CC1900D32988 /* AFPagedObjectListViewObserver.h */; };
+		093AC09C16ED42AA00BB0A2A /* AFPagedObjectListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9915E6CC1900D32988 /* AFPagedObjectListViewController.h */; };
+		093AC09D16ED42AA00BB0A2A /* AFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9115E6CC1900D32988 /* AFPage.h */; };
+		093AC09E16ED42AA00BB0A2A /* AFThemeObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEA15E6CC1900D32988 /* AFThemeObserver.h */; };
+		093AC09F16ED42AA00BB0A2A /* AFThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFE815E6CC1900D32988 /* AFThemeManager.h */; };
+		093AC0A016ED42AA00BB0A2A /* AFThemeable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEB15E6CC1900D32988 /* AFThemeable.h */; };
+		093AC0A116ED42AA00BB0A2A /* AFOnlineScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8E15E6CC1900D32988 /* AFOnlineScreen.h */; };
+		093AC0A216ED42AA00BB0A2A /* AFScreenObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBA15E6CC1900D32988 /* AFScreenObserver.h */; };
+		093AC0A316ED42AA00BB0A2A /* AFScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB815E6CC1900D32988 /* AFScreenManager.h */; };
+		093AC0A416ED42AA00BB0A2A /* AFScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB615E6CC1900D32988 /* AFScreen.h */; };
+		093AC0A516ED42AA00BB0A2A /* AFSpinAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCD15E6CC1900D32988 /* AFSpinAlertView.h */; };
+		093AC0A616ED42AA00BB0A2A /* UICustomDisclosureArrowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000315E6CC1900D32988 /* UICustomDisclosureArrowView.h */; };
+		093AC0A716ED42AA00BB0A2A /* AFImageAccessoryButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6515E6CC1900D32988 /* AFImageAccessoryButton.h */; };
+		093AC0A816ED42AA00BB0A2A /* AFJSONRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6B15E6CC1900D32988 /* AFJSONRequest.h */; };
+		093AC0A916ED42AA00BB0A2A /* AFImmediateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6915E6CC1900D32988 /* AFImmediateRequest.h */; };
+		093AC0AA16ED42AA00BB0A2A /* AFDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5715E6CC1900D32988 /* AFDownloadRequest.h */; };
+		093AC0AB16ED42AA00BB0A2A /* AFSessionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBD15E6CC1900D32988 /* AFSessionObserver.h */; };
+		093AC0AC16ED42AA00BB0A2A /* AFSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBB15E6CC1900D32988 /* AFSession.h */; };
+		093AC0AD16ED42AA00BB0A2A /* AFRequestQueueAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAF15E6CC1900D32988 /* AFRequestQueueAlertView.h */; };
+		093AC0AE16ED42AA00BB0A2A /* AFRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4415E6CC1900D32988 /* AFRequest.h */; };
+		093AC0AF16ED42AA00BB0A2A /* AFHeaderRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6315E6CC1900D32988 /* AFHeaderRequest.h */; };
+		093AC0B016ED42AA00BB0A2A /* AFRequestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAC15E6CC1900D32988 /* AFRequestObserver.h */; };
+		093AC0B116ED42AA00BB0A2A /* AFRequestEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAA15E6CC1900D32988 /* AFRequestEndpoint.h */; };
+		093AC0B216ED42AA00BB0A2A /* AFObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8015E6CC1900D32988 /* AFObjectRequest.h */; };
+		093AC0B316ED42AA00BB0A2A /* AFRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAB15E6CC1900D32988 /* AFRequestHandler.h */; };
+		093AC0B416ED42AA00BB0A2A /* AFRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAD15E6CC1900D32988 /* AFRequestQueue.h */; };
+		093AC0B516ED42AA00BB0A2A /* AFObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8A15E6CC1900D32988 /* AFObservable.h */; };
+		093AC0B616ED42AA00BB0A2A /* AFObjectHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7D15E6CC1900D32988 /* AFObjectHelper.h */; };
+		093AC0B716ED42AA00BB0A2A /* AFObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3E15E6CC1900D32988 /* AFObject.h */; };
+		093AC0B816ED42AA00BB0A2A /* AFWriteableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4815E6CC1900D32988 /* AFWriteableObject.h */; };
+		093AC0B916ED42AA00BB0A2A /* AFPanelViewableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8915E6CC1900D32988 /* AFPanelViewableObject.h */; };
+		093AC0BA16ED42AA00BB0A2A /* AFCellViewable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8815E6CC1900D32988 /* AFCellViewable.h */; };
+		093AC0BB16ED42AA00BB0A2A /* AFObservableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8C15E6CC1900D32988 /* AFObservableViewController.h */; };
+		093AC0BC16ED42AA00BB0A2A /* AFObjectViewPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8715E6CC1900D32988 /* AFObjectViewPanelController.h */; };
+		093AC0BD16ED42AA00BB0A2A /* AFObjectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8515E6CC1900D32988 /* AFObjectViewController.h */; };
+		093AC0BE16ED42AA00BB0A2A /* AFObjectTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4015E6CC1900D32988 /* AFObjectTableCell.h */; };
+		093AC0BF16ED42AA00BB0A2A /* AFObjectTableSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8315E6CC1900D32988 /* AFObjectTableSection.h */; };
+		093AC0C016ED42AA00BB0A2A /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6715E6CC1900D32988 /* AFImageCache.h */; };
+		093AC0C116ED42AA00BB0A2A /* AFCachingAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4C15E6CC1900D32988 /* AFCachingAudioPlayer.h */; };
+		093AC0C216ED42AA00BB0A2A /* AFMMYYDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6D15E6CC1900D32988 /* AFMMYYDate.h */; };
+		093AC0C316ED42AA00BB0A2A /* AFPerformSelectorOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA515E6CC1900D32988 /* AFPerformSelectorOperation.h */; };
+		093AC0C416ED42AA00BB0A2A /* AFMovingAverage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7415E6CC1900D32988 /* AFMovingAverage.h */; };
+		093AC0C516ED42AA00BB0A2A /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFF15E6CC1900D32988 /* NSData+Base64.h */; };
+		093AC0C616ED42AA00BB0A2A /* AFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFD15E6CC1900D32988 /* AFLogger.h */; };
+		093AC0C716ED42AA00BB0A2A /* AFUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF215E6CC1900D32988 /* AFUtil.h */; };
+		093AC0CC16ED448C00BB0A2A /* AFParseHTTPContentRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA6FF5E2DB4A0B38380FC /* AFParseHTTPContentRange.m */; };
 		0947D63916B3309500BE9E16 /* AFEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 090231EA165306CA007CF387 /* AFEnvironment.m */; };
 		0947D63A16B3309500BE9E16 /* AFStringLengthValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFFD015E6CC1900D32988 /* AFStringLengthValidator.m */; };
 		0947D63B16B3309500BE9E16 /* AFNumericStringValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 759BFF7915E6CC1900D32988 /* AFNumericStringValidator.m */; };
@@ -200,100 +294,6 @@
 		099B1116163D639600E81588 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
 		099B1117163D639600E81588 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
 		099B1118163D639600E81588 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
-		099B111A163D639600E81588 /* AFAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3C15E6CC1900D32988 /* AFAppDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B111B163D639600E81588 /* AFObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF3E15E6CC1900D32988 /* AFObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B111C163D639600E81588 /* AFObjectTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4015E6CC1900D32988 /* AFObjectTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B111D163D639600E81588 /* AFPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4215E6CC1900D32988 /* AFPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B111E163D639600E81588 /* AFRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4415E6CC1900D32988 /* AFRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B111F163D639600E81588 /* AFField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4615E6CC1900D32988 /* AFField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1120163D639600E81588 /* AFWriteableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4815E6CC1900D32988 /* AFWriteableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1121163D639600E81588 /* AFBooleanField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4A15E6CC1900D32988 /* AFBooleanField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1122163D639600E81588 /* AFCachingAudioPlayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4C15E6CC1900D32988 /* AFCachingAudioPlayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1123163D639600E81588 /* AFCellSelectionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4E15E6CC1900D32988 /* AFCellSelectionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1124163D639600E81588 /* AFCellViewFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF4F15E6CC1900D32988 /* AFCellViewFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1126163D639600E81588 /* AFDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5315E6CC1900D32988 /* AFDatePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1127163D639600E81588 /* AFDateField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5515E6CC1900D32988 /* AFDateField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5715E6CC1900D32988 /* AFDownloadRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1129163D639600E81588 /* AFEMailAddressValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF5915E6CC1900D32988 /* AFEMailAddressValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B112E163D639600E81588 /* AFGenericOptionTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6115E6CC1900D32988 /* AFGenericOptionTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B112F163D639600E81588 /* AFHeaderRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6315E6CC1900D32988 /* AFHeaderRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1130163D639600E81588 /* AFImageAccessoryButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6515E6CC1900D32988 /* AFImageAccessoryButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1131163D639600E81588 /* AFImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6715E6CC1900D32988 /* AFImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1132163D639600E81588 /* AFImmediateRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6915E6CC1900D32988 /* AFImmediateRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1133163D639600E81588 /* AFJSONRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6B15E6CC1900D32988 /* AFJSONRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1134163D639600E81588 /* AFMMYYDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6D15E6CC1900D32988 /* AFMMYYDate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1135163D639600E81588 /* AFMMYYDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF6E15E6CC1900D32988 /* AFMMYYDatePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1136163D639600E81588 /* AFMMYYDateField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7015E6CC1900D32988 /* AFMMYYDateField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1137163D639600E81588 /* AFMessageCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7215E6CC1900D32988 /* AFMessageCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1138163D639600E81588 /* AFMovingAverage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7415E6CC1900D32988 /* AFMovingAverage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1139163D639600E81588 /* AFNotNullValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7615E6CC1900D32988 /* AFNotNullValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B113A163D639600E81588 /* AFNumericStringValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7815E6CC1900D32988 /* AFNumericStringValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B113D163D639600E81588 /* AFObjectHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7D15E6CC1900D32988 /* AFObjectHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B113E163D639600E81588 /* AFObjectPickerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF7F15E6CC1900D32988 /* AFObjectPickerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B113F163D639600E81588 /* AFObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8015E6CC1900D32988 /* AFObjectRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1141163D639600E81588 /* AFObjectTableSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8315E6CC1900D32988 /* AFObjectTableSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1142163D639600E81588 /* AFObjectViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8515E6CC1900D32988 /* AFObjectViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1143163D639600E81588 /* AFObjectViewPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8715E6CC1900D32988 /* AFObjectViewPanelController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1144163D639600E81588 /* AFCellViewable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8815E6CC1900D32988 /* AFCellViewable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1145163D639600E81588 /* AFPanelViewableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8915E6CC1900D32988 /* AFPanelViewableObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1146163D639600E81588 /* AFObservable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8A15E6CC1900D32988 /* AFObservable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1147163D639600E81588 /* AFObservableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8C15E6CC1900D32988 /* AFObservableViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1148163D639600E81588 /* AFOnlineScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF8E15E6CC1900D32988 /* AFOnlineScreen.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114A163D639600E81588 /* AFPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9115E6CC1900D32988 /* AFPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114B163D639600E81588 /* AFPageManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9315E6CC1900D32988 /* AFPageManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114C163D639600E81588 /* AFPageManagerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9515E6CC1900D32988 /* AFPageManagerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114D163D639600E81588 /* AFPageObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9615E6CC1900D32988 /* AFPageObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114E163D639600E81588 /* AFPageScrubbingTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9715E6CC1900D32988 /* AFPageScrubbingTableCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B114F163D639600E81588 /* AFPagedObjectListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9915E6CC1900D32988 /* AFPagedObjectListViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1150163D639600E81588 /* AFPagedObjectListViewObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9B15E6CC1900D32988 /* AFPagedObjectListViewObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1151163D639600E81588 /* AFPagedObjectQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9C15E6CC1900D32988 /* AFPagedObjectQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1152163D639600E81588 /* AFPagedObjectQueryObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9E15E6CC1900D32988 /* AFPagedObjectQueryObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1153163D639600E81588 /* AFPagedObjectRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFF9F15E6CC1900D32988 /* AFPagedObjectRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1154163D639600E81588 /* AFPasswordField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA115E6CC1900D32988 /* AFPasswordField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1155163D639600E81588 /* AFPasswordValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA315E6CC1900D32988 /* AFPasswordValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1156163D639600E81588 /* AFPerformSelectorOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFA515E6CC1900D32988 /* AFPerformSelectorOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115A163D639600E81588 /* AFRequestEndpoint.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAA15E6CC1900D32988 /* AFRequestEndpoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115B163D639600E81588 /* AFRequestHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAB15E6CC1900D32988 /* AFRequestHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115C163D639600E81588 /* AFRequestObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAC15E6CC1900D32988 /* AFRequestObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115D163D639600E81588 /* AFRequestQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAD15E6CC1900D32988 /* AFRequestQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B115E163D639600E81588 /* AFRequestQueueAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFAF15E6CC1900D32988 /* AFRequestQueueAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1160163D639600E81588 /* AFResultsPage.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB215E6CC1900D32988 /* AFResultsPage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1161163D639600E81588 /* AFResultsPagingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB415E6CC1900D32988 /* AFResultsPagingCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1162163D639600E81588 /* AFScreen.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB615E6CC1900D32988 /* AFScreen.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1163163D639600E81588 /* AFScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFB815E6CC1900D32988 /* AFScreenManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1164163D639600E81588 /* AFScreenObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBA15E6CC1900D32988 /* AFScreenObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1165163D639600E81588 /* AFSession.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBB15E6CC1900D32988 /* AFSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1166163D639600E81588 /* AFSessionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFBD15E6CC1900D32988 /* AFSessionObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1169163D639600E81588 /* AFFieldObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC115E6CC1900D32988 /* AFFieldObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116A163D639600E81588 /* AFFieldPersistenceDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC215E6CC1900D32988 /* AFFieldPersistenceDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116B163D639600E81588 /* AFFieldViewPanelController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC315E6CC1900D32988 /* AFFieldViewPanelController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116C163D639600E81588 /* AFFieldViewPanelObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC515E6CC1900D32988 /* AFFieldViewPanelObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116D163D639600E81588 /* AFFieldDrivenObjectPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC615E6CC1900D32988 /* AFFieldDrivenObjectPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116E163D639600E81588 /* AFSettingProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC815E6CC1900D32988 /* AFSettingProvider.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B116F163D639600E81588 /* AFFormSection.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFC915E6CC1900D32988 /* AFFormSection.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1170163D639600E81588 /* AFSliderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCB15E6CC1900D32988 /* AFSliderField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1171163D639600E81588 /* AFSpinAlertView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCD15E6CC1900D32988 /* AFSpinAlertView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1172163D639600E81588 /* AFStringLengthValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFCF15E6CC1900D32988 /* AFStringLengthValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1173163D639600E81588 /* AFStringListPickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD115E6CC1900D32988 /* AFStringListPickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1174163D639600E81588 /* AFStringListField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD315E6CC1900D32988 /* AFStringListField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1175163D639600E81588 /* AFStringNotEmptyValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFD515E6CC1900D32988 /* AFStringNotEmptyValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1176163D639600E81588 /* AFTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFE615E6CC1900D32988 /* AFTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1177163D639600E81588 /* AFThemeManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFE815E6CC1900D32988 /* AFThemeManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1178163D639600E81588 /* AFThemeObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEA15E6CC1900D32988 /* AFThemeObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1179163D639600E81588 /* AFThemeable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEB15E6CC1900D32988 /* AFThemeable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117A163D639600E81588 /* AFUILib.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEC15E6CC1900D32988 /* AFUILib.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117B163D639600E81588 /* AFUnavailableOfflineViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFEE15E6CC1900D32988 /* AFUnavailableOfflineViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117C163D639600E81588 /* AFUserDefaultsSettingPersistence.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF015E6CC1900D32988 /* AFUserDefaultsSettingPersistence.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117D163D639600E81588 /* AFUtil.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF215E6CC1900D32988 /* AFUtil.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117E163D639600E81588 /* AFValidatable.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF415E6CC1900D32988 /* AFValidatable.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B117F163D639600E81588 /* AFValidatableValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF515E6CC1900D32988 /* AFValidatableValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1180163D639600E81588 /* AFValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF715E6CC1900D32988 /* AFValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1181163D639600E81588 /* AFViewPanelField.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFF815E6CC1900D32988 /* AFViewPanelField.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1183163D639600E81588 /* AFLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFD15E6CC1900D32988 /* AFLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1184163D639600E81588 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 759BFFFF15E6CC1900D32988 /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000315E6CC1900D32988 /* UICustomDisclosureArrowView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */ = {isa = PBXBuildFile; fileRef = 759B000515E6CC1900D32988 /* UILabel+ShrinkToFit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		099B1188163D639600E81588 /* iOS-libAugmental-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 759B000915E6CC1900D32988 /* iOS-libAugmental-Prefix.pch */; settings = {ATTRIBUTES = (Public, ); }; };
 		099B1189163D639600E81588 /* AFTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D17BC1415967F0681F57C6 /* AFTableViewController.h */; };
 		099B118A163D639600E81588 /* AFTableCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D1797652BCF7DDF2833C43 /* AFTableCell.h */; };
 		099B118B163D639600E81588 /* AFTableSectionObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 67D1706F32F997290A5782D8 /* AFTableSectionObserver.h */; };
@@ -1383,100 +1383,99 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				099B111A163D639600E81588 /* AFAppDelegate.h in Headers */,
-				099B111B163D639600E81588 /* AFObject.h in Headers */,
-				099B111C163D639600E81588 /* AFObjectTableCell.h in Headers */,
-				099B111D163D639600E81588 /* AFPickerViewController.h in Headers */,
-				099B111E163D639600E81588 /* AFRequest.h in Headers */,
-				099B111F163D639600E81588 /* AFField.h in Headers */,
-				099B1120163D639600E81588 /* AFWriteableObject.h in Headers */,
-				099B1121163D639600E81588 /* AFBooleanField.h in Headers */,
-				099B1122163D639600E81588 /* AFCachingAudioPlayer.h in Headers */,
-				099B1123163D639600E81588 /* AFCellSelectionDelegate.h in Headers */,
-				099B1124163D639600E81588 /* AFCellViewFactory.h in Headers */,
-				099B1126163D639600E81588 /* AFDatePickerViewController.h in Headers */,
-				099B1127163D639600E81588 /* AFDateField.h in Headers */,
-				099B1128163D639600E81588 /* AFDownloadRequest.h in Headers */,
-				099B1129163D639600E81588 /* AFEMailAddressValidator.h in Headers */,
-				099B112E163D639600E81588 /* AFGenericOptionTableCell.h in Headers */,
-				099B112F163D639600E81588 /* AFHeaderRequest.h in Headers */,
-				099B1130163D639600E81588 /* AFImageAccessoryButton.h in Headers */,
-				099B1131163D639600E81588 /* AFImageCache.h in Headers */,
-				099B1132163D639600E81588 /* AFImmediateRequest.h in Headers */,
-				099B1133163D639600E81588 /* AFJSONRequest.h in Headers */,
-				099B1134163D639600E81588 /* AFMMYYDate.h in Headers */,
-				099B1135163D639600E81588 /* AFMMYYDatePickerViewController.h in Headers */,
-				099B1136163D639600E81588 /* AFMMYYDateField.h in Headers */,
-				099B1137163D639600E81588 /* AFMessageCell.h in Headers */,
-				099B1138163D639600E81588 /* AFMovingAverage.h in Headers */,
-				099B1139163D639600E81588 /* AFNotNullValidator.h in Headers */,
-				099B113A163D639600E81588 /* AFNumericStringValidator.h in Headers */,
-				099B113D163D639600E81588 /* AFObjectHelper.h in Headers */,
-				099B113E163D639600E81588 /* AFObjectPickerDelegate.h in Headers */,
-				099B113F163D639600E81588 /* AFObjectRequest.h in Headers */,
-				099B1141163D639600E81588 /* AFObjectTableSection.h in Headers */,
-				099B1142163D639600E81588 /* AFObjectViewController.h in Headers */,
-				099B1143163D639600E81588 /* AFObjectViewPanelController.h in Headers */,
-				099B1144163D639600E81588 /* AFCellViewable.h in Headers */,
-				099B1145163D639600E81588 /* AFPanelViewableObject.h in Headers */,
-				099B1146163D639600E81588 /* AFObservable.h in Headers */,
-				099B1147163D639600E81588 /* AFObservableViewController.h in Headers */,
-				099B1148163D639600E81588 /* AFOnlineScreen.h in Headers */,
-				099B114A163D639600E81588 /* AFPage.h in Headers */,
-				099B114B163D639600E81588 /* AFPageManager.h in Headers */,
-				099B114C163D639600E81588 /* AFPageManagerDelegate.h in Headers */,
-				099B114D163D639600E81588 /* AFPageObserver.h in Headers */,
-				099B114E163D639600E81588 /* AFPageScrubbingTableCell.h in Headers */,
-				099B114F163D639600E81588 /* AFPagedObjectListViewController.h in Headers */,
-				099B1150163D639600E81588 /* AFPagedObjectListViewObserver.h in Headers */,
-				099B1151163D639600E81588 /* AFPagedObjectQuery.h in Headers */,
-				099B1152163D639600E81588 /* AFPagedObjectQueryObserver.h in Headers */,
-				099B1153163D639600E81588 /* AFPagedObjectRequest.h in Headers */,
-				099B1154163D639600E81588 /* AFPasswordField.h in Headers */,
-				099B1155163D639600E81588 /* AFPasswordValidator.h in Headers */,
-				099B1156163D639600E81588 /* AFPerformSelectorOperation.h in Headers */,
-				099B115A163D639600E81588 /* AFRequestEndpoint.h in Headers */,
-				099B115B163D639600E81588 /* AFRequestHandler.h in Headers */,
-				099B115C163D639600E81588 /* AFRequestObserver.h in Headers */,
-				099B115D163D639600E81588 /* AFRequestQueue.h in Headers */,
-				099B115E163D639600E81588 /* AFRequestQueueAlertView.h in Headers */,
-				099B1160163D639600E81588 /* AFResultsPage.h in Headers */,
-				099B1161163D639600E81588 /* AFResultsPagingCell.h in Headers */,
-				099B1162163D639600E81588 /* AFScreen.h in Headers */,
-				099B1163163D639600E81588 /* AFScreenManager.h in Headers */,
-				099B1164163D639600E81588 /* AFScreenObserver.h in Headers */,
-				099B1165163D639600E81588 /* AFSession.h in Headers */,
-				099B1166163D639600E81588 /* AFSessionObserver.h in Headers */,
-				099B1169163D639600E81588 /* AFFieldObserver.h in Headers */,
-				099B116A163D639600E81588 /* AFFieldPersistenceDelegate.h in Headers */,
-				099B116B163D639600E81588 /* AFFieldViewPanelController.h in Headers */,
-				099B116C163D639600E81588 /* AFFieldViewPanelObserver.h in Headers */,
-				099B116D163D639600E81588 /* AFFieldDrivenObjectPickerViewController.h in Headers */,
-				099B116E163D639600E81588 /* AFSettingProvider.h in Headers */,
-				099B116F163D639600E81588 /* AFFormSection.h in Headers */,
-				099B1170163D639600E81588 /* AFSliderField.h in Headers */,
-				099B1171163D639600E81588 /* AFSpinAlertView.h in Headers */,
-				099B1172163D639600E81588 /* AFStringLengthValidator.h in Headers */,
-				099B1173163D639600E81588 /* AFStringListPickerViewController.h in Headers */,
-				099B1174163D639600E81588 /* AFStringListField.h in Headers */,
-				099B1175163D639600E81588 /* AFStringNotEmptyValidator.h in Headers */,
-				099B1176163D639600E81588 /* AFTextField.h in Headers */,
-				099B1177163D639600E81588 /* AFThemeManager.h in Headers */,
-				099B1178163D639600E81588 /* AFThemeObserver.h in Headers */,
-				099B1179163D639600E81588 /* AFThemeable.h in Headers */,
-				099B117A163D639600E81588 /* AFUILib.h in Headers */,
-				099B117B163D639600E81588 /* AFUnavailableOfflineViewController.h in Headers */,
-				099B117C163D639600E81588 /* AFUserDefaultsSettingPersistence.h in Headers */,
-				099B117D163D639600E81588 /* AFUtil.h in Headers */,
-				099B117E163D639600E81588 /* AFValidatable.h in Headers */,
-				099B117F163D639600E81588 /* AFValidatableValidator.h in Headers */,
-				099B1180163D639600E81588 /* AFValidator.h in Headers */,
-				099B1181163D639600E81588 /* AFViewPanelField.h in Headers */,
-				099B1183163D639600E81588 /* AFLogger.h in Headers */,
-				099B1184163D639600E81588 /* NSData+Base64.h in Headers */,
-				099B1186163D639600E81588 /* UICustomDisclosureArrowView.h in Headers */,
-				099B1187163D639600E81588 /* UILabel+ShrinkToFit.h in Headers */,
-				099B1188163D639600E81588 /* iOS-libAugmental-Prefix.pch in Headers */,
+				093AC06B16ED42AA00BB0A2A /* AFStringLengthValidator.h in Headers */,
+				093AC06C16ED42AA00BB0A2A /* AFNumericStringValidator.h in Headers */,
+				093AC06D16ED42AA00BB0A2A /* AFEMailAddressValidator.h in Headers */,
+				093AC06E16ED42AA00BB0A2A /* AFNotNullValidator.h in Headers */,
+				093AC06F16ED42AA00BB0A2A /* AFPasswordValidator.h in Headers */,
+				093AC07016ED42AA00BB0A2A /* AFValidator.h in Headers */,
+				093AC07116ED42AA00BB0A2A /* AFValidatableValidator.h in Headers */,
+				093AC07216ED42AA00BB0A2A /* AFValidatable.h in Headers */,
+				093AC07316ED42AA00BB0A2A /* AFStringNotEmptyValidator.h in Headers */,
+				093AC07416ED42AA00BB0A2A /* AFAppDelegate.h in Headers */,
+				093AC07516ED42AA00BB0A2A /* UILabel+ShrinkToFit.h in Headers */,
+				093AC07616ED42AA00BB0A2A /* AFUnavailableOfflineViewController.h in Headers */,
+				093AC07716ED42AA00BB0A2A /* AFUILib.h in Headers */,
+				093AC07816ED42AA00BB0A2A /* AFCellSelectionDelegate.h in Headers */,
+				093AC07916ED42AA00BB0A2A /* AFCellViewFactory.h in Headers */,
+				093AC07A16ED42AA00BB0A2A /* AFMessageCell.h in Headers */,
+				093AC07B16ED42AA00BB0A2A /* AFObjectPickerDelegate.h in Headers */,
+				093AC07C16ED42AA00BB0A2A /* AFStringListPickerViewController.h in Headers */,
+				093AC07D16ED42AA00BB0A2A /* AFDateField.h in Headers */,
+				093AC07E16ED42AA00BB0A2A /* AFGenericOptionTableCell.h in Headers */,
+				093AC07F16ED42AA00BB0A2A /* AFViewPanelField.h in Headers */,
+				093AC08016ED42AA00BB0A2A /* AFField.h in Headers */,
+				093AC08116ED42AA00BB0A2A /* AFBooleanField.h in Headers */,
+				093AC08216ED42AA00BB0A2A /* AFMMYYDateField.h in Headers */,
+				093AC08316ED42AA00BB0A2A /* AFPasswordField.h in Headers */,
+				093AC08416ED42AA00BB0A2A /* AFSliderField.h in Headers */,
+				093AC08516ED42AA00BB0A2A /* AFTextField.h in Headers */,
+				093AC08616ED42AA00BB0A2A /* AFFormSection.h in Headers */,
+				093AC08716ED42AA00BB0A2A /* AFFieldPersistenceDelegate.h in Headers */,
+				093AC08816ED42AA00BB0A2A /* AFFieldObserver.h in Headers */,
+				093AC08916ED42AA00BB0A2A /* AFFieldDrivenObjectPickerViewController.h in Headers */,
+				093AC08A16ED42AA00BB0A2A /* AFFieldViewPanelController.h in Headers */,
+				093AC08B16ED42AA00BB0A2A /* AFStringListField.h in Headers */,
+				093AC08C16ED42AA00BB0A2A /* AFFieldViewPanelObserver.h in Headers */,
+				093AC08D16ED42AA00BB0A2A /* AFMMYYDatePickerViewController.h in Headers */,
+				093AC08E16ED42AA00BB0A2A /* AFDatePickerViewController.h in Headers */,
+				093AC08F16ED42AA00BB0A2A /* AFPickerViewController.h in Headers */,
+				093AC09016ED42AA00BB0A2A /* AFSettingProvider.h in Headers */,
+				093AC09116ED42AA00BB0A2A /* AFUserDefaultsSettingPersistence.h in Headers */,
+				093AC09216ED42AA00BB0A2A /* AFResultsPagingCell.h in Headers */,
+				093AC09316ED42AA00BB0A2A /* AFResultsPage.h in Headers */,
+				093AC09416ED42AA00BB0A2A /* AFPageScrubbingTableCell.h in Headers */,
+				093AC09516ED42AA00BB0A2A /* AFPageObserver.h in Headers */,
+				093AC09616ED42AA00BB0A2A /* AFPageManagerDelegate.h in Headers */,
+				093AC09716ED42AA00BB0A2A /* AFPageManager.h in Headers */,
+				093AC09816ED42AA00BB0A2A /* AFPagedObjectRequest.h in Headers */,
+				093AC09916ED42AA00BB0A2A /* AFPagedObjectQueryObserver.h in Headers */,
+				093AC09A16ED42AA00BB0A2A /* AFPagedObjectQuery.h in Headers */,
+				093AC09B16ED42AA00BB0A2A /* AFPagedObjectListViewObserver.h in Headers */,
+				093AC09C16ED42AA00BB0A2A /* AFPagedObjectListViewController.h in Headers */,
+				093AC09D16ED42AA00BB0A2A /* AFPage.h in Headers */,
+				093AC09E16ED42AA00BB0A2A /* AFThemeObserver.h in Headers */,
+				093AC09F16ED42AA00BB0A2A /* AFThemeManager.h in Headers */,
+				093AC0A016ED42AA00BB0A2A /* AFThemeable.h in Headers */,
+				093AC0A116ED42AA00BB0A2A /* AFOnlineScreen.h in Headers */,
+				093AC0A216ED42AA00BB0A2A /* AFScreenObserver.h in Headers */,
+				093AC0A316ED42AA00BB0A2A /* AFScreenManager.h in Headers */,
+				093AC0A416ED42AA00BB0A2A /* AFScreen.h in Headers */,
+				093AC0A516ED42AA00BB0A2A /* AFSpinAlertView.h in Headers */,
+				093AC0A616ED42AA00BB0A2A /* UICustomDisclosureArrowView.h in Headers */,
+				093AC0A716ED42AA00BB0A2A /* AFImageAccessoryButton.h in Headers */,
+				093AC0A816ED42AA00BB0A2A /* AFJSONRequest.h in Headers */,
+				093AC0A916ED42AA00BB0A2A /* AFImmediateRequest.h in Headers */,
+				093AC0AA16ED42AA00BB0A2A /* AFDownloadRequest.h in Headers */,
+				093AC0AB16ED42AA00BB0A2A /* AFSessionObserver.h in Headers */,
+				093AC0AC16ED42AA00BB0A2A /* AFSession.h in Headers */,
+				093AC0AD16ED42AA00BB0A2A /* AFRequestQueueAlertView.h in Headers */,
+				093AC0AE16ED42AA00BB0A2A /* AFRequest.h in Headers */,
+				093AC0AF16ED42AA00BB0A2A /* AFHeaderRequest.h in Headers */,
+				093AC0B016ED42AA00BB0A2A /* AFRequestObserver.h in Headers */,
+				093AC0B116ED42AA00BB0A2A /* AFRequestEndpoint.h in Headers */,
+				093AC0B216ED42AA00BB0A2A /* AFObjectRequest.h in Headers */,
+				093AC0B316ED42AA00BB0A2A /* AFRequestHandler.h in Headers */,
+				093AC0B416ED42AA00BB0A2A /* AFRequestQueue.h in Headers */,
+				093AC0B516ED42AA00BB0A2A /* AFObservable.h in Headers */,
+				093AC0B616ED42AA00BB0A2A /* AFObjectHelper.h in Headers */,
+				093AC0B716ED42AA00BB0A2A /* AFObject.h in Headers */,
+				093AC0B816ED42AA00BB0A2A /* AFWriteableObject.h in Headers */,
+				093AC0B916ED42AA00BB0A2A /* AFPanelViewableObject.h in Headers */,
+				093AC0BA16ED42AA00BB0A2A /* AFCellViewable.h in Headers */,
+				093AC0BB16ED42AA00BB0A2A /* AFObservableViewController.h in Headers */,
+				093AC0BC16ED42AA00BB0A2A /* AFObjectViewPanelController.h in Headers */,
+				093AC0BD16ED42AA00BB0A2A /* AFObjectViewController.h in Headers */,
+				093AC0BE16ED42AA00BB0A2A /* AFObjectTableCell.h in Headers */,
+				093AC0BF16ED42AA00BB0A2A /* AFObjectTableSection.h in Headers */,
+				093AC0C016ED42AA00BB0A2A /* AFImageCache.h in Headers */,
+				093AC0C116ED42AA00BB0A2A /* AFCachingAudioPlayer.h in Headers */,
+				093AC0C216ED42AA00BB0A2A /* AFMMYYDate.h in Headers */,
+				093AC0C316ED42AA00BB0A2A /* AFPerformSelectorOperation.h in Headers */,
+				093AC0C416ED42AA00BB0A2A /* AFMovingAverage.h in Headers */,
+				093AC0C516ED42AA00BB0A2A /* NSData+Base64.h in Headers */,
+				093AC0C616ED42AA00BB0A2A /* AFLogger.h in Headers */,
+				093AC0C716ED42AA00BB0A2A /* AFUtil.h in Headers */,
 				099B1189163D639600E81588 /* AFTableViewController.h in Headers */,
 				099B118A163D639600E81588 /* AFTableCell.h in Headers */,
 				099B118B163D639600E81588 /* AFTableSectionObserver.h in Headers */,
@@ -1654,6 +1653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				093AC0CC16ED448C00BB0A2A /* AFParseHTTPContentRange.m in Sources */,
 				099B10B7163D639600E81588 /* AFAppDelegate.m in Sources */,
 				099B10B8163D639600E81588 /* AFObject.m in Sources */,
 				099B10B9163D639600E81588 /* AFObjectTableCell.m in Sources */,
