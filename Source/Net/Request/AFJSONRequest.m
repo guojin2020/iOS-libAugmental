@@ -57,9 +57,7 @@ static CJSONSerializer   *jsonSerializer;
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 {
-    [super willSendURLRequest:requestIn];
-
-    //NSAssert(postData,@"Serialisation AFSessionStateError in %@, request was: %@",[self class],[URL absoluteString]);
+    requestIn = [super willSendURLRequest:requestIn];
 
     [requestIn setHTTPMethod:@"POST"];
     [requestIn setHTTPBody:postData];

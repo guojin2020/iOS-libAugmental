@@ -87,9 +87,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
         NSNumber *expectedSizeNumber = (NSNumber *) [sizeCache objectForKey:[URLIn absoluteString]];
         if (expectedSizeNumber)
         {
-            //[self notifyObservers:AFRequestEventWillPollSize parameters:self, NULL];
             self.expectedBytes = [expectedSizeNumber intValue];
-            //[self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
         }
 
         if(queueIn)
@@ -127,7 +125,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     AFLogPosition();
 
-    [super willSendURLRequest:requestIn];
+    requestIn = [super willSendURLRequest:requestIn];
 
     [self updateReceivedBytesFromFile];
 

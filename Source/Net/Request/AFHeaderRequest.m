@@ -20,7 +20,8 @@
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
     AFLogPosition();
-    [super willSendURLRequest:requestIn];
+
+    requestIn = [super willSendURLRequest:requestIn];
     [requestIn setHTTPMethod:@"HEAD"];
     return requestIn;
 }
