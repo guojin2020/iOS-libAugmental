@@ -3,10 +3,7 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
-
-#import <QuartzCore/QuartzCore.h>
 #import "AFLayoutView.h"
-
 
 @implementation AFLayoutView
 
@@ -19,8 +16,5 @@
     }
     return self;
 }
-
-//- (UIEdgeInsets)edgeInsets { return edgeInsets;       }
-//- (void)setEdgeInsets:(UIEdgeInsets)edgeInsets { edgeInsets = edgeInsets; }
 
 @end

@@ -10,11 +10,11 @@
 {
 }
 
-static AFVideoStillsFactory *sharedInstance;
+static AFVideoStillsFactory *defaultCache;
 
 +(AFVideoStillsFactory *)sharedInstance
 {
-    return sharedInstance ?: ( sharedInstance = [[AFVideoStillsFactory alloc] init]);
+    return defaultCache ?: ( defaultCache = [[AFVideoStillsFactory alloc] init]);
 }
 
 - (void)generateStillsFromURL:(NSURL *)url

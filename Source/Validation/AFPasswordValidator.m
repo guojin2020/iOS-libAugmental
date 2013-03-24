@@ -1,7 +1,7 @@
 #import "AFPasswordValidator.h"
 #import "AFPasswordField.h"
 
-static NSObject <AFValidator> *sharedInstance = nil;
+static NSObject <AFValidator> *defaultCache = nil;
 
 @implementation AFPasswordValidator
 
@@ -20,8 +20,8 @@ static NSObject <AFValidator> *sharedInstance = nil;
 
 + (NSObject <AFValidator> *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFPasswordValidator alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFPasswordValidator alloc] init];
+    return defaultCache;
 }
 
 - (BOOL)isValid:(NSObject *)testObject

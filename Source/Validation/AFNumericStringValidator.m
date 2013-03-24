@@ -3,15 +3,15 @@
 
 @implementation AFNumericStringValidator
 
-static AFNumericStringValidator *sharedInstance = nil;
+static AFNumericStringValidator *defaultCache = nil;
 
 //static NSString *emailRegEx = @"[0-9]+";
 //static GTMRegex *regex = nil;
 
 + (NSObject <AFValidator> *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFNumericStringValidator alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFNumericStringValidator alloc] init];
+    return defaultCache;
 }
 
 - (BOOL)isValid:(NSObject *)testObject

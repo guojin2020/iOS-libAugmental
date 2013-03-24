@@ -2,7 +2,6 @@
 #import "AFObservable.h"
 #import "AFRequest.h"
 #import "AFRequest+Protected.h"
-#import "AFFileUtils.h"
 #import "AFParseHTTPContentRange.h"
 
 SEL

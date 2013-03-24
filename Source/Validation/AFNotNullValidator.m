@@ -1,13 +1,13 @@
 #import "AFNotNullValidator.h"
 
-static AFNotNullValidator *sharedInstance = nil;
+static AFNotNullValidator *defaultCache = nil;
 
 @implementation AFNotNullValidator
 
 + (NSObject <AFValidator> *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFNotNullValidator alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFNotNullValidator alloc] init];
+    return defaultCache;
 }
 
 - (BOOL)isValid:(NSObject *)testObject

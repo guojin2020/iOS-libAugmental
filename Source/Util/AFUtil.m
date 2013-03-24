@@ -1,8 +1,4 @@
 #import "AFUtil.h"
-
-#import <SystemConfiguration/SCNetworkReachability.h>
-#include <netinet/in.h> 
-
 #import "AFObject.h"
 
 @implementation AFUtil
@@ -31,9 +27,6 @@ static char base64EncodingTable[64] = {
 
 + (void)dumpDictionary:(NSDictionary *)dictionary
 {
-    for (id key in dictionary)
-    {
-    }
 }
 
 + (NSString *)priceStringFromFloat:(float)priceFloat

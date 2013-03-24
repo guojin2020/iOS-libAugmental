@@ -2,14 +2,14 @@
 
 //#import "AFAppDelegate.h"
 
-static AFUserDefaultsSettingPersistence *sharedInstance = nil;
+static AFUserDefaultsSettingPersistence *defaultCache = nil;
 
 @implementation AFUserDefaultsSettingPersistence
 
 + (AFUserDefaultsSettingPersistence *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFUserDefaultsSettingPersistence alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFUserDefaultsSettingPersistence alloc] init];
+    return defaultCache;
 }
 
 - (void)persistFieldValue:(NSData *)value forKey:(NSString *)key
