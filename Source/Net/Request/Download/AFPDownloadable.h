@@ -9,7 +9,7 @@
 
 @protocol AFPDownloadable <NSObject>
 
--(NSString*)remoteIdentifier;
+-(NSURL*)remoteURL;
 -(NSString*)localFilePath;
 
 @end

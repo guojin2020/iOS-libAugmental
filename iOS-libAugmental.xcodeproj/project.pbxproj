@@ -385,6 +385,7 @@
 		B03CA873B170D408B49B9597 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABA11409644EACA4B994 /* QuartzCore.framework */; };
 		B03CA894247C24B72E1007F8 /* AFAssertion.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA7BC5F5E14C82E8C3463 /* AFAssertion.h */; };
 		B03CA8C4254B4F05A5132C33 /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA6BC9009CF9F61C23986 /* AFSKProductFetchResponse.h */; };
+		B03CA8DEEF5B5A52AB3F9DBC /* AFDownloadRequest+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAB7825F803BA7679DF36 /* AFDownloadRequest+Protected.h */; };
 		B03CA8FAA917B392D1D1DA7E /* AFSKProductFetchResponseFailed.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA18005EF2F47350D3980 /* AFSKProductFetchResponseFailed.h */; };
 		B03CA907220A568DCA26A040 /* AFDefaultsBackedStringArray.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3EB13CF90BDDC6FD84A /* AFDefaultsBackedStringArray.m */; };
 		B03CA90CC2AD7872AF72FC11 /* AFObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA1E25B3CBEB98D3A2BEB /* AFObserver.h */; };
@@ -707,6 +708,7 @@
 		B03CAAA161369910B66A7C6B /* AFLandscapeMPMoviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFLandscapeMPMoviePlayerViewController.h; sourceTree = "<group>"; };
 		B03CAAA3A87FC690F69F0F4B /* AFCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCache.h; sourceTree = "<group>"; };
 		B03CAB6533537B8C80FF632B /* AFDownloadRequestTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDownloadRequestTest.h; sourceTree = "<group>"; };
+		B03CAB7825F803BA7679DF36 /* AFDownloadRequest+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AFDownloadRequest+Protected.h"; sourceTree = "<group>"; };
 		B03CAB87A0AD87800A758BA9 /* AFDrawingDelegableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDrawingDelegableView.h; sourceTree = "<group>"; };
 		B03CABA11409644EACA4B994 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B03CABBDFD9E143F8A8B621F /* AFVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFVideoPlayerViewController.m; sourceTree = "<group>"; };
@@ -1415,6 +1417,7 @@
 				B03CA2134D23CA8173748313 /* AFDownloadRequestCache.h */,
 				B03CA4BBF2297B8D94EA7BAF /* AFPDownloadRequest.h */,
 				B03CADC16A35A044CBEE865B /* AFPDownloadable.h */,
+				B03CAB7825F803BA7679DF36 /* AFDownloadRequest+Protected.h */,
 			);
 			path = Download;
 			sourceTree = "<group>";
@@ -1585,6 +1588,7 @@
 				B03CA0277A26BDA655335EB6 /* AFPDownloadRequest.h in Headers */,
 				B03CA054DF251A35D4E9B6C7 /* AFPDownloadable.h in Headers */,
 				B03CA9BA795617562E34C608 /* NSInvocation+Constructors.h in Headers */,
+				B03CA8DEEF5B5A52AB3F9DBC /* AFDownloadRequest+Protected.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

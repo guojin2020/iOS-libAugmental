@@ -81,13 +81,13 @@ static AFDownloadRequestCache *defaultCache = NULL;
     }
     else // Otherwise, create a new request and requestCache it
     {
-        Class<AFPDownloadRequest, NSObject> requestClass = [self downloadRequestClassForDownloadable:downloadableIn];
+        Class requestClass = [self downloadRequestClassForDownloadable:downloadableIn];
 
         request = NSAllocateObject(requestClass, 0, NSDefaultMallocZone());
 
-        SEL initWithDownloadableSelector = [requestClass initWithDownloadableSelector];
+        SEL initWithDownloadableSelector = [(id<AFPDownloadRequest>)requestClass initWithDownloadableSelector];
 
-        NSMethodSignature *signature = [requestClass instanceMethodSignatureForSelector:initWithDownloadableSelector];
+        NSMethodSignature *signature = [(Class)requestClass instanceMethodSignatureForSelector:initWithDownloadableSelector];
 
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
 

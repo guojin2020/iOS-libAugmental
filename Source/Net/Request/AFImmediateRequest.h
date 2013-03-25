@@ -2,16 +2,20 @@
 
 #import "AFRequest.h"
 
+@protocol AFRequestEndpoint;
+
 @interface AFImmediateRequest : AFRequest
 {
-    NSObject        *callbackObject;
-    SEL             callbackSelector;
-    NSMutableData   *responseDataBuffer;
-    NSData          *postData;
+    NSObject<AFRequestEndpoint> *endpoint;
+    NSMutableData               *responseDataBuffer;
+    NSData                      *postData;
 }
 
-- (id)initWithURL:(NSURL *)URLIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn;
+-(id)initWithURL:(NSURL *)URLIn
+        endpoint:(NSObject<AFRequestEndpoint> *)endpoint;
 
-- (id)initWithURL:(NSURL *)URLIn postData:(NSData *)postDataIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn;
+-(id)initWithURL:(NSURL *)URLIn
+        postData:(NSData *)postDataIn
+        endpoint:(NSObject<AFRequestEndpoint> *)endpoint;
 
 @end

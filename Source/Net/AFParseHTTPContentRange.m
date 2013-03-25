@@ -6,10 +6,10 @@ const NSString* AFContentRangeFormatErrorDescription = @"Content-Range header en
 AFRangeInfo* CreateAFRangeInfoFromHTTPHeaders(NSDictionary* httpHeaders)
 {
     NSString
-            *contentRangeFormatString = httpHeaders[@"Content-Range" ],
-            *contentLengthString      = httpHeaders[@"Content-Length"];
+            *contentRangeFormatString = [httpHeaders objectForKey:@"Content-Range"],
+            *contentLengthString      = [httpHeaders objectForKey:@"Content-Length"];
 
-    if(contentRangeFormatString)
+    if( contentRangeFormatString )
     {
 
         if(![contentRangeFormatString hasPrefix:@"bytes"])
@@ -74,7 +74,7 @@ AFRangeInfo* CreateAFRangeInfoFromHTTPHeaders(NSDictionary* httpHeaders)
         NSUInteger contentTotal  = [[numberFormatter numberFromString:contentLengthString] unsignedIntegerValue];
 
         AFRangeInfo* rangeInfo = malloc(sizeof(AFRangeInfo));
-        rangeInfo->contentRange = NSMakeRange(0, contentTotal - 1 );
+        rangeInfo->contentRange = NSMakeRange(0, contentTotal );
         rangeInfo->contentTotal = contentTotal;
 
         [numberFormatter release];

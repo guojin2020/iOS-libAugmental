@@ -2,6 +2,7 @@
 #import <Foundation/Foundation.h>
 
 #import "AFRequest.h"
+
 #import "AFRequestEndpoint.h"
 #import "AFPDownloadRequest.h"
 
@@ -12,13 +13,16 @@
 @protocol AFPDownloadable;
 
 @interface AFDownloadRequest : AFRequest <AFRequestEndpoint, UIAlertViewDelegate, AFPDownloadRequest>
+{
+	AFRequest* pollSizeRequest;
+}
 
 -(id)initWithDownloadable:(id<AFPDownloadable>)downloadableIn
                 observers:(NSSet *)observersIn
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 requestQueueForHeaderPoll:(AFRequestQueue *)queueIn;
 
--(id)initWithURL:(NSString *)remoteIdentifierIn
+-(id)initWithURL:(NSURL *)urlIn
       targetPath:(NSString *)targetPathIn
        observers:(NSSet *)observersIn
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
@@ -31,5 +35,6 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn;
 -(void)closeHandleSafely;
 
 @property(nonatomic, readonly) NSString *localFilePath;
+//@property(nonatomic, retain) AFRequest* pollSizeRequest;
 
 @end

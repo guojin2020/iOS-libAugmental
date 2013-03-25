@@ -189,11 +189,6 @@
 {
     NSAssert(requestIn, NSInvalidArgumentException);
 
-    if(![requestIn isKindOfClass:[AFHeaderRequest class]]) NSLog(@"Not an AFHeaderRequest");
-    if(![requestIn isKindOfClass:[AFRequest class]]) NSLog(@"Not an AFRequest");
-    if(![requestIn respondsToSelector:@selector(removeObserver:)]) NSLog(@"Doesn't respond to removeObserver:");
-    NSLog(@"Is a: %@", NSStringFromClass([requestIn class]));
-
     [requestIn removeObserver:self];
     [activeRequests removeObject:requestIn];
     [self startWaitingRequests];

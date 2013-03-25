@@ -37,11 +37,14 @@ extern SEL
 }
 
 - (id)initWithURL:(NSURL *)URLIn;
-- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn;
+
+- (NSDictionary *)httpHeader;
+
+- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn DEPRECATED_ATTRIBUTE;
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 
-- (void)willReceiveWithHeaders:(NSDictionary *)header responseCode:(int)responseCode;
+- (void)willReceiveWithHeaders:(NSDictionary *)httpHeaderIn responseCode:(int)responseCode;
 
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn;
 

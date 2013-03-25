@@ -6,7 +6,6 @@
 
 
 #import <Foundation/Foundation.h>
-//#import "AFRequest.h"
 
 @interface AFRequest (Protected)
 
