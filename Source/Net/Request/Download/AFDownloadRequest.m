@@ -23,7 +23,6 @@
 {
     NSFileHandle        *fileHandle;
     NSString            *localFilePath;
-    NSMutableDictionary *expectedSizeCache;
     NSMutableData       *dataBuffer;
 
 #if APPLICATION_BUFFERING_ENABLED
@@ -63,9 +62,9 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
     if(self)
     {
-        localFilePath = [targetPathIn retain];
+        localFilePath     = [targetPathIn retain];
         expectedSizeCache = [sizeCacheIn retain];
-        dataBuffer    = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
+        dataBuffer        = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
         if(observersIn) [self addObservers:[observersIn allObjects]];
 

@@ -61,7 +61,7 @@
 
             if( requestIsAlreadyActive )
             {
-                [queue removeObject:request];
+                [activatedRequests removeObject:request];
             }
             else
             {

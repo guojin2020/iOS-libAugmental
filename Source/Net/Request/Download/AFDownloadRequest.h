@@ -15,6 +15,7 @@
 @interface AFDownloadRequest : AFRequest <AFRequestEndpoint, UIAlertViewDelegate, AFPDownloadRequest>
 {
 	AFRequest* pollSizeRequest;
+	NSMutableDictionary *expectedSizeCache;
 }
 
 -(id)initWithDownloadable:(id<AFPDownloadable>)downloadableIn
