@@ -1,6 +1,5 @@
 #import "AFObjectTableCell.h"
 #import "AFCellViewable.h"
-#import "AFObservable.h"
 #import "AFLogger.h"
 
 @implementation AFObjectTableCell

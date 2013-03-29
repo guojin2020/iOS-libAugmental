@@ -1,26 +1,29 @@
 
-#import "AFObservable.h"
 #import "AFImmediateRequest.h"
+
+#import "AFRequestEndpoint.h"
 
 @implementation AFImmediateRequest
 
-- (id)initWithURL:(NSURL *)URLIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn
+-(id)initWithURL:(NSURL *)URLIn
+        endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
-    NSAssert(callbackObjectIn && callbackSelectorIn, @"Invalid parameters initing %@", [self class]);
+    NSAssert(endpointIn, NSInvalidArgumentException );
 
     if ((self = [super initWithURL:URLIn]))
     {
-        callbackObject = [callbackObjectIn retain];
-        [callbackObject retain];
-        callbackSelector   = callbackSelectorIn;
+        endpoint           = [endpointIn retain];
         responseDataBuffer = [[NSMutableData data] retain];
     }
     return self;
 }
 
-- (id)initWithURL:(NSURL *)URLIn postData:(NSData *)postDataIn callbackObject:(NSObject *)callbackObjectIn callbackSelector:(SEL)callbackSelectorIn
+-(id)initWithURL:(NSURL *)URLIn
+        postData:(NSData *)postDataIn
+		endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
-    if ((self = [self initWithURL:URLIn callbackObject:callbackObjectIn callbackSelector:callbackSelectorIn]))
+    self = [self initWithURL:URLIn endpoint:endpointIn];
+    if( self )
     {
         postData = [postDataIn retain];
     }
@@ -57,18 +60,17 @@
 - (void)didFinish
 {
     [super didFinish];
-    [callbackObject performSelector:callbackSelector withObject:responseDataBuffer];
+
+    [endpoint request:self returnedWithData:responseDataBuffer];
 }
 
 - (void)dealloc
 {
-    [callbackObject release];
-    [callbackObject release];
+    [endpoint           release];
     [responseDataBuffer release];
-    [postData release];
+    [postData           release];
+
     [super dealloc];
 }
-
-//@dynamic connection, URL, state, requiresLogin, attempts;
 
 @end

@@ -8,6 +8,7 @@
 #import "AFObjectCache.h"
 #import "AFRequestQueueAlertView.h"
 #import "AFPerformSelectorOperation.h"
+#import "AFDownloadRequestCache.h"
 
 @implementation AFSession
 
@@ -111,7 +112,8 @@ static AFSession *sharedSession = nil;
 {
     [self cancelAllRequests];
     [downloadQueue cancelAllRequests];
-    [AFDownloadRequest clearRequestPool];
+
+    [[AFDownloadRequestCache defaultCache] clear];
 
     [self setState:(AFSessionState) AFSessionStateDisconnecting];
     [self setState:(AFSessionState) AFSessionStateDisconnected];
@@ -134,9 +136,6 @@ static AFSession *sharedSession = nil;
     for (NSHTTPCookie *currentCookie in allCookies)
     {
         cookieProperties = [currentCookie properties];
-        for (id key in cookieProperties)
-        {
-        }
     }
 }
 

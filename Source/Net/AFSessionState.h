@@ -1,5 +1,6 @@
 
 //State enumerations
+DEPRECATED_ATTRIBUTE
 typedef enum AFSessionState
 {
     AFSessionStateUnknown       = 1, //The Session object is not initialised or there has been an AFSessionStateError.

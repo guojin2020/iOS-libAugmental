@@ -19,11 +19,11 @@
 
 @implementation AFSKProductFetcher {}
 
-static AFSKProductFetcher *sharedInstance;
+static AFSKProductFetcher *defaultCache;
 
 +(AFSKProductFetcher *)sharedInstance
 {
-    return sharedInstance ?: (sharedInstance = [[AFSKProductFetcher alloc] init]);
+    return defaultCache ?: (defaultCache = [[AFSKProductFetcher alloc] init]);
 }
 
 -(id)init

@@ -27,9 +27,6 @@
     NSAssert(primaryKey > 0, @"Invalid primary key calling %@", NSStringFromSelector(_cmd));
     NSAssert(objectClass, @"Invalid class calling %@", NSStringFromSelector(_cmd));
 
-    if (primaryKey <= 0)
-    {}
-
     NSString     *classString    = NSStringFromClass((Class)objectClass);
     NSDictionary *typeDictionary = [cache objectForKey:classString];
 

@@ -16,6 +16,7 @@ extern SEL
  AFObject provides state and functionality which will be common to all AFObject implementations.
  It is essentially abstract and intended to be subclassed: it should never be instantiated directly.
  **/
+DEPRECATED_ATTRIBUTE
 @interface AFObject : AFObservable <NSCoding, AFValidatable>
 {
 

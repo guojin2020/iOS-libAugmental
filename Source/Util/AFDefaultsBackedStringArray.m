@@ -4,7 +4,6 @@
 //
 
 #import "AFDefaultsBackedStringArray.h"
-#import "AFMethodBlockedException.h"
 
 static NSString *INVALID_ARGUMENT_REASON = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 

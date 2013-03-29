@@ -1,14 +1,14 @@
 #import "AFValidatableValidator.h"
 #import "AFValidatable.h"
 
-static AFValidatableValidator *sharedInstance = nil;
+static AFValidatableValidator *defaultCache = nil;
 
 @implementation AFValidatableValidator
 
 + (NSObject <AFValidator> *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFValidatableValidator alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFValidatableValidator alloc] init];
+    return defaultCache;
 }
 
 - (BOOL)isValid:(NSObject *)testObject

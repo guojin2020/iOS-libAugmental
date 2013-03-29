@@ -1,21 +1,20 @@
-#import <Foundation/Foundation.h>
-#import "AFObservable.h"
+
+#import "AFPDownloadable.h"
+#import "AFRequestQueue.h"
 #import "AFDownloadRequest.h"
-#import "AFSession.h"
 #import "AFHeaderRequest.h"
-#import "AFRequest+Protected.h"
-#import "AFFileUtils.h"
 #import "AFLogger.h"
 #import "AFParseHTTPContentRange.h"
+#import "AFRequest+Protected.h"
+#import "AFFileUtils.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
 #define SIZE_CACHE_ERROR @""
+#define APPLICATION_BUFFERING_ENABLED true
 
 @interface AFDownloadRequest ()
 
-+(NSString *)createUniqueKeyFromURL:(NSURL *)URLIn localFilePath:(NSString *)localFilePathIn;
--(NSString *)uniqueKey;
 -(void)updateReceivedBytesFromFile;
 
 @end
@@ -24,110 +23,97 @@
 {
     NSFileHandle        *fileHandle;
     NSString            *localFilePath;
-    NSMutableDictionary *sizeCache;
     NSMutableData       *dataBuffer;
-    AFHeaderRequest     *headerRequest;
+
+#if APPLICATION_BUFFERING_ENABLED
+    NSUInteger          dataBufferPosition;
+#endif
 }
 
-static NSMutableDictionary *uniqueRequestPool = nil;
-
-+ (AFDownloadRequest *)requestForURL:(NSURL*)               URLIn
-                       localFilePath:(NSString*)            localFilePathIn
-                           observers:(NSSet*)               observersIn
-                       fileSizeCache:(NSMutableDictionary* )sizeCacheIn
-               queueForHeaderRequest:(AFRequestQueue*)      queueIn
++(SEL)initWithDownloadableSelector
 {
-    NSAssert( URLIn!=nil,           @"URL must not be nil" );
-    NSAssert( localFilePathIn!=nil, @"Local file path must not be nil" );
-
-    if (!uniqueRequestPool) uniqueRequestPool = [[NSMutableDictionary alloc] init];
-
-    NSString *uniqueKey = [AFDownloadRequest createUniqueKeyFromURL:URLIn localFilePath:localFilePathIn];
-
-    AFDownloadRequest *request;
-    if ((request = [uniqueRequestPool objectForKey:uniqueKey])) //If there is already a request for that key, just observe it
-    {
-        for (NSObject <AFRequestObserver> *l in observersIn) [request addObserver:l];
-    }
-    else //Otherwise, let's create a new request
-    {
-        request = [[AFDownloadRequest alloc] initWithURL:URLIn
-                                              targetPath:localFilePathIn
-                                               observers:observersIn
-                                           fileSizeCache:sizeCacheIn
-                               requestQueueForHeaderPoll:queueIn];
-
-        [uniqueRequestPool setObject:request forKey:uniqueKey];
-        [request release];
-    }
-    return request;
+    return @selector(initWithDownloadable:observers:fileSizeCache:requestQueueForHeaderPoll:);
 }
 
--(id)         initWithURL:(NSURL *)URLIn
-               targetPath:(NSString *)targetPathIn
+-(id)initWithDownloadable:(id<AFPDownloadable>)downloadableIn
                 observers:(NSSet *)observersIn
             fileSizeCache:(NSMutableDictionary *)sizeCacheIn
 requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
-    NSAssert(URLIn,        NSInvalidArgumentException);
-    NSAssert(targetPathIn, NSInvalidArgumentException);
+    self = [self initWithURL:downloadableIn.remoteURL
+                  targetPath:downloadableIn.localFilePath
+                   observers:observersIn
+               fileSizeCache:sizeCacheIn
+   requestQueueForHeaderPoll:queueIn];
 
-    self = [self initWithURL:URLIn];
+    return self;
+}
+
+-(id)initWithURL:(NSURL *)urlIn
+                   targetPath:(NSString *)targetPathIn
+                    observers:(NSSet *)observersIn
+                fileSizeCache:(NSMutableDictionary *)sizeCacheIn
+    requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
+{
+    NSAssert(urlIn, NSInvalidArgumentException);
+    NSAssert(targetPathIn,       NSInvalidArgumentException);
+
+    self = [self initWithURL:urlIn];
 
     if(self)
     {
-        localFilePath = [targetPathIn retain];
-        sizeCache     = [sizeCacheIn retain];
-        dataBuffer    = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
+        localFilePath     = [targetPathIn retain];
+        expectedSizeCache = [sizeCacheIn retain];
+        dataBuffer        = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
         if(observersIn) [self addObservers:[observersIn allObjects]];
 
         [self updateReceivedBytesFromFile];
 
-        NSNumber *expectedSizeNumber = (NSNumber *) [sizeCache objectForKey:[URLIn absoluteString]];
+        NSNumber *expectedSizeNumber = (NSNumber *) [expectedSizeCache objectForKey:[urlIn absoluteString]];
         if (expectedSizeNumber)
         {
-            //[self notifyObservers:AFRequestEventWillPollSize parameters:self, NULL];
             self.expectedBytes = [expectedSizeNumber intValue];
-            //[self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
         }
 
-        if(queueIn)
-        {
-            [self notifyObservers:AFRequestEventWillPollSize parameters:self,NULL];
-
-            headerRequest = [[AFHeaderRequest alloc] initWithURL:URLIn endpoint:self];
-            [queueIn handleRequest:headerRequest];
-            [headerRequest release];
-        }
+        [self beginPollSize:queueIn];
     }
     return self;
 }
 
-+(NSString*)createUniqueKeyFromURL:(NSURL*)URLIn localFilePath:(NSString*)localFilePathIn
+-(void)beginPollSize:(AFRequestQueue*)queueIn
 {
-    return [NSString stringWithFormat:@"%@¦%@", [URLIn absoluteString], localFilePathIn];
+    if(queueIn)
+    {
+        [self notifyObservers:AFRequestEventWillPollSize parameters:self,NULL];
+
+        pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:self.URL endpoint:self];
+        [queueIn handleRequest:pollSizeRequest];
+        [pollSizeRequest release];
+    }
 }
 
-+(void)clearRequestPool { [uniqueRequestPool removeAllObjects]; }
-
-+(BOOL)sizePolledForAllPooledRequests
+-(void)request:(AFRequest*)request returnedWithData:(id)header
 {
-    @synchronized (uniqueRequestPool)
-    {for (NSString *curRequestKey in uniqueRequestPool)if (((AFDownloadRequest *) [uniqueRequestPool objectForKey:curRequestKey]).expectedBytes == -1) return NO;}
-    return YES;
+    AFLogPosition();
+    NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
+
+    AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+    [self didPollSize:rangeInfo->contentTotal];
+    free(rangeInfo);
 }
 
--(NSString*)uniqueKey
+-(void)didPollSize:(int)sizeIn
 {
-    return [AFDownloadRequest createUniqueKeyFromURL:self.URL localFilePath:self.localFilePath];
+    self.expectedBytes = sizeIn;
+    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
 
-- (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
+-(NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
     AFLogPosition();
 
-    [super willSendURLRequest:requestIn];
+    requestIn = [super willSendURLRequest:requestIn];
 
     [self updateReceivedBytesFromFile];
 
@@ -141,7 +127,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     return requestIn;
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
+-(void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
     AFLogPosition();
 
@@ -175,7 +161,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
             {
                 AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(headers);
                 NSRange      range     = rangeInfo->contentRange;
-                NSUInteger   total     = rangeInfo->contentTotal;
+                //NSUInteger   total     = rangeInfo->contentTotal;
                 free(rangeInfo);
 
                 if(self.expectedBytes != rangeInfo->contentTotal)
@@ -217,9 +203,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     [super received:dataIn];
 
-    [fileHandle writeData:dataIn];
+#if APPLICATION_BUFFERING_ENABLED
 
-    /*
     if ([dataIn length] > DATA_BUFFER_LENGTH) //It's a large chunk of data, worth writing immediately
     {
         [fileHandle writeData:dataBuffer];
@@ -242,21 +227,30 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
             dataBufferPosition += [dataIn length];
         }
     }
-    */
+
+#else
+
+    [fileHandle writeData:dataIn];
+
+#endif
+
 }
 
 - (NSString *)actionDescription { return @"Downloading file"; }
 
 - (void)didFinish;
 {
-    /*
+
+#if APPLICATION_BUFFERING_ENABLED
+
     if (dataBufferPosition > 0)
     {
         NSData *finalData = [[NSData alloc] initWithBytes:[dataBuffer bytes] length:dataBufferPosition];
         [fileHandle writeData:finalData];
         [finalData release];
     }
-    */
+
+#endif
 
     [self closeHandleSafely];
 
@@ -290,35 +284,19 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 {
     [super setExpectedBytes:expectedBytesIn];
 
-    NSString
-            *expectedBytesString = [[NSNumber numberWithInt:expectedBytesIn] stringValue],
-            *uniqueKey           = self.uniqueKey;
+    NSString *expectedBytesString = [[NSNumber numberWithInt:expectedBytesIn] stringValue];
 
-    [sizeCache setObject:expectedBytesString forKey:uniqueKey];
-}
-
-
-- (void)request:(AFRequest*)request returnedWithData:(id)header
-{
-    AFLogPosition();
-    NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
-
-    AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
-    self.expectedBytes = rangeInfo->contentTotal;
-    free(rangeInfo);
-
-    [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
+    [expectedSizeCache setObject:expectedBytesString forKey:self.localFilePath];
 }
 
 - (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
-    NSAssert(request == headerRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
+    NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
     self.error = errorIn;
 
-    NSString* uniqueKey = self.uniqueKey;
-    [sizeCache setObject:SIZE_CACHE_ERROR forKey:uniqueKey];
+    [expectedSizeCache setObject:SIZE_CACHE_ERROR forKey:self.localFilePath];
     [self setState:AFRequestStateFailed];
 }
 
@@ -357,7 +335,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)dealloc
 {
-    [sizeCache          release];
+    [expectedSizeCache release];
     [numberFormatter    release];
     [localFilePath      release];
     [dataBuffer         release];

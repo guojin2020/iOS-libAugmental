@@ -17,6 +17,7 @@
  necessary server call to get the real information for that object and update it asynchronously. When it does so, an
  objectEvent will inform observing users of that object.
  */
+DEPRECATED_ATTRIBUTE
 @interface AFObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint>
 {
     NSMutableDictionary *cache;

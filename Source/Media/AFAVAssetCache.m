@@ -9,11 +9,11 @@
 
 @implementation AFAVAssetCache
 
-static AFAVAssetCache* sharedInstance;
+static AFAVAssetCache*defaultCache;
 
 +(AFAVAssetCache*)sharedInstance
 {
-    return sharedInstance ?: (sharedInstance = [[AFAVAssetCache alloc] init]);
+    return defaultCache ?: (defaultCache = [[AFAVAssetCache alloc] init]);
 }
 
 -(id)init

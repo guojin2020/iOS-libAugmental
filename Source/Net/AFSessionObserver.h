@@ -3,6 +3,7 @@
 
 @class AFSession;
 
+DEPRECATED_ATTRIBUTE
 @protocol AFSessionObserver
 
 @optional

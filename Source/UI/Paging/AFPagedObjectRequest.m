@@ -61,7 +61,7 @@
     }
     //#endif
 
-    //[callbackObject performSelector:callbackSelector withObject:resultsPage];
+    //[endpoint performSelector:callbackSelector withObject:resultsPage];
 }
 
 - (NSString *)actionDescription

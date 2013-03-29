@@ -1,13 +1,13 @@
 #import "AFStringNotEmptyValidator.h"
 
-static AFStringNotEmptyValidator *sharedInstance = nil;
+static AFStringNotEmptyValidator *defaultCache = nil;
 
 @implementation AFStringNotEmptyValidator
 
 + (NSObject <AFValidator> *)sharedInstance
 {
-    if (!sharedInstance) sharedInstance = [[AFStringNotEmptyValidator alloc] init];
-    return sharedInstance;
+    if (!defaultCache) defaultCache = [[AFStringNotEmptyValidator alloc] init];
+    return defaultCache;
 }
 
 - (BOOL)isValid:(NSObject *)testObject

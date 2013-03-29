@@ -2,6 +2,7 @@
 #import "AFObject.h"
 #import "AFRequestEndpoint.h"
 
+DEPRECATED_ATTRIBUTE
 @interface AFWriteableObject : AFObject
 {}
 

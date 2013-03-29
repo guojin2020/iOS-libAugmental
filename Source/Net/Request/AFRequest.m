@@ -2,7 +2,6 @@
 #import "AFObservable.h"
 #import "AFRequest.h"
 #import "AFRequest+Protected.h"
-#import "AFFileUtils.h"
 #import "AFParseHTTPContentRange.h"
 
 SEL
@@ -22,8 +21,12 @@ SEL
         receivedBytes,
         queuePosition;
 
+	NSDictionary *httpHeader;
+
     AFRequestState state;
 }
+
+-(NSDictionary*)httpHeader { return httpHeader; }
 
 +(void)initialize
 {
@@ -39,7 +42,7 @@ SEL
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;
 
--(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn
+-(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn DEPRECATED_ATTRIBUTE
 {
     NSAssert(URLIn, NSInvalidArgumentException);
 
@@ -58,7 +61,8 @@ SEL
     self = [self init];
     if( self )
     {
-        URL = [URLIn retain];
+        URL         = [URLIn retain];
+	    httpHeader  = NULL;
     }
     return self;
 }
@@ -113,13 +117,15 @@ SEL
     return ( responseCode >= 200 ) && ( responseCode < 300 );
 }
 
-- (void)willReceiveWithHeaders:(NSDictionary *)header responseCode:(int)responseCodeIn
+- (void)willReceiveWithHeaders:(NSDictionary *)httpHeaderIn responseCode:(int)responseCodeIn
 {
     responseCode = responseCodeIn;
 
+	httpHeader = [httpHeaderIn retain];
+
     if([self isSuccessHTTPResponse])
     {
-        AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
+        AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(httpHeaderIn);
 
         self.expectedBytes = rangeInfo->contentTotal;
         self.state = AFRequestStateInProcess;
@@ -197,7 +203,8 @@ SEL
 
 -(void)dealloc
 {
-    [_error              release];
+	[httpHeader release];
+    [_error             release];
     [numberFormatter    release];
     [connection         release];
     [URL                release];

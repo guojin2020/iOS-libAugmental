@@ -67,14 +67,18 @@ static NSUserDefaults *defaults;
 
 - (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey
 {
-    if(![anObject isKindOfClass:[NSString class]])  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+    if(!([anObject isKindOfClass:[NSString class]] ||
+		 [anObject isKindOfClass:[NSNumber class]]))  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+
     [dictionary setObject:anObject forKey:aKey];
 }
 
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
 {
-    if(![obj isKindOfClass:[NSString class]])       [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
-    [dictionary setObject:obj forKeyedSubscript:key];
+	if(!([obj isKindOfClass:[NSString class]] ||
+	     [obj isKindOfClass:[NSNumber class]]))  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+
+	[dictionary setObject:obj forKeyedSubscript:key];
 }
 
 - (id)objectForKey:(id)aKey         { return [dictionary objectForKey:aKey]; }

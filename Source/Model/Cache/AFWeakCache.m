@@ -1,11 +1,6 @@
-//
-// Created by Chris Hatton on 05/11/2012.
-// Contact: christopherhattonuk@gmail.com
-//
 
 #import "AFWeakCache.h"
 #import "AFObject.h"
-#import "AFObservable.h"
 #import "AFLogger.h"
 
 @implementation AFWeakCache

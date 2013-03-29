@@ -1,17 +1,9 @@
-//
-//  iOS_libAugmentalTest.m
-//  iOS-libAugmental-test
-//
-//  Created by Chris Hatton on 14/10/2012.
-//
-//
 
 #import "iOS_libAugmentalTest.h"
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
 #import "AFSession.h"
 #import "TestDownloadRequestObserver.h"
-#import "AFUtil.h"
 #import "AFFileUtils.h"
 
 @implementation iOS_libAugmentalTest
