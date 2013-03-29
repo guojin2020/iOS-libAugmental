@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09C62F0D162ADF5B00CC6B73"
-               BuildableName = "iOS-libAugmentalTest.octest"
+               BuildableName = "iOS-libAugmentalTest"
                BlueprintName = "iOS-libAugmentalTest"
                ReferencedContainer = "container:iOS-libAugmental.xcodeproj">
             </BuildableReference>
