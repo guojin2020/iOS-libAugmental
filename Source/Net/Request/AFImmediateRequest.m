@@ -1,6 +1,5 @@
 
 #import "AFImmediateRequest.h"
-
 #import "AFRequestEndpoint.h"
 
 @implementation AFImmediateRequest
@@ -8,36 +7,46 @@
 -(id)initWithURL:(NSURL *)URLIn
         endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
-    NSAssert(endpointIn, NSInvalidArgumentException );
+    NSAssert( endpointIn, NSInvalidArgumentException );
+    [self release];
 
-    if ((self = [super initWithURL:URLIn]))
+    self = [[AFEndpointImmediateRequest alloc] initWithURL:URLIn
+                                                  endpoint:endpointIn];
+    if(self)
     {
-        endpoint           = [endpointIn retain];
-        responseDataBuffer = [[NSMutableData data] retain];
+        [self commonInit];
     }
     return self;
 }
 
 -(id)initWithURL:(NSURL *)URLIn
-        postData:(NSData *)postDataIn
-		endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
+         handler:(ResponseHandler)endpointIn
 {
-    self = [self initWithURL:URLIn endpoint:endpointIn];
-    if( self )
+    NSAssert( endpointIn, NSInvalidArgumentException );
+    [self release];
+
+    self = [[AFBlocksImmediateRequest alloc] initWithURL:URLIn
+                                                endpoint:endpointIn];
+    if(self)
     {
-        postData = [postDataIn retain];
+        [self commonInit];
     }
     return self;
+}
+
+-(void)commonInit
+{
+    responseDataBuffer = [[NSMutableData data] retain];
 }
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
     requestIn = [super willSendURLRequest:requestIn];
 
-    if (postData)
+    if (_postData)
     {
         [requestIn setHTTPMethod:@"POST"];
-        [requestIn setHTTPBody:postData];
+        [requestIn setHTTPBody:_postData];
     }
     return requestIn;
 }
@@ -55,7 +64,34 @@
 }
 
 - (NSString *)actionDescription
-{return @"Getting file";}
+{
+    return @"Getting file";
+}
+
+- (void)dealloc
+{
+    [responseDataBuffer release];
+    self.postData = nil;
+    [super dealloc];
+}
+
+@end
+
+@implementation AFEndpointImmediateRequest
+{
+    NSObject<AFRequestEndpoint> *endpoint;
+}
+
+-(id)initWithURL:(NSURL*)URLIn
+        endpoint:(NSObject<AFRequestEndpoint>*)endpointIn
+{
+    self = [super initWithURL:URLIn];
+    if(self)
+    {
+        endpoint = [endpointIn retain];
+    }
+    return self;
+}
 
 - (void)didFinish
 {
@@ -64,13 +100,35 @@
     [endpoint request:self returnedWithData:responseDataBuffer];
 }
 
-- (void)dealloc
+-(void)dealloc
 {
-    [endpoint           release];
-    [responseDataBuffer release];
-    [postData           release];
-
+    [endpoint release];
     [super dealloc];
+}
+
+@end
+
+@implementation AFBlocksImmediateRequest
+{
+    ResponseHandler endpoint;
+}
+
+-(id)initWithURL:(NSURL*)URLIn
+        endpoint:(ResponseHandler)endpointIn
+{
+    self = [super initWithURL:URLIn];
+    if(self)
+    {
+        endpoint = endpointIn;
+    }
+    return self;
+}
+
+- (void)didFinish
+{
+    [super didFinish];
+
+    endpoint( responseDataBuffer );
 }
 
 @end

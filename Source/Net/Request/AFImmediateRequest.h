@@ -2,20 +2,27 @@
 
 #import "AFRequest.h"
 
+typedef void (^ResponseHandler)(NSData*);
+
 @protocol AFRequestEndpoint;
 
 @interface AFImmediateRequest : AFRequest
 {
-    NSObject<AFRequestEndpoint> *endpoint;
-    NSMutableData               *responseDataBuffer;
-    NSData                      *postData;
+    NSMutableData *responseDataBuffer;
 }
 
 -(id)initWithURL:(NSURL *)URLIn
-        endpoint:(NSObject<AFRequestEndpoint> *)endpoint;
+        endpoint:(NSObject<AFRequestEndpoint>*)endpoint;
 
 -(id)initWithURL:(NSURL *)URLIn
-        postData:(NSData *)postDataIn
-        endpoint:(NSObject<AFRequestEndpoint> *)endpoint;
+         handler:(ResponseHandler)responseHandler;
 
+@property (nonatomic,retain) NSData* postData;
+
+@end
+
+@interface AFEndpointImmediateRequest : AFImmediateRequest
+@end
+
+@interface AFBlocksImmediateRequest : AFImmediateRequest
 @end
