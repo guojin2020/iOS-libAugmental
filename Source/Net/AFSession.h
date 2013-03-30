@@ -64,6 +64,8 @@
 
 - (void)removeObserver:(NSObject <AFSessionObserver> *)sessionObserver;
 
+- (void)dumpAllCookies;
+
 //-(void)requestAccepted:(AFRequest*)request;
 
 + (AFSession *)sharedSession;

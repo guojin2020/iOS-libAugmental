@@ -2,6 +2,7 @@
 #import "AFRequestQueue.h"
 
 #import "AFPerformSelectorOperation.h"
+#import "AFHeaderRequest.h"
 #import "AFLogger.h"
 
 @interface AFRequestQueue ()

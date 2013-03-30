@@ -8,8 +8,7 @@
         endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
     NSAssert( endpointIn, NSInvalidArgumentException );
-
-    [self release]; // Class cluster pattern, veto this allocation and replace with subclass
+    [self release];
 
     self = [[AFEndpointImmediateRequest alloc] initWithURL:URLIn
                                                   endpoint:endpointIn];
@@ -27,7 +26,7 @@
     [self release];
 
     self = [[AFBlocksImmediateRequest alloc] initWithURL:URLIn
-                                                handler:endpointIn];
+                                                endpoint:endpointIn];
     if(self)
     {
         [self commonInit];
@@ -101,13 +100,6 @@
     [endpoint request:self returnedWithData:responseDataBuffer];
 }
 
-- (void)didFail:(NSError *)error
-{
-	[super didFail:error];
-
-	[endpoint request:self returnedWithData:NULL];
-}
-
 -(void)dealloc
 {
     [endpoint release];
@@ -131,14 +123,6 @@
     }
     return self;
 }
-
-- (void)didFail:(NSError *)error
-{
-	[super didFail:error];
-
-	endpoint( NULL );
-}
-
 
 - (void)didFinish
 {

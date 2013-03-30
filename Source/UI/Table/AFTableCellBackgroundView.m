@@ -82,6 +82,7 @@ static float defaultBorderWidth = -1;
         CGFloat minx = CGRectGetMinX(rect) , midx = CGRectGetMidX(rect), maxx = CGRectGetMaxX(rect) ;
         CGFloat miny = CGRectGetMinY(rect) , maxy = CGRectGetMaxY(rect) ;
         minx = minx + 1;
+        miny = miny ;
 		
         maxx = maxx - 1;
         maxy = maxy - 1;
