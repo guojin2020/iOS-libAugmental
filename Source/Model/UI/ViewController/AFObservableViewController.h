@@ -12,7 +12,7 @@
 
 @interface AFObservableViewController : UIViewController
 {
-    AFObservable *object;
+    AFObservable *observableObject;
 }
 
 - (id)initWithObservable:(AFObservable *)objectIn;

@@ -15,18 +15,20 @@
 {
     if ((self = [self init]))
     {
-        object = [objectIn retain];
+        observableObject = [objectIn retain];
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [object release];
+    [observableObject release];
     [super dealloc];
 }
 
 - (AFObservable *)observableObject
-{return object;}
+{
+    return observableObject;
+}
 
 @end

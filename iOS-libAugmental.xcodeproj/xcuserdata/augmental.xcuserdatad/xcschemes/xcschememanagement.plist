@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>-[iOS_libAugmentalTest testDownloadRequest].xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
-		</dict>
 		<key>iOS-libAugmental copy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,11 +13,6 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
-		</dict>
-		<key>iOS-libAugmentalTest.xcscheme</key>
-		<dict>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>test.xcscheme</key>
 		<dict>

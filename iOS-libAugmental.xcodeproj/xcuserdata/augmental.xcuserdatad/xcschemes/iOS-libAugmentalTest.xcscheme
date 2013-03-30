@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0450"
+   LastUpgradeVersion = "0460"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09C62F0D162ADF5B00CC6B73"
-               BuildableName = "iOS-libAugmentalTest"
+               BuildableName = "iOS-libAugmentalTest.octest"
                BlueprintName = "iOS-libAugmentalTest"
                ReferencedContainer = "container:iOS-libAugmental.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "09C62F0D162ADF5B00CC6B73"
-               BuildableName = "iOS-libAugmentalTest"
+               BuildableName = "iOS-libAugmentalTest.octest"
                BlueprintName = "iOS-libAugmentalTest"
                ReferencedContainer = "container:iOS-libAugmental.xcodeproj">
             </BuildableReference>

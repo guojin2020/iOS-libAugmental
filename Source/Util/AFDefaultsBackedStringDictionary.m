@@ -6,7 +6,7 @@
 #import "AFDefaultsBackedStringDictionary.h"
 #import "AFMethodBlockedException.h"
 
-static NSString *INVALID_ARGUMENT_REASON = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
+const NSString *INVALID_ARGUMENT_REASON = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 
 static NSUserDefaults *defaults;
 
