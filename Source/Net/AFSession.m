@@ -129,16 +129,6 @@ static AFSession *sharedSession = nil;
     //[self dumpAllCookies]; //For debugging if necessary
 }
 
-- (void)dumpAllCookies
-{
-    NSArray           *allCookies = [cookieStore cookies];
-    NSDictionary      *cookieProperties;
-    for (NSHTTPCookie *currentCookie in allCookies)
-    {
-        cookieProperties = [currentCookie properties];
-    }
-}
-
 - (void)setState:(AFSessionState)newState
 {
     if (newState != state)

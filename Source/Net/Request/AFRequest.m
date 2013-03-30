@@ -4,15 +4,7 @@
 #import "AFRequest+Protected.h"
 #import "AFParseHTTPContentRange.h"
 
-SEL
-    AFRequestEventStarted,
-    AFRequestEventProgressUpdated,
-    AFRequestEventFinished,
-    AFRequestEventCancel,
-    AFRequestEventQueued,
-    AFRequestEventWillPollSize,
-    AFRequestEventDidPollSize,
-    AFRequestEventFailed;
+
 
 @implementation AFRequest
 {
@@ -190,7 +182,6 @@ SEL
 }
 
 - (NSString*) actionDescription { return nil;      }
-- (int)       attempts          { return attempts; }
 
 - (int) receivedBytes { return receivedBytes; }
 - (void)setReceivedBytes:(int)receivedBytesIn

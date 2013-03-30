@@ -49,7 +49,7 @@ DEPRECATED_ATTRIBUTE
 /**
  Efficiency method to allow multiple objects to be retrieved in a single server request.
  */
-- (NSArray *)objectsOfType:(AFObject*)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
+- (NSArray *)objectsOfType:(Class)objectClass withPrimaryKeys:(NSArray *)primaryKeys;
 
 /**
  Returns true if an object of the given type and primary key is already held in the local cacheImage, false otherwise.
