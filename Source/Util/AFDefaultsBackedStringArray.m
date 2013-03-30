@@ -5,7 +5,7 @@
 
 #import "AFDefaultsBackedStringArray.h"
 
-const NSString *INVALID_ARGUMENT_REASON = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
+const NSString *AFDefaultsBackedArrayInvalidArgumentReason = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 
 static NSUserDefaults *defaults;
 
@@ -57,7 +57,7 @@ static NSUserDefaults *defaults;
 
 - (void)addObject:(id)anObject
 {
-    if(![anObject isKindOfClass:[NSString class]])  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+    if(![anObject isKindOfClass:[NSString class]]) [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedArrayInvalidArgumentReason];
     [array addObject:anObject];
 }
 
