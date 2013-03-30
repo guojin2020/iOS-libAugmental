@@ -42,7 +42,7 @@ SEL
 
 @synthesize attempts, requiresLogin, URL, state, connection = connection;
 
--(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn DEPRECATED_ATTRIBUTE
+-(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn /* DEPRECATED_ATTRIBUTE */
 {
     NSAssert(URLIn, NSInvalidArgumentException);
 

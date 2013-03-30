@@ -40,7 +40,7 @@ extern SEL
 
 - (NSDictionary *)httpHeader;
 
-- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn DEPRECATED_ATTRIBUTE;
+- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn /* DEPRECATED_ATTRIBUTE */;
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 

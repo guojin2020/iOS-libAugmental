@@ -114,7 +114,7 @@
 }
 
 -(id)initWithURL:(NSURL*)URLIn
-        endpoint:(ResponseHandler)endpointIn
+         handler:(ResponseHandler)endpointIn
 {
     self = [super initWithURL:URLIn];
     if(self)
