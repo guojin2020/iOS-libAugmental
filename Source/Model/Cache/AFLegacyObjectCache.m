@@ -7,6 +7,7 @@
 #import "AFUtil.h"
 #import "AFEnvironment.h"
 #import "AFObjectRequest.h"
+#import "AFLogger.h"
 
 @implementation AFLegacyObjectCache
 
@@ -16,7 +17,6 @@
     {
         cache           = [[NSMutableDictionary alloc] init];
         numberFormatter = [[NSNumberFormatter alloc] init];
-        //[[AFAppDelegate appEventManager] addObserver:self]; //FIX!!
     }
     return self;
 }
@@ -106,6 +106,11 @@
     [[AFSession sharedSession] handleRequest:request];
     [request release];
     return request;
+}
+
+- (void)requestFailed:(AFRequest*)request withError:(NSError*)error
+{
+    
 }
 
 - (AFObjectRequest *)deleteObject:(AFObject*)object endpoint:(NSObject <AFRequestEndpoint> *)endpoint

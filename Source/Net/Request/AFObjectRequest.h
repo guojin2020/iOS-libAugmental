@@ -7,7 +7,7 @@
 
 #define SHOW_SERVER_DEBUG
 
-DEPRECATED_ATTRIBUTE
+/* DEPRECATED_ATTRIBUTE */
 @interface AFObjectRequest : AFJSONRequest
 {
 }

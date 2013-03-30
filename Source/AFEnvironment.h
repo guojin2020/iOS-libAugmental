@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-//DEPRECATED_ATTRIBUTE
+/* DEPRECATED_ATTRIBUTE */
 @interface AFEnvironment : NSObject
 {
 	NSURL* APIBaseURL;

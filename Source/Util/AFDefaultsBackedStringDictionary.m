@@ -6,7 +6,7 @@
 #import "AFDefaultsBackedStringDictionary.h"
 #import "AFMethodBlockedException.h"
 
-static NSString *INVALID_ARGUMENT_REASON = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
+const NSString *AFDefaultsBackedDictionaryInvalidArgumentReason = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 
 static NSUserDefaults *defaults;
 
@@ -68,7 +68,8 @@ static NSUserDefaults *defaults;
 - (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey
 {
     if(!([anObject isKindOfClass:[NSString class]] ||
-		 [anObject isKindOfClass:[NSNumber class]]))  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+		 [anObject isKindOfClass:[NSNumber class]]))
+        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
 
     [dictionary setObject:anObject forKey:aKey];
 }
@@ -76,7 +77,8 @@ static NSUserDefaults *defaults;
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
 {
 	if(!([obj isKindOfClass:[NSString class]] ||
-	     [obj isKindOfClass:[NSNumber class]]))  [NSException raise:NSInvalidArgumentException format:INVALID_ARGUMENT_REASON];
+	     [obj isKindOfClass:[NSNumber class]]))
+        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
 
 	[dictionary setObject:obj forKeyedSubscript:key];
 }

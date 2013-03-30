@@ -13,7 +13,7 @@
 @class AFObjectCache;
 @class AFEnvironment;
 
-DEPRECATED_ATTRIBUTE
+/* DEPRECATED_ATTRIBUTE */
 @interface AFSession : AFRequestQueue <AFSessionObserver, AFRequestEndpoint>
 {
     NSString            *username;

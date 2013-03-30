@@ -23,16 +23,6 @@ extern SEL
     AFRequestEventDidPollSize,
     AFRequestEventFailed;
 
-SEL
-	AFRequestEventStarted,
-	AFRequestEventProgressUpdated,
-	AFRequestEventFinished,
-	AFRequestEventCancel,
-	AFRequestEventQueued,
-	AFRequestEventWillPollSize,
-	AFRequestEventDidPollSize,
-	AFRequestEventFailed;
-
 @interface AFRequest : AFObservable
 {
     NSURL               *URL;
@@ -50,7 +40,7 @@ SEL
 
 - (NSDictionary *)httpHeader;
 
-- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn;
+- (id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn /* DEPRECATED_ATTRIBUTE */;
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn;
 
