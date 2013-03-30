@@ -159,7 +159,7 @@
 
 }
 
-- (NSArray *)objectsOfType:(AFObject*)objectClass withPrimaryKeys:(NSArray *)primaryKeys
+- (NSArray *)objectsOfType:(Class)objectClass withPrimaryKeys:(NSArray *)primaryKeys
 {
     NSMutableArray *objectsOut = [NSMutableArray array];
     int primaryKey;
