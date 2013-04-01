@@ -118,6 +118,8 @@ static CGSize cgSizeMax;
 	    textLayer = [[CATextLayer     alloc] init];
 	    maskLayer = [[CAGradientLayer alloc] init];
 
+	    textLayer.contentsScale = [[UIScreen mainScreen] scale];
+
 	    self.layer.anchorPoint = CGPointZero;
 	    textLayer.anchorPoint  = CGPointZero;
 	    maskLayer.anchorPoint  = CGPointZero;
