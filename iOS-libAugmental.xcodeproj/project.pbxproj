@@ -418,16 +418,26 @@
 		91C76C458D7412091BDB700E /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		91CD0F12E7F5A1B2F891D68D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91CFE7288593DE871232F922 /* CoreText.framework */; };
 		B03CA04DF43427A147C62A1E /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */; };
+		B03CA1DE50D4CC39B46ED21C /* NSObject+MKBlockAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA1A6F658F78E8EA50AD0 /* NSObject+MKBlockAdditions.h */; };
+		B03CA2D862D0EABAF0D0306E /* UIActionSheet+MKBlockAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA0338DC873CD3F9B9D2D /* UIActionSheet+MKBlockAdditions.h */; };
 		B03CA352639F7D368EEB5ACB /* TestDownloadRequestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA61E037F63E0919F9879 /* TestDownloadRequestObserver.m */; };
+		B03CA374E70B4122C2FCACF0 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */; };
 		B03CA45F94A118567B1AD7BC /* NSObject+SenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA7CBAEB9584BBB6C4A27 /* NSObject+SenTest.m */; };
 		B03CA4727D3AD56ABCB4BA8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA202EA01EA4743CB47A3 /* CoreGraphics.framework */; };
 		B03CA53343CEB901551B4AA6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097252D914A5F48800E75618 /* SystemConfiguration.framework */; };
+		B03CA64F27FC889CEAAB08CA /* MKBlockAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAE1FD78A6E18F930A95D /* MKBlockAdditions.h */; };
 		B03CA6B318568ACDC77BB57F /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */; };
 		B03CA873B170D408B49B9597 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CABA11409644EACA4B994 /* QuartzCore.framework */; };
+		B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */; };
+		B03CA9445A185265F6C8A362 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */; };
+		B03CA9933E999A577D479094 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */; };
 		B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
 		B03CABEE61FC1181BE3995B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
+		B03CAC36641ABA4FB652319C /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */; };
 		B03CAD18E68645B7B483DB69 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAFC3FA0039BC7D9CBB2A /* libxml2.dylib */; };
 		B03CAD48859F339A04B1C956 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */; };
+		B03CAD8B8409C0ED3B953606 /* UIAlertView+MKBlockAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA2C895250D4086C6934A /* UIAlertView+MKBlockAdditions.h */; };
+		B03CAFA63ED7EB46C80F34B5 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -725,10 +735,16 @@
 		75A4AC821485AB9000EBD4B0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		91CFE7288593DE871232F922 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		B03CA030861D5274FEAE80F6 /* CJSONSerializedData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializedData.h; sourceTree = "<group>"; };
+		B03CA0338DC873CD3F9B9D2D /* UIActionSheet+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActionSheet+MKBlockAdditions.h"; sourceTree = "<group>"; };
+		B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActionSheet+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		B03CA08B5E731989B9094E68 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		B03CA1A6F658F78E8EA50AD0 /* NSObject+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MKBlockAdditions.h"; sourceTree = "<group>"; };
 		B03CA202EA01EA4743CB47A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		B03CA22ECFF193EC72C43817 /* NSObject+SenTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SenTest.h"; sourceTree = "<group>"; };
+		B03CA2C895250D4086C6934A /* UIAlertView+MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+MKBlockAdditions.h"; sourceTree = "<group>"; };
 		B03CA39A1176128227F3AF37 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MKBlockAdditions.m"; sourceTree = "<group>"; };
+		B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+MKBlockAdditions.m"; sourceTree = "<group>"; };
 		B03CA61E037F63E0919F9879 /* TestDownloadRequestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDownloadRequestObserver.m; sourceTree = "<group>"; };
 		B03CA6BC7D80316536686AC2 /* CJSONSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerialization.h; sourceTree = "<group>"; };
 		B03CA741346D16FC348022A1 /* TestDownloadRequestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDownloadRequestObserver.h; sourceTree = "<group>"; };
@@ -742,6 +758,7 @@
 		B03CAC3CDA19157EF8F2813C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
 		B03CADB1DB86B732668F58BF /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
 		B03CADFFEB65C0359AC15524 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		B03CAE1FD78A6E18F930A95D /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
 		B03CAE991ECD6DB57BD0AAB7 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
 		B03CAF9AF70F847D7FC5D74C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -1067,6 +1084,7 @@
 				09E33ADE17075ECB00C3A37E /* UILabel+ShrinkToFit.h */,
 				09E33ADF17075ECB00C3A37E /* UILabel+ShrinkToFit.m */,
 				09E33AE017075ECB00C3A37E /* View */,
+				B03CAA116DAE04221CD7E2D9 /* Blocks */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1400,6 +1418,20 @@
 			path = Util;
 			sourceTree = "<group>";
 		};
+		B03CAA116DAE04221CD7E2D9 /* Blocks */ = {
+			isa = PBXGroup;
+			children = (
+				B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */,
+				B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */,
+				B03CA2C895250D4086C6934A /* UIAlertView+MKBlockAdditions.h */,
+				B03CA0338DC873CD3F9B9D2D /* UIActionSheet+MKBlockAdditions.h */,
+				B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */,
+				B03CA1A6F658F78E8EA50AD0 /* NSObject+MKBlockAdditions.h */,
+				B03CAE1FD78A6E18F930A95D /* MKBlockAdditions.h */,
+			);
+			path = Blocks;
+			sourceTree = "<group>";
+		};
 		B03CACC1575DDDF5BE314C50 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -1588,6 +1620,10 @@
 				09E340471707638400C3A37E /* AFValidatableValidator.h in Headers */,
 				09E340481707638400C3A37E /* AFValidator.h in Headers */,
 				09E340E41707693600C3A37E /* AFDrawingDelegableTableCellView.h in Headers */,
+				B03CAD8B8409C0ED3B953606 /* UIAlertView+MKBlockAdditions.h in Headers */,
+				B03CA2D862D0EABAF0D0306E /* UIActionSheet+MKBlockAdditions.h in Headers */,
+				B03CA1DE50D4CC39B46ED21C /* NSObject+MKBlockAdditions.h in Headers */,
+				B03CA64F27FC889CEAAB08CA /* MKBlockAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1805,6 +1841,9 @@
 				09E33FB01707634700C3A37E /* AFStringNotEmptyValidator.m in Sources */,
 				09E33FB11707634700C3A37E /* AFValidatableValidator.m in Sources */,
 				09E340E51707693600C3A37E /* AFDrawingDelegableTableCellView.m in Sources */,
+				B03CAFA63ED7EB46C80F34B5 /* NSObject+MKBlockAdditions.m in Sources */,
+				B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				B03CA374E70B4122C2FCACF0 /* UIAlertView+MKBlockAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1932,6 +1971,9 @@
 				09E33C9217075ECC00C3A37E /* AFStringLengthValidator.m in Sources */,
 				09E33C9517075ECC00C3A37E /* AFStringNotEmptyValidator.m in Sources */,
 				09E33C9917075ECC00C3A37E /* AFValidatableValidator.m in Sources */,
+				B03CA9933E999A577D479094 /* NSObject+MKBlockAdditions.m in Sources */,
+				B03CAC36641ABA4FB652319C /* UIActionSheet+MKBlockAdditions.m in Sources */,
+				B03CA9445A185265F6C8A362 /* UIAlertView+MKBlockAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
