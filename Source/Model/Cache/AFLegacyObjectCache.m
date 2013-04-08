@@ -214,7 +214,7 @@
             : @"Tried to make an object from a dictionary which had an invalid primaryKey");
 
     //Get the actual class for this model name
-    AFObject* objectClass = (AFObject*) [AFObjectHelper classForModelName:className];
+    Class objectClass = [AFObjectHelper classForModelName:className];
 
     //If the object is already in the cache, assume it has updated content and update our existing instance
     if ([self containsObjectOfType:objectClass withPrimaryKey:primaryKey])

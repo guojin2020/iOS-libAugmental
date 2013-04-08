@@ -5,7 +5,6 @@
 
 
 #import "AFSKProductRequest.h"
-#import "AFPSKProductIdProvider.h"
 #import "AFPSKProductConsumer.h"
 
 @implementation AFSKProductRequest

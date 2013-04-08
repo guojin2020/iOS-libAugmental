@@ -305,7 +305,6 @@
 		09E33FE61707638400C3A37E /* AFPDownloadable.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5B17075ECB00C3A37E /* AFPDownloadable.h */; };
 		09E33FE71707638400C3A37E /* AFPDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5C17075ECB00C3A37E /* AFPDownloadRequest.h */; };
 		09E33FE81707638400C3A37E /* AFPSKProductConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */; };
-		09E33FE91707638400C3A37E /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */; };
 		09E33FEA1707638400C3A37E /* AFSKProductFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */; };
 		09E33FEB1707638400C3A37E /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */; };
 		09E33FEC1707638400C3A37E /* AFSKProductFetchResponseFailed.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6417075ECB00C3A37E /* AFSKProductFetchResponseFailed.h */; };
@@ -559,7 +558,6 @@
 		09E33A5B17075ECB00C3A37E /* AFPDownloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPDownloadable.h; sourceTree = "<group>"; };
 		09E33A5C17075ECB00C3A37E /* AFPDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPDownloadRequest.h; sourceTree = "<group>"; };
 		09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPSKProductConsumer.h; sourceTree = "<group>"; };
-		09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPSKProductIdProvider.h; sourceTree = "<group>"; };
 		09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetcher.h; sourceTree = "<group>"; };
 		09E33A6117075ECB00C3A37E /* AFSKProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetcher.m; sourceTree = "<group>"; };
 		09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponse.h; sourceTree = "<group>"; };
@@ -1050,7 +1048,6 @@
 			isa = PBXGroup;
 			children = (
 				09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */,
-				09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */,
 				09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */,
 				09E33A6117075ECB00C3A37E /* AFSKProductFetcher.m */,
 				09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */,
@@ -1523,7 +1520,6 @@
 				09E33FE61707638400C3A37E /* AFPDownloadable.h in Headers */,
 				09E33FE71707638400C3A37E /* AFPDownloadRequest.h in Headers */,
 				09E33FE81707638400C3A37E /* AFPSKProductConsumer.h in Headers */,
-				09E33FE91707638400C3A37E /* AFPSKProductIdProvider.h in Headers */,
 				09E33FEA1707638400C3A37E /* AFSKProductFetcher.h in Headers */,
 				09E33FEB1707638400C3A37E /* AFSKProductFetchResponse.h in Headers */,
 				09E33FEC1707638400C3A37E /* AFSKProductFetchResponseFailed.h in Headers */,
