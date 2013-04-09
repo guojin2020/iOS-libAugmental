@@ -43,7 +43,7 @@ extern SEL
 //-(id)initWithPrimaryKey:(int)primaryKeyIn;
 
 /**
- This is where initialisation common to the init and initWithCoder paths should go.
+ This is where initialisation common to the initWithObject: and initWithCoder paths should go.
  */
 - (void)commonInit;
 

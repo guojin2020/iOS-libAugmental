@@ -49,7 +49,7 @@ static char base64EncodingTable[64] = {
 
     /*
      NSString* versionString = [[[UIDevice currentDevice] systemVersion] substringToIndex:3];
-     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] initWithObject:];
      NSNumber* versionNumber = [numberFormatter numberFromString:versionString];
      [numberFormatter release];
      BOOL isLater = [versionNumber floatValue]>=3.2;

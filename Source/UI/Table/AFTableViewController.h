@@ -27,7 +27,7 @@
 }
 
 /*
- * Convenience initialiser, equivalent to doing [init] then performing self.table = tableIn;
+ * Convenience initialiser, equivalent to doing [initWithObject:] then performing self.table = tableIn;
  */
 
 -(id)initWithStyle:(UITableViewStyle)tableStyleIn;

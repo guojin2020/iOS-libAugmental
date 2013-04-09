@@ -24,7 +24,7 @@ static AFEnvironment* devEnvironment	 = nil;
 
 -(id)initWithAPI:(NSURL*)APIBaseURLIn productImageBaseURL:(NSURL*)productImageBaseURLIn paypalNotificationURL:(NSURL*)paypalNotificationURLIn
 {
-	NSAssert(APIBaseURLIn && productImageBaseURLIn && paypalNotificationURLIn,@"Invalid parameters to init Environment");
+	NSAssert(APIBaseURLIn && productImageBaseURLIn && paypalNotificationURLIn,@"Invalid parameters to initWithObject: Environment");
 	
 	if((self = [super init]))
 	{
