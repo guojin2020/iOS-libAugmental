@@ -24,6 +24,6 @@
 -(void)lock;
 -(void)unlock;
 
-- (AFSKProductRequest*)requestProductForConsumer:(id<AFPSKProductConsumer>)consumer;
+- (AFSKProductRequest*)requestProductForConsumer:(NSObject<AFPSKProductConsumer>*)consumer;
 
 @end

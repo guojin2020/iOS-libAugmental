@@ -173,7 +173,7 @@
     return objectsOut;
 }
 
-- (BOOL)containsObjectOfType:(id )objectClass withPrimaryKey:(int)primaryKey
+- (BOOL)containsObjectOfType:(Class)objectClass withPrimaryKey:(int)primaryKey
 {
     NSAssert(primaryKey > 0, @"Invalid primary key calling %@", NSStringFromSelector(_cmd));
 
@@ -251,7 +251,7 @@
     NSMutableArray *objects = [[NSMutableArray alloc] init];
     if (!objectDictionaries) return objects;
     NSMutableArray *objectsToSet = [[NSMutableArray alloc] init];
-    AFObject* objectClass;
+    Class objectClass;
     for (NSDictionary *objectDictionary in objectDictionaries)
     {
         if (objectDictionary && (id)objectDictionary != [NSNull null])
@@ -260,7 +260,7 @@
             if (className)
             {
                 AFObject* object;
-                objectClass = (AFObject*) [AFObjectHelper classForModelName:className];
+                objectClass = [AFObjectHelper classForModelName:className];
                 int primaryKey;
                 NSNumber *pkNumber = [objectDictionary objectForKey:@"pk"];
                 if (![pkNumber isKindOfClass:[NSNull class]])
@@ -356,12 +356,12 @@
 
 - (id)unarchiver:(NSKeyedUnarchiver *)unarchiver didDecodeObject:(id)object
 {
-    if (object && [object  isKindOfClass:[AFObject class]])
+    if (object && [object isKindOfClass:[AFObject class]])
     {
         int primaryKey = [((AFObject*) object) primaryKey];
-        if ([self containsObjectOfType:(AFObject*)[object class] withPrimaryKey:primaryKey])
+        if ([self containsObjectOfType:[object class] withPrimaryKey:primaryKey])
         {
-            return [self objectOfType:(AFObject*)[object class] withPrimaryKey:primaryKey];
+            return [self objectOfType:[object class] withPrimaryKey:primaryKey];
         }
         else
         {
