@@ -292,7 +292,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 - (void)requestFailed:(AFRequest *)request withError:(NSError*)errorIn
 {
     AFLogPosition();
-    NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
+    //NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
     self.error = errorIn;
 
