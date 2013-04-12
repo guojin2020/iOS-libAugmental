@@ -28,7 +28,7 @@ SEL
 
 -(NSDictionary*)httpHeader { return httpHeader; }
 
-+(void)initialize
++(void)load
 {
     AFRequestEventStarted          = @selector(requestStarted:);            //Params: AFRequest
     AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:);    //Params: AFRequest

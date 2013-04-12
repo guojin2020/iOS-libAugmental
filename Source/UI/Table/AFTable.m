@@ -8,7 +8,7 @@ SEL AFTableEventEdited;
 
 @implementation AFTable
 
-+(void)initialize
++(void)load
 {
     AFTableEventEdited = @selector(handleTableEdited:); //Table
 }

@@ -11,7 +11,7 @@ SEL AFTableSectionEventEdited;
 
 @implementation AFTableSection
 
-+(void)initialize
++(void)load
 {
     AFTableSectionEventEdited = @selector(handleTableSectionEdited:); //TableSection
 }
