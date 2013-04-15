@@ -81,13 +81,13 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
-    [self performSelectorOnCommonBackgroundThread:@selector(startConnectionMainThreadInternal:) withObject:request];
+	dispatch_block_t block = ^
+	{
+		[self startConnectionMainThreadInternal:request];
+	};
 
-    /*
-    [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
-                           withObject:request
-                        waitUntilDone:NO]; //modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]
-                                             */
+	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block );
+
     return YES;
 }
 

@@ -15,14 +15,13 @@
 
 - (void)session:(AFSession *)changedSession becameOffline:(BOOL)offlineState
 {
-    if (offlineState)
-    {
-        [self performSelectorOnMainThread:@selector(showOfflineView) withObject:nil waitUntilDone:NO];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(hideOfflineView) withObject:nil waitUntilDone:NO];
-    }
+	dispatch_block_t block = ^
+	{
+		if(offlineState) [self showOfflineView];
+		else             [self hideOfflineView];
+	};
+
+	dispatch_async(dispatch_get_main_queue(), block );
 }
 
 - (void)showOfflineView

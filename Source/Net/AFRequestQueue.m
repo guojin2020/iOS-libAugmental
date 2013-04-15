@@ -92,10 +92,13 @@
     if(targetHandler) return [targetHandler handleRequest:request];
     else
     {
-        [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
-                               withObject:request
-                            waitUntilDone:NO
-                                    modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]];
+	    dispatch_block_t block = ^
+	    {
+		    [self startConnectionMainThreadInternal:request];
+	    };
+
+	    dispatch_async(dispatch_get_main_queue(), block);
+
         return YES;
     }
 }
@@ -119,6 +122,8 @@
     AFLogPosition();
 
 #ifdef BACKGROUND_HANDLING_ENABLED
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self handleRequestInternal:request]; });
+
     [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
     return YES;
 #else
