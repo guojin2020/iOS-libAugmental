@@ -124,7 +124,6 @@
 #ifdef BACKGROUND_HANDLING_ENABLED
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self handleRequestInternal:request]; });
 
-    [self performSelectorOnCommonBackgroundThread:@selector(handleRequestInternal:) withObject:request];
     return YES;
 #else
 		return [self handleRequestInternal:storeKitRequest];
