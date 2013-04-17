@@ -55,7 +55,7 @@ static NSString
 
 - (void)commonInit
 {
-    //eventManager  = [[AFObservable alloc] init];
+    //eventManager  = [[AFObservable alloc] initWithObject:];
     batchUpdating = NO;
     updateNeeded  = NO;
 }

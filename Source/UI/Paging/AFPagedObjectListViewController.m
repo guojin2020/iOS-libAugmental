@@ -134,7 +134,7 @@ static AFTableCell *resultsLoadingCell;
         [headerCell release];
 
         //Reload the table!
-        [(UITableView*)self.view performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+	    dispatch_async(dispatch_get_main_queue(), ^{ [(UITableView*)self.view reloadData]; });
 
         NSUInteger bottomIndexPath[] = {[resultsTable sectionCount] - 1, (NSUInteger) ([[resultsTable sectionAtIndex:[resultsTable sectionCount] - 1] cellCount] - 1)};
         NSUInteger topIndexPath[]    = {0, 0};

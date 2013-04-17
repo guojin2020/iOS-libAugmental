@@ -81,13 +81,13 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
-    [self performSelectorOnCommonBackgroundThread:@selector(startConnectionMainThreadInternal:) withObject:request];
+	dispatch_block_t block = ^
+	{
+		[self startConnectionInternal:request];
+	};
 
-    /*
-    [self performSelectorOnMainThread:@selector(startConnectionMainThreadInternal:)
-                           withObject:request
-                        waitUntilDone:NO]; //modes:[NSArray arrayWithObject:NSDefaultRunLoopMode]
-                                             */
+	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block );
+
     return YES;
 }
 
@@ -96,7 +96,7 @@ static AFSession *sharedSession = nil;
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
         //NSLog(@"Retrying %i of %i",requestIn.attempts,REQUEST_RETRY_LIMIT);
-        [self startConnectionMainThreadInternal:requestIn];
+	    [self startConnectionInternal:requestIn];
     }
     else
     {
@@ -131,12 +131,14 @@ static AFSession *sharedSession = nil;
 
 - (void)dumpAllCookies
 {
+	/*
     NSArray           *allCookies = [cookieStore cookies];
     NSDictionary      *cookieProperties;
     for (NSHTTPCookie *currentCookie in allCookies)
     {
         cookieProperties = [currentCookie properties];
     }
+    */
 }
 
 - (void)setState:(AFSessionState)newState

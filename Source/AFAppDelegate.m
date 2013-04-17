@@ -25,7 +25,7 @@ SEL
 
 @implementation AFAppDelegate
 
-+(void)initialize
++(void)load
 {
     AFEventAppSettingsLoaded        = @selector(handleAppSettingsLoaded);
     AFEventAppTerminating           = @selector(handleAppTerminating);

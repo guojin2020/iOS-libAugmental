@@ -9,8 +9,8 @@
 
 @interface AFSKProductRequest : NSObject
 
-@property(nonatomic, readonly) id<AFPSKProductConsumer> productConsumer;
+@property(nonatomic, readonly) NSObject<AFPSKProductConsumer>* productConsumer;
 
--(id)initWithConsumer:(id<AFPSKProductConsumer>)productConsumer;
+-(id)initWithConsumer:(NSObject<AFPSKProductConsumer>*)productConsumer;
 
 @end

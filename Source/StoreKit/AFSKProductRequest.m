@@ -5,17 +5,16 @@
 
 
 #import "AFSKProductRequest.h"
-#import "AFPSKProductIdProvider.h"
 #import "AFPSKProductConsumer.h"
 
 @implementation AFSKProductRequest
 {
-    id<AFPSKProductConsumer> productConsumer;
+    NSObject<AFPSKProductConsumer>* productConsumer;
 }
 
 @synthesize productConsumer;
 
--(id)initWithConsumer:(id<AFPSKProductConsumer>)productConsumerIn
+-(id)initWithConsumer:(NSObject<AFPSKProductConsumer>*)productConsumerIn
 {
     self = [self init];
     if(self)

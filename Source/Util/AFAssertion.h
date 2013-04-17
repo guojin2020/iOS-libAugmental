@@ -7,5 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define AFAssertMainThread()        NSAssert( [[NSThread currentThread] isMainThread], @"Only the main thread is allowed here!")
-#define AFAssertBackgroundThread()  NSAssert(![[NSThread currentThread] isMainThread], @"The main thread is not allowed here!" )
+#define AFAssertMainThread()        NSAssert( [NSThread isMainThread], @"Only the main thread is allowed here!")
+#define AFAssertBackgroundThread()  NSAssert(![NSThread isMainThread], @"The main thread is not allowed here!" )
+
+#define AFCAssertMainThread()        NSCAssert( [NSThread isMainThread], @"Only the main thread is allowed here!")
+#define AFCAssertBackgroundThread()  NSCAssert(![NSThread isMainThread], @"The main thread is not allowed here!" )

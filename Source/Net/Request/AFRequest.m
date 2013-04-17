@@ -3,6 +3,7 @@
 #import "AFRequest.h"
 #import "AFRequest+Protected.h"
 #import "AFParseHTTPContentRange.h"
+#import "AFAssertion.h"
 
 SEL
     AFRequestEventStarted,
@@ -28,7 +29,7 @@ SEL
 
 -(NSDictionary*)httpHeader { return httpHeader; }
 
-+(void)initialize
++(void)load
 {
     AFRequestEventStarted          = @selector(requestStarted:);            //Params: AFRequest
     AFRequestEventProgressUpdated  = @selector(requestProgressUpdated:);    //Params: AFRequest
@@ -119,6 +120,8 @@ SEL
 
 - (void)willReceiveWithHeaders:(NSDictionary *)httpHeaderIn responseCode:(int)responseCodeIn
 {
+	AFAssertBackgroundThread();
+
     responseCode = responseCodeIn;
 
 	httpHeader = [httpHeaderIn retain];
@@ -143,29 +146,39 @@ SEL
 
 - (void)requestWasQueuedAtPosition:(NSUInteger)queuePositionIn
 {
+	AFAssertBackgroundThread();
+
     queuePosition = queuePositionIn;
     self.state = AFRequestStateQueued;
 }
 
 - (void)received:(NSData *)dataIn
 {
+	AFAssertBackgroundThread();
+
     self.state = AFRequestStateInProcess;
     self.receivedBytes += [dataIn length];
 }
 
 - (void)didFinish
 {
+	AFAssertBackgroundThread();
+
     self.state = AFRequestStateFulfilled;
 }
 
 - (void)didFail:(NSError *)errorIn;
 {
+	AFAssertBackgroundThread();
+
     self.error = errorIn;
     self.state = AFRequestStateFailed;
 }
 
 - (void)cancel
 {
+	AFAssertBackgroundThread();
+
     self.state = AFRequestStateIdle;
     [connection cancel];
 }

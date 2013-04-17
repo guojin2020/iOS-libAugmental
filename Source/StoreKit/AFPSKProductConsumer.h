@@ -3,14 +3,14 @@
 // Contact: christopherhattonuk@gmail.com
 //
 
-#import "AFPSKProductIdProvider.h"
-
 @class AFSKProductFetchResponse;
 @class AFSKProductRequest;
 
-@protocol AFPSKProductConsumer <AFPSKProductIdProvider>
+@protocol AFPSKProductConsumer
 
 -(void)willSendRequest:(AFSKProductRequest*)request;
 -(void)didReceiveResponse:(AFSKProductFetchResponse*)result toRequest:(AFSKProductRequest*)request;
+
+@property(nonatomic,readonly) NSString* storeKitProductId;
 
 @end

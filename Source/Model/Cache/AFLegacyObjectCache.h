@@ -53,7 +53,7 @@
 /**
  Returns true if an object of the given type and primary key is already held in the local cache, false otherwise.
  */
-- (BOOL)containsObjectOfType:(AFObject*)objectClass withPrimaryKey:(int)primaryKey;
+- (BOOL)containsObjectOfType:(Class)objectClass withPrimaryKey:(int)primaryKey;
 
 /**
  Where AFObjects are acquired from the server by means other than a direct primary key reference (e.g. a server API call for name searching),

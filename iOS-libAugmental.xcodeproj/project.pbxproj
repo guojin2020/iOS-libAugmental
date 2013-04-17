@@ -305,7 +305,6 @@
 		09E33FE61707638400C3A37E /* AFPDownloadable.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5B17075ECB00C3A37E /* AFPDownloadable.h */; };
 		09E33FE71707638400C3A37E /* AFPDownloadRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5C17075ECB00C3A37E /* AFPDownloadRequest.h */; };
 		09E33FE81707638400C3A37E /* AFPSKProductConsumer.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */; };
-		09E33FE91707638400C3A37E /* AFPSKProductIdProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */; };
 		09E33FEA1707638400C3A37E /* AFSKProductFetcher.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */; };
 		09E33FEB1707638400C3A37E /* AFSKProductFetchResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */; };
 		09E33FEC1707638400C3A37E /* AFSKProductFetchResponseFailed.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A6417075ECB00C3A37E /* AFSKProductFetchResponseFailed.h */; };
@@ -422,6 +421,7 @@
 		B03CA2D862D0EABAF0D0306E /* UIActionSheet+MKBlockAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CA0338DC873CD3F9B9D2D /* UIActionSheet+MKBlockAdditions.h */; };
 		B03CA352639F7D368EEB5ACB /* TestDownloadRequestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA61E037F63E0919F9879 /* TestDownloadRequestObserver.m */; };
 		B03CA374E70B4122C2FCACF0 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */; };
+		B03CA3A810354F8944D46CFD /* AFExceptionReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAB6372D124729EAF4CCD /* AFExceptionReporter.m */; };
 		B03CA45F94A118567B1AD7BC /* NSObject+SenTest.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA7CBAEB9584BBB6C4A27 /* NSObject+SenTest.m */; };
 		B03CA4727D3AD56ABCB4BA8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA202EA01EA4743CB47A3 /* CoreGraphics.framework */; };
 		B03CA53343CEB901551B4AA6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 097252D914A5F48800E75618 /* SystemConfiguration.framework */; };
@@ -431,6 +431,7 @@
 		B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */; };
 		B03CA9445A185265F6C8A362 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */; };
 		B03CA9933E999A577D479094 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */; };
+		B03CAB54C60F3E614CD0C08C /* AFExceptionReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAC2189DC6FE0DD4F0C04 /* AFExceptionReporter.h */; };
 		B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
 		B03CABEE61FC1181BE3995B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
 		B03CAC36641ABA4FB652319C /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */; };
@@ -559,7 +560,6 @@
 		09E33A5B17075ECB00C3A37E /* AFPDownloadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPDownloadable.h; sourceTree = "<group>"; };
 		09E33A5C17075ECB00C3A37E /* AFPDownloadRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPDownloadRequest.h; sourceTree = "<group>"; };
 		09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPSKProductConsumer.h; sourceTree = "<group>"; };
-		09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPSKProductIdProvider.h; sourceTree = "<group>"; };
 		09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetcher.h; sourceTree = "<group>"; };
 		09E33A6117075ECB00C3A37E /* AFSKProductFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSKProductFetcher.m; sourceTree = "<group>"; };
 		09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSKProductFetchResponse.h; sourceTree = "<group>"; };
@@ -753,8 +753,10 @@
 		B03CA93EAA42AD47DE1DF998 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
 		B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B03CAA31BA37036E74146504 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		B03CAB6372D124729EAF4CCD /* AFExceptionReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFExceptionReporter.m; sourceTree = "<group>"; };
 		B03CABA11409644EACA4B994 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		B03CAC2189DC6FE0DD4F0C04 /* AFExceptionReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFExceptionReporter.h; sourceTree = "<group>"; };
 		B03CAC3CDA19157EF8F2813C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
 		B03CADB1DB86B732668F58BF /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
 		B03CADFFEB65C0359AC15524 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
@@ -1050,7 +1052,6 @@
 			isa = PBXGroup;
 			children = (
 				09E33A5E17075ECB00C3A37E /* AFPSKProductConsumer.h */,
-				09E33A5F17075ECB00C3A37E /* AFPSKProductIdProvider.h */,
 				09E33A6017075ECB00C3A37E /* AFSKProductFetcher.h */,
 				09E33A6117075ECB00C3A37E /* AFSKProductFetcher.m */,
 				09E33A6217075ECB00C3A37E /* AFSKProductFetchResponse.h */,
@@ -1318,6 +1319,8 @@
 				09E33B0517075ECC00C3A37E /* AFUtil.m */,
 				09E33B0617075ECC00C3A37E /* NSData+Base64.h */,
 				09E33B0717075ECC00C3A37E /* NSData+Base64.m */,
+				B03CAB6372D124729EAF4CCD /* AFExceptionReporter.m */,
+				B03CAC2189DC6FE0DD4F0C04 /* AFExceptionReporter.h */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1523,7 +1526,6 @@
 				09E33FE61707638400C3A37E /* AFPDownloadable.h in Headers */,
 				09E33FE71707638400C3A37E /* AFPDownloadRequest.h in Headers */,
 				09E33FE81707638400C3A37E /* AFPSKProductConsumer.h in Headers */,
-				09E33FE91707638400C3A37E /* AFPSKProductIdProvider.h in Headers */,
 				09E33FEA1707638400C3A37E /* AFSKProductFetcher.h in Headers */,
 				09E33FEB1707638400C3A37E /* AFSKProductFetchResponse.h in Headers */,
 				09E33FEC1707638400C3A37E /* AFSKProductFetchResponseFailed.h in Headers */,
@@ -1624,6 +1626,7 @@
 				B03CA2D862D0EABAF0D0306E /* UIActionSheet+MKBlockAdditions.h in Headers */,
 				B03CA1DE50D4CC39B46ED21C /* NSObject+MKBlockAdditions.h in Headers */,
 				B03CA64F27FC889CEAAB08CA /* MKBlockAdditions.h in Headers */,
+				B03CAB54C60F3E614CD0C08C /* AFExceptionReporter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1844,6 +1847,7 @@
 				B03CAFA63ED7EB46C80F34B5 /* NSObject+MKBlockAdditions.m in Sources */,
 				B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				B03CA374E70B4122C2FCACF0 /* UIAlertView+MKBlockAdditions.m in Sources */,
+				B03CA3A810354F8944D46CFD /* AFExceptionReporter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

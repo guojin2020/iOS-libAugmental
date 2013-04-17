@@ -114,7 +114,7 @@ NSString *STATUS_KEY = @"status";
 {
     if (context == &PlayerStatusContext)
     {
-        [self performSelectorOnMainThread:@selector(refresh) withObject:nil waitUntilDone:NO];
+	    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self refresh]; });
     }
 }
 

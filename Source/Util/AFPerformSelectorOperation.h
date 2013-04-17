@@ -1,3 +1,5 @@
+/*
+
 #import <Foundation/Foundation.h>
 
 @interface AFPerformSelectorOperation : NSOperation
@@ -18,3 +20,4 @@
 - (NSOperation *)performSelectorOnCommonBackgroundThread:(SEL)selector withObject:(id)object;
 
 @end
+          */
