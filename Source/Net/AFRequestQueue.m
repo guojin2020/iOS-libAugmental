@@ -3,6 +3,7 @@
 
 #import "AFPerformSelectorOperation.h"
 #import "AFLogger.h"
+#import "AFAssertion.h"
 
 @interface AFRequestQueue ()
 
@@ -21,7 +22,7 @@
     NSObject <AFRequestHandler> *targetHandler;
     int maxConcurrentDownloads;
 
-#ifdef THREADED_REQUEST_HANDLER_ENABLED
+	#ifdef THREADED_REQUEST_HANDLER_ENABLED
 	NSCondition* requestThreadCondition;
 	NSThread* requestThread;
 	#endif
@@ -43,6 +44,8 @@
 
 - (void)startWaitingRequests
 {
+	AFAssertBackgroundThread();
+
     queuePosition = 1;
     [activatedRequests removeAllObjects];
     @synchronized (queue)
@@ -89,16 +92,12 @@
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
+	AFAssertBackgroundThread();
+
     if(targetHandler) return [targetHandler handleRequest:request];
     else
     {
-	    dispatch_block_t block = ^
-	    {
-		    [self startConnectionMainThreadInternal:request];
-	    };
-
-	    dispatch_async(dispatch_get_main_queue(), block);
-
+	    [self startConnectionInternal:request];
         return YES;
     }
 }
@@ -108,6 +107,8 @@
  */
 - (void)cancelAllRequests
 {
+	AFAssertBackgroundThread();
+
     for (AFRequest* request in [NSArray arrayWithArray:queue])
     {
         [request cancel];
@@ -119,10 +120,11 @@
  */
 - (BOOL)handleRequest:(AFRequest*)request
 {
+	AFAssertBackgroundThread();
     AFLogPosition();
 
 #ifdef BACKGROUND_HANDLING_ENABLED
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self handleRequestInternal:request]; });
+	[self handleRequestInternal:request];
 
     return YES;
 #else
@@ -132,6 +134,7 @@
 
 - (BOOL)handleRequestInternal:(AFRequest*)request
 {
+	AFAssertBackgroundThread();
     AFLogPosition();
 
 #ifdef BACKGROUND_HANDLING_ENABLED
@@ -155,11 +158,15 @@
 
 - (void)queueRequestAtFront:(AFRequest*)requestIn
 {
+	AFAssertBackgroundThread();
+
     [self queueRequest:requestIn atPosition:0];
 }
 
 - (void)queueRequestAtBack:(AFRequest*)requestIn;
 {
+	AFAssertBackgroundThread();
+
     [self queueRequest:requestIn atPosition:[queue count]];
 }
 
@@ -168,6 +175,7 @@
  */
 - (void)queueRequest:(AFRequest*)requestIn atPosition:(NSUInteger)positionIn
 {
+	AFAssertBackgroundThread();
     NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn addObserver:self];
@@ -176,8 +184,9 @@
     [self startWaitingRequests];
 }
 
-- (void)startConnectionMainThreadInternal:(AFRequest*)requestIn
+- (void)startConnectionInternal:(AFRequest*)requestIn
 {
+	AFAssertBackgroundThread();
     NSAssert(requestIn, NSInvalidArgumentException);
 
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:requestIn.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
@@ -190,6 +199,7 @@
 
 - (void)requestComplete:(AFRequest*)requestIn
 {
+	AFAssertBackgroundThread();
     NSAssert(requestIn, NSInvalidArgumentException);
 
     [requestIn removeObserver:self];
@@ -199,20 +209,21 @@
 
 - (void)requestCancelled:(AFRequest*)requestIn
 {
-    AFLogPosition();
+	AFAssertBackgroundThread();
     NSAssert(requestIn, NSInvalidArgumentException);
     [self requestWasDeactivatedInternal:requestIn];
 }
 
 - (void)requestFailed:(AFRequest*)requestIn withError:(NSError*)error
 {
-    AFLogPosition();
+	AFAssertBackgroundThread();
     NSAssert(requestIn, NSInvalidArgumentException);
     [self requestWasDeactivatedInternal:requestIn];
 }
 
 -(void)requestWasDeactivatedInternal:(AFRequest*)requestIn
 {
+	AFAssertBackgroundThread();
     [requestIn removeObserver:self];
     [queue removeObject:requestIn];
     [activeRequests removeObject:requestIn];
@@ -221,6 +232,7 @@
 
 - (AFRequest*)queuedRequestForConnection:(NSURLConnection *)connection
 {
+	AFAssertBackgroundThread();
     NSAssert(connection, NSInvalidArgumentException);
 
     for (AFRequest*testRequest in queue)            if (testRequest.connection == connection) return testRequest;
@@ -232,7 +244,6 @@
 {
     if (!offline)
     {
-        //NSLog(@"Going ONLINE from being offine... start waiting requests.");
         [self startWaitingRequests];
     }
 }
@@ -248,6 +259,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+	AFAssertBackgroundThread();
     NSAssert(connection, NSInvalidArgumentException);
     NSAssert(response,   NSInvalidArgumentException);
 
@@ -267,6 +279,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+	AFAssertBackgroundThread();
     NSAssert(connection, NSInvalidArgumentException);
     NSAssert(data,       NSInvalidArgumentException);
 
@@ -276,6 +289,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+	AFAssertBackgroundThread();
     NSAssert(connection, NSInvalidArgumentException);
     //[self setOffline:YES];
     AFRequest* findRequest = [self queuedRequestForConnection:connection];
@@ -286,6 +300,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+	AFAssertBackgroundThread();
     NSAssert(connection, NSInvalidArgumentException);
 
     AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
@@ -303,11 +318,8 @@
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
-    //NSLog(@"%@ %@",connection,NSStringFromSelector(_cmd));
+	AFAssertBackgroundThread();
 
-    if (redirectResponse)
-    {
-    }
     return request; //Currently always allowing the redirection, by returning the request value
 }
 

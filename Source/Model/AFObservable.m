@@ -71,14 +71,18 @@ SEL
     int index;
 
     NSSet* observersSnapshot = [observers copy];
+
+	NSLog(@"%@ -> ", NSStringFromSelector(eventIn) );
+	for (id observer in observersSnapshot)
+	{
+		BOOL ok = [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn]);
+		NSLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
+	}
+
     for (id observer in observersSnapshot)
     {
-	    NSLog(@"Observer: %@",observer);
-
         if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
         {
-	        NSLog(@"Sending: %@", NSStringFromSelector(eventIn));
-
             invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
             invocation.target = observer;
             invocation.selector = eventIn;

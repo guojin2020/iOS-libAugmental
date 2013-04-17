@@ -30,7 +30,7 @@
 
 - (BOOL)isRequestActive:(AFRequest*)requestIn;
 
-- (void)startConnectionMainThreadInternal:(AFRequest*)requestIn;
+- (void)startConnectionInternal:(AFRequest*)requestIn;
 
 @property(nonatomic, readonly) NSArray *queue;
 @property(nonatomic, readonly) NSSet   *activeRequests;

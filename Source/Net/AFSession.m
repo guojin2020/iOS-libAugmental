@@ -83,7 +83,7 @@ static AFSession *sharedSession = nil;
 {
 	dispatch_block_t block = ^
 	{
-		[self startConnectionMainThreadInternal:request];
+		[self startConnectionInternal:request];
 	};
 
 	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block );
@@ -96,7 +96,7 @@ static AFSession *sharedSession = nil;
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
         //NSLog(@"Retrying %i of %i",requestIn.attempts,REQUEST_RETRY_LIMIT);
-        [self startConnectionMainThreadInternal:requestIn];
+	    [self startConnectionInternal:requestIn];
     }
     else
     {
