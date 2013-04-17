@@ -32,6 +32,36 @@ SEL
     return self;
 }
 
+- (void)notifyObservers:(SEL)eventIn parameters:(id)firstParameter, ...
+{
+	NSAssert(eventIn,NSInvalidArgumentException);
+
+	NSMutableArray *parameters;
+
+	if (firstParameter)
+	{
+		parameters = [NSMutableArray new];
+
+		va_list parameterList;
+		[parameters addObject:firstParameter];
+		va_start(parameterList, firstParameter);
+		id parameter;
+		while( (parameter = va_arg(parameterList, id)) )
+		{
+			[parameters addObject:parameter];
+		}
+		va_end(parameterList);
+	}
+	else
+	{
+		parameters = NULL;
+	}
+
+	[self notifyObservers:eventIn parameterArray:parameters];
+
+	[parameters release];
+}
+
 - (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
 {
     NSAssert ( eventIn, NSInvalidArgumentException );
@@ -40,11 +70,15 @@ SEL
     NSInvocation *invocation;
     int index;
 
-    NSSet* observersSnapshot = [[NSSet alloc] initWithSet:observers];
+    NSSet* observersSnapshot = [observers copy];
     for (id observer in observersSnapshot)
     {
+	    NSLog(@"Observer: %@",observer);
+
         if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
         {
+	        NSLog(@"Sending: %@", NSStringFromSelector(eventIn));
+
             invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
             invocation.target = observer;
             invocation.selector = eventIn;
@@ -67,37 +101,6 @@ SEL
     }
     [observersSnapshot release];
 }
-
-- (void)notifyObservers:(SEL)eventIn parameters:(id)firstParameter, ...
-{
-    NSAssert(eventIn,NSInvalidArgumentException);
-
-    NSMutableArray *parameters;
-
-    if (firstParameter)
-    {
-        parameters = [[NSMutableArray alloc] init];
-
-        va_list parameterList;
-        [parameters addObject:firstParameter];
-        va_start(parameterList, firstParameter);
-        id parameter;
-        while ((parameter = va_arg(parameterList, id)))
-        {
-            [parameters addObject:parameter];
-        }
-        va_end(parameterList);
-    }
-    else
-    {
-        parameters = NULL;
-    }
-
-    [self notifyObservers:eventIn parameterArray:parameters];
-
-    [parameters release];
-}
-
 
 - (void)addObserver:(id)observer
 {
