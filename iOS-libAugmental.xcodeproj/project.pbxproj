@@ -431,6 +431,7 @@
 		B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA03683354BD5F86E029A /* UIActionSheet+MKBlockAdditions.m */; };
 		B03CA9445A185265F6C8A362 /* UIAlertView+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA54848B56F674E7185A2 /* UIAlertView+MKBlockAdditions.m */; };
 		B03CA9933E999A577D479094 /* NSObject+MKBlockAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CA3CFA9423ECEFE8A7F98 /* NSObject+MKBlockAdditions.m */; };
+		B03CAB0F42EF866AADAAF9D0 /* AFDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = B03CAAC011E9B6B921DB5B98 /* AFDispatch.m */; };
 		B03CAB54C60F3E614CD0C08C /* AFExceptionReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = B03CAC2189DC6FE0DD4F0C04 /* AFExceptionReporter.h */; };
 		B03CAB5E4E0EA683DA2971F4 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA39A1176128227F3AF37 /* MediaPlayer.framework */; };
 		B03CABEE61FC1181BE3995B2 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */; };
@@ -753,12 +754,14 @@
 		B03CA93EAA42AD47DE1DF998 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
 		B03CA96EC10286B12A0A2C0C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		B03CAA31BA37036E74146504 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		B03CAAC011E9B6B921DB5B98 /* AFDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFDispatch.m; sourceTree = "<group>"; };
 		B03CAB6372D124729EAF4CCD /* AFExceptionReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFExceptionReporter.m; sourceTree = "<group>"; };
 		B03CABA11409644EACA4B994 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B03CABEC8AB5E06AB8C54472 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		B03CAC2189DC6FE0DD4F0C04 /* AFExceptionReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFExceptionReporter.h; sourceTree = "<group>"; };
 		B03CAC3CDA19157EF8F2813C /* CJSONDeserializer_BlocksExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer_BlocksExtensions.h; sourceTree = "<group>"; };
 		B03CADB1DB86B732668F58BF /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		B03CADE5FEA121546822A867 /* AFDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFDispatch.h; sourceTree = "<group>"; };
 		B03CADFFEB65C0359AC15524 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
 		B03CAE1FD78A6E18F930A95D /* MKBlockAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKBlockAdditions.h; sourceTree = "<group>"; };
 		B03CAE53D7D0A0445BDB5BFF /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
@@ -864,6 +867,8 @@
 				09E339F717075ECB00C3A37E /* Exception */,
 				09E339FC17075ECB00C3A37E /* NSInvocation+Constructors.h */,
 				09E339FD17075ECB00C3A37E /* NSInvocation+Constructors.m */,
+				B03CADE5FEA121546822A867 /* AFDispatch.h */,
+				B03CAAC011E9B6B921DB5B98 /* AFDispatch.m */,
 			);
 			path = Lang;
 			sourceTree = "<group>";
@@ -1848,6 +1853,7 @@
 				B03CA90F808D6BE312C3AAF4 /* UIActionSheet+MKBlockAdditions.m in Sources */,
 				B03CA374E70B4122C2FCACF0 /* UIAlertView+MKBlockAdditions.m in Sources */,
 				B03CA3A810354F8944D46CFD /* AFExceptionReporter.m in Sources */,
+				B03CAB0F42EF866AADAAF9D0 /* AFDispatch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

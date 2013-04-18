@@ -5,7 +5,7 @@
 #import <sys/utsname.h>
 #import <MessageUI/MessageUI.h>
 
-NSString* AFMachineName();
+NSString* AFMachineName(void);
 
 void AFReportingExceptionHandler(NSException* exception);
 

@@ -1,5 +1,6 @@
 #import "AFOnlineScreen.h"
 #import "AFUnavailableOfflineViewController.h"
+#import "AFDispatch.h"
 
 @class AFSession;
 
@@ -21,7 +22,7 @@
 		else             [self hideOfflineView];
 	};
 
-	dispatch_async(dispatch_get_main_queue(), block );
+	AFMainDispatch( block );
 }
 
 - (void)showOfflineView

@@ -4,6 +4,7 @@
 #import "AFPerformSelectorOperation.h"
 #import "AFLogger.h"
 #import "AFAssertion.h"
+#import "AFDispatch.h"
 
 @interface AFRequestQueue ()
 
@@ -192,9 +193,10 @@
     NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:requestIn.URL cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData timeoutInterval:30];
     urlRequest = [requestIn willSendURLRequest:urlRequest];
 
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:YES];
-
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self startImmediately:NO];
     requestIn.connection = connection;
+	[connection scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+	[connection start];
 }
 
 - (void)requestComplete:(AFRequest*)requestIn
@@ -259,66 +261,85 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-	AFAssertBackgroundThread();
+	AFAssertMainThread();
     NSAssert(connection, NSInvalidArgumentException);
     NSAssert(response,   NSInvalidArgumentException);
 
-    AFRequest* findRequest = [[self queuedRequestForConnection:connection] retain];
+	dispatch_block_t action = ^
+	{
+	    AFRequest* findRequest = [[self queuedRequestForConnection:connection] retain];
 
-    NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
-    NSAssert ( findRequest, responseString );
+	    NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
+	    NSAssert ( findRequest, responseString );
 
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse *)response;
-    NSDictionary *headers = [[httpResponse allHeaderFields] retain];
+	    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse *)response;
+	    NSDictionary *headers = [[httpResponse allHeaderFields] retain];
 
-    [findRequest willReceiveWithHeaders:headers responseCode:[httpResponse statusCode]];
+	    [findRequest willReceiveWithHeaders:headers responseCode:[httpResponse statusCode]];
 
-    [headers release];
-    [findRequest release];
+	    [headers release];
+	    [findRequest release];
+	};
+
+	AFBackgroundDispatch( action );
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-	AFAssertBackgroundThread();
+	AFAssertMainThread();
     NSAssert(connection, NSInvalidArgumentException);
     NSAssert(data,       NSInvalidArgumentException);
 
-    AFRequest*findRequest = [self queuedRequestForConnection:connection];
-    if (findRequest) [findRequest received:data];
+	dispatch_block_t handOff = ^
+	{
+		AFRequest*findRequest = [self queuedRequestForConnection:connection];
+		if (findRequest) [findRequest received:data];
+	};
+
+	AFBackgroundDispatch( handOff );
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-	AFAssertBackgroundThread();
+	AFAssertMainThread();
     NSAssert(connection, NSInvalidArgumentException);
-    //[self setOffline:YES];
-    AFRequest* findRequest = [self queuedRequestForConnection:connection];
-    NSAssert(findRequest, @"Couldn't find the request for connection in %@", [self class], nil);
-    [findRequest didFail:error];
-    //[connection release];
+
+	dispatch_block_t handOff = ^
+	{
+		AFRequest* findRequest = [self queuedRequestForConnection:connection];
+		NSAssert(findRequest, @"Couldn't find the request for connection in %@", [self class], nil);
+		[findRequest didFail:error];
+	};
+
+	AFBackgroundDispatch( handOff );
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-	AFAssertBackgroundThread();
+	AFAssertMainThread();
     NSAssert(connection, NSInvalidArgumentException);
 
-    AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
+	dispatch_block_t handOff = ^
+	{
+		AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
 
-    //NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
+		//NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
 
-    [findRequest didFinish]; //Tell the object that it AFRequestEventFinished (so it can do something useful with the data)
-    [findRequest removeObserver:self]; //Stop listening to the request
-    [queue removeObject:findRequest]; //Remove the request from the list
-    [self startWaitingRequests];
+		[findRequest didFinish]; //Tell the object that it AFRequestEventFinished (so it can do something useful with the data)
+		[findRequest removeObserver:self]; //Stop listening to the request
+		[queue removeObject:findRequest]; //Remove the request from the list
+		[self startWaitingRequests];
 
-    [findRequest release];
-    [connection autorelease];
+		[findRequest release];
+		[connection autorelease];
+	};
+
+	AFBackgroundDispatch( handOff );
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
-	AFAssertBackgroundThread();
+	//AFAssertBackgroundThread();
 
     return request; //Currently always allowing the redirection, by returning the request value
 }

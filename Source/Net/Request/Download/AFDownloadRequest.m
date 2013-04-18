@@ -8,6 +8,7 @@
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
 #import "AFAssertion.h"
+#import "AFDispatch.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -77,7 +78,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
             self.expectedBytes = [expectedSizeNumber intValue];
         }
 
-	    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self beginPollSize:queueIn]; });
+	    AFBackgroundDispatch( ^{ [self beginPollSize:queueIn]; });
     }
     return self;
 }
@@ -98,7 +99,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 -(void)request:(AFRequest*)request returnedWithData:(id)header
 {
-    AFLogPosition();
+	AFAssertBackgroundThread();
     NSAssert(request == pollSizeRequest, @"AFDownloadRequest received response from an unexpected request: %@", request);
 
     AFRangeInfo* rangeInfo = CreateAFRangeInfoFromHTTPHeaders(header);
@@ -108,13 +109,15 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 -(void)didPollSize:(int)sizeIn
 {
+	AFAssertBackgroundThread();
+
     self.expectedBytes = sizeIn;
     [self notifyObservers:AFRequestEventDidPollSize parameters:self, NULL];
 }
 
 -(NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
 {
-    AFLogPosition();
+	AFAssertBackgroundThread();
 
     requestIn = [super willSendURLRequest:requestIn];
 
@@ -132,7 +135,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 -(void)willReceiveWithHeaders:(NSDictionary *)headers responseCode:(int)responseCodeIn
 {
-    AFLogPosition();
+	AFAssertBackgroundThread();
 
     [super willReceiveWithHeaders:headers responseCode:responseCodeIn];
 

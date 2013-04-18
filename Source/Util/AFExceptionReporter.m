@@ -6,6 +6,7 @@
 #import "MKBlockAdditions.h"
 #import "UIAlertView+MKBlockAdditions.h"
 #import "AFAssertion.h"
+#import "AFDispatch.h"
 
 NSString* AFMachineName()
 {
@@ -58,7 +59,7 @@ void AFReportingExceptionHandler(NSException* exception)
 	};
 
 	if([NSThread isMainThread]) showAlertBlock();
-	else dispatch_async( dispatch_get_main_queue(), showAlertBlock );
+	else AFMainDispatch( showAlertBlock );
 }
 
 @implementation AFExceptionReporter
@@ -90,7 +91,7 @@ void AFReportingExceptionHandler(NSException* exception)
 	};
 
 	if([NSThread isMainThread]) dismissBlock();
-	else dispatch_async( dispatch_get_main_queue(), dismissBlock );
+	else AFMainDispatch( dismissBlock );
 }
 
 @end

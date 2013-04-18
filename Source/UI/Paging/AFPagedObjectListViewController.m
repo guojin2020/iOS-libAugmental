@@ -9,6 +9,7 @@
 #import "AFMessageCell.h"
 #import "AFPagedObjectListViewObserver.h"
 #import "AFPageScrubbingTableCell.h"
+#import "AFDispatch.h"
 
 static AFTableCell *defaultNoResultsCell;
 static AFTableCell *resultsLoadingCell;
@@ -134,7 +135,7 @@ static AFTableCell *resultsLoadingCell;
         [headerCell release];
 
         //Reload the table!
-	    dispatch_async(dispatch_get_main_queue(), ^{ [(UITableView*)self.view reloadData]; });
+	    AFMainDispatch( ^{ [(UITableView*)self.view reloadData]; });
 
         NSUInteger bottomIndexPath[] = {[resultsTable sectionCount] - 1, (NSUInteger) ([[resultsTable sectionAtIndex:[resultsTable sectionCount] - 1] cellCount] - 1)};
         NSUInteger topIndexPath[]    = {0, 0};

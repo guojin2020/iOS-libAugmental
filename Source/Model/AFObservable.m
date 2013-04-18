@@ -25,8 +25,8 @@ SEL
     self = [super init];
     if (self)
     {
-        observers       = [[NSMutableSet alloc] init];
-        invocationQueue = [[NSMutableSet alloc] init];
+        observers       = [NSCountedSet new];
+        invocationQueue = [NSMutableSet new];
         lockCount       = 0;
     }
     return self;
@@ -38,7 +38,7 @@ SEL
 
 	NSMutableArray *parameters;
 
-	if (firstParameter)
+	if( firstParameter )
 	{
 		parameters = [NSMutableArray new];
 
@@ -72,12 +72,14 @@ SEL
 
     NSSet* observersSnapshot = [observers copy];
 
+#if LOG_OBSERVERS
 	NSLog(@"%@ -> ", NSStringFromSelector(eventIn) );
 	for (id observer in observersSnapshot)
 	{
 		BOOL ok = [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn]);
 		NSLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
 	}
+#endif
 
     for (id observer in observersSnapshot)
     {

@@ -9,6 +9,7 @@
 #import "AFRequestQueueAlertView.h"
 #import "AFPerformSelectorOperation.h"
 #import "AFDownloadRequestCache.h"
+#import "AFDispatch.h"
 
 @implementation AFSession
 
@@ -86,7 +87,7 @@ static AFSession *sharedSession = nil;
 		[self startConnectionInternal:request];
 	};
 
-	dispatch_async( dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block );
+	AFBackgroundDispatch( block );
 
     return YES;
 }

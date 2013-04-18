@@ -25,7 +25,7 @@ static AFDownloadRequestCache *defaultCache = NULL;
 
 +(AFDownloadRequestCache*)defaultCache
 {
-    return defaultCache ?: (defaultCache = [[AFDownloadRequestCache alloc] init]);
+    return defaultCache ?: (defaultCache = [AFDownloadRequestCache new]);
 }
 
 -(id)init
@@ -33,8 +33,8 @@ static AFDownloadRequestCache *defaultCache = NULL;
     self = [super init];
     if(self)
     {
-        typeMap       = [[NSMutableDictionary alloc] init];
-        requestCache  = [[NSMutableDictionary alloc] init];
+        typeMap       = [NSMutableDictionary new];
+        requestCache  = [NSMutableDictionary new];
         fileSizeCache = [[AFDefaultsBackedStringDictionary alloc] initWithDefaultsKey:FILE_SIZE_CACHE_KEY];
     }
     return self;

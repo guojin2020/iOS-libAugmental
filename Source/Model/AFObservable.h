@@ -15,7 +15,7 @@ extern SEL
 @interface AFObservable : NSObject
 {
     @private
-    NSMutableSet *observers;
+    NSCountedSet *observers;
     NSMutableSet *invocationQueue;
     uint32_t lockCount;
 }

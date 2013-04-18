@@ -9,6 +9,7 @@
 #import "AFAVAssetCache.h"
 #import "AFAssertion.h"
 #import "AVAsset+Tracks.h"
+#import "AFDispatch.h"
 
 id PlayerStatusContext;
 NSString *STATUS_KEY = @"status";
@@ -114,7 +115,7 @@ NSString *STATUS_KEY = @"status";
 {
     if (context == &PlayerStatusContext)
     {
-	    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{ [self refresh]; });
+	    AFBackgroundDispatch( ^{ [self refresh]; } );
     }
 }
 
