@@ -100,13 +100,13 @@ static NSString *beginEditingSound = nil;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTextField class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textColor;
 }
 
 + (NSString *)beginEditingSound
 {
-    if (!beginEditingSound)beginEditingSound = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTextField class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND] retain];
+    if (!beginEditingSound)beginEditingSound = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND] retain];
     return beginEditingSound;
 }
 
@@ -118,7 +118,7 @@ static NSString *beginEditingSound = nil;
     beginEditingSound = nil;
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
++ (id<AFPThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

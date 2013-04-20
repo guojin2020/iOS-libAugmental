@@ -19,7 +19,7 @@ static NSOperationQueue *backgroundOperationQueue = nil;
 
 - (void)main
 {
-    //NSLog(@"%@ response to selector %@? %i",target,NSStringFromSelector(selector),[target respondsToSelector:selector]);
+    //AFLog(@"%@ response to selector %@? %i",target,NSStringFromSelector(selector),[target respondsToSelector:selector]);
     [target performSelector:selector withObject:object];
 }
 

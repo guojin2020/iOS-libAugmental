@@ -62,7 +62,7 @@ static AFRequestQueue          *visibleQueue = nil;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //NSLog(@"RequestQueueAlert dismissed");
+    //AFLog(@"RequestQueueAlert dismissed");
     [queue release];
     [alert release];
     queue = nil;
@@ -89,7 +89,7 @@ static AFRequestQueue          *visibleQueue = nil;
 //Required
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSLog(@"Request rows: %i",[queue.activeRequests count]);
+    //AFLog(@"Request rows: %i",[queue.activeRequests count]);
     return [activatedRequestCache count] + [queue.queue count];
 }
 
@@ -132,7 +132,7 @@ static AFRequestQueue          *visibleQueue = nil;
 //Optional
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    //NSLog(@"requestAlert section query");
+    //AFLog(@"requestAlert section query");
     return 1;
 }
 

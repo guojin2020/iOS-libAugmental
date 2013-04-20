@@ -89,14 +89,14 @@ static UIColor *bgColor   = nil;
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
     return textColor;
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 
@@ -108,7 +108,7 @@ static UIColor *bgColor   = nil;
     bgColor   = nil;
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
++ (id<AFPThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

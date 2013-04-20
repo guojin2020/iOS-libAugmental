@@ -13,7 +13,7 @@ static NSMutableDictionary *icons;
 {
     NSAssert(imageName, @"null image name");
 
-    //NSLog(@"Loading image '%@'",imageName);
+    //AFLog(@"Loading image '%@'",imageName);
     UIImage *returnImage = [icons objectForKey:imageName];
     if (returnImage) return returnImage;
     else
@@ -21,13 +21,13 @@ static NSMutableDictionary *icons;
         NSString *newImagePath = [[NSBundle mainBundle] pathForResource:imageName ofType:@"png"];
         if (!newImagePath)
         {
-            //NSLog(@"No image for name: %@",imageName);
+            //AFLog(@"No image for name: %@",imageName);
             return nil;
         }
         returnImage = [UIImage imageWithContentsOfFile:newImagePath];
         if (!returnImage)
         {
-            //NSLog(@"Bad image for: %@",newImagePath);
+            //AFLog(@"Bad image for: %@",newImagePath);
             return nil;
         }
         [icons setObject:returnImage forKey:imageName];

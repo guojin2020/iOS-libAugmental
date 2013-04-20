@@ -3,7 +3,7 @@
 
 #import "AFField.h"
 #import "AFFieldViewPanelObserver.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_EDIT_ICON @"editIcon"
 
@@ -16,7 +16,7 @@
  * a single control. It holds a reference to an AFNavigationController and UIViewController which are used to
  * present the controls for the setting.
  */
-@interface AFViewPanelField : AFField <AFFieldViewPanelObserver, AFThemeable>
+@interface AFViewPanelField : AFField <AFFieldViewPanelObserver, AFPThemeable>
 {
     UIImage     *labelIcon;
     UILabel     *optionLabel;

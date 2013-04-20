@@ -4,6 +4,7 @@
 #import "AFTable.h"
 #import "AFTableSection.h"
 #import "AFTableCellBackgroundView.h"
+#import "AFLog.h"
 
 @interface AFTableViewController ()
 
@@ -56,7 +57,10 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(void)reloadData
 {
-	[(UITableView*)self.view performSelector:@selector(reloadData)];
+	@synchronized( self.table )
+	{
+		[(UITableView*)self.view performSelector:@selector(reloadData)];
+	}
 }
 
 -(void)setTable:(AFTable*)tableIn
@@ -121,7 +125,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 {
     [super viewWillAppear:animated];
 
-    NSLog(@"Table frame on display: %@", NSStringFromCGRect(self.view.frame));
+    AFLog(@"Table frame on display: %@", NSStringFromCGRect(self.view.frame));
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -129,7 +133,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	[super viewDidAppear:animated];
 	
 	[((UITableView*)self.view) flashScrollIndicators];
-	//NSLog(@"Table view didAppear: %@, navController: %@",self.view,self.navigationController);
+	//AFLog(@"Table view didAppear: %@, navController: %@",self.view,self.navigationController);
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
@@ -161,6 +165,8 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+
+
 
 -(UIView*)tableView:(UITableView*)tableView viewForFooterInSection:(NSInteger)section
 {
@@ -258,7 +264,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(AFTableCell*)tableCellForIndexPath:(NSIndexPath*)indexPath 
 {
-	return table? [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row]:nil;
+	return table ? [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row]:nil;
 }
 
 -(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath

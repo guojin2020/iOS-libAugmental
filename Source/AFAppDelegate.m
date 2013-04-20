@@ -7,7 +7,7 @@
 #import "AFCachingAudioPlayer.h"
 #import "AFObjectCache.h"
 #import "AFSession.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 static NSMutableDictionary* settings         = nil;
 static AFBooleanField*      soundFXSetting   = nil;
@@ -42,9 +42,9 @@ SEL
 -(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
 	#ifdef CREATE_THEME_TEMPLATE_MODE
-	//NSLog(@"RUNNING IN THEME-TEMPLATE CREATION MODE");
+	//AFLog(@"RUNNING IN THEME-TEMPLATE CREATION MODE");
 	
-	//NSLog(@"Constructing theme-template from themeable classes...");
+	//AFLog(@"Constructing theme-template from themeable classes...");
 	NSDictionary* templateDictionary = [AFThemeManager generateThemeTemplate];
 
 	//Get app document path
@@ -55,14 +55,14 @@ SEL
 	NSString *tempFilePath = [NSString stringWithFormat:@"%@temp.plist",documentsDirectory];
 
 	//Write array to file
-	//NSLog(@"Saving to: %@",tempFilePath);
+	//AFLog(@"Saving to: %@",tempFilePath);
 	[templateDictionary writeToFile:tempFilePath atomically:NO];
 	
 	//Read back file
 	NSString *plistData = [NSString stringWithContentsOfFile:tempFilePath encoding:NSUTF8StringEncoding AFSessionStateError:nil];
 	
 	//Dump file contents
-	//NSLog(@"\n---- TEMPLATE PLIST START ----\n\n%@\n\n---- TEMPLATE PLIST END ----",plistData);
+	//AFLog(@"\n---- TEMPLATE PLIST START ----\n\n%@\n\n---- TEMPLATE PLIST END ----",plistData);
 	#else
 
 	globalSFXEnabled = NO;

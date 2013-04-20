@@ -4,7 +4,7 @@
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
 #import "AFObject.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 @implementation AFField
 
@@ -19,7 +19,7 @@ static UIColor *invalidColor = nil;
         NSData *persistedData = [persistenceDelegate restoreSettingValueForKey:identity];
         if (persistedData)
         {
-            //NSLog(@"%@ with key '%@' is being set by persisted data using %@",NSStringFromClass([self class]),identity,NSStringFromClass([persistenceDelegate class]));
+            //AFLog(@"%@ with key '%@' is being set by persisted data using %@",NSStringFromClass([self class]),identity,NSStringFromClass([persistenceDelegate class]));
             self.value = [NSKeyedUnarchiver unarchiveObjectWithData:persistedData];
         }
         else self.value = defaultValue;
@@ -187,14 +187,14 @@ static UIColor *invalidColor = nil;
 + (UIColor *)validColor
 {
     if (!validColor)
-    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFField class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
+    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
     return validColor;
 }
 
 + (UIColor *)invalidColor
 {
     if (!invalidColor)
-    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFField class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
+    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
     return invalidColor;
 }
 
@@ -206,7 +206,7 @@ static UIColor *invalidColor = nil;
     invalidColor = nil;
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
++ (id<AFPThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

@@ -13,25 +13,25 @@ static float defaultBorderWidth = -1;
 
 +(UIColor*)defaultBackgroundColor
 {
-    if(!defaultBackgroundColor) defaultBackgroundColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBackgroundColor) defaultBackgroundColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
     return defaultBackgroundColor;
 }
 
 +(UIColor*)defaultBorderColor
 {
-    if(!defaultBorderColor) defaultBorderColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR] retain];
+    if(!defaultBorderColor) defaultBorderColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR] retain];
     return defaultBorderColor;
 }
 
 +(float)defaultRounding
 {
-	if(defaultRounding<0) defaultRounding = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_ROUNDING] floatValue];
+	if(defaultRounding<0) defaultRounding = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_ROUNDING] floatValue];
     return defaultRounding;
 }
 
 +(float)defaultBorderWidth
 {
-	if(defaultBorderWidth<0) defaultBorderWidth = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_BORDER_WIDTH] floatValue];
+	if(defaultBorderWidth<0) defaultBorderWidth = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] valueForKey:THEME_KEY_BORDER_WIDTH] floatValue];
     return defaultBorderWidth;
 }
 
@@ -149,7 +149,7 @@ static float defaultBorderWidth = -1;
     defaultBorderColor      = nil;
 }
 
-+(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTableCell class];}
++(id<AFPThemeable>)themeParentSectionClass{return (id<AFPThemeable>)[AFTableCell class];}
 +(NSString*)themeSectionName{return nil;}
 
 +(NSDictionary*)defaultThemeSection

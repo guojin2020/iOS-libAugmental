@@ -10,7 +10,7 @@ static UIColor *disclosureArrowColor = nil;
 {
     if (!disclosureArrowColor)
     {
-        disclosureArrowColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFGenericOptionTableCell class]] colorForKey:THEME_KEY_DISCLOSURE_ARROW_COLOR];
+        disclosureArrowColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFGenericOptionTableCell class]] colorForKey:THEME_KEY_DISCLOSURE_ARROW_COLOR];
     }
     return disclosureArrowColor;
 }
@@ -42,7 +42,7 @@ static UIColor *disclosureArrowColor = nil;
     searchOptionLabel = [(UILabel *) [cell viewWithTag:1] retain];
     searchOptionIcon  = [(UIImageView *) [cell viewWithTag:2] retain];
 
-    //NSLog(@"%@",	searchOptionIcon);
+    //AFLog(@"%@",	searchOptionIcon);
 
     NSAssert(searchOptionLabel, @"");
     NSAssert(searchOptionIcon, @"");
@@ -50,7 +50,7 @@ static UIColor *disclosureArrowColor = nil;
     [searchOptionLabel setTextColor:[AFTableCell defaultTextColor]];
     [searchOptionLabel setFont:[[AFTableCell defaultTextFont] fontWithSize:[AFTableCell defaultTextSize]]];
 
-    //NSLog(@"LabelIcon: %@",labelIcon);
+    //AFLog(@"LabelIcon: %@",labelIcon);
 
     if (labelText) searchOptionLabel.text = labelText;
     if (labelIcon && [labelIcon isKindOfClass:[UIImage class]]) [searchOptionIcon setImage:labelIcon];
@@ -63,8 +63,8 @@ static UIColor *disclosureArrowColor = nil;
     disclosureArrowColor = nil;
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
-{return (id<AFThemeable>)[AFTableCell class];}
++ (id<AFPThemeable>)themeParentSectionClass
+{return (id<AFPThemeable>)[AFTableCell class];}
 
 + (NSString *)themeSectionName
 {return @"genericOption";}

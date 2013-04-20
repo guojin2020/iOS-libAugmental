@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "AFTableCell.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_BG_COLOR            @"bgColor"
 #define THEME_KEY_TEXT_COLOR        @"textColor"
@@ -18,7 +18,7 @@ typedef enum AFPagingCellConfiguration
 }
 AFPagingCellConfiguration;
 
-@interface AFResultsPagingCell : AFTableCell <AFThemeable>
+@interface AFResultsPagingCell : AFTableCell <AFPThemeable>
 {
     UILabel     *showingLabel;
     UIImageView *swipeImageView;

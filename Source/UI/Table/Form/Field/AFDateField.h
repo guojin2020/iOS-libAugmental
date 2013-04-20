@@ -2,13 +2,13 @@
 #import "AFViewPanelField.h"
 #import "AFField.h"
 #import "AFDatePickerViewController.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_DATE_ICON @"dateIcon"
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFDateField : AFViewPanelField <AFThemeable>
+@interface AFDateField : AFViewPanelField <AFPThemeable>
 {
     NSDateFormatter *dateFormatter;
 }

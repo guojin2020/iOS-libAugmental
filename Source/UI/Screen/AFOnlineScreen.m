@@ -59,8 +59,8 @@
     [super dealloc];
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
-{return (id<AFThemeable>)[AFScreen class];}
++ (id<AFPThemeable>)themeParentSectionClass
+{return (id<AFPThemeable>)[AFScreen class];}
 
 + (NSString *)themeSectionName
 {return nil;} //@"onlineScreen"

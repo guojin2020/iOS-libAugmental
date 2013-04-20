@@ -2,7 +2,7 @@
 
 #define DEFAULT_THEME_NAME @"defaultTheme"
 
-@protocol AFThemeable;
+@protocol AFPThemeable;
 @protocol AFThemeObserver;
 
 @interface AFThemeManager : NSObject
@@ -16,7 +16,7 @@
 
 + (void)setCurrentTheme:(NSDictionary *)newTheme;
 
-+ (NSDictionary *)themeSectionForClass:(id<AFThemeable>)themeableClass;
++ (NSDictionary *)themeSectionForClass:(id<AFPThemeable>)themeableClass;
 
 + (NSDictionary *)newThemeTemplate;
 

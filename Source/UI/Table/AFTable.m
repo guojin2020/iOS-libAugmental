@@ -44,34 +44,46 @@ SEL AFTableEventEdited;
 
 -(void)insertSection:(AFTableSection*)group atIndex:(NSUInteger)index
 {
-	group.parentTable = self;
-	[children insertObject:group atIndex:index];
-	[group addObserver:self];
-    [self notifyObservers:AFTableEventEdited parameters:nil];
+	@synchronized (self)
+	{
+		group.parentTable = self;
+		[children insertObject:group atIndex:index];
+		[group addObserver:self];
+	    [self notifyObservers:AFTableEventEdited parameters:nil];
+	}
 }
 
 -(void)addSection:(AFTableSection*)group
 {
-	group.parentTable = self;
-	[children addObject:group];
-	[group addObserver:self];
-    [self notifyObservers:AFTableEventEdited parameters:nil];
+	@synchronized(self)
+	{
+		group.parentTable = self;
+		[children addObject:group];
+		[group addObserver:self];
+	    [self notifyObservers:AFTableEventEdited parameters:nil];
+	}
 }
 
 -(void)removeSection:(AFTableSection*)group
 {
-	if(group.parentTable==self) group.parentTable = nil;
-	[children removeObject:group];
-	[group removeObserver:self];
-    [self notifyObservers:AFTableEventEdited parameters:nil];
+	@synchronized (self)
+	{
+		if(group.parentTable==self) group.parentTable = nil;
+		[children removeObject:group];
+		[group removeObserver:self];
+	    [self notifyObservers:AFTableEventEdited parameters:nil];
+	}
 }
 
 -(BOOL)containsSection:(AFTableSection*)section{return [children containsObject:section];}
 
 -(void)clear
 {
-	[children removeAllObjects];
-    [self notifyObservers:AFTableEventEdited parameters:nil];
+	@synchronized(self)
+	{
+		[children removeAllObjects];
+	    [self notifyObservers:AFTableEventEdited parameters:nil];
+	}
 }
 
 -(AFTableSection*)sectionAtIndex:(NSUInteger)index
@@ -97,7 +109,7 @@ SEL AFTableEventEdited;
 //=======>> Themeable Implementation
 
 -(void)themeChanged{}
-+(id<AFThemeable>)themeParentSectionClass{return nil;}
++(id<AFPThemeable>)themeParentSectionClass{return nil;}
 +(NSString*)themeSectionName{return @"table";}
 
 +(NSDictionary*)defaultThemeSection

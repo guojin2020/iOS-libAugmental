@@ -34,19 +34,19 @@ static NSNumber *textShadowEnabled;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textColor;
 }
 
 + (UIColor *)textShadowColor
 {
-    if (!textShadowColor)textShadowColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textShadowColor)textShadowColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
     return textShadowColor;
 }
 
 + (BOOL)textShadowEnabled
 {
-    if (!textShadowEnabled)textShadowEnabled = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED] retain];
+    if (!textShadowEnabled)textShadowEnabled = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED] retain];
     return [textShadowEnabled boolValue];
 }
 
@@ -156,7 +156,7 @@ static NSNumber *textShadowEnabled;
 
 - (void)pageRefreshDidFinish:(AFPagedObjectListViewController *)objectListViewController
 {
-    //NSLog(@"SCRUBBIN DAT FINISH!");
+    //AFLog(@"SCRUBBIN DAT FINISH!");
     //[cell setHidden:NO];
 
     [self updateScrubber];
@@ -170,8 +170,8 @@ static NSNumber *textShadowEnabled;
 - (void)themeChanged
 {textColor = nil;}
 
-+ (id<AFThemeable>)themeParentSectionClass
-{return (id<AFThemeable>)[AFTableCell class];}
++ (id<AFPThemeable>)themeParentSectionClass
+{return (id<AFPThemeable>)[AFTableCell class];}
 
 + (NSString *)themeSectionName
 {return @"pageScrubbingCell";}

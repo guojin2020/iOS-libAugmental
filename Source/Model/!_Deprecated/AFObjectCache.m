@@ -7,7 +7,7 @@
 #import "AFSession.h"
 #import "AFUtil.h"
 #import "AFEnvironment.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 @implementation AFObjectCache
 
@@ -307,7 +307,7 @@
 {
     NSAssert(key && [key isKindOfClass:[NSString class]] && [key length] > 0, @"Invalid key calling %@", NSStringFromSelector(_cmd));
 
-    NSLog(@"Saving '%@' to defaults under key '%@'", obj, key);
+    AFLog(@"Saving '%@' to defaults under key '%@'", obj, key);
 
     NSMutableData   *objectData = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver   = [[NSKeyedArchiver alloc] initForWritingWithMutableData:objectData];
@@ -319,14 +319,14 @@
     [objectData release];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"...AFRequestEventFinished saving key '%@'", key);
+    AFLog(@"...AFRequestEventFinished saving key '%@'", key);
 }
 
 - (NSObject <NSCoding> *)loadObjectFromDefaultsForKey:(NSString *)key
 {
     NSAssert(key && [key isKindOfClass:[NSString class]] && [key length] > 0, @"Invalid key calling %@", NSStringFromSelector(_cmd));
 
-    NSLog(@"Loading key '%@' from defaults", key);
+    AFLog(@"Loading key '%@' from defaults", key);
 
     NSData *objectData = [[NSUserDefaults standardUserDefaults] dataForKey:key];
 
@@ -340,7 +340,7 @@
         [unarchiver finishDecoding];
         [unarchiver release];
 
-        NSLog(@"...AFRequestEventFinished loading '%@' from key '%@'", object, key);
+        AFLog(@"...AFRequestEventFinished loading '%@' from key '%@'", object, key);
         return object;
     }
 

@@ -18,19 +18,19 @@ SEL AFTableSectionEventEdited;
 
 +(UIColor*)headerColor
 {
-	if(!headerColor)headerColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_COLOR];
+	if(!headerColor)headerColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_COLOR];
 	return headerColor;
 }
 
 +(UIColor*)headerShadowColor
 {
-	if(!headerShadowColor)headerShadowColor = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_SHADOW_COLOR];
+	if(!headerShadowColor)headerShadowColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableSection class]] colorForKey:THEME_KEY_HEADER_SHADOW_COLOR];
 	return headerShadowColor;
 }
 
 +(BOOL)headerShadowEnabled
 {
-	if(!headerShadowEnabled)headerShadowEnabled = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableSection class]] valueForKey:THEME_KEY_HEADER_SHADOW_ENABLED];
+	if(!headerShadowEnabled)headerShadowEnabled = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableSection class]] valueForKey:THEME_KEY_HEADER_SHADOW_ENABLED];
 	return [headerShadowEnabled boolValue];
 }
 
@@ -39,8 +39,8 @@ SEL AFTableSectionEventEdited;
     self=[super init];
     if(self)
     {
-        title = @"";
-        children = [[NSMutableArray alloc] init];
+        title       = @"";
+        children    = [NSMutableArray new];
         parentTable = nil;
     }
     return self;
@@ -65,19 +65,12 @@ SEL AFTableSectionEventEdited;
 	NSUInteger len = [children count];
 	id* childrenCopy = malloc(sizeof(id)*len);
 	[children getObjects:childrenCopy range:NSMakeRange(0, len)];
-	
+
 	if(state->state >= len)return 0;
-    state->itemsPtr = childrenCopy;
-    state->state = (unsigned long) len;
-    state->mutationsPtr = (unsigned long *)self;
-    return len;
-	
-	/*
-	len = len<[children count]?len:[children count];
-	stackbuf = malloc(sizeof(AFTableCell*)*len);
-	[children getObjects:stackbuf range:NSMakeRange(0,len)];
+	state->itemsPtr = childrenCopy;
+	state->state = (unsigned long) len;
+	state->mutationsPtr = (unsigned long *)self;
 	return len;
-	 */
 }
 
 -(NSInteger)indexOf:(AFTableCell *)cell
@@ -89,27 +82,39 @@ SEL AFTableSectionEventEdited;
 
 -(void)addCell:(AFTableCell*)cell
 {
-	cell.parentSection = self;
-	[children addObject:cell];
-	[cell willBeAdded];
-    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
+	@synchronized (parentTable)
+	{
+		cell.parentSection = self;
+		[children addObject:cell];
+		[cell willBeAdded];
+	    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
+	}
 }
 
 -(void)removeCell:(AFTableCell*)cell
 {
-	[children removeObject:cell];
-	[cell willBeRemoved];
-    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
+	@synchronized (parentTable)
+	{
+		[children removeObject:cell];
+		[cell willBeRemoved];
+	    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
+	}
 }
 
--(int)cellCount{return [children count];}
+-(int)cellCount
+{
+	return [children count];
+}
 
 -(void)removeAllCells
 {
-	[self beginAtomic];
-	NSArray* removeList = [NSArray arrayWithArray:children];
-	for(AFTableCell* cell in removeList)[self removeCell:cell];
-	[self completeAtomic];
+	@synchronized (parentTable)
+	{
+		[self beginAtomic];
+		NSArray* removeList = [NSArray arrayWithArray:children];
+		for(AFTableCell* cell in removeList)[self removeCell:cell];
+		[self completeAtomic];
+	}
 }
 
 //============>> Themeable
@@ -120,7 +125,7 @@ SEL AFTableSectionEventEdited;
 	headerShadowColor = nil;
 }
 
-+(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTable class];}
++(id<AFPThemeable>)themeParentSectionClass{return (id<AFPThemeable>)[AFTable class];}
 +(NSString*)themeSectionName{return nil;}
 +(NSDictionary*)defaultThemeSection
 {

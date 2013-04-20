@@ -2,6 +2,7 @@
 #import "AFScreen.h"
 //#import "AFAppDelegate.h"
 #import "AFThemeManager.h"
+#import "AFLog.h"
 
 static AFScreenManager *sharedManager = nil;
 
@@ -35,7 +36,7 @@ static NSString *switchViewSound = nil;
         tabController.delegate                 = self;
 
         tabController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        NSDictionary *themeSection = [AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]];
+        NSDictionary *themeSection = [AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]];
         tabController.view.backgroundColor = [themeSection colorForKey:THEME_KEY_BG_COLOR];
 
         tabController.view.opaque = YES;
@@ -166,7 +167,7 @@ static NSString *switchViewSound = nil;
 {
     if (oldController && screen.viewController != oldController)
     {
-        NSLog(@"Updating Tab Bar due to screenViewController change");
+        AFLog(@"Updating Tab Bar due to screenViewController change");
 
         [oldController release];
 
@@ -213,27 +214,27 @@ static NSString *switchViewSound = nil;
 + (NSString *)bgImageName
 {
     if (!bgImageName)
-    {bgImageName = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME] retain];}
+    {bgImageName = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME] retain];}
     return bgImageName;
 }
 
 + (BOOL)bgImageEnable
 {
     if (!bgImageEnable)
-    {bgImageEnable = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE] retain];}
+    {bgImageEnable = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE] retain];}
     return [bgImageEnable boolValue];
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
     return bgColor;
 }
 
 + (NSString *)switchViewSound
 {
-    if (!switchViewSound)switchViewSound = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND] retain];
+    if (!switchViewSound)switchViewSound = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND] retain];
     return switchViewSound;
 }
 
@@ -256,7 +257,7 @@ static NSString *switchViewSound = nil;
          if(!backgroundImageView) backgroundImageView = [[UIImageView alloc] initWithImage:bgImage];
          else [self setBackgroundImage:bgImage];
 
-         //NSLog(@"SETTING BG TO %@",[themeSection colorForKey:THEME_KEY_BG_COLOR]);
+         //AFLog(@"SETTING BG TO %@",[themeSection colorForKey:THEME_KEY_BG_COLOR]);
          [tabController.view setBackgroundColor:[themeSection colorForKey:THEME_KEY_BG_COLOR]];
 
          if(backgroundImageView.superview!=tabController.view)[tabController.view addSubview:backgroundImageView];
@@ -280,7 +281,7 @@ static NSString *switchViewSound = nil;
             nil];
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
++ (id<AFPThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

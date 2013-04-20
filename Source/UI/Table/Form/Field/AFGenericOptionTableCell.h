@@ -1,10 +1,10 @@
 #import <Foundation/Foundation.h>
 #import "AFTableCell.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_DISCLOSURE_ARROW_COLOR @"disclosureArrowColor"
 
-@interface AFGenericOptionTableCell : AFTableCell <AFThemeable>
+@interface AFGenericOptionTableCell : AFTableCell <AFPThemeable>
 {
     UIImage     *labelIcon;
     UILabel     *searchOptionLabel;

@@ -2,9 +2,9 @@
 
 #import "AFSessionObserver.h"
 #import "AFScreen.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
-@interface AFOnlineScreen : AFScreen <AFSessionObserver, AFThemeable>
+@interface AFOnlineScreen : AFScreen <AFSessionObserver, AFPThemeable>
 {
     UIViewController *offlineViewController;
 }

@@ -1,11 +1,11 @@
 #import <Foundation/Foundation.h>
 
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 #import "AFThemeObserver.h"
 
-@protocol AFThemeable <NSObject, AFThemeObserver>
+@protocol AFPThemeable <NSObject, AFThemeObserver>
 
-+ (id<AFThemeable>)themeParentSectionClass;
++ (id<AFPThemeable>)themeParentSectionClass;
 
 + (NSString *)themeSectionName;
 

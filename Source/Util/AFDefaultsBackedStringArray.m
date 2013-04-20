@@ -4,6 +4,7 @@
 //
 
 #import "AFDefaultsBackedStringArray.h"
+#import "AFLog.h"
 
 const NSString *AFDefaultsBackedArrayInvalidArgumentReason = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 
@@ -29,7 +30,7 @@ static NSUserDefaults *defaults;
         NSArray* storedArray = [defaults arrayForKey:defaultsKey];
         if(storedArray && [storedArray count]>0)
         {
-            NSLog(@"Read %i entries from stored array '%@'",[storedArray count],defaultsKeyIn);
+            AFLog(@"Read %i entries from stored array '%@'",[storedArray count],defaultsKeyIn);
             array = [[NSMutableArray alloc] initWithArray:storedArray];
         }
         else

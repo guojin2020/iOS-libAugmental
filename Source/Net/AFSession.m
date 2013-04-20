@@ -96,12 +96,12 @@ static AFSession *sharedSession = nil;
 {
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
-        //NSLog(@"Retrying %i of %i",requestIn.attempts,REQUEST_RETRY_LIMIT);
+        //AFLog(@"Retrying %i of %i",requestIn.attempts,REQUEST_RETRY_LIMIT);
 	    [self startConnectionInternal:requestIn];
     }
     else
     {
-        //NSLog(@"Session going offline in response to retry limit reached...");
+        //AFLog(@"Session going offline in response to retry limit reached...");
         [self setOffline:YES];
         [super requestFailed:requestIn withError:error];
     }

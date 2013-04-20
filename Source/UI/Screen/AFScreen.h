@@ -2,7 +2,7 @@
 
 #import "AFSettingProvider.h"
 #import "AFSessionObserver.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_LOADING_BG_COLOR        @"bgColor"
 #define THEME_KEY_LOADING_BG_OPACITY    @"bgOpacity"
@@ -18,7 +18,7 @@
  * Implements functionality common to all Screens
  * This is not a complete implementation of a Screen and needs to be subclassed for use
  */
-@interface AFScreen : NSObject <AFSettingProvider, AFSessionObserver, AFThemeable>
+@interface AFScreen : NSObject <AFSettingProvider, AFSessionObserver, AFPThemeable>
 {
     BOOL needsNavigationController;
     UIViewController *viewController;

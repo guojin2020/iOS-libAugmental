@@ -3,7 +3,7 @@
 #import "AFCellSelectionDelegate.h"
 #import "AFTableCell.h"
 #import "AFObservable.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_HEADER_COLOR			@"headerColor"
 #define THEME_KEY_HEADER_SHADOW_COLOR	@"headerShadowColor"
@@ -17,7 +17,7 @@ extern SEL AFTableSectionEventEdited;
 /**
  *	Represents a basic section in a table, with a text header and any number of cells.
  */
-@interface AFTableSection : AFObservable <NSFastEnumeration, AFThemeable>
+@interface AFTableSection : AFObservable <NSFastEnumeration, AFPThemeable>
 {
 	NSString* title;
 	NSMutableArray* children;

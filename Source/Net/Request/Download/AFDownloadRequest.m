@@ -3,7 +3,7 @@
 #import "AFRequestQueue.h"
 #import "AFDownloadRequest.h"
 #import "AFHeaderRequest.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 #import "AFParseHTTPContentRange.h"
 #import "AFRequest+Protected.h"
 #import "AFFileUtils.h"
@@ -128,7 +128,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
         NSString *contentRange = [NSString stringWithFormat:@"bytes=%i-", self.receivedBytes];
         [requestIn setValue:contentRange forHTTPHeaderField:@"Range"];
 
-        NSLog(@"Requesting %@ from %@",contentRange,[URL absoluteString]);
+        AFLog(@"Requesting %@ from %@",contentRange,[URL absoluteString]);
     }
     return requestIn;
 }
@@ -141,7 +141,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
     if( [self isSuccessHTTPResponse] )
     {
-        NSLog(@"Will begin writing to file '%@'", localFilePath);
+        AFLog(@"Will begin writing to file '%@'", localFilePath);
 
         NSURL* fileURL = [NSURL fileURLWithPath:localFilePath];
 
@@ -151,7 +151,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
         {
             NSFileManager *fileManager = [NSFileManager defaultManager];
 
-            NSLog(@"Creating file: %@", localFilePath);
+            AFLog(@"Creating file: %@", localFilePath);
             [AFFileUtils createAncestorDirectoriesForPath:fileURL error:&error];
             [fileManager createFileAtPath:localFilePath contents:nil attributes:nil];
             NSAssert(!error, [error localizedDescription]);

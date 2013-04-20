@@ -1,5 +1,6 @@
 
 #import "UIView+Dump.h"
+#import "AFLog.h"
 
 @implementation UIView (Dump)
 
@@ -20,11 +21,11 @@
 
     if ([text compare:@""] == NSOrderedSame)
     {
-        NSLog(@"%@ %@", classDescription, NSStringFromCGRect(self.frame));
+        AFLog(@"%@ %@", classDescription, NSStringFromCGRect(self.frame));
     }
     else
     {
-        NSLog(@"%@ %@ %@", text, classDescription, NSStringFromCGRect(self.frame));
+        AFLog(@"%@ %@ %@", text, classDescription, NSStringFromCGRect(self.frame));
     }
 
     for (NSUInteger i = 0; i < [self.subviews count]; i++)

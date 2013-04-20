@@ -101,6 +101,14 @@ static NSString* cellClickedSound			= nil;
 	return [self viewCellForTableView:tableIn].frame.size.height;
 }
 
+- (void)didDisappear
+{
+}
+
+- (void)willAppear
+{
+}
+
 -(void)setFillColor:(UIColor*)color
 {
 	UIColor* oldColor = fillColor;
@@ -122,23 +130,24 @@ static NSString* cellClickedSound			= nil;
 
 -(NSString*)cellTemplateName{return nil;}
 
-//=================>> Theme Getters
+
+#pragma mark Theme Getters begin
 
 +(UIColor*)defaultTextColor
 {
-    if(!defaultTextColor) defaultTextColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR] retain];
+    if(!defaultTextColor) defaultTextColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR] retain];
     return defaultTextColor;
 }
 
 +(UIColor*)defaultSecondaryTextColor
 {
-    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR] retain];
+    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR] retain];
     return defaultSecondaryTextColor;
 }
 
 +(UIColor*)defaultBGColor
 {
-    if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
     return defaultBGColor?:[UIColor clearColor];
 }
 
@@ -146,7 +155,7 @@ static NSString* cellClickedSound			= nil;
 {
     if(!defaultTextFont)
     {
-        NSString* fontName = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_DEFAULT_TEXT_FONT];
+        NSString* fontName = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_DEFAULT_TEXT_FONT];
         defaultTextFont = [[UIFont fontWithName:fontName size:[AFTableCell defaultTextSize]] retain];
     }
     return defaultTextFont;
@@ -154,15 +163,18 @@ static NSString* cellClickedSound			= nil;
 
 +(float_t)defaultTextSize
 {
-    if(defaultTextSize<0) defaultTextSize = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] floatForKey:THEME_KEY_DEFAULT_TEXT_SIZE];
+    if(defaultTextSize<0) defaultTextSize = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] floatForKey:THEME_KEY_DEFAULT_TEXT_SIZE];
     return defaultTextSize;
 }
 
 +(NSString*)cellClickedSound
 {
-	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
+	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
 	return cellClickedSound;
 }
+
+#pragma mark Theme Getters end
+
 
 -(void)viewCellDidLoad
 {
@@ -180,10 +192,56 @@ static NSString* cellClickedSound			= nil;
     UIView* backgroundView  = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
     cell.backgroundView     = backgroundView;
     [backgroundView release];
+
+
+	// Begin KVO observance of cells window, so that we can call willAppear and didDisappear
+	[cell addObserver:self
+	       forKeyPath:@"window"
+			  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
+			  context:NULL];
+
 }
 
 
-//=================>> Themeable
+#pragma mark KVO observing begin
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+		                change:(NSDictionary *)change
+			           context:(void *)context
+{
+	BOOL isPrior = [((NSNumber*)change[NSKeyValueChangeNotificationIsPriorKey]) boolValue];
+
+	if(object==cell)
+	{
+		if([keyPath isEqualToString:@"window"])
+		{
+			UIWindow
+				*oldWindow = [change objectForKey:NSKeyValueChangeOldKey],
+				*newWindow = [change objectForKey:NSKeyValueChangeNewKey];
+
+			if((id)oldWindow==[NSNull null]) oldWindow = NULL;
+			if((id)newWindow==[NSNull null]) newWindow = NULL;
+
+			if( (oldWindow==NULL) != (newWindow==NULL) )
+			{
+				if( newWindow ) // Appearing
+				{
+					[self willAppear];
+				}
+				else // Disappearing
+				{
+					[self didDisappear];
+				}
+			}
+		}
+	}
+}
+
+#pragma mark KVO observing end
+
+
+#pragma mark AFPThemeable implementation begin
 
 -(void)themeChanged
 {
@@ -193,7 +251,7 @@ static NSString* cellClickedSound			= nil;
     defaultTextSize = -1.0;
 }
 
-+(id<AFThemeable>)themeParentSectionClass{return (id<AFThemeable>)[AFTable class];}
++(id<AFPThemeable>)themeParentSectionClass{return (id<AFPThemeable>)[AFTable class];}
 +(NSString*)themeSectionName{return @"cell";}
 
 +(NSDictionary*)defaultThemeSection
@@ -206,7 +264,7 @@ static NSString* cellClickedSound			= nil;
     @"FFFFFF",							THEME_KEY_DEFAULT_BG_COLOR,nil];
 }
 
-//=================>> 
+#pragma mark AFPThemeable implementation end
 
 -(void)dealloc
 {

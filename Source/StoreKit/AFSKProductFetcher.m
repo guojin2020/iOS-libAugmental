@@ -10,6 +10,7 @@
 #import "AFSKProductFetchResponse.h"
 #import "AFSKProductFetchResponseSuccess.h"
 #import "AFSKProductFetchResponseFailed.h"
+#import "AFLog.h"
 
 @interface AFSKProductFetcher ()
 
@@ -141,7 +142,7 @@ static AFSKProductFetcher *defaultCache;
 
 - (void)requestDidFinish:(SKRequest *)request
 {
-    NSLog(@"%@",NSStringFromSelector(_cmd));
+    AFLogPosition();
 }
 
 - (void)request:(SKRequest *)storeKitRequestIn didFailWithError:(NSError *)error

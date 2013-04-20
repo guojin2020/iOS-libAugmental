@@ -1,14 +1,14 @@
 #import <Foundation/Foundation.h>
 
 #import "AFField.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_TEXT_COLOR            @"textColor"
 #define THEME_KEY_BEGIN_EDITING_SOUND    @"beginEditingSound"
 
 @protocol AFFieldPersistenceDelegate;
 
-@interface AFTextField : AFField <UITextFieldDelegate, AFThemeable>
+@interface AFTextField : AFField <UITextFieldDelegate, AFPThemeable>
 {
     UITextField                    *textField;
     NSObject <UITextFieldDelegate> *textFieldDelegate;

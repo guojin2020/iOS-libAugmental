@@ -2,7 +2,7 @@
 
 //#import "AFSessionObserver.h"
 #import "AFScreenObserver.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_BG_IMAGE_ENABLE           @"bgImageEnable"
 #define THEME_KEY_BG_IMAGE_NAME             @"bgImageName"
@@ -12,7 +12,7 @@
 @class AFScreen;
 @class NSMapTable;
 
-@interface AFScreenManager : NSObject <UITabBarDelegate, UITabBarControllerDelegate, AFThemeable, AFScreenObserver>
+@interface AFScreenManager : NSObject <UITabBarDelegate, UITabBarControllerDelegate, AFPThemeable, AFScreenObserver>
 {
     NSMutableArray     *screens;
     UITabBarController *tabController;

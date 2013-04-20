@@ -1,7 +1,7 @@
 
 #import "AFWeakCache.h"
 #import "AFObject.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 @implementation AFWeakCache
 {

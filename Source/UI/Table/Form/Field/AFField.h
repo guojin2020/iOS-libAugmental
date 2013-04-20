@@ -4,7 +4,7 @@
 #import "AFCellSelectionDelegate.h"
 #import "AFTableCell.h"
 #import "AFFieldPersistenceDelegate.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_VALID_COLOR    @"inputValidCellColor"
 #define THEME_KEY_INVALID_COLOR @"inputInvalidCellColor"
@@ -17,7 +17,7 @@
 @protocol AFValidator;
 @class AFObject;
 
-@interface AFField : AFTableCell <AFCellSelectionDelegate, AFThemeable>
+@interface AFField : AFTableCell <AFCellSelectionDelegate, AFPThemeable>
 {
     NSObject <AFFieldPersistenceDelegate> *persistenceDelegate;
 

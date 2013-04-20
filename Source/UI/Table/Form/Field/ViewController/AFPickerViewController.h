@@ -1,14 +1,14 @@
 #import <UIKit/UIKit.h>
 #import "AFObjectPickerDelegate.h"
 #import "AFFieldViewPanelController.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_TEXT_COLOR    @"textColor"
 #define THEME_KEY_BG_COLOR        @"bgColor"
 
 @class AFViewPanelField;
 
-@interface AFPickerViewController : AFFieldViewPanelController <UIPickerViewDataSource, UIPickerViewDelegate, AFThemeable>
+@interface AFPickerViewController : AFFieldViewPanelController <UIPickerViewDataSource, UIPickerViewDelegate, AFPThemeable>
 {
     NSArray                           *objects;
     UIPickerView                      *picker;

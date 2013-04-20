@@ -29,7 +29,7 @@
 
     NSError      *error         = nil;
     NSDictionary *rootContainer = [[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error];
-    //NSLog(@"%@",AFSessionStateError);
+    //AFLog(@"%@",AFSessionStateError);
 
     //NSAssert([rootContainer isKindOfClass:[NSDictionary class]],@"There was no paging data from the request '%@'",[URL absoluteString]);
 

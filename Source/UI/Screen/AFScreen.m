@@ -211,28 +211,28 @@ static UIColor  *loadingTitleColor;
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR] retain];}
+    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR] retain];}
     return bgColor;
 }
 
 + (float)bgOpacity
 {
     if (!bgOpacity)
-    {bgOpacity = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY] retain];}
+    {bgOpacity = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY] retain];}
     return [bgOpacity floatValue];
 }
 
 + (NSString *)loadingTitle
 {
     if (!loadingTitle)
-    {loadingTitle = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE] retain];}
+    {loadingTitle = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE] retain];}
     return loadingTitle;
 }
 
 + (UIColor *)loadingTitleColor
 {
     if (!loadingTitleColor)
-    {loadingTitleColor = [[[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR] retain];}
+    {loadingTitleColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR] retain];}
     return loadingTitleColor;
 }
 
@@ -245,7 +245,7 @@ static UIColor  *loadingTitleColor;
     loadingTitle = nil;
 }
 
-+ (id<AFThemeable>)themeParentSectionClass
++ (id<AFPThemeable>)themeParentSectionClass
 {return nil;}
 
 + (NSString *)themeSectionName

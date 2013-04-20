@@ -91,7 +91,7 @@ static UIImage *editIcon = nil;
 
 + (UIImage *)editIcon
 {
-    if (!editIcon)editIcon = [[AFThemeManager themeSectionForClass:(id<AFThemeable>)[AFViewPanelField class]] imageForKey:THEME_KEY_EDIT_ICON];
+    if (!editIcon)editIcon = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFViewPanelField class]] imageForKey:THEME_KEY_EDIT_ICON];
     return editIcon;
 }
 
@@ -100,8 +100,8 @@ static UIImage *editIcon = nil;
 - (void)themeChanged
 {editIcon = nil;}
 
-+ (id<AFThemeable>)themeParentSectionClass
-{return (id<AFThemeable>)[AFField class];}
++ (id<AFPThemeable>)themeParentSectionClass
+{return (id<AFPThemeable>)[AFField class];}
 
 + (NSString *)themeSectionName
 {return nil;}

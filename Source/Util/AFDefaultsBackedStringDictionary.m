@@ -5,6 +5,7 @@
 
 #import "AFDefaultsBackedStringDictionary.h"
 #import "AFMethodBlockedException.h"
+#import "AFLog.h"
 
 const NSString *AFDefaultsBackedDictionaryInvalidArgumentReason = @"You may only store NSString objects in an AFDefaultsBackedStringDictionary";
 
@@ -30,7 +31,7 @@ static NSUserDefaults *defaults;
         NSDictionary* storedDictionary = [defaults dictionaryForKey:defaultsKey];
         if(storedDictionary && [storedDictionary count]>0)
         {
-            NSLog(@"Read %i entries from stored array '%@'",[storedDictionary count],defaultsKeyIn);
+            AFLog(@"Read %i entries from stored array '%@'",[storedDictionary count],defaultsKeyIn);
             dictionary = [[NSMutableDictionary alloc] initWithDictionary:dictionary];
         }
         else

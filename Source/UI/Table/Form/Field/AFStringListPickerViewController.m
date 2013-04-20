@@ -6,7 +6,7 @@
 {
     if ((self = [super initWithObjects:objectsIn delegate:self title:titleIn]))
     {
-        //NSLog(@"String picker objects: %@",objectsIn);
+        //AFLog(@"String picker objects: %@",objectsIn);
 
         self.defaultValue = [objects objectAtIndex:0];
     }

@@ -1,5 +1,9 @@
 #import <Foundation/Foundation.h>
 
+#ifdef DEBUG_MODE
+
+#define AFLog( s, ... ) NSLog( s, ##__VA_ARGS__] )
+
 #define AFLogPosition_0()  NSLog(@"[%@] %@ -> %@",         [NSThread currentThread], NSStringFromClass([self class]), NSStringFromSelector(_cmd) )
 #define AFLogPosition_1(m) NSLog( @"[%@] %@ -> %@ - '%@'", [NSThread currentThread], NSStringFromClass([self class]), NSStringFromSelector(_cmd), (m), nil)
 
@@ -9,16 +13,9 @@
                            AFLogPosition_1(__VA_ARGS__),\
                            AFLogPosition_0(__VA_ARGS__))
 
-#if DEBUG
-
 #else
-#define AFLogPosition()
+
+#define AFLog( s, ... )
+#define AFLogPosition( ... )
+
 #endif
-
-@interface AFLogger : NSObject {}
-
-+(void)log:(NSString *)logString;
-+(void)log:(NSString *)logString level:(int)logLevelIn;
-+(int)logLevel;
-
-@end

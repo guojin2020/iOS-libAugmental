@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define DEFAULT_CELL_HEIGHT 22.0f
 
@@ -20,7 +20,7 @@
  *	Uses the default UITableViewCell to display a line of text and a target object and
  *	selector to announce USER-touches.
  */
-@interface AFTableCell : NSObject <AFThemeable>
+@interface AFTableCell : NSObject <AFPThemeable>
 {
 	UITableView*		tableView;
 	UITableViewCell*	cell;
@@ -61,6 +61,9 @@
 
 -(void)willBeAdded;
 -(void)willBeRemoved;
+
+-(void)willAppear;
+-(void)didDisappear;
 
 -(void)setFillColor:(UIColor*)color;
 -(UIColor*)fillColor;

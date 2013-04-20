@@ -10,6 +10,7 @@
 #import "AFAssertion.h"
 #import "AVAsset+Tracks.h"
 #import "AFDispatch.h"
+#import "AFLog.h"
 
 id PlayerStatusContext;
 NSString *STATUS_KEY = @"status";
@@ -51,7 +52,7 @@ NSString *STATUS_KEY = @"status";
 
 -(void)assetVideoTrackLoaded:(AVAssetTrack*)videoTrack
 {
-    NSLog(@"Track is %ix%i",(int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
+    AFLog(@"Track is %ix%i",(int)videoTrack.naturalSize.width, (int)videoTrack.naturalSize.height);
 
     self.playerItem = [AVPlayerItem playerItemWithAsset:videoTrack.asset];
     [self.playerItem addObserver:self forKeyPath:STATUS_KEY options:NSKeyValueObservingOptionNew context:&PlayerStatusContext];

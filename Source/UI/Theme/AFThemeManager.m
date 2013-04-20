@@ -1,6 +1,6 @@
 #import "AFThemeManager.h"
 #import "AFThemeObserver.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 #import "AFImageCache.h"
 #import <objc/runtime.h>
 
@@ -8,7 +8,7 @@
 
 @interface AFThemeManager ()
 
-+ (NSMutableDictionary *)composeThemeForClass:(id<AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache;
++ (NSMutableDictionary *)composeThemeForClass:(id<AFPThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache;
 
 @end
 
@@ -30,7 +30,7 @@ static NSMutableSet *observers;
     {
         currentTheme = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:DEFAULT_THEME_NAME ofType:@"plist"]];
 
-        //NSLog(@"Loaded theme with %i sections...\n%@",[currentTheme count],currentTheme);
+        //AFLog(@"Loaded theme with %i sections...\n%@",[currentTheme count],currentTheme);
 
     }
     return currentTheme;
@@ -48,12 +48,12 @@ static NSMutableSet *observers;
     NSMutableDictionary *rootThemeDictionary = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *themeCache          = [[NSMutableDictionary alloc] init];
     [themeCache setObject:rootThemeDictionary forKey:ROOT_DICTIONARY_CACHE_KEY];
-    id<AFThemeable> currentClass;
+    id<AFPThemeable> currentClass;
 
     while ([themeables count] > 0)
     {
         currentClass = [themeables anyObject];
-        //NSLog(@"Composing array for %@...",NSStringFromClass(currentClass));
+        //AFLog(@"Composing array for %@...",NSStringFromClass(currentClass));
         [themeables removeObject:currentClass];
         [AFThemeManager composeThemeForClass:currentClass usingCache:themeCache];
     }
@@ -64,13 +64,13 @@ static NSMutableSet *observers;
     return rootThemeDictionary;
 }
 
-+ (NSMutableDictionary *)composeThemeForClass:(id<AFThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
++ (NSMutableDictionary *)composeThemeForClass:(id<AFPThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
 {
     NSString            *className  = NSStringFromClass((Class)themeableClass);
     NSMutableDictionary *dictionary = [themeCache objectForKey:className];
     if (!dictionary)
     {
-        id<AFThemeable> parentClass = [themeableClass themeParentSectionClass];
+        id<AFPThemeable> parentClass = [themeableClass themeParentSectionClass];
         NSMutableDictionary *parentDictionary = parentClass ? [self composeThemeForClass:parentClass usingCache:themeCache] : [themeCache objectForKey:ROOT_DICTIONARY_CACHE_KEY];
 
         NSString *classSectionName = [themeableClass themeSectionName];
@@ -117,9 +117,9 @@ static NSMutableSet *observers;
         for (int i = 0; i < numClasses; i++)
         {
             class = classes[i];
-            if ([NSStringFromClass(class) hasPrefix:@"AF"] && [class conformsToProtocol:@protocol(AFThemeable)])[themeableClasses addObject:class];
+            if ([NSStringFromClass(class) hasPrefix:@"AF"] && [class conformsToProtocol:@protocol(AFPThemeable)])[themeableClasses addObject:class];
         }
-        //NSLog(@"...AFRequestEventFinished.");
+        //AFLog(@"...AFRequestEventFinished.");
         free(classes);
     }
 
@@ -136,10 +136,10 @@ static NSMutableSet *observers;
     {[observer themeChanged];}
 }
 
-+ (NSDictionary *)themeSectionForClass:(id<AFThemeable>)themeableClass
++ (NSDictionary *)themeSectionForClass:(id<AFPThemeable>)themeableClass
 {
-    //NSLog(@"%@",NSStringFromClass(themeableClass));
-    id<AFThemeable> themeableParentClass = [themeableClass themeParentSectionClass];
+    //AFLog(@"%@",NSStringFromClass(themeableClass));
+    id<AFPThemeable> themeableParentClass = [themeableClass themeParentSectionClass];
     NSDictionary *parentSection    = themeableParentClass ? [self themeSectionForClass:themeableParentClass] : [AFThemeManager currentTheme];
     NSString     *themeSectionName = [themeableClass themeSectionName];
     return themeSectionName ? [parentSection objectForKey:themeSectionName] : parentSection;

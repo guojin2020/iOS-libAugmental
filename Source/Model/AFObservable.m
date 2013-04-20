@@ -73,11 +73,11 @@ SEL
     NSSet* observersSnapshot = [observers copy];
 
 #if LOG_OBSERVERS
-	NSLog(@"%@ -> ", NSStringFromSelector(eventIn) );
+	AFLog(@"%@ -> ", NSStringFromSelector(eventIn) );
 	for (id observer in observersSnapshot)
 	{
 		BOOL ok = [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn]);
-		NSLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
+		AFLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
 	}
 #endif
 

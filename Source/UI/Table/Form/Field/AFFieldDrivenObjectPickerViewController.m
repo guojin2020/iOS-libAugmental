@@ -5,7 +5,7 @@
 #import "AFSession.h"
 #import "AFObjectCache.h"
 #import "AFEnvironment.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 @interface AFFieldDrivenObjectPickerViewController ()
 

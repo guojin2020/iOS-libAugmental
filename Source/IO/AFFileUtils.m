@@ -5,6 +5,7 @@
 //
 
 #import "AFFileUtils.h"
+#import "AFLog.h"
 
 @implementation AFFileUtils
 
@@ -16,7 +17,7 @@
     NSString* directoryPath = [[fileURL URLByDeletingLastPathComponent] path];
     if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
     {
-        NSLog(@"Creating directory: %@", directoryPath);
+        AFLog(@"Creating directory: %@", directoryPath);
         [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:error];
         return YES;
     }

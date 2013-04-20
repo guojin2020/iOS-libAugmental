@@ -2,7 +2,7 @@
 #import "AFHeaderRequest.h"
 
 #import "AFRequestEndpoint.h"
-#import "AFLogger.h"
+#import "AFLog.h"
 
 @implementation AFHeaderRequest
 

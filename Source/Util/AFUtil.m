@@ -1,5 +1,6 @@
 #import "AFUtil.h"
 #import "AFObject.h"
+#import "AFLog.h"
 
 @implementation AFUtil
 
@@ -115,7 +116,7 @@ static char base64EncodingTable[64] = {
 + (void)logData:(NSData *)data
 {
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", string);
+    AFLog(@"%@", string);
     [string release];
 }
 

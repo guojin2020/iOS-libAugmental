@@ -1,13 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "AFViewPanelField.h"
 #import "AFField.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 @protocol AFFieldPersistenceDelegate;
 
 #define THEME_KEY_DATE_ICON @"dateIcon"
 
-@interface AFMMYYDateField : AFViewPanelField <AFThemeable>
+@interface AFMMYYDateField : AFViewPanelField <AFPThemeable>
 {
 }
 

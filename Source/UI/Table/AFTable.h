@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFObservable.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 @class AFTableSection;
 @class AFTableViewController;
@@ -12,7 +12,7 @@ extern SEL AFTableEventEdited;
  *	Generic framework-like class, representing an on-screen table
  *  which is assembled from individual pruneCellCache and Section objects.
  */
-@interface AFTable : AFObservable <NSFastEnumeration, AFThemeable>
+@interface AFTable : AFObservable <NSFastEnumeration, AFPThemeable>
 {
 	NSString*       title;
 	NSMutableArray* children;

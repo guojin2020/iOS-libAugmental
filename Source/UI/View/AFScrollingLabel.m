@@ -10,6 +10,7 @@
 
 #import "AFScrollingLabel.h"
 #import "AFAssertion.h"
+#import "AFLog.h"
 
 typedef enum AFScrollingLabelMask
 {
@@ -455,7 +456,7 @@ static CGSize cgSizeMax;
 
 -(void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx
 {
-	NSLog(@"Test");
+	AFLogPosition();
 }
 
 // CAAnimationDelegate implementation

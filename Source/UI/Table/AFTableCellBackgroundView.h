@@ -1,7 +1,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AFTableCell.h"
-#import "AFThemeable.h"
+#import "AFPThemeable.h"
 
 #define THEME_KEY_ROUNDING				@"rounding"
 #define THEME_KEY_BORDER_WIDTH			@"borderWidth"
@@ -17,7 +17,7 @@ typedef enum AFTableCellBackgroundViewPosition
 }
 AFTableCellBackgroundViewPosition;
 
-@interface AFTableCellBackgroundView : UIView <AFThemeable>
+@interface AFTableCellBackgroundView : UIView <AFPThemeable>
 {
     AFTableCell* cell;
     AFTableCellBackgroundViewPosition position;
