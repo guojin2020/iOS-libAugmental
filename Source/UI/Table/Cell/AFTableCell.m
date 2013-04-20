@@ -9,6 +9,8 @@
 #import "AFThemeManager.h"
 #import "AFAssertion.h"
 
+#define ENABLE_DEFAULT_BACKGROUND false
+
 static UIColor* defaultTextColor			= nil;
 static UIColor* defaultSecondaryTextColor	= nil;
 static UIColor* defaultBGColor				= nil;
@@ -189,16 +191,19 @@ static NSString* cellClickedSound			= nil;
 
     //Apply the default background view, more customisable than the Apple default
 
+#if ENABLE_DEFAULT_BACKGROUND
     UIView* backgroundView  = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
     cell.backgroundView     = backgroundView;
     [backgroundView release];
+#endif
 
-
+	/*
 	// Begin KVO observance of cells window, so that we can call willAppear and didDisappear
 	[cell addObserver:self
 	       forKeyPath:@"window"
 			  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
 			  context:NULL];
+			  */
 
 }
 

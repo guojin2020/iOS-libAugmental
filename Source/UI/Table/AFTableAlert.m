@@ -60,11 +60,6 @@
     UIGraphicsEndImageContext();
 }
 
--(void)drawRect:(CGRect)rect
-{
-    [super drawRect:rect];
-}
-
 #pragma mark
 #pragma mark Property Methods
 
