@@ -12,4 +12,6 @@
 
 - (id)initWithRenderer:(NSObject <AFPImageRenderer> *)rendererIn;
 
+@property (nonatomic, retain) NSObject<AFPImageRenderer>* renderer;
+
 @end

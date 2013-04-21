@@ -11,12 +11,30 @@
 {
 	NSAssert(rendererIn,NSInvalidArgumentException);
 
-	self = [super init];
+	self = [self init];
 	if(self)
 	{
 		renderer = [rendererIn retain];
 	}
 	return self;
+}
+
+- (void)setRenderer:(NSObject <AFPImageRenderer> *)rendererIn
+{
+	if(rendererIn!=renderer)
+	{
+		[rendererIn retain];
+		[renderer release];
+		renderer = rendererIn;
+
+		self.image = NULL;
+		[self setNeedsLayout];
+	}
+}
+
+- (NSObject <AFPImageRenderer> *)renderer
+{
+	return renderer;
 }
 
 -(void)layoutSubviews
@@ -27,7 +45,8 @@
 		selfSize  = self.frame.size,
 		imageSize = self.image ? self.image.size : CGSizeZero;
 
-	if( selfSize.width>0 && selfSize.height>0 && !CGSizeEqualToSize(imageSize, selfSize) )
+	// If this view has a non-zero size and the current image size doesn't match
+	if( selfSize.width>0 && selfSize.height>0 && !CGSizeEqualToSize(imageSize, selfSize) && renderer)
 	{
 		self.image = [[AFRenderedImageCache sharedInstance] imageFromRenderer:renderer withSize:selfSize];
 	}

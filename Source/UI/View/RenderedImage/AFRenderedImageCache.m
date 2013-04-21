@@ -14,7 +14,7 @@
 
 @end
 
-static AFRenderedImageCache *sharedInstance;
+static AFRenderedImageCache *sharedInstance = NULL;
 
 @implementation AFRenderedImageCache
 
