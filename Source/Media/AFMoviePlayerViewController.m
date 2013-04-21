@@ -23,6 +23,7 @@
 - (void)loadView
 {
     [player prepareToPlay];
+	player.controlStyle = MPMovieControlModeHidden;
     self.view = player.view;
 }
 

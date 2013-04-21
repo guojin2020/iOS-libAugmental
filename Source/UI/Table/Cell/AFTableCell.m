@@ -197,13 +197,11 @@ static NSString* cellClickedSound			= nil;
     [backgroundView release];
 #endif
 
-	/*
 	// Begin KVO observance of cells window, so that we can call willAppear and didDisappear
 	[cell addObserver:self
 	       forKeyPath:@"window"
 			  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
 			  context:NULL];
-			  */
 
 }
 
