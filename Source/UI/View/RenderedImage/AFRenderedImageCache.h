@@ -10,5 +10,6 @@
 + (AFRenderedImageCache *)sharedInstance;
 
 -(UIImage*)imageFromRenderer:(id<AFPImageRenderer>)renderer withSize:(CGSize)size;
+- (void)purgeSizeCacheForRenderer:(id <AFPImageRenderer>)renderer;
 
 @end

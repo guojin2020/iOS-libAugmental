@@ -1,6 +1,7 @@
 //
 // Created by Chris Hatton on 20/04/2013.
 //
+#import <CoreGraphics/CoreGraphics.h>
 #import "AFRenderedImageCache.h"
 #import "AFPImageRenderer.h"
 #import "AFThemeManager.h"
@@ -45,6 +46,11 @@ static AFRenderedImageCache *sharedInstance;
 
 -(UIImage*)imageFromRenderer:(id <AFPImageRenderer>)renderer withSize:(CGSize)size
 {
+	NSAssert(renderer, NSInvalidArgumentException);
+	NSAssert( size.width>0 && size.height>0, NSInvalidArgumentException );
+
+	size = CGSizeMake(roundf(size.width), roundf(size.height));
+
 	NSValue *rendererKey = [NSValue valueWithNonretainedObject:renderer];
 
 	NSMutableDictionary *sizes = [_rendererCaches objectForKey:rendererKey];
@@ -72,6 +78,12 @@ static AFRenderedImageCache *sharedInstance;
 {
 	[_rendererCaches release];
 	[super dealloc];
+}
+
+- (void)purgeSizeCacheForRenderer:(id <AFPImageRenderer>)renderer
+{
+	NSMutableDictionary *sizes = [_rendererCaches objectForKey:renderer];
+	[sizes removeAllObjects];
 }
 
 @end

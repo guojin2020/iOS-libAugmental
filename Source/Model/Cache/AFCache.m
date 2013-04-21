@@ -7,7 +7,7 @@
 
 @implementation AFCache
 {
-    NSMutableDictionary* cache;
+    CFMutableDictionaryRef cache;
     AFCache * nextCache;
 }
 
@@ -18,7 +18,7 @@
     self = [super init];
     if (self)
     {
-        cache = [[NSMutableDictionary alloc] init];
+        cache = CFDictionaryCreateMutable(NULL, 1,  &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(purgeCache)
@@ -31,29 +31,33 @@
 
 -(NSObject*)objectForKey:(NSObject *)key
 {
-    NSObject *object = [cache objectForKey:key];
+    NSObject *object = CFDictionaryGetValue(cache, key);
     if(!object && nextCache) object = [nextCache objectForKey:key];
     return object;
 }
 
 -(void)setObject:(NSObject*)object forKey:(NSObject*)key
 {
-    CFDictionarySetValue((CFMutableDictionaryRef)cache, key, object);
+    CFDictionarySetValue(cache, key, object);
 }
 
 -(void)purgeCache
 {
+	NSUInteger size = CFDictionaryGetCount(cache);
+	CFTypeRef *keysTypeRef = (CFTypeRef *) malloc( size * sizeof(CFTypeRef) );
+	CFDictionaryGetKeysAndValues(cache, keysTypeRef, NULL);
+
     NSObject *object;
-    NSArray *cacheKeysSnapshot = [[NSArray alloc] initWithArray:[cache allKeys]];
-    for(NSObject *key in cacheKeysSnapshot)
+	CFTypeRef keyRef;
+	int i=0;
+    while( (keyRef = keysTypeRef[i++] ) )
     {
-        object = cache[key];
+        object = CFDictionaryGetValue(cache, keyRef);
         if([object retainCount]==1)
         {
-            [cache removeObjectForKey:key];
+	        CFDictionaryRemoveValue(cache, keyRef);
         }
     }
-    [cacheKeysSnapshot release];
 }
 
 - (void)dealloc
@@ -61,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:UIApplicationDidReceiveMemoryWarningNotification
                                                   object:nil];
-    [cache release];
+	CFRelease(cache);
     [nextCache release];
     [super dealloc];
 }
