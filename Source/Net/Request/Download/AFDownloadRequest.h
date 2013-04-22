@@ -9,13 +9,14 @@
 @class AFHeaderRequest;
 @class AFSession;
 @class AFRequestQueue;
+@class AFDefaultsBackedStringDictionary;
 
 @protocol AFPDownloadable;
 
 @interface AFDownloadRequest : AFRequest <AFRequestEndpoint, UIAlertViewDelegate, AFPDownloadRequest>
 {
 	AFRequest* pollSizeRequest;
-	NSMutableDictionary *expectedSizeCache;
+	AFDefaultsBackedStringDictionary *expectedSizeCache;
 }
 
 -(id)initWithDownloadable:(id<AFPDownloadable>)downloadableIn

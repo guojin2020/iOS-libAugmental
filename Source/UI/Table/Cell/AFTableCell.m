@@ -202,7 +202,6 @@ static NSString* cellClickedSound			= nil;
 	       forKeyPath:@"window"
 			  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
 			  context:NULL];
-
 }
 
 
@@ -213,7 +212,7 @@ static NSString* cellClickedSound			= nil;
 		                change:(NSDictionary *)change
 			           context:(void *)context
 {
-	BOOL isPrior = [((NSNumber*)change[NSKeyValueChangeNotificationIsPriorKey]) boolValue];
+	//BOOL isPrior = [((NSNumber*)change[NSKeyValueChangeNotificationIsPriorKey]) boolValue];
 
 	if(object==cell)
 	{

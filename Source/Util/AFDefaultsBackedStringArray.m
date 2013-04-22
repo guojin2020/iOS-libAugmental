@@ -60,6 +60,16 @@ static NSUserDefaults *defaults;
 {
     if(![anObject isKindOfClass:[NSString class]]) [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedArrayInvalidArgumentReason];
     [array addObject:anObject];
+
+	//[self synchronize];
+}
+
+- (void)removeObject:(id)anObject
+{
+	if(![anObject isKindOfClass:[NSString class]]) [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedArrayInvalidArgumentReason];
+	[array removeObject:anObject];
+
+	//[self synchronize];
 }
 
 - (BOOL)containsObject:(id)anObject
