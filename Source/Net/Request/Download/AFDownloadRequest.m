@@ -9,6 +9,7 @@
 #import "AFFileUtils.h"
 #import "AFAssertion.h"
 #import "AFDispatch.h"
+#import "AFDefaultsBackedStringDictionary.h"
 
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
@@ -78,23 +79,26 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
             self.expectedBytes = [expectedSizeNumber intValue];
         }
 
-	    AFBackgroundDispatch( ^{ [self beginPollSize:queueIn]; });
+	    dispatch_block_t beginPollSize = ^
+	    {
+		    [self beginPollSize:queueIn];
+	    };
+
+	    AFBackgroundDispatch( beginPollSize );
     }
     return self;
 }
 
 -(void)beginPollSize:(AFRequestQueue*)queueIn
 {
+	NSAssert(queueIn, NSInvalidArgumentException);
 	AFAssertBackgroundThread();
 
-    if(queueIn)
-    {
-        [self notifyObservers:AFRequestEventWillPollSize parameters:self,NULL];
+    [self notifyObservers:AFRequestEventWillPollSize parameters:self,NULL];
 
-        pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:self.URL endpoint:self];
-        [queueIn handleRequest:pollSizeRequest];
-        [pollSizeRequest release];
-    }
+    pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:self.URL endpoint:self];
+    [queueIn handleRequest:pollSizeRequest];
+    [pollSizeRequest release];
 }
 
 -(void)request:(AFRequest*)request returnedWithData:(id)header

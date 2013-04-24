@@ -1,4 +1,6 @@
 
+#import <dispatch/dispatch.h>
+
 #define AFMainDispatch(BLOCK)       dispatch_async(dispatch_get_main_queue(), BLOCK )
 #define AFBackgroundDispatch(BLOCK) dispatch_async( AFBackgroundQueue, BLOCK )
 
