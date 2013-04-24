@@ -12,7 +12,7 @@
 
 -(void)beginLoadVideoTrackTo:(id)target selector:(SEL)callbackSelector
 {
-    void (^handleTracksLoaded)() = ^
+    dispatch_block_t handleTracksLoaded = ^
     {
         NSError *error;
         AVKeyValueStatus status = [self statusOfValueForKey:TRACKS_KEY error:&error];
