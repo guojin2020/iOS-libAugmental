@@ -148,9 +148,16 @@ SEL
 {
 	AFAssertBackgroundThread();
 
-    queuePosition = queuePositionIn;
+	if(queuePosition!=queuePositionIn)
+	{
+        queuePosition = queuePositionIn;
+		[self notifyObservers:AFRequestEventQueued parameters:self,[NSNumber numberWithInt:queuePosition],nil];
+	}
+
     self.state = AFRequestStateQueued;
 }
+
+
 
 - (void)received:(NSData *)dataIn
 {

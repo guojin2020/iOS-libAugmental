@@ -7,11 +7,11 @@
 
 @implementation AFRenderedImageView
 
--(id)initWithRenderer:(NSObject<AFPImageRenderer>*)rendererIn
+-(id)initWithRenderer:(id<AFPImageRenderer>)rendererIn
 {
 	NSAssert(rendererIn,NSInvalidArgumentException);
 
-	self = [self init];
+	self = [super init];
 	if(self)
 	{
 		renderer = [rendererIn retain];
@@ -19,7 +19,7 @@
 	return self;
 }
 
-- (void)setRenderer:(NSObject <AFPImageRenderer> *)rendererIn
+- (void)setRenderer:(id<AFPImageRenderer>)rendererIn
 {
 	if(rendererIn!=renderer)
 	{
@@ -32,7 +32,7 @@
 	}
 }
 
-- (NSObject <AFPImageRenderer> *)renderer
+- (id<AFPImageRenderer>)renderer
 {
 	return renderer;
 }

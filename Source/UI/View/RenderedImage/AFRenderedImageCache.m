@@ -8,7 +8,7 @@
 
 @interface AFRenderedImageCache ()
 
-@property (nonatomic,readonly) NSMutableDictionary* rendererCaches;
+@property (nonatomic,readonly) NSCache* rendererCaches;
 
 - (void)purgeCache;
 
@@ -28,12 +28,7 @@ static AFRenderedImageCache *sharedInstance = NULL;
 	self = [super init];
 	if(self)
 	{
-		_rendererCaches = [NSMutableDictionary new];
-
-		[[NSNotificationCenter defaultCenter] addObserver:self
-		                                         selector:@selector(purgeCache)
-				                                     name:UIApplicationDidReceiveMemoryWarningNotification
-					                               object:nil];
+		_rendererCaches = [NSCache new];
 	}
 	return self;
 }
@@ -53,11 +48,11 @@ static AFRenderedImageCache *sharedInstance = NULL;
 
 	NSValue *rendererKey = [NSValue valueWithNonretainedObject:renderer];
 
-	NSMutableDictionary *sizes = [_rendererCaches objectForKey:rendererKey];
+	NSCache *sizes = [_rendererCaches objectForKey:rendererKey];
 
 	if(!sizes)
 	{
-		sizes = [NSMutableDictionary new];
+		sizes = [NSCache new];
 		[_rendererCaches setObject:sizes forKey:rendererKey];
 	}
 
@@ -82,7 +77,7 @@ static AFRenderedImageCache *sharedInstance = NULL;
 
 - (void)purgeSizeCacheForRenderer:(id <AFPImageRenderer>)renderer
 {
-	NSMutableDictionary *sizes = [_rendererCaches objectForKey:renderer];
+	NSCache *sizes = [_rendererCaches objectForKey:renderer];
 	[sizes removeAllObjects];
 }
 

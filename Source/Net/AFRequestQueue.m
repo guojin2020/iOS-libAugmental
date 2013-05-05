@@ -82,7 +82,10 @@
                 }
                 else
                 {
-                    if ([request isKindOfClass:[AFRequest class]])[request requestWasQueuedAtPosition:queuePosition];
+                    if ([request isKindOfClass:[AFRequest class]])
+                    {
+	                    [request requestWasQueuedAtPosition:queuePosition];
+                    }
                     queuePosition++;
                 }
             }
