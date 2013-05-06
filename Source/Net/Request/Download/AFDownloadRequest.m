@@ -84,7 +84,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 		    [self beginPollSize:queueIn];
 	    };
 
-	    AFBackgroundDispatch( beginPollSize );
+	    AFBeginBackgroundDispatch( beginPollSize );
     }
     return self;
 }

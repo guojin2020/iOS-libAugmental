@@ -14,6 +14,4 @@
 
 - (void)setObject:(NSObject *)object forKey:(NSObject *)key;
 
-- (void)purgeCache;
-
 @end

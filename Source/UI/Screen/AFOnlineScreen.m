@@ -22,7 +22,7 @@
 		else             [self hideOfflineView];
 	};
 
-	AFMainDispatch( block );
+	AFBeginMainDispatch( block );
 }
 
 - (void)showOfflineView

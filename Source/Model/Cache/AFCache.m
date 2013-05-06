@@ -7,7 +7,7 @@
 
 @implementation AFCache
 {
-    CFMutableDictionaryRef cache;
+    NSCache* cache;
     AFCache * nextCache;
 }
 
@@ -18,12 +18,8 @@
     self = [super init];
     if (self)
     {
-        cache = CFDictionaryCreateMutable(NULL, 1,  &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(purgeCache)
-                                                     name:UIApplicationDidReceiveMemoryWarningNotification
-                                                   object:nil];
+        cache = [NSCache new];
+	    nextCache = NULL;
     }
 
     return self;
@@ -31,41 +27,18 @@
 
 -(NSObject*)objectForKey:(NSObject *)key
 {
-    NSObject *object = CFDictionaryGetValue(cache, key);
+    NSObject *object = [cache objectForKey:key];
     if(!object && nextCache) object = [nextCache objectForKey:key];
     return object;
 }
 
 -(void)setObject:(NSObject*)object forKey:(NSObject*)key
 {
-    CFDictionarySetValue(cache, key, object);
-}
-
--(void)purgeCache
-{
-	NSUInteger size = CFDictionaryGetCount(cache);
-	CFTypeRef *keysTypeRef = (CFTypeRef *) malloc( size * sizeof(CFTypeRef) );
-	CFDictionaryGetKeysAndValues(cache, keysTypeRef, NULL);
-
-    NSObject *object;
-	CFTypeRef keyRef;
-	int i=0;
-    while( (keyRef = keysTypeRef[i++] ) )
-    {
-        object = CFDictionaryGetValue(cache, keyRef);
-        if([object retainCount]==1)
-        {
-	        CFDictionaryRemoveValue(cache, keyRef);
-        }
-    }
+	[cache setObject:object forKey:key];
 }
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                    name:UIApplicationDidReceiveMemoryWarningNotification
-                                                  object:nil];
-	CFRelease(cache);
     [nextCache release];
     [super dealloc];
 }

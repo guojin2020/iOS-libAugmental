@@ -15,8 +15,8 @@
 {
     if ((self = [super init]))
     {
-        cache           = [[NSMutableDictionary alloc] init];
-        numberFormatter = [[NSNumberFormatter alloc] init];
+        cache           = [NSCache new];
+        numberFormatter = [NSNumberFormatter new];
         //[[AFAppDelegate appEventManager] addObserver:self]; //FIX!!
     }
     return self;
@@ -59,22 +59,21 @@
 {
     AFObject* object;
     int retainCount;
-    NSMutableSet        *keysForRemoval = [[NSMutableSet alloc] init];
-    NSMutableDictionary *typeDictionary;
-    for (NSString       *typeName in cache) //Iterate over each object type
+    NSMutableSet *keysForRemoval = [[NSMutableSet alloc] init];
+    NSCache *typeCache;
+    for (NSString *typeName in cache) //Iterate over each object type
     {
-        typeDictionary = (NSMutableDictionary *) [cache objectForKey:typeName];
-        for (NSNumber *key in typeDictionary)
+        typeCache = [cache objectForKey:typeName];
+        for (NSNumber *key in typeCache)
         {
-            object      = [typeDictionary objectForKey:key];
+            object      = [typeCache objectForKey:key];
             retainCount = [object retainCount];
             if (retainCount == 1) [keysForRemoval addObject:key];
         }
 
         for (NSNumber *key in keysForRemoval)
         {
-            //object = [typeDictionary objectForKey:key];
-            [typeDictionary removeObjectForKey:key];
+            [typeCache removeObjectForKey:key];
         }
     }
     [keysForRemoval release];
@@ -125,7 +124,7 @@
 
         if ([object primaryKey] > 0)
         {
-            NSMutableDictionary *typeDictionary = (NSMutableDictionary *) [cache objectForKey:NSStringFromClass((Class)objectClass)];
+            NSCache *typeDictionary = (NSCache *) [cache objectForKey:NSStringFromClass((Class)objectClass)];
             [typeDictionary removeObjectForKey:[NSNumber numberWithInt:object.primaryKey]];
 
             NSString *queryString = [NSString stringWithFormat:@"?action=delete%@&id=%i", [objectClass modelName], [object primaryKey]];
@@ -145,7 +144,7 @@
 {
     NSAssert(pk > 0, @"Invalid primary key calling %@", NSStringFromSelector(_cmd));
 
-    NSMutableDictionary *typeDictionary = [cache objectForKey:modelName];
+    NSCache *typeDictionary = [cache objectForKey:modelName];
     NSObject            *object         = [typeDictionary objectForKey:[NSNumber numberWithInt:pk]];
     if (object)
     {
@@ -190,14 +189,14 @@
             return;
         }
         NSString            *className      = NSStringFromClass([object class]);
-        NSMutableDictionary *typeDictionary = (NSMutableDictionary *) [cache objectForKey:className];
-        if (!typeDictionary)
+        NSCache *typeCache = (NSCache *) [cache objectForKey:className];
+        if (!typeCache)
         {
-            typeDictionary = [[NSMutableDictionary alloc] initWithCapacity:10];
-            [cache setObject:typeDictionary forKey:className];
-            [typeDictionary release];
+            typeCache = [NSCache new];
+	        [cache setObject:typeCache forKey:className];
+            [typeCache release];
         }
-        [typeDictionary setObject:object forKey:[NSNumber numberWithInt:[object primaryKey]]];
+        [typeCache setObject:object forKey:[NSNumber numberWithInt:[object primaryKey]]];
     }
 }
 

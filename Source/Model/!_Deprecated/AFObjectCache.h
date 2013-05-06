@@ -20,7 +20,7 @@
 /* DEPRECATED_ATTRIBUTE */
 @interface AFObjectCache : NSObject <NSKeyedArchiverDelegate, NSKeyedUnarchiverDelegate, AFRequestEndpoint>
 {
-    NSMutableDictionary *cache;
+    NSCache *cache;
     NSNumberFormatter   *numberFormatter;
 }
 

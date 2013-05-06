@@ -284,7 +284,7 @@
 	    [findRequest release];
 	};
 
-	AFBackgroundDispatch( action );
+	AFBeginBackgroundDispatch( action );
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -299,7 +299,7 @@
 		if (findRequest) [findRequest received:data];
 	};
 
-	AFBackgroundDispatch( handOff );
+	AFBeginBackgroundDispatch( handOff );
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -314,7 +314,7 @@
 		[findRequest didFail:error];
 	};
 
-	AFBackgroundDispatch( handOff );
+	AFBeginBackgroundDispatch( handOff );
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -337,7 +337,7 @@
 		[connection autorelease];
 	};
 
-	AFBackgroundDispatch( handOff );
+	AFBeginBackgroundDispatch( handOff );
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse

@@ -116,7 +116,7 @@ NSString *STATUS_KEY = @"status";
 {
     if (context == &PlayerStatusContext)
     {
-	    AFBackgroundDispatch( ^{ [self refresh]; } );
+	    AFBeginBackgroundDispatch( ^{ [self refresh]; } );
     }
 }
 

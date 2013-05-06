@@ -87,7 +87,7 @@ static AFSession *sharedSession = nil;
 		[self startConnectionInternal:request];
 	};
 
-	AFBackgroundDispatch( block );
+	AFBeginBackgroundDispatch( block );
 
     return YES;
 }

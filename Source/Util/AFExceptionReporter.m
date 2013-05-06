@@ -59,7 +59,7 @@ void AFReportingExceptionHandler(NSException* exception)
 	};
 
 	if([NSThread isMainThread]) showAlertBlock();
-	else AFMainDispatch( showAlertBlock );
+	else AFBeginMainDispatch( showAlertBlock );
 }
 
 @implementation AFExceptionReporter
@@ -91,7 +91,7 @@ void AFReportingExceptionHandler(NSException* exception)
 	};
 
 	if([NSThread isMainThread]) dismissBlock();
-	else AFMainDispatch( dismissBlock );
+	else AFBeginMainDispatch( dismissBlock );
 }
 
 @end
