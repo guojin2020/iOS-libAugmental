@@ -57,11 +57,12 @@
 
 - (void)pruneCache
 {
+	/*
     AFObject* object;
     int retainCount;
     NSMutableSet *keysForRemoval = [[NSMutableSet alloc] init];
     NSCache *typeCache;
-    for (NSString *typeName in cache) //Iterate over each object type
+    for (NSString *typeName in []) //Iterate over each object type
     {
         typeCache = [cache objectForKey:typeName];
         for (NSNumber *key in typeCache)
@@ -77,6 +78,7 @@
         }
     }
     [keysForRemoval release];
+    */
 }
 
 - (void)emptyCache

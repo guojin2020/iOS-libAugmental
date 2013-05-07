@@ -118,7 +118,7 @@ static AFSKProductFetcher *defaultCache;
                 found = YES;
 
                 response = [[AFSKProductFetchResponseSuccess alloc] initWithProduct:product];
-                [request.productConsumer didReceiveResponse:response toRequest:request];
+	            [request.productConsumer didReceiveResponse:response toProductRequest:request];
                 [response release];
             }
         }
@@ -129,7 +129,7 @@ static AFSKProductFetcher *defaultCache;
     for(request in activeRequests)
     {
         response = [[AFSKProductFetchResponseFailed alloc] initWithReason:@"currently unavailable"];
-        [request.productConsumer didReceiveResponse:response toRequest:request];
+	    [request.productConsumer didReceiveResponse:response toProductRequest:request];
         [response release];
     }
 
@@ -155,7 +155,7 @@ static AFSKProductFetcher *defaultCache;
 	for(request in activeRequests)
 	{
 		response = [[AFSKProductFetchResponseFailed alloc] initWithReason:@"Could not contact iTunes"];
-		[request.productConsumer didReceiveResponse:response toRequest:request];
+		[request.productConsumer didReceiveResponse:response toProductRequest:request];
 		[response release];
 	}
 

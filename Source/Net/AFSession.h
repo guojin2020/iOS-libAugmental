@@ -57,7 +57,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendProductRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse;
 */
 
 - (void)addObserver:(NSObject <AFSessionObserver> *)sessionObserver;

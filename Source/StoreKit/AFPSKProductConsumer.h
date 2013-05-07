@@ -8,8 +8,8 @@
 
 @protocol AFPSKProductConsumer
 
--(void)willSendRequest:(AFSKProductRequest*)request;
--(void)didReceiveResponse:(AFSKProductFetchResponse*)result toRequest:(AFSKProductRequest*)request;
+-(void)willSendProductRequest:(AFSKProductRequest*)request;
+-(void)didReceiveResponse:(AFSKProductFetchResponse *)result toProductRequest:(AFSKProductRequest*)request;
 
 @property(nonatomic,readonly) NSString* storeKitProductId;
 
