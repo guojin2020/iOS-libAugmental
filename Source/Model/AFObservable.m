@@ -66,51 +66,57 @@ SEL
 {
     NSAssert ( eventIn, NSInvalidArgumentException );
 
-    NSMethodSignature *selectorMethodSignature;
-    NSInvocation *invocation;
-    int index;
-
-    NSSet* observersSnapshot = [observers copy];
-
-#if LOG_OBSERVERS
-	AFLog(@"%@ -> ", NSStringFromSelector(eventIn) );
-	for (id observer in observersSnapshot)
+	@synchronized (observers)
 	{
-		BOOL ok = [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn]);
-		AFLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
+	    NSMethodSignature *selectorMethodSignature;
+	    NSInvocation *invocation;
+	    int index;
+
+	    NSSet* observersSnapshot = [observers copy];
+
+	#if LOG_OBSERVERS
+		AFLog(@"%@ -> ", NSStringFromSelector(eventIn) );
+		for (id observer in observersSnapshot)
+		{
+			BOOL ok = [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn]);
+			AFLog(@"- %@, %@",observer, ok?@"Yes":@"No" );
+		}
+	#endif
+
+	    for (id observer in observersSnapshot)
+	    {
+	        if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
+	        {
+	            invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
+	            invocation.target = observer;
+	            invocation.selector = eventIn;
+
+	            index = 2; // Indices 0, 1 are reserved according to NSInvocation documentation
+	            for (id parameter in parameters)
+	            {
+	                [invocation setArgument:&parameter atIndex:index++];
+	            }
+
+	            if (lockCount == 0)
+	            {
+	                [invocation invoke];
+	            }
+	            else
+	            {
+	                [invocationQueue addObject:invocation];
+	            }
+	        }
+	    }
+	    [observersSnapshot release];
 	}
-#endif
-
-    for (id observer in observersSnapshot)
-    {
-        if ( [observer respondsToSelector:eventIn] && ( selectorMethodSignature = [observer methodSignatureForSelector:eventIn] ) )
-        {
-            invocation = [NSInvocation invocationWithMethodSignature:selectorMethodSignature];
-            invocation.target = observer;
-            invocation.selector = eventIn;
-
-            index = 2; // Indices 0, 1 are reserved according to NSInvocation documentation
-            for (id parameter in parameters)
-            {
-                [invocation setArgument:&parameter atIndex:index++];
-            }
-
-            if (lockCount == 0)
-            {
-                [invocation invoke];
-            }
-            else
-            {
-                [invocationQueue addObject:invocation];
-            }
-        }
-    }
-    [observersSnapshot release];
 }
 
 - (void)addObserver:(id)observer
 {
-    [observers addObject:observer];
+	@synchronized (observers)
+	{
+		[observers addObject:observer];
+	}
 }
 
 - (void)addObservers:(NSArray *)observersIn
@@ -120,7 +126,10 @@ SEL
 
 - (void)removeObserver:(id)observer
 {
-    [observers removeObject:observer];
+	@synchronized (observers)
+	{
+        [observers removeObject:observer];
+	}
 }
 
 - (void)dealloc

@@ -10,6 +10,6 @@
 
 +(bool)createAncestorDirectoriesForPath:(NSURL *)fileURL error:(NSError * *)error;
 
-+(NSString *)documentsDirectory;
++(NSString *)downloadsDirectory;
 
 @end

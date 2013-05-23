@@ -111,19 +111,17 @@ static AFSKProductFetcher *defaultCache;
     for(SKProduct* product in storeKitResponse.products)
     {
         found = NO;
-        for(request in activeRequests)
+        for(request in [activeRequests copy])
         {
             if([request.productConsumer.storeKitProductId isEqualToString:product.productIdentifier])
             {
                 found = YES;
-
+	            [activeRequests removeObject:request];
                 response = [[AFSKProductFetchResponseSuccess alloc] initWithProduct:product];
 	            [request.productConsumer didReceiveResponse:response toProductRequest:request];
                 [response release];
             }
         }
-
-        if(found) [activeRequests removeObject:request];
     }
 
     for(request in activeRequests)
