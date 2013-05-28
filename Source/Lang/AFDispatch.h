@@ -6,8 +6,8 @@
 */
 extern dispatch_queue_t AFBackgroundQueue;
 
-#define AFBeginMainDispatch(BLOCK)       dispatch_async( dispatch_get_main_queue(), BLOCK )
-#define AFBeginBackgroundDispatch(BLOCK) dispatch_async( AFBackgroundQueue, BLOCK )
+#define AFBeginMainDispatch(dispatch_block_t)       dispatch_async( dispatch_get_main_queue(), dispatch_block_t )
+#define AFBeginBackgroundDispatch(dispatch_block_t) dispatch_async( AFBackgroundQueue, dispatch_block_t )
 
 #define AFMainDispatch(BLOCK)            dispatch_sync(dispatch_get_main_queue(), BLOCK )
 #define AFBackgroundDispatch(BLOCK)      dispatch_sync( AFBackgroundQueue, BLOCK )
