@@ -14,7 +14,7 @@
 // 512KB Buffer
 #define DATA_BUFFER_LENGTH 524288
 #define SIZE_CACHE_ERROR @""
-#define APPLICATION_BUFFERING_ENABLED true
+#define APPLICATION_BUFFERING_ENABLED NO
 
 @interface AFDownloadRequest ()
 
@@ -211,6 +211,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 - (void)received:(NSData *)dataIn
 {
+	@synchronized (self)
+	{
     [super received:dataIn];
 
 #if APPLICATION_BUFFERING_ENABLED
@@ -240,7 +242,9 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
 #else
 
-    [fileHandle writeData:dataIn];
+
+        [fileHandle writeData:dataIn];
+	}
 
 #endif
 

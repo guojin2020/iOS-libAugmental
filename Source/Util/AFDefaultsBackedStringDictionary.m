@@ -68,31 +68,66 @@ static NSUserDefaults *defaults;
 
 - (void)setObject:(id)anObject forKey:(id <NSCopying>)aKey
 {
-    if(!([anObject isKindOfClass:[NSString class]] ||
-		 [anObject isKindOfClass:[NSNumber class]]))
-        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
+	@synchronized (dictionary)
+	{
+	    if(!([anObject isKindOfClass:[NSString class]] ||
+			 [anObject isKindOfClass:[NSNumber class]]))
+	        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
 
-    [dictionary setObject:anObject forKey:aKey];
+	    [dictionary setObject:anObject forKey:aKey];
+	}
 }
 
 - (void)setObject:(id)obj forKeyedSubscript:(id <NSCopying>)key
 {
-	if(!([obj isKindOfClass:[NSString class]] ||
-	     [obj isKindOfClass:[NSNumber class]]))
-        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
+	@synchronized(dictionary)
+	{
+		if(!([obj isKindOfClass:[NSString class]] ||
+		     [obj isKindOfClass:[NSNumber class]]))
+	        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
 
-	[dictionary setObject:obj forKeyedSubscript:key];
+		[dictionary setObject:obj forKeyedSubscript:key];
+	}
 }
 
-- (id)objectForKey:(id)aKey         { return [dictionary objectForKey:aKey]; }
-- (NSUInteger)count                 { return [dictionary count]; }
-- (NSEnumerator *)keyEnumerator     { return [dictionary keyEnumerator]; }
-- (void)removeObjectForKey:(id)aKey { [dictionary removeObjectForKey:aKey]; }
+- (id)objectForKey:(id)aKey
+{
+	@synchronized(dictionary)
+	{
+		return [dictionary objectForKey:aKey];
+	}
+}
+
+- (NSUInteger)count
+{
+	@synchronized(dictionary)
+	{
+		return [dictionary count];
+	}
+}
+- (NSEnumerator *)keyEnumerator
+{
+	@synchronized(dictionary)
+	{
+		return [dictionary keyEnumerator];
+	}
+}
+
+- (void)removeObjectForKey:(id)aKey
+{
+	@synchronized(dictionary)
+	{
+		[dictionary removeObjectForKey:aKey];
+	}
+}
 
 -(void)synchronize
 {
-    [defaults setObject:dictionary forKey:defaultsKey];
-    [defaults synchronize];
+	@synchronized (dictionary)
+	{
+	    [defaults setObject:dictionary forKey:defaultsKey];
+	    [defaults synchronize];
+	}
 }
 
 - (void)dealloc

@@ -56,6 +56,9 @@
             requestIsAlreadyActive,
             maxRequestsReached;
 
+	    AFLogPosition(@"State of request queue is:");
+
+	    int i=0;
         for( AFRequest* request in queue )
         {
             NSAssert( request.state == AFRequestStateQueued, @"All requests in the queue should be 'pending', but found one which was marked " );
@@ -64,6 +67,8 @@
 
             if( requestIsAlreadyActive )
             {
+	            NSLog(@"%i - %@ - Already active",i++,request);
+
                 [activatedRequests removeObject:request];
             }
             else
@@ -72,6 +77,8 @@
 
                 if( !maxRequestsReached )
                 {
+	                NSLog(@"%i - %@ - Activating",i++,request);
+
                     requestWasActioned = [self actionRequest:request];
 
                     if( requestWasActioned )
@@ -82,6 +89,8 @@
                 }
                 else
                 {
+	                NSLog(@"%i - %@ - Queued",i++,request);
+
                     if ([request isKindOfClass:[AFRequest class]])
                     {
 	                    [request requestWasQueuedAtPosition:queuePosition];
