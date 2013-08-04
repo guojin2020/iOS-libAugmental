@@ -75,8 +75,7 @@ static UIColor *invalidColor = nil;
 - (void)setLabelText:(NSString *)labelTextIn
 {
     NSString *oldLabelText = labelText;
-    labelText = [labelTextIn retain];
-    [oldLabelText release];
+    labelText = labelTextIn;
     if (cell)[[cell textLabel] setText:labelText];
 }
 
@@ -102,8 +101,7 @@ static UIColor *invalidColor = nil;
     {
         //Do the Release/Retain dance with the new value
         NSObject *oldValue = value;
-        value              = [valueIn retain];
-        [oldValue release];
+        value              = valueIn;
 
         for (NSObject <AFFieldObserver> *observer in settingObservers)
         {[observer settingChanged:(AFField*) self];}
@@ -153,7 +151,6 @@ static UIColor *invalidColor = nil;
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:labelText message:[self helpText] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 }
 
@@ -163,8 +160,7 @@ static UIColor *invalidColor = nil;
 - (void)setValidator:(NSObject <AFValidator> *)newValidator
 {
     NSObject <AFValidator> *oldValidator = validator;
-    validator = [newValidator retain];
-    [oldValidator release];
+    validator = newValidator;
     self.value = value;
 }
 
@@ -187,14 +183,14 @@ static UIColor *invalidColor = nil;
 + (UIColor *)validColor
 {
     if (!validColor)
-    {validColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_VALID_COLOR] retain];}
+    {validColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_VALID_COLOR];}
     return validColor;
 }
 
 + (UIColor *)invalidColor
 {
     if (!invalidColor)
-    {invalidColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_INVALID_COLOR] retain];}
+    {invalidColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFField class]] colorForKey:THEME_KEY_INVALID_COLOR];}
     return invalidColor;
 }
 
@@ -222,33 +218,6 @@ static UIColor *invalidColor = nil;
 
 //====>> Dealloc
 
-- (void)dealloc
-{
-    //[[AFAppDelegate appEventManager] removeObserver:self];
-    [labelText release];
-    [settingObservers release];
-    [cell release];
-    [identity release];
-    [validator release];
-    [value release];
-    [value release];
-    [validator release];
-    [validator release];
-    [value release];
-    [value release];
-    [validator release];
-    [value release];
-    [validator release];
-    [value release];
-    [value release];
-    [validator release];
-    [validator release];
-    [persistenceDelegate release];
-    [helpText release];
-    [value release];
-    [validator release];
-    [super dealloc];
-}
 
 @synthesize persistenceDelegate, identity, helpText, value, valid;
 

@@ -21,7 +21,7 @@ static UIColor *disclosureArrowColor = nil;
 
     if ((self = [self initWithLabelText:labelTextIn]))
     {
-        labelIcon = [labelIconIn retain];
+        labelIcon = labelIconIn;
     }
     return self;
 }
@@ -33,14 +33,11 @@ static UIColor *disclosureArrowColor = nil;
     //Apply the default disclosure view
     UIView *arrow = [[UICustomDisclosureArrowView alloc] initWithColor:[AFGenericOptionTableCell disclosureArrowColor]];
     cell.accessoryView = arrow;
-    [arrow release];
 
     //Reassign components
-    [searchOptionLabel release];
-    [searchOptionIcon release];
 
-    searchOptionLabel = [(UILabel *) [cell viewWithTag:1] retain];
-    searchOptionIcon  = [(UIImageView *) [cell viewWithTag:2] retain];
+    searchOptionLabel = (UILabel *) [cell viewWithTag:1];
+    searchOptionIcon  = (UIImageView *) [cell viewWithTag:2];
 
     //AFLog(@"%@",	searchOptionIcon);
 
@@ -71,18 +68,10 @@ static UIColor *disclosureArrowColor = nil;
 
 + (NSDictionary *)defaultThemeSection
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"B85430", THEME_KEY_DISCLOSURE_ARROW_COLOR, nil];
+    return @{THEME_KEY_DISCLOSURE_ARROW_COLOR: @"B85430"};
 }
 
 //==========>> Dealloc
 
-- (void)dealloc
-{
-    [labelIcon release];
-    [searchOptionLabel release];
-    [searchOptionIcon release];
-    [super dealloc];
-}
 
 @end

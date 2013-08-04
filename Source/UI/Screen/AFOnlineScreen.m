@@ -43,7 +43,6 @@
     if (offlineViewController)
     {
         [offlineViewController.view removeFromSuperview];
-        [offlineViewController release];
         offlineViewController = nil;
     }
 }
@@ -53,11 +52,6 @@
 - (void)themeChanged
 {}
 
-- (void)dealloc
-{
-    [offlineViewController release];
-    [super dealloc];
-}
 
 + (id<AFPThemeable>)themeParentSectionClass
 {return (id<AFPThemeable>)[AFScreen class];}

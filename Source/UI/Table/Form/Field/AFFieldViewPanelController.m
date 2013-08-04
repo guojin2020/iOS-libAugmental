@@ -53,8 +53,7 @@
 - (void)setDefaultValue:(NSObject <NSCoding> *)defaultSelectedObjectIn
 {
     NSObject <NSCoding> *oldSelection = defaultValue;
-    defaultValue = [defaultSelectedObjectIn retain];
-    [oldSelection release];
+    defaultValue = defaultSelectedObjectIn;
 
     if (!value) self.value = defaultValue;
 }
@@ -64,8 +63,7 @@
     if (valueIn != value)
     {
         NSObject <NSCoding> *oldValue = value;
-        value = [valueIn retain];
-        [oldValue release];
+        value = valueIn;
 
         [self broadcastNewValueToObservers:value];
     }
@@ -83,17 +81,6 @@
     {[observer settingViewPanel:self valueChanged:newValue];}
 }
 
-- (void)dealloc
-{
-    [observers release];
-    [defaultValue release];
-    [value release];
-    [value release];
-    [defaultValue release];
-    [loadingView release];
-    [loadingLabel release];
-    [super dealloc];
-}
 
 @synthesize value, defaultValue, observers;
 @synthesize loadingLabel, loadingView;

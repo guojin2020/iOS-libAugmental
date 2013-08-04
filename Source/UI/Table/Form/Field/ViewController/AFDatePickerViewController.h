@@ -14,7 +14,7 @@
 
 - (void)datePickerValueChanged;
 
-@property(nonatomic, retain) IBOutlet UIDatePicker *picker;
-@property(nonatomic, retain) IBOutlet UITextView   *adviceText;
+@property(nonatomic, strong) IBOutlet UIDatePicker *picker;
+@property(nonatomic, strong) IBOutlet UITextView   *adviceText;
 
 @end

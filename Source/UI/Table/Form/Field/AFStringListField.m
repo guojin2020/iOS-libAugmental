@@ -19,7 +19,6 @@
     {
     }
 
-    [stringPickerViewController release];
     return self;
 }
 

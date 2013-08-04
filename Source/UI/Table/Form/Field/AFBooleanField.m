@@ -13,11 +13,6 @@
     if (sender == valueSwitch)[self setValue:[NSNumber numberWithBool:valueSwitch.on]];
 }
 
-- (void)dealloc
-{
-    [valueSwitch release];
-    [super dealloc];
-}
 
 - (void)viewCellDidLoad
 {

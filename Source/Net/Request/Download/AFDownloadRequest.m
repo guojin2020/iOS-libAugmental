@@ -65,8 +65,8 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
     if(self)
     {
-        localFilePath     = [targetPathIn retain];
-        expectedSizeCache = [sizeCacheIn retain];
+        localFilePath     = targetPathIn;
+        expectedSizeCache = sizeCacheIn;
         dataBuffer        = [[NSMutableData alloc] initWithLength:DATA_BUFFER_LENGTH];
 
         if(observersIn) [self addObservers:[observersIn allObjects]];
@@ -98,7 +98,6 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
 
     pollSizeRequest = [[AFHeaderRequest alloc] initWithURL:self.URL endpoint:self];
     [queueIn handleRequest:pollSizeRequest];
-    [pollSizeRequest release];
 }
 
 -(void)request:(AFRequest*)request returnedWithData:(id)header
@@ -161,7 +160,7 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
             NSAssert(!error, [error localizedDescription]);
         }
 
-        fileHandle = [[NSFileHandle fileHandleForWritingToURL:fileURL error:&error] retain];
+        fileHandle = [NSFileHandle fileHandleForWritingToURL:fileURL error:&error];
 
         NSAssert(fileHandle, @"Couldn't open a file handle to receive '%@'", [URL absoluteString]);
 
@@ -289,7 +288,6 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     {
         [fileHandle synchronizeFile];
         [fileHandle closeFile];
-        [fileHandle release];
         fileHandle = nil;
     }
 }
@@ -347,15 +345,6 @@ requestQueueForHeaderPoll:(AFRequestQueue *)queueIn
     }
 }
 
-- (void)dealloc
-{
-    [expectedSizeCache release];
-    [numberFormatter    release];
-    [localFilePath      release];
-    [dataBuffer         release];
-    [fileHandle         release];
-    [super dealloc];
-}
 
 @synthesize localFilePath;
 

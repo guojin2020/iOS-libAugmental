@@ -16,7 +16,7 @@ typedef void (^ResponseHandler)(NSData*);
 -(id)initWithURL:(NSURL *)URLIn
          handler:(ResponseHandler)responseHandler;
 
-@property (nonatomic,retain) NSData* postData;
+@property (nonatomic,strong) NSData* postData;
 
 @end
 

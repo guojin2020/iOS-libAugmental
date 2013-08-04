@@ -71,13 +71,13 @@
  */
 + (UIColor *)invalidColor;
 
-@property(nonatomic, retain) NSObject <NSCoding> *value;
+@property(nonatomic, strong) NSObject <NSCoding> *value;
 @property(nonatomic) BOOL valid;
-@property(nonatomic, retain) NSString                                *identity;
-@property(nonatomic, retain) NSString                                *helpText;
-@property(nonatomic, retain) NSObject <AFValidator>                  *validator;
-@property(nonatomic, retain) NSObject <AFFieldPersistenceDelegate> *persistenceDelegate;
-@property(nonatomic, readonly) AFTableViewController                 *tableController;
+@property(nonatomic, strong) NSString                                *identity;
+@property(nonatomic, strong) NSString                                *helpText;
+@property(nonatomic, strong) NSObject <AFValidator>                  *validator;
+@property(nonatomic, strong) NSObject <AFFieldPersistenceDelegate> *persistenceDelegate;
+@property(weak, nonatomic, readonly) AFTableViewController                 *tableController;
 
 /**
  Any AFField must have a unique NSString key, returned by this method.

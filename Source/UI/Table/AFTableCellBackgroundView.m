@@ -13,13 +13,13 @@ static float defaultBorderWidth = -1;
 
 +(UIColor*)defaultBackgroundColor
 {
-    if(!defaultBackgroundColor) defaultBackgroundColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBackgroundColor) defaultBackgroundColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR];
     return defaultBackgroundColor;
 }
 
 +(UIColor*)defaultBorderColor
 {
-    if(!defaultBorderColor) defaultBorderColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR] retain];
+    if(!defaultBorderColor) defaultBorderColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCellBackgroundView class]] colorForKey:THEME_KEY_DEFAULT_BORDER_COLOR];
     return defaultBorderColor;
 }
 
@@ -39,7 +39,7 @@ static float defaultBorderWidth = -1;
 {
     if((self = [super initWithFrame:frame]))
 	{
-        cell = [usefulCellIn retain];
+        cell = usefulCellIn;
 		position = AFTableCellBackgroundViewPositionSingle;
         
         [AFThemeManager addObserver:self];
@@ -164,11 +164,6 @@ static float defaultBorderWidth = -1;
 
 //==========================>> Dealloc
 
--(void)dealloc
-{
-    [cell release];
-    [super dealloc];
-}
 
 @synthesize position, cell;
 

@@ -36,6 +36,6 @@
 
 + (UIImage *)editIcon;
 
-@property(nonatomic, retain) NSString *valueString;
+@property(nonatomic, strong) NSString *valueString;
 
 @end

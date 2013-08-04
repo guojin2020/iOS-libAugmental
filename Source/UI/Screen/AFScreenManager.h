@@ -60,7 +60,7 @@
 
 + (UIColor *)bgColor;
 
-@property(nonatomic, retain) UITabBarController *tabController;
-@property(nonatomic, retain) UIImageView        *backgroundImageView;
+@property(nonatomic, strong) UITabBarController *tabController;
+@property(nonatomic, strong) UIImageView        *backgroundImageView;
 
 @end

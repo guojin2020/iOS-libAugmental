@@ -14,7 +14,7 @@
     self = [self init];
     if(self)
     {
-        reason = [reasonIn retain];
+        reason = reasonIn;
     }
     return self;
 }
@@ -24,10 +24,5 @@
     return reason;
 }
 
-- (void)dealloc
-{
-    [reason release];
-    [super dealloc];
-}
 
 @end

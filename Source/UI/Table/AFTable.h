@@ -35,10 +35,10 @@ extern SEL AFTableEventEdited;
 -(NSUInteger) sectionCount;
 -(void)clear;
 
-@property (nonatomic,retain) NSString* title;
-@property (nonatomic,retain) NSString* backTitle;
+@property (nonatomic,strong) NSString* title;
+@property (nonatomic,strong) NSString* backTitle;
 
-@property (nonatomic,retain) AFTableViewController* viewController;
-@property (nonatomic, readonly) UITableView* tableView;
+@property (nonatomic,strong) AFTableViewController* viewController;
+@property (weak, nonatomic, readonly) UITableView* tableView;
 
 @end

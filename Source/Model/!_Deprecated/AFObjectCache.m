@@ -37,14 +37,13 @@
     if (findObject) return findObject;
     else
     {
-        AFObject* newObject = [NSAllocateObject((Class)objectClass, 0, NULL) initPlaceholderWithPrimaryKey:primaryKey];
+        AFObject* newObject = [[objectClass alloc] initPlaceholderWithPrimaryKey:primaryKey];
         [self injectObject:newObject]; //If we just created a new object, put it into the cacheImage
 
         NSString        *queryString = [NSString stringWithFormat:@"?action=get%@&id=%i", (AFObject*)[objectClass modelName], primaryKey];
         NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
         AFObjectRequest *request     = [[AFObjectRequest alloc] initWithURL:callURL endpoint:self];
         [[AFSession sharedSession] handleRequest:request];
-        [request release];
         return newObject;
     }
 }
@@ -110,7 +109,6 @@
     NSURL           *callURL     = [NSURL URLWithString:queryString relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
     AFObjectRequest *request     = [[AFObjectRequest alloc] initWithURL:callURL AFWriteableObjects:[NSArray arrayWithObjects:object, nil] endpoint:endpoint];
     [[AFSession sharedSession] handleRequest:request];
-    [request release];
     return request;
 }
 
@@ -135,7 +133,6 @@
 
             AFObjectRequest *request = [[AFObjectRequest alloc] initWithURL:callURL AFWriteableObjects:[NSArray arrayWithObjects:object, nil] endpoint:endpoint];
             [[AFSession sharedSession] handleRequest:request];
-            [request release];
             return request;
         }
     }
@@ -196,7 +193,6 @@
         {
             typeCache = [NSCache new];
 	        [cache setObject:typeCache forKey:className];
-            [typeCache release];
         }
         [typeCache setObject:object forKey:[NSNumber numberWithInt:[object primaryKey]]];
     }
@@ -208,7 +204,7 @@
 
     if (!objectDictionary) return nil; //Return nil if we were supplied a null pointer.
     AFObject* object    = nil;
-    NSString            *className = [[objectDictionary valueForKey:@"class"] retain]; //Get the objects model name and validate its existence
+    NSString            *className = [objectDictionary valueForKey:@"class"]; //Get the objects model name and validate its existence
     int primaryKey = [[objectDictionary objectForKey:@"pk"] intValue];
 
     NSAssert(className && primaryKey > 0, primaryKey > 0 ? @"Tried to make an object from a array which was missing the required 'class' key"
@@ -231,7 +227,7 @@
     else //If the object isn't already in the cacheImage....
     {
         //Initialise a new AFObject instance of the right type for the incoming array
-        object = NSAllocateObject((Class)objectClass, 0, NULL);
+        object = [objectClass alloc];
         [object initPlaceholderWithPrimaryKey:primaryKey];
 
         //Register it with the cacheImage
@@ -241,7 +237,6 @@
         [object setContentFromDictionary:objectDictionary];
     }
 
-    [className release];
     return object;
 }
 
@@ -257,7 +252,7 @@
     {
         if (objectDictionary && (id)objectDictionary != [NSNull null])
         {
-            NSString *className = [[objectDictionary valueForKey:@"class"] retain];
+            NSString *className = [objectDictionary valueForKey:@"class"];
             if (className)
             {
                 AFObject* object;
@@ -282,7 +277,7 @@
                     }
                     else
                     {
-                        object = NSAllocateObject((Class)objectClass, 0, NULL);
+                        object = [objectClass alloc];
                         [object initPlaceholderWithPrimaryKey:primaryKey];
                         [self injectObject:object];
                         [objectsToSet addObject:[NSArray arrayWithObjects:object, objectDictionary, nil]];
@@ -290,7 +285,6 @@
                     if (object) [objects addObject:object];
                 }
             }
-            [className release];
         }
     }
 
@@ -300,7 +294,6 @@
     {
         [(AFObject*) [setPair objectAtIndex:0] setContentFromDictionary:(NSDictionary *) [setPair objectAtIndex:1]];
     }
-    [objectsToSet release];
     return objects;
 }
 
@@ -316,8 +309,6 @@
     [archiver encodeRootObject:obj];
     [archiver finishEncoding];
     [[NSUserDefaults standardUserDefaults] setObject:objectData forKey:key];
-    [archiver release];
-    [objectData release];
 
     [[NSUserDefaults standardUserDefaults] synchronize];
     AFLog(@"...AFRequestEventFinished saving key '%@'", key);
@@ -339,7 +330,6 @@
         [unarchiver setDelegate:self];
         NSObject <NSCoding> *object = [unarchiver decodeObject];
         [unarchiver finishDecoding];
-        [unarchiver release];
 
         AFLog(@"...AFRequestEventFinished loading '%@' from key '%@'", object, key);
         return object;
@@ -403,11 +393,5 @@
 
 //=====> Archiver delegate finish
 
-- (void)dealloc
-{
-    [numberFormatter release];
-    [cache release];
-    [super dealloc];
-}
 
 @end

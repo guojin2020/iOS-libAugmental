@@ -17,7 +17,7 @@
            observer:(NSObject <AFFieldViewPanelObserver> *)observerIn
           yearRange:(NSRange)range;
 
-@property(nonatomic, retain) IBOutlet UIPickerView *picker;
-@property(nonatomic, retain) IBOutlet UITextView   *adviceText;
+@property(nonatomic, strong) IBOutlet UIPickerView *picker;
+@property(nonatomic, strong) IBOutlet UITextView   *adviceText;
 
 @end

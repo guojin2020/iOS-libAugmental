@@ -12,7 +12,7 @@ static AFRequestQueue          *visibleQueue = nil;
 
 @interface AFRequestQueueAlertView ()
 
-@property(nonatomic, retain) NSArray *activatedRequestCache;
+@property(nonatomic, strong) NSArray *activatedRequestCache;
 
 @end
 
@@ -22,12 +22,12 @@ static AFRequestQueue          *visibleQueue = nil;
 {
     if ((self = [super initWithTitle:@"Requests" message:nil delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil]))
     {
-        queue = [queueIn retain];
+        queue = queueIn;
         [self setDelegate:self];
         [self setTableData:self];
         [self setTableDelegate:self];
 
-        headingRow = [[[AFCellViewFactory defaultFactory] cellOfKind:@"requestCell" forTable:nil reuseIdentifier:@"headingRow"] retain];
+        headingRow = [[AFCellViewFactory defaultFactory] cellOfKind:@"requestCell" forTable:nil reuseIdentifier:@"headingRow"];
         ((UILabel *) [headingRow viewWithTag:1]).text      = @"#";
         ((UILabel *) [headingRow viewWithTag:1]).textColor = [UIColor whiteColor];
         ((UILabel *) [headingRow viewWithTag:2]).text      = @"Request type";
@@ -52,7 +52,7 @@ static AFRequestQueue          *visibleQueue = nil;
     else
     {
         //Otherwise, let's create a new view and show it
-        visibleQueue = [queueIn retain];
+        visibleQueue = queueIn;
         alert = [[AFRequestQueueAlertView alloc] initWithRequestQueue:queueIn];
         [alert show];
     }
@@ -63,8 +63,6 @@ static AFRequestQueue          *visibleQueue = nil;
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //AFLog(@"RequestQueueAlert dismissed");
-    [queue release];
-    [alert release];
     queue = nil;
     alert = nil;
 }
@@ -177,15 +175,6 @@ static AFRequestQueue          *visibleQueue = nil;
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {return sourceIndexPath;}
 
-- (void)dealloc
-{
-    [headingRow release];
-
-    [queue release];
-    [visibleQueue release];
-    [activatedRequestCache release];
-    [super dealloc];
-}
 
 @synthesize activatedRequestCache;
 

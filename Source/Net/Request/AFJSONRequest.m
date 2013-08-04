@@ -16,8 +16,8 @@ static CJSONSerializer   *jsonSerializer;
 
 + (void)initialize
 {
-    jsonDeserializer = [[CJSONDeserializer deserializer] retain];
-    jsonSerializer   = [[CJSONSerializer serializer] retain];
+    jsonDeserializer = [CJSONDeserializer deserializer];
+    jsonSerializer   = [CJSONSerializer serializer];
 }
 
 + (CJSONDeserializer *)jsonDeserializer { return jsonDeserializer; }
@@ -30,7 +30,7 @@ static CJSONSerializer   *jsonSerializer;
 
     if ((self = [super initWithURL:URLIn]))
     {
-        endpoint           = [endpointIn retain];
+        endpoint           = endpointIn;
         responseDataBuffer = [[NSMutableData alloc] initWithLength:0];
         postData           = nil;
         returnedDictionary = nil;
@@ -44,7 +44,7 @@ static CJSONSerializer   *jsonSerializer;
 
     if ((self = [self initWithURL:URLIn endpoint:endpointIn]))
     {
-        postData = [[[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil] retain];
+        postData = [[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil];
         NSAssert(postData, @"Serialisation AFSessionStateError");
     }
     return self;
@@ -95,14 +95,13 @@ static CJSONSerializer   *jsonSerializer;
 
     NSString *dumpString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
     //AFLog(@"%@",[NSString stringWithFormat:@"Response from '%@': %@",[[self URL] absoluteString],dumpString]);
-    [dumpString release];
 
     NSError *error = nil;
-    returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];
+    returnedDictionary = [[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error];
 
     if (error)
     {
-        NSString *responseString = [[[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding] autorelease];
+        NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
         @throw([NSException exceptionWithName:[error localizedDescription] reason:responseString userInfo:nil]);
     }
 
@@ -114,7 +113,6 @@ static CJSONSerializer   *jsonSerializer;
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Debug Message" message:[NSString stringWithFormat:@"%@ logged: %@", [URL absoluteString], debugString] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
         //#endif
 
@@ -124,7 +122,6 @@ static CJSONSerializer   *jsonSerializer;
         {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Error Message" message:[NSString stringWithFormat:@"%@ logged: %@", [URL absoluteString], errorString] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
-            [alert release];
         }
         //#endif
 
@@ -140,15 +137,6 @@ static CJSONSerializer   *jsonSerializer;
 - (NSString *)actionDescription
 {return @"Getting data";}
 
-- (void)dealloc
-{
-    [responseDataBuffer release];
-    [endpoint release];
-    [returnedDictionary release];
-    [postData release];
-    [postData release];
-    [super dealloc];
-}
 
 @synthesize returnedDictionary;
 //@dynamic requiresLogin, attempts;

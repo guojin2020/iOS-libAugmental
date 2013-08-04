@@ -36,8 +36,8 @@ extern SEL AFTableSectionEventEdited;
 +(UIColor*)headerShadowColor;
 +(BOOL)headerShadowEnabled;
 
-@property (nonatomic, retain) NSString* title;
-@property (nonatomic, retain) NSMutableArray* children;
-@property (nonatomic, retain) AFTable* parentTable;
+@property (nonatomic, strong) NSString* title;
+@property (nonatomic, strong) NSMutableArray* children;
+@property (nonatomic, strong) AFTable* parentTable;
 
 @end

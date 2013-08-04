@@ -15,6 +15,6 @@
 @property(nonatomic, readonly) uint16_t currentPage;
 @property(nonatomic, readonly) uint16_t resultsPerPage;
 
-@property(nonatomic, retain, readonly) NSArray *pageObjects;
+@property(nonatomic, strong, readonly) NSArray *pageObjects;
 
 @end

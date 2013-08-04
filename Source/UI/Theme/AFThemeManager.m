@@ -20,7 +20,7 @@ static NSMutableSet *observers;
 
 + (void)initialize
 {
-    DEFAULT_VOID_COLOR = [[UIColor clearColor] retain];
+    DEFAULT_VOID_COLOR = [UIColor clearColor];
     observers          = [[NSMutableSet alloc] init];
 }
 
@@ -47,7 +47,7 @@ static NSMutableSet *observers;
     NSMutableSet        *themeables          = [AFThemeManager newSetOfThemeableClasses];
     NSMutableDictionary *rootThemeDictionary = [[NSMutableDictionary alloc] init];
     NSMutableDictionary *themeCache          = [[NSMutableDictionary alloc] init];
-    [themeCache setObject:rootThemeDictionary forKey:ROOT_DICTIONARY_CACHE_KEY];
+    themeCache[ROOT_DICTIONARY_CACHE_KEY] = rootThemeDictionary;
     id<AFPThemeable> currentClass;
 
     while ([themeables count] > 0)
@@ -58,8 +58,6 @@ static NSMutableSet *observers;
         [AFThemeManager composeThemeForClass:currentClass usingCache:themeCache];
     }
 
-    [themeCache release];
-    [themeables release];
 
     return rootThemeDictionary;
 }
@@ -67,16 +65,16 @@ static NSMutableSet *observers;
 + (NSMutableDictionary *)composeThemeForClass:(id<AFPThemeable>)themeableClass usingCache:(NSMutableDictionary *)themeCache
 {
     NSString            *className  = NSStringFromClass((Class)themeableClass);
-    NSMutableDictionary *dictionary = [themeCache objectForKey:className];
+    NSMutableDictionary *dictionary = themeCache[className];
     if (!dictionary)
     {
         id<AFPThemeable> parentClass = [themeableClass themeParentSectionClass];
-        NSMutableDictionary *parentDictionary = parentClass ? [self composeThemeForClass:parentClass usingCache:themeCache] : [themeCache objectForKey:ROOT_DICTIONARY_CACHE_KEY];
+        NSMutableDictionary *parentDictionary = parentClass ? [self composeThemeForClass:parentClass usingCache:themeCache] : themeCache[ROOT_DICTIONARY_CACHE_KEY];
 
         NSString *classSectionName = [themeableClass themeSectionName];
         if (classSectionName) //If this has it's own section, create a new array for it and fill with default contents
         {
-            NSMutableDictionary *existingDictionary = [parentDictionary objectForKey:classSectionName];
+            NSMutableDictionary *existingDictionary = parentDictionary[classSectionName];
             if (existingDictionary)
             {
                 dictionary = existingDictionary;
@@ -85,8 +83,7 @@ static NSMutableSet *observers;
             else
             {
                 dictionary = [[NSMutableDictionary alloc] initWithDictionary:[themeableClass defaultThemeSection]];
-                [parentDictionary setObject:dictionary forKey:classSectionName];
-                [dictionary release];
+                parentDictionary[classSectionName] = dictionary;
             }
         }
         else
@@ -96,7 +93,7 @@ static NSMutableSet *observers;
         }
     }
 
-    [themeCache setObject:dictionary forKey:className];
+    themeCache[className] = dictionary;
 
     return dictionary;
 }
@@ -108,10 +105,11 @@ static NSMutableSet *observers;
 
     if (numClasses > 0)
     {
-        Class *classes = NULL;
+        __unsafe_unretained Class *classes = NULL;
         Class class;
 
-        classes = malloc(sizeof(Class) * numClasses);
+        
+        classes = (__unsafe_unretained Class*)malloc(sizeof(Class) * numClasses);
         objc_getClassList(classes, numClasses);
 
         for (int i = 0; i < numClasses; i++)
@@ -129,8 +127,7 @@ static NSMutableSet *observers;
 + (void)setCurrentTheme:(NSDictionary *)newTheme
 {
     NSDictionary *oldTheme = currentTheme;
-    currentTheme = [newTheme retain];
-    [oldTheme release];
+    currentTheme = newTheme;
 
     for (NSObject <AFThemeObserver> *observer in observers)
     {[observer themeChanged];}
@@ -142,7 +139,7 @@ static NSMutableSet *observers;
     id<AFPThemeable> themeableParentClass = [themeableClass themeParentSectionClass];
     NSDictionary *parentSection    = themeableParentClass ? [self themeSectionForClass:themeableParentClass] : [AFThemeManager currentTheme];
     NSString     *themeSectionName = [themeableClass themeSectionName];
-    return themeSectionName ? [parentSection objectForKey:themeSectionName] : parentSection;
+    return themeSectionName ? parentSection[themeSectionName] : parentSection;
 }
 
 + (AFThemeManager *)sharedInstance
@@ -278,17 +275,17 @@ static NSMutableSet *observers;
     // Remove braces
     cString = [cString substringFromIndex:1];
     cString = [cString substringToIndex:([cString length] - 1)];
-    CFShow(cString);
+    //CFShow(cString);
 
     // Separate into components by removing commas and spaces
     NSArray *components = [cString componentsSeparatedByString:@", "];
     if ([components count] != 4) return DEFAULT_VOID_COLOR;
 
     // Create the color
-    return [UIColor colorWithRed:[[components objectAtIndex:0] floatValue]
-                           green:[[components objectAtIndex:1] floatValue]
-                            blue:[[components objectAtIndex:2] floatValue]
-                           alpha:[[components objectAtIndex:3] floatValue]];
+    return [UIColor colorWithRed:[components[0] floatValue]
+                           green:[components[1] floatValue]
+                            blue:[components[2] floatValue]
+                           alpha:[components[3] floatValue]];
 }
 
 + (UIColor *)colorWithHexString:(NSString *)stringToConvert

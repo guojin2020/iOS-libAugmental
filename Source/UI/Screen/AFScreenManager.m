@@ -48,8 +48,7 @@ static NSString *switchViewSound = nil;
 - (void)setBackgroundImage:(UIImage *)newBackground
 {
     UIImage *oldBackground = backgroundImage;
-    backgroundImage = [newBackground retain];
-    [oldBackground release];
+    backgroundImage = newBackground;
 
     [backgroundImageView setImage:newBackground];
 }
@@ -62,7 +61,6 @@ static NSString *switchViewSound = nil;
         [viewControllers addObject:screen.viewController.navigationController ? screen.viewController.navigationController : screen.viewController];
     }
     [tabController setViewControllers:viewControllers animated:animated];
-    [viewControllers release];
 }
 
 - (void)addScreen:(AFScreen *)screen
@@ -72,7 +70,6 @@ static NSString *switchViewSound = nil;
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:screen.viewController];
         NSAssert(screen.viewController.navigationController == navController, @"ViewController didn't get wrapped!");
         screen.viewController.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-        [navController release];
     }
 
     [screens addObject:screen];
@@ -123,7 +120,6 @@ static NSString *switchViewSound = nil;
 {
     UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:screen.tabName image:[screen tabBarIcon] tag:0];
     screen.viewController.tabBarItem = item;
-    [item release];
 }
 
 - (NSArray *)screens
@@ -169,7 +165,6 @@ static NSString *switchViewSound = nil;
     {
         AFLog(@"Updating Tab Bar due to screenViewController change");
 
-        [oldController release];
 
         UIViewController *controller;
         if (screen.needsNavigationController) //Wrap the screen in a navigation controller if it needs it.
@@ -179,10 +174,9 @@ static NSString *switchViewSound = nil;
         }
         else
         {
-            controller = [screen.viewController retain];
+            controller = screen.viewController;
         }
 
-        [controller release];
 
         [self updateTabBarAnimated:NO];
     }
@@ -214,27 +208,27 @@ static NSString *switchViewSound = nil;
 + (NSString *)bgImageName
 {
     if (!bgImageName)
-    {bgImageName = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME] retain];}
+    {bgImageName = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_NAME];}
     return bgImageName;
 }
 
 + (BOOL)bgImageEnable
 {
     if (!bgImageEnable)
-    {bgImageEnable = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE] retain];}
+    {bgImageEnable = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_BG_IMAGE_ENABLE];}
     return [bgImageEnable boolValue];
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] colorForKey:THEME_KEY_BG_COLOR];}
     return bgColor;
 }
 
 + (NSString *)switchViewSound
 {
-    if (!switchViewSound)switchViewSound = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND] retain];
+    if (!switchViewSound)switchViewSound = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreenManager class]] valueForKey:THEME_KEY_SWITCH_VIEW_SOUND];
     return switchViewSound;
 }
 
@@ -289,14 +283,6 @@ static NSString *switchViewSound = nil;
 
 //==========>> Dealloc
 
-- (void)dealloc
-{
-    [tabController release];
-    [screens release];
-    [backgroundImage release];
-    [backgroundImageView release];
-    [super dealloc];
-}
 
 @synthesize tabController, backgroundImageView;
 

@@ -23,9 +23,9 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
 {
     if ((self = [super initWithObjects:nil delegate:self title:titleIn]))
     {
-        getObjectActionString       = [getObjectActionStringIn retain];
-        objectCSVIdListSettingsKey  = [objectCSVIdListSettingsKeyIn retain];
-        objectDefaultSelectionIdKey = [objectDefaultSelectionIdKeyIn retain];
+        getObjectActionString       = getObjectActionStringIn;
+        objectCSVIdListSettingsKey  = objectCSVIdListSettingsKeyIn;
+        objectDefaultSelectionIdKey = objectDefaultSelectionIdKeyIn;
         objectClass                 = objectClassIn;
 
         if ([AFAppDelegate settingsLoaded])
@@ -48,7 +48,6 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     NSURL           *objectsURL     = [NSURL URLWithString:[NSString stringWithFormat:@"?action=%@&idList=%@", getObjectActionString, csvIdList] relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
     AFObjectRequest *objectsRequest = [[AFObjectRequest alloc] initWithURL:objectsURL endpoint:self];
     [[AFSession sharedSession] handleRequest:objectsRequest];
-    [objectsRequest release];
 }
 
 - (void)request:(AFRequest*)request returnedWithData:(id)objectsIn
@@ -85,12 +84,5 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
 {
 }
 
-- (void)dealloc
-{
-    [getObjectActionString release];
-    [objectCSVIdListSettingsKey release];
-    [objectDefaultSelectionIdKey release];
-    [super dealloc];
-}
 
 @end

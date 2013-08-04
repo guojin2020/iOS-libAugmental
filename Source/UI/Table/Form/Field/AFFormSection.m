@@ -9,7 +9,7 @@
 {
     if ((self = [super initWithTitle:titleIn]))
     {
-        provider = [providerIn retain];
+        provider = providerIn;
     }
     return self;
 }
@@ -19,11 +19,6 @@
 	[self addCell:field];
 }
 
-- (void)dealloc
-{
-    [provider release];
-    [super dealloc];
-}
 
 @synthesize provider;
 

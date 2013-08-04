@@ -151,22 +151,22 @@
     AFLogPosition();
 
 #ifdef BACKGROUND_HANDLING_ENABLED
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
 #endif
 
-    BOOL returnVal;
-    if( request && request.state != AFRequestStateFulfilled )
-    {
-        [self queueRequestAtBack:request];
-        returnVal = YES;
-    }
-    else returnVal = NO;
+        BOOL returnVal;
+        if( request && request.state != AFRequestStateFulfilled )
+        {
+            [self queueRequestAtBack:request];
+            returnVal = YES;
+        }
+        else returnVal = NO;
 
 #ifdef BACKGROUND_HANDLING_ENABLED
-    [pool release];
 #endif
 
-    return returnVal;
+        return returnVal;
+    }
 }
 
 - (void)queueRequestAtFront:(AFRequest*)requestIn
@@ -279,18 +279,16 @@
 
 	dispatch_block_t action = ^
 	{
-	    AFRequest* findRequest = [[self queuedRequestForConnection:connection] retain];
+	    AFRequest* findRequest = [self queuedRequestForConnection:connection];
 
 	    NSString *responseString = [NSString stringWithFormat:@"Couldn't find the request that I received a response to! %@", [[response URL] absoluteString]];
 	    NSAssert ( findRequest, responseString );
 
 	    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse *)response;
-	    NSDictionary *headers = [[httpResponse allHeaderFields] retain];
+	    NSDictionary *headers = [httpResponse allHeaderFields];
 
 	    [findRequest willReceiveWithHeaders:headers responseCode:[httpResponse statusCode]];
 
-	    [headers release];
-	    [findRequest release];
 	};
 
 	AFBeginBackgroundDispatch( action );
@@ -333,7 +331,7 @@
 
 	dispatch_block_t handOff = ^
 	{
-		AFRequest*findRequest = [[self queuedRequestForConnection:connection] retain];
+		AFRequest*findRequest = [self queuedRequestForConnection:connection];
 
 		//NSAssert(findRequest,@"Couldn't retrieve request for AFRequestEventFinished connection");
 
@@ -342,8 +340,7 @@
 		[queue removeObject:findRequest]; //Remove the request from the list
 		[self startWaitingRequests];
 
-		[findRequest release];
-		[connection autorelease];
+		//[connection autorelease];
 	};
 
 	AFBeginBackgroundDispatch( handOff );
@@ -360,12 +357,8 @@
 
 - (void)dealloc
 {
-    [activeRequests release];
     [self cancelAllRequests];
     for (AFRequest* request in queue)[request removeObserver:self];
-    [queue release];
-    [activatedRequests release];
-    [super dealloc];
 }
 
 @synthesize queue, activeRequests;

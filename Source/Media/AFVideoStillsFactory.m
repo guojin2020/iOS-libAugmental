@@ -65,7 +65,6 @@ static AFVideoStillsFactory *defaultCache;
                     {
                         id object = [[UIImage alloc] initWithCGImage:image];
                         [images setObject:object forKey:requestedTimeValue];
-                        [object release];
                     }
 
                     default:
@@ -79,9 +78,6 @@ static AFVideoStillsFactory *defaultCache;
                 {
                     handler(images);
 
-                    [cmTimes release];
-                    [imageGenerator release];
-                    [images release];
                 }
             }];
 }

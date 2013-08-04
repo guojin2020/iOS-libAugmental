@@ -19,15 +19,10 @@
     self = [self init];
     if(self)
     {
-        productConsumer = [productConsumerIn retain];
+        productConsumer = productConsumerIn;
     }
     return self;
 }
 
--(void)dealloc
-{
-    [productConsumer release];
-    [super dealloc];
-}
 
 @end

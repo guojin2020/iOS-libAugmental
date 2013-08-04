@@ -21,7 +21,7 @@ static UIImage *imagePrevious;
         configuration = configurationIn;
         showingLabel = nil;
         swipeImageView = nil;
-        resultsPage = [resultsPageIn retain];
+        resultsPage = resultsPageIn;
     }
     return self;
 }
@@ -29,28 +29,28 @@ static UIImage *imagePrevious;
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_BG_COLOR];}
     return bgColor;
 }
 
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] colorForKey:THEME_KEY_TEXT_COLOR];}
     return textColor;
 }
 
 + (UIImage *)imageNext
 {
     if (!imageNext)
-    {imageNext = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_NEXT] retain];}
+    {imageNext = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_NEXT];}
     return imageNext;
 }
 
 + (UIImage *)imagePrevious
 {
     if (!imagePrevious)
-    {imagePrevious = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_PREVIOUS] retain];}
+    {imagePrevious = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFResultsPagingCell class]] imageForKey:THEME_KEY_IMAGE_PREVIOUS];}
     return imagePrevious;
 }
 
@@ -134,11 +134,6 @@ static UIImage *imagePrevious;
 - (NSString *)cellTemplateName
 {return @"resultsPagingCell";}
 
-- (void)dealloc
-{
-    [resultsPage release];
-    [super dealloc];
-}
 
 @synthesize configuration;
 

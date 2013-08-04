@@ -26,10 +26,10 @@
 
 - (void)updateNavigationItems;
 
-@property(nonatomic, retain) NSString         *title;
-@property(nonatomic, retain) UIBarButtonItem  *nextBarButtonItem;
-@property(nonatomic, retain) UIBarButtonItem  *previousBarButtonItem;
-@property(nonatomic, retain) UIViewController *viewController;
-@property(nonatomic, retain) AFPageManager    *manager;
+@property(nonatomic, strong) NSString         *title;
+@property(nonatomic, strong) UIBarButtonItem  *nextBarButtonItem;
+@property(nonatomic, strong) UIBarButtonItem  *previousBarButtonItem;
+@property(nonatomic, strong) UIViewController *viewController;
+@property(nonatomic, strong) AFPageManager    *manager;
 
 @end

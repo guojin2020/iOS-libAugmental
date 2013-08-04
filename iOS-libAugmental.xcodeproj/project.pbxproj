@@ -41,7 +41,6 @@
 		09E33B5917075ECC00C3A37E /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2017075ECB00C3A37E /* AFCache.m */; };
 		09E33B5C17075ECC00C3A37E /* AFLegacyObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2217075ECB00C3A37E /* AFLegacyObjectCache.m */; };
 		09E33B5F17075ECC00C3A37E /* AFObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2417075ECB00C3A37E /* AFObjectCache.m */; };
-		09E33B6217075ECC00C3A37E /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2617075ECB00C3A37E /* AFWeakCache.m */; };
 		09E33B6517075ECC00C3A37E /* AFPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2917075ECB00C3A37E /* AFPrice.m */; };
 		09E33B6A17075ECC00C3A37E /* AFObjectTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2F17075ECB00C3A37E /* AFObjectTableCell.m */; };
 		09E33B6D17075ECC00C3A37E /* AFObjectTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A3117075ECB00C3A37E /* AFObjectTableSection.m */; };
@@ -157,7 +156,6 @@
 		09E33F531707634700C3A37E /* AFCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2017075ECB00C3A37E /* AFCache.m */; };
 		09E33F541707634700C3A37E /* AFLegacyObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2217075ECB00C3A37E /* AFLegacyObjectCache.m */; };
 		09E33F551707634700C3A37E /* AFObjectCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2417075ECB00C3A37E /* AFObjectCache.m */; };
-		09E33F561707634700C3A37E /* AFWeakCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2617075ECB00C3A37E /* AFWeakCache.m */; };
 		09E33F571707634700C3A37E /* AFPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2917075ECB00C3A37E /* AFPrice.m */; };
 		09E33F581707634700C3A37E /* AFObjectTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A2F17075ECB00C3A37E /* AFObjectTableCell.m */; };
 		09E33F591707634700C3A37E /* AFObjectTableSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 09E33A3117075ECB00C3A37E /* AFObjectTableSection.m */; };
@@ -272,7 +270,6 @@
 		09E33FC71707638300C3A37E /* AFCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A1F17075ECB00C3A37E /* AFCache.h */; };
 		09E33FC81707638300C3A37E /* AFLegacyObjectCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2117075ECB00C3A37E /* AFLegacyObjectCache.h */; };
 		09E33FC91707638300C3A37E /* AFObjectCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2317075ECB00C3A37E /* AFObjectCache.h */; };
-		09E33FCA1707638300C3A37E /* AFWeakCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2517075ECB00C3A37E /* AFWeakCache.h */; };
 		09E33FCB1707638300C3A37E /* AFPrice.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2817075ECB00C3A37E /* AFPrice.h */; };
 		09E33FCC1707638300C3A37E /* AFCellViewable.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2B17075ECB00C3A37E /* AFCellViewable.h */; };
 		09E33FCD1707638300C3A37E /* AFPanelViewableObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E33A2C17075ECB00C3A37E /* AFPanelViewableObject.h */; };
@@ -518,8 +515,6 @@
 		09E33A2217075ECB00C3A37E /* AFLegacyObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFLegacyObjectCache.m; sourceTree = "<group>"; };
 		09E33A2317075ECB00C3A37E /* AFObjectCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFObjectCache.h; sourceTree = "<group>"; };
 		09E33A2417075ECB00C3A37E /* AFObjectCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFObjectCache.m; sourceTree = "<group>"; };
-		09E33A2517075ECB00C3A37E /* AFWeakCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFWeakCache.h; sourceTree = "<group>"; };
-		09E33A2617075ECB00C3A37E /* AFWeakCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFWeakCache.m; sourceTree = "<group>"; };
 		09E33A2817075ECB00C3A37E /* AFPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPrice.h; sourceTree = "<group>"; };
 		09E33A2917075ECB00C3A37E /* AFPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPrice.m; sourceTree = "<group>"; };
 		09E33A2B17075ECB00C3A37E /* AFCellViewable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCellViewable.h; sourceTree = "<group>"; };
@@ -964,8 +959,6 @@
 				09E33A2217075ECB00C3A37E /* AFLegacyObjectCache.m */,
 				09E33A2317075ECB00C3A37E /* AFObjectCache.h */,
 				09E33A2417075ECB00C3A37E /* AFObjectCache.m */,
-				09E33A2517075ECB00C3A37E /* AFWeakCache.h */,
-				09E33A2617075ECB00C3A37E /* AFWeakCache.m */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -1539,7 +1532,6 @@
 				09E33FC71707638300C3A37E /* AFCache.h in Headers */,
 				09E33FC81707638300C3A37E /* AFLegacyObjectCache.h in Headers */,
 				09E33FC91707638300C3A37E /* AFObjectCache.h in Headers */,
-				09E33FCA1707638300C3A37E /* AFWeakCache.h in Headers */,
 				09E33FCB1707638300C3A37E /* AFPrice.h in Headers */,
 				09E33FCC1707638300C3A37E /* AFCellViewable.h in Headers */,
 				09E33FCD1707638300C3A37E /* AFPanelViewableObject.h in Headers */,
@@ -1800,7 +1792,6 @@
 				09E33F531707634700C3A37E /* AFCache.m in Sources */,
 				09E33F541707634700C3A37E /* AFLegacyObjectCache.m in Sources */,
 				09E33F551707634700C3A37E /* AFObjectCache.m in Sources */,
-				09E33F561707634700C3A37E /* AFWeakCache.m in Sources */,
 				09E33F571707634700C3A37E /* AFPrice.m in Sources */,
 				09E33F581707634700C3A37E /* AFObjectTableCell.m in Sources */,
 				09E33F591707634700C3A37E /* AFObjectTableSection.m in Sources */,
@@ -1934,7 +1925,6 @@
 				09E33B5917075ECC00C3A37E /* AFCache.m in Sources */,
 				09E33B5C17075ECC00C3A37E /* AFLegacyObjectCache.m in Sources */,
 				09E33B5F17075ECC00C3A37E /* AFObjectCache.m in Sources */,
-				09E33B6217075ECC00C3A37E /* AFWeakCache.m in Sources */,
 				09E33B6517075ECC00C3A37E /* AFPrice.m in Sources */,
 				09E33B6A17075ECC00C3A37E /* AFObjectTableCell.m in Sources */,
 				09E33B6D17075ECC00C3A37E /* AFObjectTableSection.m in Sources */,
@@ -2059,6 +2049,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";
@@ -2071,6 +2062,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DSTROOT = "/tmp/iOS-libAugmental.dst";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Source/iOS-libAugmental-Prefix.pch";

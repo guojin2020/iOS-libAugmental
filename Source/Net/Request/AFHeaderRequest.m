@@ -49,12 +49,6 @@
     return @"Determining download size";
 }
 
-- (void)dealloc
-{
-    [endpoint release];
-    [headers release];
-    [super dealloc];
-}
 
 @synthesize endpoint, headers;
 

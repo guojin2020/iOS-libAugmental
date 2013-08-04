@@ -14,7 +14,7 @@
 	self = [super init];
 	if(self)
 	{
-		renderer = [rendererIn retain];
+		renderer = rendererIn;
 	}
 	return self;
 }
@@ -23,8 +23,6 @@
 {
 	if(rendererIn!=renderer)
 	{
-		[rendererIn retain];
-		[renderer release];
 		renderer = rendererIn;
 
 		self.image = NULL;

@@ -8,7 +8,7 @@
     {
         //AFLog(@"String picker objects: %@",objectsIn);
 
-        self.defaultValue = [objects objectAtIndex:0];
+        self.defaultValue = objects[0];
     }
     return self;
 }

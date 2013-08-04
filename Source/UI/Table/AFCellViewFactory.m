@@ -30,11 +30,6 @@ static AFCellViewFactory *factorySingleton;
     return self;
 }
 
-- (void)dealloc
-{
-    [viewTemplateStore release];
-    [super dealloc];
-}
 
 - (UITableViewCell *)cellOfKind:(NSString *)theCellKind forTable:(UITableView *)aTableView reuseIdentifier:(NSString *)reuseIdentifier
 {

@@ -50,26 +50,26 @@ SEL AFTableSectionEventEdited;
 {
 	if((self = [self init]))
 	{
-		title = [titleIn retain];
+		title = titleIn;
 	}
 	return self;
 }
 
 -(AFTableCell*)cellAtIndex:(NSUInteger)index
 {
-	return [children objectAtIndex:index];
+	return children[index];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(id __unsafe_unretained [])buffer count:(NSUInteger)lenIn
 {
 	NSUInteger len = [children count];
-	id* childrenCopy = malloc(sizeof(id)*len);
+	__unsafe_unretained id* childrenCopy = (__unsafe_unretained id*)malloc(sizeof(id)*len);
 	[children getObjects:childrenCopy range:NSMakeRange(0, len)];
 
 	if(state->state >= len)return 0;
 	state->itemsPtr = childrenCopy;
 	state->state = (unsigned long) len;
-	state->mutationsPtr = (unsigned long *)self;
+	state->mutationsPtr = &state->extra[0];
 	return len;
 }
 
@@ -129,23 +129,13 @@ SEL AFTableSectionEventEdited;
 +(NSString*)themeSectionName{return nil;}
 +(NSDictionary*)defaultThemeSection
 {
-	return [NSDictionary dictionaryWithObjectsAndKeys:
-	@"FFFFFF",						THEME_KEY_HEADER_COLOR,
-	@"000000",						THEME_KEY_HEADER_SHADOW_COLOR,
-	[NSNumber numberWithBool:NO],	THEME_KEY_HEADER_SHADOW_ENABLED,
-	nil];
+	return @{THEME_KEY_HEADER_COLOR: @"FFFFFF",
+	THEME_KEY_HEADER_SHADOW_COLOR: @"000000",
+	THEME_KEY_HEADER_SHADOW_ENABLED: @NO};
 }
 
 //======>> Dealloc
 
--(void)dealloc
-{
-	//[selectionTargets release];
-	[children release];
-	[title release];
-    [parentTable release];
-    [super dealloc];
-}
 
 @synthesize title, children, parentTable; //selectionTargets;
 

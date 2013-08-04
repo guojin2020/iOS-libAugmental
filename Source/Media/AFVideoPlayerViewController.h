@@ -16,6 +16,6 @@
 - (id)initWithAsset:(AVAsset *)assetIn;
 - (id)initWithURL:(NSURL *)urlIn;
 
-@property (nonatomic, readonly) AVPlayer* player;
+@property (weak, nonatomic, readonly) AVPlayer* player;
 
 @end

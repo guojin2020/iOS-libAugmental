@@ -68,7 +68,7 @@ AFScrollIntent;
 
 @property(nonatomic) SEL pageObjectSortSelector;
 @property(nonatomic, readonly) AFResultsPage    *currentResultsPage;
-@property(nonatomic, retain) AFPagedObjectQuery *query;
-@property(nonatomic, retain) AFTableCell        *noResultsCell;
+@property(nonatomic, strong) AFPagedObjectQuery *query;
+@property(nonatomic, strong) AFTableCell        *noResultsCell;
 
 @end

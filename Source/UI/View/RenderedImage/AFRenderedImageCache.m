@@ -63,17 +63,11 @@ static AFRenderedImageCache *sharedInstance = NULL;
 	{
 		image = [renderer newImageForSize:size];
 		[sizes setObject:image forKey:sizeKey];
-		[image release];
 	}
 
 	return image;
 }
 
--(void)dealloc
-{
-	[_rendererCaches release];
-	[super dealloc];
-}
 
 - (void)purgeSizeCacheForRenderer:(id <AFPImageRenderer>)renderer
 {

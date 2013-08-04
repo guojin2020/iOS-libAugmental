@@ -27,9 +27,9 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 
 
-@property(nonatomic, retain) IBOutlet UIPickerView *picker;
-@property(nonatomic, retain) IBOutlet UITextView   *adviceText;
+@property(nonatomic, strong) IBOutlet UIPickerView *picker;
+@property(nonatomic, strong) IBOutlet UITextView   *adviceText;
 
-@property(nonatomic, retain) NSArray *objects;
+@property(nonatomic, strong) NSArray *objects;
 
 @end

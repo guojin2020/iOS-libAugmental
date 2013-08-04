@@ -62,7 +62,7 @@ SEL
     self = [self init];
     if( self )
     {
-        URL         = [URLIn retain];
+        URL         = URLIn;
 	    httpHeader  = NULL;
     }
     return self;
@@ -124,7 +124,7 @@ SEL
 
     responseCode = responseCodeIn;
 
-	httpHeader = [httpHeaderIn retain];
+	httpHeader = httpHeaderIn;
 
     if([self isSuccessHTTPResponse])
     {
@@ -140,7 +140,6 @@ SEL
     {
         NSError *httpError = [[NSError alloc] initWithDomain:NSNetServicesErrorDomain code:responseCode userInfo:nil];
         [self didFail:httpError];
-        [httpError release];
     }
 }
 
@@ -221,14 +220,5 @@ SEL
 
 - (int)responseCode { return responseCode;  }
 
--(void)dealloc
-{
-	[httpHeader release];
-    [_error             release];
-    [numberFormatter    release];
-    [connection         release];
-    [URL                release];
-    [super              dealloc];
-}
 
 @end

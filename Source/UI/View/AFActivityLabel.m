@@ -84,11 +84,5 @@ static NSString* TEXT_KEY_PATH = @"text";
 
 - (BOOL)isActive { return indicator.isAnimating; }
 
-- (void)dealloc
-{
-	[label release];
-	[indicator release];
-    [super dealloc];
-}
 
 @end

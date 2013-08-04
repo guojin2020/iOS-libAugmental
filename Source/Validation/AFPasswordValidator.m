@@ -12,7 +12,7 @@ static NSObject <AFValidator> *defaultCache = nil;
 {
     if ((self = [self init]))
     {
-        comparisonSetting = [comparisonSettingIn retain];
+        comparisonSetting = comparisonSettingIn;
         allowEmpty        = allowEmptyIn;
     }
     return self;
@@ -37,11 +37,6 @@ static NSObject <AFValidator> *defaultCache = nil;
 - (NSString *)conditionDescription
 {return @"contain only numbers and letters, and be 8-16 characters long.";}
 
-- (void)dealloc
-{
-    [comparisonSetting release];
-    [super dealloc];
-}
 
 @synthesize comparisonSetting;
 

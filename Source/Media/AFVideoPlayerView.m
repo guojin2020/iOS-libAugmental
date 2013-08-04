@@ -136,10 +136,6 @@ NSString *STATUS_KEY = @"status";
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
-    [player release];
-    [playerItem release];
-    [playButton release];
-    [super dealloc];
 }
 
 - (void)didMoveToWindow

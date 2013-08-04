@@ -166,9 +166,5 @@ static NSString
 
 //====================== NSCoding
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 
 @end

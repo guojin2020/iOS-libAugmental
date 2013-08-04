@@ -16,7 +16,7 @@
     if (self)
     {
         currentPageNumber = 1;
-        queryString       = [queryStringIn retain];
+        queryString       = queryStringIn;
         pageBy            = pageByIn;
         observers         = [[NSMutableSet alloc] init];
     }
@@ -31,16 +31,13 @@
 
         AFPagedObjectRequest *oldRequest = currentRequest;
         currentRequest = [[AFPagedObjectRequest alloc] initWithURL:queryURL endpoint:self resultsPerPage:pageBy page:currentPageNumber];
-        [oldRequest release];
         [[AFSession sharedSession] handleRequest:currentRequest];
         //[newPageRequest release];
-        [queryURL release];
     }
 }
 
 - (void)refresh
 {
-    [currentResultsPage release];
     currentResultsPage = nil;
     [self setCurrentPageNumber:currentPageNumber];
 }
@@ -54,7 +51,6 @@
 
 - (void)cancelQuery
 {
-    [currentRequest release];
     currentRequest = nil;
 }
 
@@ -68,13 +64,11 @@
 {
     if (request == currentRequest)
     {
-        [currentRequest release];
         currentRequest = nil;
 
         AFResultsPage *oldResultsPage = (AFResultsPage *) resultsPage;
-        currentResultsPage = [resultsPage retain];
+        currentResultsPage = resultsPage;
         currentPageNumber  = (uint8_t) currentResultsPage.currentPage;
-        [oldResultsPage release];
         for (NSObject <AFPagedObjectQueryObserver> *observer in observers) [observer resultsPageUpdated:resultsPage];
     }
 }
@@ -93,7 +87,7 @@
     self = [self init];
     if (self)
     {
-        queryString       = [[coder decodeObjectForKey:@"queryString"] retain];
+        queryString       = [coder decodeObjectForKey:@"queryString"];
         currentPageNumber = (uint8_t) [coder decodeIntForKey:@"currentPageNumber"];
         pageBy            = (uint16_t) [coder decodeIntForKey:@"pageBy"];
 
@@ -109,15 +103,6 @@
 
 }
 
-- (void)dealloc
-{
-    [observers release];
-    [queryString release];
-    [currentRequest release];
-    [currentResultsPage release];
-    [queryString release];
-    [super dealloc];
-}
 
 @synthesize currentPageNumber, queryString;
 

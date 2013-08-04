@@ -30,11 +30,9 @@
 	{
 		UIAlertView* rejectAlert = [[UIAlertView alloc] initWithTitle:@"Please correct the following" message:errorMessage delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 		[rejectAlert show];
-		[rejectAlert release];
 		returnVal = NO;
 	}
 	else returnVal = YES;
-	[errorMessage release];
 	return returnVal;
 }
 

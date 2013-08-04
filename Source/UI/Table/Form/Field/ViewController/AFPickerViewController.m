@@ -14,7 +14,7 @@ static UIColor *bgColor   = nil;
     {
         self.objects = objectsIn;
         self.title   = titleIn;
-        delegate = [delegateIn retain];
+        delegate = delegateIn;
 
         defaultValue = nil;
         value        = nil;
@@ -26,8 +26,7 @@ static UIColor *bgColor   = nil;
 {
     NSArray *oldObjects = objects;
     objects = [[NSMutableArray alloc] initWithArray:objectsIn];
-    [oldObjects release];
-    if ((!defaultValue || ![objects containsObject:defaultValue]) && [objects count] > 0) self.defaultValue = [objects objectAtIndex:0];
+    if ((!defaultValue || ![objects containsObject:defaultValue]) && [objects count] > 0) self.defaultValue = objects[0];
 }
 
 - (void)setValue:(id)valueIn
@@ -74,13 +73,13 @@ static UIColor *bgColor   = nil;
     }
     else
     {
-        self.value = [objects objectAtIndex:(NSUInteger) row];
+        self.value = objects[(NSUInteger) row];
     }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    NSString *objectTitle = component == 0 ? [delegate titleForObject:[objects objectAtIndex:(NSUInteger) row]] : nil;
+    NSString *objectTitle = component == 0 ? [delegate titleForObject:objects[(NSUInteger) row]] : nil;
     return objectTitle;
 }
 
@@ -89,14 +88,14 @@ static UIColor *bgColor   = nil;
 + (UIColor *)textColor
 {
     if (!textColor)
-    {textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];}
+    {textColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_TEXT_COLOR];}
     return textColor;
 }
 
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_BG_COLOR] retain];}
+    {bgColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPickerViewController class]] colorForKey:THEME_KEY_BG_COLOR];}
     return bgColor;
 }
 
@@ -116,23 +115,12 @@ static UIColor *bgColor   = nil;
 
 + (NSDictionary *)defaultThemeSection
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"000000", THEME_KEY_TEXT_COLOR,
-            @"FFFFFF", THEME_KEY_BG_COLOR,
-            nil];
+    return @{THEME_KEY_TEXT_COLOR: @"000000",
+            THEME_KEY_BG_COLOR: @"FFFFFF"};
 }
 
 //================>> Dealloc
 
-- (void)dealloc
-{
-    //[setting release];
-    [objects release];
-    [delegate release];
-    [picker release];
-    [adviceText release];
-    [super dealloc];
-}
 
 @synthesize picker, adviceText, objects;
 

@@ -13,7 +13,7 @@
 
 - (id)initWithURL:(NSURL *)URLIn endpoint:(NSObject <AFRequestEndpoint> *)endpointIn;
 
-@property(nonatomic, retain) NSObject <AFRequestEndpoint> *endpoint;
-@property(nonatomic, retain) NSDictionary                 *headers;
+@property(nonatomic, strong) NSObject <AFRequestEndpoint> *endpoint;
+@property(nonatomic, strong) NSDictionary                 *headers;
 
 @end

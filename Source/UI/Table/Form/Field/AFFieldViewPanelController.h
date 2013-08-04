@@ -25,11 +25,11 @@
 
 - (void)broadcastNewValueToObservers:(NSObject *)newValue;
 
-@property(nonatomic, retain) NSMutableSet        *observers;
-@property(nonatomic, retain) NSObject <NSCoding> *value;
-@property(nonatomic, retain) NSObject <NSCoding> *defaultValue;
+@property(nonatomic, strong) NSMutableSet        *observers;
+@property(nonatomic, strong) NSObject <NSCoding> *value;
+@property(nonatomic, strong) NSObject <NSCoding> *defaultValue;
 
-@property(nonatomic, retain) IBOutlet UILabel *loadingLabel;
-@property(nonatomic, retain) IBOutlet UIView  *loadingView;
+@property(nonatomic, strong) IBOutlet UILabel *loadingLabel;
+@property(nonatomic, strong) IBOutlet UIView  *loadingView;
 
 @end

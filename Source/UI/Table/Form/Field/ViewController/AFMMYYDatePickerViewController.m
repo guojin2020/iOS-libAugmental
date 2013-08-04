@@ -24,16 +24,12 @@
         int      end    = range.location + range.length;
         for (int offset = range.location; offset <= end; offset++)
         {
-            [buildYearStrings addObject:[twoDigitFormatter stringFromNumber:[NSNumber numberWithInt:yearNumber + offset]]];
+            [buildYearStrings addObject:[twoDigitFormatter stringFromNumber:@(yearNumber + offset)]];
         }
 
         yearStrings  = [[NSArray alloc] initWithArray:buildYearStrings];
-        monthStrings = [[NSArray alloc] initWithObjects:@"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11", @"12", nil];
+        monthStrings = @[@"01", @"02", @"03", @"04", @"05", @"06", @"07", @"08", @"09", @"10", @"11", @"12"];
 
-        [buildYearStrings release];
-        [twoDigitFormatter release];
-        [gregorian release];
-        [today release];
 
         self.hidesBottomBarWhenPushed = YES;
     }
@@ -85,7 +81,7 @@
     {
         case 0:
         case 1:
-            [self setValue:[NSString stringWithFormat:@"%@%@", [monthStrings objectAtIndex:(NSUInteger) [picker selectedRowInComponent:0]], [yearStrings objectAtIndex:(NSUInteger) [picker selectedRowInComponent:1]]]];
+            [self setValue:[NSString stringWithFormat:@"%@%@", monthStrings[(NSUInteger) [picker selectedRowInComponent:0]], yearStrings[(NSUInteger) [picker selectedRowInComponent:1]]]];
             break;
         default:
             break;
@@ -97,23 +93,14 @@
     switch (component)
     {
         case 0:
-            return [monthStrings objectAtIndex:(NSUInteger) row];
+            return monthStrings[(NSUInteger) row];
         case 1:
-            return [yearStrings objectAtIndex:(NSUInteger) row];
+            return yearStrings[(NSUInteger) row];
         default:
             return nil;
     }
 }
 
-- (void)dealloc
-{
-    [setting release];
-    [yearStrings release];
-    [monthStrings release];
-    [picker release];
-    [adviceText release];
-    [super dealloc];
-}
 
 @synthesize picker, adviceText;
 

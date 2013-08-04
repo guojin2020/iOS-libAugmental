@@ -51,8 +51,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 -(void)setParentViewController:(UIViewController*)parentViewControllerIn
 {
     UIViewController* oldOverrideParent = overrideParent;
-    overrideParent = [parentViewControllerIn retain];
-    [oldOverrideParent release];
+    overrideParent = parentViewControllerIn;
 }
 
 -(void)reloadData
@@ -66,10 +65,9 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 -(void)setTable:(AFTable*)tableIn
 {
 	AFTable* oldTable = table;
-	table = [tableIn retain];
+	table = tableIn;
 	[oldTable removeObserver:(id)self];
 	[tableIn addObserver:(id)self];
-	[oldTable release];
 	//[self editableChanged:table];
 	table.viewController = self;
 	self.title = table.title;
@@ -78,7 +76,6 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	{
 		UIBarButtonItem* backButton = [[UIBarButtonItem alloc] initWithTitle:table.backTitle style:UIBarButtonItemStylePlain target:nil action:nil];
 		self.navigationItem.backBarButtonItem = backButton;
-		[backButton release];
 	}
 	
 	//if([self isViewLoaded])[self editableChanged:self];
@@ -112,7 +109,6 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
    tableView.opaque = NO;
 
-	[tableView release];
 }
 
 -(void)viewDidLoad
@@ -170,7 +166,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(UIView*)tableView:(UITableView*)tableView viewForFooterInSection:(NSInteger)section
 {
-	return [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+	return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
 }
 
 -(UIView*)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
@@ -179,7 +175,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 	
 	if(!tableView || !title || [title isEqualToString:@""])
 	{
-		return [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		return [[UIView alloc] initWithFrame:CGRectZero];
 	}
 		
 	UIView* headerView = [headerViews objectForKey:title];
@@ -200,9 +196,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 		headerLabel.shadowOffset	= [AFTableSection headerShadowEnabled]?CGSizeMake(1, 1):CGSizeMake(0, 0);
 		
 		[headerView addSubview:headerLabel];
-		[headerLabel release];
 		[headerViews setObject:headerView forKey:title];
-		[headerView release];
 	}
 	return headerView;
 }
@@ -489,12 +483,6 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 -(void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[returnCell release];
-	[headerViews release];
-	[table release];
-    [overrideParent release];
-    [doneButton release];
-    [super dealloc];
 }
 
 @synthesize table, doneButton;

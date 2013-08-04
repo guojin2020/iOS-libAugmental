@@ -150,7 +150,6 @@ static AFSession *sharedSession = nil;
         state = newState;
         NSSet                             *observerSnapshot = [[NSSet alloc] initWithSet:observers];
         for (NSObject <AFSessionObserver> *observer in observerSnapshot)if ([observer respondsToSelector:@selector(stateOfSession:changedFrom:to:)])[observer stateOfSession:self changedFrom:oldState to:state];
-        [observerSnapshot release];
     }
     //if(state==(AFSessionState)AFSessionStateDisconnected || state==(AFSessionState)AFSessionStateRejected) offline = NO;
 }
@@ -174,19 +173,6 @@ static AFSession *sharedSession = nil;
 {
 }
 
-- (void)dealloc
-{
-    [cache release];
-    [username release];
-    [password release];
-    [downloadQueue release];
-    [environment release];
-    [observers release];
-    [offlineLoginCache release];
-    [requestsAwaitingLogin release];
-    [loginData release];
-    [super dealloc];
-}
 
 @synthesize environment, downloadQueue, cache;
 

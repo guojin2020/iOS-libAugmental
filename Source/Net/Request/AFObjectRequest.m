@@ -24,10 +24,9 @@
         }
         NSDictionary                      *postDictionary     = [NSDictionary dictionaryWithObject:objectDictionaries forKey:@"objects"];
 
-        postData = [[[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil] retain];
+        postData = [[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil];
 
         NSString *postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
-        [postString release];
 
         NSAssert(postData, @"Deserialisation AFSessionStateError in %@, request was: %@", [self class], [URL absoluteString]);
     }
@@ -39,7 +38,7 @@
     [super didFinish];
 
     NSError *error = nil;
-    returnedDictionary = [[[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error] retain];
+    returnedDictionary = [[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error];
 
     NSArray *objectDictionaries = [returnedDictionary objectForKey:@"objects"];
 
@@ -72,7 +71,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 
     NSArray *objects = [[AFSession sharedSession].cache allocObjectsFromDictionaries:objectDictionaries];
@@ -83,12 +81,10 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Debug Message" message:[NSString stringWithFormat:@"%@ logged: %@", [URL absoluteString], debugString] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
 #endif
 
     [endpoint request:self returnedWithData:objects];
-    [objects release];
 }
 
 - (NSString *)actionDescription

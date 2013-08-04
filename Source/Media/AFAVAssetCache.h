@@ -7,12 +7,10 @@
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 
-typedef struct AVCacheItem
-{
-    AVAsset* asset;
-    NSUInteger referenceCount;
-}
-AVCacheItem;
+@interface AVCacheItem : NSObject
+@property (copy) AVAsset* asset;
+@property NSUInteger referenceCount;
+@end 
 
 @interface AFAVAssetCache : NSObject
 {

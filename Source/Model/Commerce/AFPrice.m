@@ -21,7 +21,6 @@
     [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     [numberFormatter setLocale:self.priceLocale];
     NSString *string = [numberFormatter stringFromNumber:self.price];
-    [numberFormatter release];
     return string;
 }
 

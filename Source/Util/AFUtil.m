@@ -32,12 +32,12 @@ static char base64EncodingTable[64] = {
 
 + (NSString *)priceStringFromFloat:(float)priceFloat
 {
-    return priceFloat < 0 ? @"£--.--" : priceFloat == 0 ? @"FREE" : [NSString stringWithFormat:@"£%@", [priceFormatter stringFromNumber:[NSNumber numberWithFloat:priceFloat]]];
+    return priceFloat < 0 ? @"£--.--" : priceFloat == 0 ? @"FREE" : [NSString stringWithFormat:@"£%@", [priceFormatter stringFromNumber:@(priceFloat)]];
 }
 
 + (NSString *)weightStringFromFloat:(float)weightFloat
 {
-    return [NSString stringWithFormat:@"%@Kg", [weightFormatter stringFromNumber:[NSNumber numberWithFloat:weightFloat]]];
+    return [NSString stringWithFormat:@"%@Kg", [weightFormatter stringFromNumber:@(weightFloat)]];
 }
 
 + (void)logViewSize:(UIView *)view withName:(NSString *)name
@@ -62,7 +62,6 @@ static char base64EncodingTable[64] = {
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alert show];
-    [alert release];
 }
 
 + (NSArray *)allocIdArrayFromCsv:(NSString *)csvIdList
@@ -77,12 +76,10 @@ static char base64EncodingTable[64] = {
         if (idNumber)[numberComponents addObject:idNumber];
         else
         {
-            [numberComponents release];
             numberComponents = nil;
             break;
         }
     }
-    [formatter release];
     return numberComponents;
 }
 
@@ -92,18 +89,17 @@ static char base64EncodingTable[64] = {
     @synchronized (objects)
     {
         int objectsCount = [objects count];
-        if (objectsCount > 0 && [[objects objectAtIndex:0] isKindOfClass:[AFObject class]])
+        if (objectsCount > 0 && [objects[0] isKindOfClass:[AFObject class]])
         {
-            [objectsIdCsv appendFormat:@"%i", ((AFObject*) [objects objectAtIndex:0]).primaryKey];
+            [objectsIdCsv appendFormat:@"%i", ((AFObject*) objects[0]).primaryKey];
             for (int i = 1; i < objectsCount; i++)
             {
-                if ([[objects objectAtIndex:(NSUInteger) i] isKindOfClass:[AFObject class]])
+                if ([objects[(NSUInteger) i] isKindOfClass:[AFObject class]])
                 {
-                    [objectsIdCsv appendFormat:@",%i", ((AFObject*) [objects objectAtIndex:(NSUInteger) i]).primaryKey];
+                    [objectsIdCsv appendFormat:@",%i", ((AFObject*) objects[(NSUInteger) i]).primaryKey];
                 }
                 else
                 {
-                    [objectsIdCsv release];
                     objectsIdCsv = nil;
                     break;
                 }
@@ -117,7 +113,6 @@ static char base64EncodingTable[64] = {
 {
     NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     AFLog(@"%@", string);
-    [string release];
 }
 
 + (NSString *)newDurationString:(NSTimeInterval)time
@@ -193,7 +188,7 @@ static char base64EncodingTable[64] = {
 
     }
 
-    NSString *ret = [[[NSString alloc] initWithBytes:outbuf length:(NSUInteger) outp encoding:NSASCIIStringEncoding] autorelease];
+    NSString *ret = [[NSString alloc] initWithBytes:outbuf length:(NSUInteger) outp encoding:NSASCIIStringEncoding];
     free(outbuf);
 
     return ret;

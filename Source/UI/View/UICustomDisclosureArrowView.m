@@ -9,7 +9,7 @@ static const CGFloat W = 3.0; // line width
 {
     if ((self = [self initWithFrame:CGRectMake(0, 0, R * 2 + W, R * 2)]))
     {
-        color = [colorIn retain];
+        color = colorIn;
     }
     return self;
 }
@@ -40,10 +40,5 @@ static const CGFloat W = 3.0; // line width
     CGContextStrokePath(ctxt);
 }
 
-- (void)dealloc
-{
-    [color release];
-    [super dealloc];
-}
 
 @end

@@ -12,6 +12,6 @@
 	id<AFDrawingDelegate> delegate;
 }
 
-@property (nonatomic, retain) id<AFDrawingDelegate> delegate;
+@property (nonatomic, strong) id<AFDrawingDelegate> delegate;
 
 @end

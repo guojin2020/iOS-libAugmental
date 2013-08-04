@@ -33,16 +33,11 @@
 {
     if (sender == slider)
     {
-        value = [NSNumber numberWithFloat:minimum + ((maximum - minimum) * [slider value])];
+        value = @(minimum + ((maximum - minimum) * [slider value]));
         [super controlValueChanged:sender];
     }
 }
 
-- (void)dealloc
-{
-    [slider release];
-    [super dealloc];
-}
 
 //@dynamic validator, valid, value;
 

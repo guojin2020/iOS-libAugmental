@@ -12,6 +12,6 @@
 
 -(id)initWithReason:(NSString *)reason;
 
-@property (nonatomic, readonly) NSString* reason;
+@property (weak, nonatomic, readonly) NSString* reason;
 
 @end

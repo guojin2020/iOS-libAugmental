@@ -15,16 +15,11 @@
 {
     if ((self = [self init]))
     {
-        observableObject = [objectIn retain];
+        observableObject = objectIn;
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [observableObject release];
-    [super dealloc];
-}
 
 - (AFObservable *)observableObject
 {

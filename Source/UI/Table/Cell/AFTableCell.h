@@ -76,11 +76,11 @@
 
 -(void)viewCellDidLoad;
 
-@property (nonatomic,retain) NSObject<AFCellSelectionDelegate>* selectionDelegate;
-@property (nonatomic,retain) UITableViewCell* cell;
-@property (nonatomic,retain) UITableView* tableView;
-@property (nonatomic,retain) AFTableSection* parentSection;
-@property (nonatomic,readonly) UINavigationController* navigationController;
-@property (nonatomic, retain) UIColor* fillColor;
+@property (nonatomic,strong) NSObject<AFCellSelectionDelegate>* selectionDelegate;
+@property (nonatomic,strong) UITableViewCell* cell;
+@property (nonatomic,strong) UITableView* tableView;
+@property (nonatomic,strong) AFTableSection* parentSection;
+@property (weak, nonatomic,readonly) UINavigationController* navigationController;
+@property (nonatomic, strong) UIColor* fillColor;
 
 @end

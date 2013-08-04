@@ -17,6 +17,6 @@
 
 - (id)initWithObservable:(AFObservable *)objectIn;
 
-@property(nonatomic, readonly) AFObservable *observableObject;
+@property(weak, nonatomic, readonly) AFObservable *observableObject;
 
 @end

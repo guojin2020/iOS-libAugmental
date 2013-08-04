@@ -8,8 +8,8 @@
 
 @interface AFPrice : NSObject
 
-@property (nonatomic, retain) NSNumber* price;
-@property (nonatomic, retain) NSLocale* priceLocale;
+@property (nonatomic, strong) NSNumber* price;
+@property (nonatomic, strong) NSLocale* priceLocale;
 
 -(id)initWithPrice:(NSNumber *)priceIn priceLocale:(NSLocale *)priceLocaleIn;
 

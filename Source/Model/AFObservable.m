@@ -59,7 +59,6 @@ SEL
 
 	[self notifyObservers:eventIn parameterArray:parameters];
 
-	[parameters release];
 }
 
 - (void)notifyObservers:(SEL)eventIn parameterArray:(NSArray*)parameters
@@ -92,7 +91,7 @@ SEL
 	            invocation.selector = eventIn;
 
 	            index = 2; // Indices 0, 1 are reserved according to NSInvocation documentation
-	            for (id parameter in parameters)
+	            for (__unsafe_unretained id parameter in parameters)
 	            {
 	                [invocation setArgument:&parameter atIndex:index++];
 	            }
@@ -107,7 +106,6 @@ SEL
 	            }
 	        }
 	    }
-	    [observersSnapshot release];
 	}
 }
 
@@ -132,12 +130,6 @@ SEL
 	}
 }
 
-- (void)dealloc
-{
-    [observers release];
-    [invocationQueue release];
-    [super dealloc];
-}
 
 - (void)beginAtomic
 {

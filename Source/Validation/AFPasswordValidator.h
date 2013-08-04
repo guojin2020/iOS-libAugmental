@@ -11,6 +11,6 @@
 
 - (id)initWithComparisonSetting:(AFPasswordField *)comparisonSettingIn allowsEmpty:(BOOL)allowEmptyIn;
 
-@property(nonatomic, retain) AFPasswordField *comparisonSetting;
+@property(nonatomic, strong) AFPasswordField *comparisonSetting;
 
 @end

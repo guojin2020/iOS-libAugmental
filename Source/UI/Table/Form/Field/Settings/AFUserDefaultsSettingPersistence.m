@@ -23,11 +23,5 @@ static AFUserDefaultsSettingPersistence *defaultCache = nil;
     return (NSData *) [[NSUserDefaults standardUserDefaults] valueForKey:key];
 }
 
-- (void)dealloc
-{
-
-    [defaults release];
-    [super dealloc];
-}
 
 @end

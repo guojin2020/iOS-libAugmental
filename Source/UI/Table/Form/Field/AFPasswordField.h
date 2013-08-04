@@ -11,6 +11,6 @@
 
 - (void)counterpartUpdated;
 
-@property(nonatomic, retain) AFPasswordField *counterpart;
+@property(nonatomic, strong) AFPasswordField *counterpart;
 
 @end

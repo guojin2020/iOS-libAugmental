@@ -11,7 +11,7 @@
 {
     if ((self = [self init]))
     {
-        viewController        = [viewControllerIn retain];
+        viewController        = viewControllerIn;
         title                 = nil;
         manager               = nil;
         nextBarButtonItem     = nil;
@@ -24,8 +24,7 @@
 - (void)setManager:(AFPageManager *)managerIn
 {
     AFPageManager *oldManager = manager;
-    manager = [managerIn retain];
-    [oldManager release];
+    manager = managerIn;
 
     [self updateNavigationItems];
 }
@@ -47,7 +46,6 @@
         {
             UIBarButtonItem *item = [manager.delegate newPreviousBarButtonItemForPage:self];
             viewController.navigationItem.leftBarButtonItem = item;
-            [item release];
         }
 
         if (nextBarButtonItem)
@@ -58,7 +56,6 @@
         {
             UIBarButtonItem *item = [manager.delegate newNextBarButtonItemForPage:self];
             viewController.navigationItem.rightBarButtonItem = item;
-            [item release];
         }
 
         viewController.title = title ? title : [manager.delegate titleForPage:self];
@@ -68,7 +65,7 @@
 - (void)setPreviousBarButtonItem:(UIBarButtonItem *)newItem
 {
     UIBarButtonItem *oldItem = previousBarButtonItem;
-    previousBarButtonItem = [newItem retain];
+    previousBarButtonItem = newItem;
     if (viewController)
     {
         if (previousBarButtonItem)
@@ -79,16 +76,14 @@
         {
             UIBarButtonItem *item = [manager.delegate newPreviousBarButtonItemForPage:self];
             viewController.navigationItem.leftBarButtonItem = item;
-            [item release];
         }
     }
-    [oldItem release];
 }
 
 - (void)setNextBarButtonItem:(UIBarButtonItem *)newItem
 {
     UIBarButtonItem *oldItem = nextBarButtonItem;
-    nextBarButtonItem = [newItem retain];
+    nextBarButtonItem = newItem;
     if (viewController)
     {
         if (nextBarButtonItem)
@@ -99,10 +94,8 @@
         {
             UIBarButtonItem *item = [manager.delegate newNextBarButtonItemForPage:self];
             viewController.navigationItem.rightBarButtonItem = item;
-            [item release];
         }
     }
-    [oldItem release];
 }
 
 - (UIBarButtonItem *)nextBarButtonItem
@@ -151,14 +144,13 @@
 - (void)setViewController:(UIViewController *)newViewController
 {
     UIViewController *oldViewController = viewController;
-    viewController = [newViewController retain];
+    viewController = newViewController;
 
     title = viewController.title;
 
     [self updateNavigationItems];
     [manager viewControllerChanged:self was:oldViewController];
 
-    [oldViewController release];
 }
 
 - (NSString *)title
@@ -167,23 +159,11 @@
 - (void)setTitle:(NSString *)titleIn
 {
     NSString *oldTitle = title;
-    title = [titleIn retain];
-    [oldTitle release];
+    title = titleIn;
 
     if (viewController) viewController.title = title ? title : [manager.delegate titleForPage:self];
 }
 
-- (void)dealloc
-{
-    [viewController release];
-    [manager release];
-    [previousBarButtonItem release];
-    [nextBarButtonItem release];
-    [title release];
-    [title release];
-    [manager release];
-    [super dealloc];
-}
 
 @synthesize viewController, manager;
 

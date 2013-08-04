@@ -83,29 +83,17 @@ static AFDownloadRequestCache *defaultCache = NULL;
     {
         Class requestClass = [self downloadRequestClassForDownloadable:downloadableIn];
 
-        request = NSAllocateObject(requestClass, 0, NSDefaultMallocZone());
+        request = [requestClass alloc];
 
         SEL initWithDownloadableSelector = [(id<AFPDownloadRequest>)requestClass initWithDownloadableSelector];
 
-        NSMethodSignature *signature = [(Class)requestClass instanceMethodSignatureForSelector:initWithDownloadableSelector];
-
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-
-        [invocation setSelector:initWithDownloadableSelector];
-        [invocation setTarget:request];
-
-        [invocation setArgument:&downloadableIn atIndex:2];
-        [invocation setArgument:&observersIn    atIndex:3];
-        [invocation setArgument:&fileSizeCache  atIndex:4];
-        [invocation setArgument:&queueIn        atIndex:5];
-
-        [invocation setReturnValue:&request];
-
-        [invocation invoke];
+        typedef void (*InitWithDownloadableMethod)(id, SEL, NSObject<AFPDownloadable>*, NSSet*, AFDefaultsBackedStringDictionary*, AFRequestQueue*);
+        InitWithDownloadableMethod methodToCall;
+        methodToCall = (InitWithDownloadableMethod)[request methodForSelector:initWithDownloadableSelector];
+        methodToCall(request, initWithDownloadableSelector, downloadableIn, observersIn, fileSizeCache, queueIn);
 
         [requestCache setObject:request forKey:request.localFilePath];
 
-        [request release];
     }
 
     return request;
@@ -128,13 +116,5 @@ static AFDownloadRequestCache *defaultCache = NULL;
     return YES;
 }
 
--(void)dealloc
-{
-    [typeMap        release];
-    [fileSizeCache  release];
-    [requestCache   release];
-
-    [super dealloc];
-}
 
 @end

@@ -30,12 +30,10 @@
 
     for (NSUInteger i = 0; i < [self.subviews count]; i++)
     {
-        UIView *subView = [self.subviews objectAtIndex:i];
+        UIView *subView = (self.subviews)[i];
         NSString *newIndent = [[NSString alloc] initWithFormat:@"  %@", indent];
         NSString *msg = [[NSString alloc] initWithFormat:@"%@%d:", newIndent, i];
         [subView dumpWithText:msg indent:newIndent];
-        [msg release];
-        [newIndent release];
     }
 }
 

@@ -100,13 +100,13 @@ static NSString *beginEditingSound = nil;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] colorForKey:THEME_KEY_TEXT_COLOR];
     return textColor;
 }
 
 + (NSString *)beginEditingSound
 {
-    if (!beginEditingSound)beginEditingSound = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND] retain];
+    if (!beginEditingSound)beginEditingSound = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTextField class]] valueForKey:THEME_KEY_BEGIN_EDITING_SOUND];
     return beginEditingSound;
 }
 
@@ -126,24 +126,12 @@ static NSString *beginEditingSound = nil;
 
 + (NSDictionary *)defaultThemeSection
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"000000", THEME_KEY_TEXT_COLOR,
-            @"beep-21", THEME_KEY_BEGIN_EDITING_SOUND,
-            nil];
+    return @{THEME_KEY_TEXT_COLOR: @"000000",
+            THEME_KEY_BEGIN_EDITING_SOUND: @"beep-21"};
 }
 
 //============>> Dealloc
 
-- (void)dealloc
-{
-    //[string release];
-    [textField release];
-    //[string release];
-    [textField release];
-    [textFieldDelegate release];
-    [string release];
-    [super dealloc];
-}
 
 @synthesize string, textField, textFieldDelegate, maxLength;
 

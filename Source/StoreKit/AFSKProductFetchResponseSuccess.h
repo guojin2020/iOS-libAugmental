@@ -11,6 +11,6 @@
 
 -(id)initWithProduct:(SKProduct *)product;
 
-@property (nonatomic, readonly) SKProduct* product;
+@property (weak, nonatomic, readonly) SKProduct* product;
 
 @end

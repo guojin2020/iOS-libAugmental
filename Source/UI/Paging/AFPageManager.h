@@ -12,7 +12,7 @@
 
     UINavigationController *navController;
 
-    NSObject <AFPageManagerDelegate> *delegate;
+    NSObject <AFPageManagerDelegate> *__weak delegate;
 }
 
 - (id)initWithNavigationController:(UINavigationController *)navControllerIn;
@@ -57,6 +57,6 @@
 
 - (NSEnumerator *)pageEnumerator;
 
-@property(nonatomic, readonly) NSObject <AFPageManagerDelegate> *delegate;
+@property(weak, nonatomic, readonly) NSObject <AFPageManagerDelegate> *delegate;
 
 @end

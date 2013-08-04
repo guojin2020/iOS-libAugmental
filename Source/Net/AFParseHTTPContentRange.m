@@ -63,7 +63,6 @@ AFRangeInfo* CreateAFRangeInfoFromHTTPHeaders(NSDictionary* httpHeaders)
         rangeInfo->contentRange = NSMakeRange(rangeStart, rangeEnd - rangeStart );
         rangeInfo->contentTotal = contentTotal;
 
-        [numberFormatter release];
 
         return rangeInfo;
     }
@@ -77,7 +76,6 @@ AFRangeInfo* CreateAFRangeInfoFromHTTPHeaders(NSDictionary* httpHeaders)
         rangeInfo->contentRange = NSMakeRange(0, contentTotal );
         rangeInfo->contentTotal = contentTotal;
 
-        [numberFormatter release];
 
         return rangeInfo;
     }

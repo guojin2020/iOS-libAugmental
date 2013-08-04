@@ -34,8 +34,8 @@ SEL AFTableEventEdited;
 {
 	if((self = [self init]))
 	{
-		title     = [titleIn retain];
-		backTitle = [backTitleIn retain];
+		title     = titleIn;
+		backTitle = backTitleIn;
 
         [self notifyObservers:AFTableEventEdited parameters:nil];
 	}
@@ -88,7 +88,7 @@ SEL AFTableEventEdited;
 
 -(AFTableSection*)sectionAtIndex:(NSUInteger)index
 {
-	return (AFTableSection*)[children objectAtIndex:index];
+	return (AFTableSection*)children[index];
 }
 
 -(NSUInteger)sectionCount{return [children count];}
@@ -96,13 +96,13 @@ SEL AFTableEventEdited;
 -(NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id[])stackbuf count:(NSUInteger)lenIn
 {
 	NSUInteger len = [children count];
-	id* childrenCopy = malloc(sizeof(id)*len);
+	__unsafe_unretained id* childrenCopy = (__unsafe_unretained id*)malloc(sizeof(id)*len);
 	[children getObjects:childrenCopy range:NSMakeRange(0, len)];
-	
+    
 	if(state->state >= len)return 0;
     state->itemsPtr = childrenCopy;
     state->state = len;
-    state->mutationsPtr = (unsigned long *)self;
+    state->mutationsPtr = &state->extra[0];
     return len;
 }
 
@@ -114,7 +114,7 @@ SEL AFTableEventEdited;
 
 +(NSDictionary*)defaultThemeSection
 {
-    return [NSDictionary dictionary];
+    return @{};
 }
 
 //=========>> Views
@@ -133,15 +133,6 @@ SEL AFTableEventEdited;
     return (UITableView*)([self viewController].view);
 }
 
--(void)dealloc
-{
-    [viewController release];
-	[children release];
-	[title release];
-    [backTitle release];
-    [backTitle release];
-    [super dealloc];
-}
 
 @synthesize title, backTitle, viewController;
 

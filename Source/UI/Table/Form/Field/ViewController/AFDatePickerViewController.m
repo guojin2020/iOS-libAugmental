@@ -31,12 +31,6 @@
     [super setValue:valueIn];
 }
 
-- (void)dealloc
-{
-    [picker release];
-    [adviceText release];
-    [super dealloc];
-}
 
 @synthesize picker, adviceText;
 

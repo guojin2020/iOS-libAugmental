@@ -23,7 +23,7 @@
 
 - (NSString *)cellReuseIdentifier;
 
-@property(nonatomic, retain) AFObject <AFCellViewable> *object;
+@property(nonatomic, strong) AFObject <AFCellViewable> *object;
 
 - (UITableViewCell *)viewCellForTableView:(UITableView *)tableIn;
 

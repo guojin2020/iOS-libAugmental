@@ -38,12 +38,10 @@ void AFReportingExceptionHandler(NSException* exception)
 		MFMailComposeViewController *mailComposer = [[MFMailComposeViewController alloc] init];
 		AFExceptionReporter *reporter = [AFExceptionReporter new];
 		mailComposer.mailComposeDelegate = reporter;
-		[reporter release];
 		[mailComposer setToRecipients:@[recipients]];
 		[mailComposer setSubject:subject];
 		[mailComposer setMessageBody:messageBody isHTML:NO];
 		[navController presentModalViewController:mailComposer animated:YES];
-		[mailComposer release];
 	};
 
 	void (^showAlertBlock)() = ^
@@ -55,7 +53,6 @@ void AFReportingExceptionHandler(NSException* exception)
 												        onDismiss:dismissHandler
 														 onCancel:NULL];
 		[errorAlert show];
-		[errorAlert release];
 	};
 
 	if([NSThread isMainThread]) showAlertBlock();

@@ -36,7 +36,6 @@
     NSDictionary *pagingData         = [rootContainer objectForKey:@"pagingData"];
     NSArray      *objectDictionaries = [rootContainer objectForKey:@"pageObjects"];
 
-    [responseString release];
 
     int resultsCount = [(NSNumber *) [pagingData objectForKey:@"resultsCount"] intValue];
 
@@ -47,9 +46,7 @@
                                                                 currentPage:(uint16_t) [(NSNumber *) [pagingData objectForKey:@"currentPage"] intValue]
                                                              resultsPerPage:(uint16_t) [(NSNumber *) [pagingData objectForKey:@"resultsPerPage"] intValue]];
 
-    [pageObjects release];
     [endpoint request:self returnedWithData:resultsPage];
-    [resultsPage release];
 
     //#ifdef SHOW_SERVER_DEBUG
     NSString *debugString = [returnedDictionary objectForKey:@"debug"];
@@ -57,7 +54,6 @@
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Server Debug Message" message:[NSString stringWithFormat:@"%@ logged: %@", [URL absoluteString], debugString] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        [alert release];
     }
     //#endif
 

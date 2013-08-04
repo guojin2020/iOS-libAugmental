@@ -124,17 +124,17 @@
 
 @property(nonatomic, readonly) BOOL active;
 @property(nonatomic, readonly) BOOL needsNavigationController;
-@property(nonatomic, readonly) UINavigationController *navigationController;
+@property(weak, nonatomic, readonly) UINavigationController *navigationController;
 
-@property(nonatomic, readonly) UIImage  *defaultTabBarIcon;
-@property(nonatomic, readonly) NSString *defaultTitle;
-@property(nonatomic, readonly) NSString *defaultTabName;
+@property(weak, nonatomic, readonly) UIImage  *defaultTabBarIcon;
+@property(weak, nonatomic, readonly) NSString *defaultTitle;
+@property(weak, nonatomic, readonly) NSString *defaultTabName;
 
-@property(nonatomic, retain) UIViewController *viewController;
+@property(nonatomic, strong) UIViewController *viewController;
 
-@property(nonatomic, retain) NSString *tabName;
+@property(nonatomic, strong) NSString *tabName;
 
-@property(nonatomic, retain) IBOutlet UILabel *loadingLabel;
-@property(nonatomic, retain) IBOutlet UIView  *loadingView;
+@property(nonatomic, strong) IBOutlet UILabel *loadingLabel;
+@property(nonatomic, strong) IBOutlet UIView  *loadingView;
 
 @end

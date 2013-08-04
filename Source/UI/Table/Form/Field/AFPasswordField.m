@@ -35,18 +35,11 @@
 - (void)setCounterpart:(AFPasswordField *)counterpartIn
 {
     AFPasswordField *oldCounterpart = counterpart;
-    counterpart = [counterpartIn retain];
-    [oldCounterpart release];
+    counterpart = counterpartIn;
 
     ((AFPasswordValidator *) self.validator).comparisonSetting = counterpart;
 }
 
-- (void)dealloc
-{
-    [counterpart release];
-    [counterpart release];
-    [super dealloc];
-}
 
 @synthesize counterpart;
 

@@ -12,6 +12,6 @@
 
 - (id)initWithRenderer:(id<AFPImageRenderer>)rendererIn;
 
-@property (nonatomic, retain) id<AFPImageRenderer> renderer;
+@property (nonatomic, strong) id<AFPImageRenderer> renderer;
 
 @end

@@ -17,7 +17,6 @@ static UIImage *dateIcon = nil;
         dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"dd-MM-yyyy"];
     }
-    [datePickerViewController release];
     return self;
 }
 
@@ -37,7 +36,7 @@ static UIImage *dateIcon = nil;
 
 + (UIImage *)dateIcon
 {
-    if (!dateIcon)dateIcon = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFDateField class]] imageForKey:THEME_KEY_DATE_ICON] retain];
+    if (!dateIcon)dateIcon = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFDateField class]] imageForKey:THEME_KEY_DATE_ICON];
     return dateIcon;
 }
 
@@ -61,11 +60,6 @@ static UIImage *dateIcon = nil;
 
 //==========>> Dealloc
 
-- (void)dealloc
-{
-    [dateFormatter release];
-    [super dealloc];
-}
 
 //@dynamic value, validator, valid;
 

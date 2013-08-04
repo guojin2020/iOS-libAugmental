@@ -18,8 +18,8 @@ static AFTableCell *resultsLoadingCell;
 
 + (void)initialize
 {
-    defaultNoResultsCell = [[[AFMessageCell alloc] initWithLabelText:@"There are no results to show"] retain];
-    resultsLoadingCell   = [[[AFMessageCell alloc] initWithLabelText:@"Search results are loading..."] retain];
+    defaultNoResultsCell = [[AFMessageCell alloc] initWithLabelText:@"There are no results to show"];
+    resultsLoadingCell   = [[AFMessageCell alloc] initWithLabelText:@"Search results are loading..."];
 }
 
 - (id)initWithQuery:(AFPagedObjectQuery *)queryIn
@@ -38,7 +38,7 @@ static AFTableCell *resultsLoadingCell;
         noResultsCell = defaultNoResultsCell;
 
         resultsTable        = [[AFTable alloc] initWithTitle:titleIn];
-        selectionDelegate   = [selectionDelegateIn retain];
+        selectionDelegate   = selectionDelegateIn;
         resultsTableSection = [[AFObjectTableSection alloc] initWithTitle:@"Search Results"];
         self.table = resultsTable;
         [resultsTable addSection:resultsTableSection];
@@ -74,8 +74,7 @@ static AFTableCell *resultsLoadingCell;
     for (NSObject <AFPagedObjectListViewObserver> *observer in observers)[observer pageRefreshWillStart:self];
 
     firstUpdate = NO;
-    [currentResultsPage release];
-    currentResultsPage = [resultsPage retain];
+    currentResultsPage = resultsPage;
 
     [resultsTableSection removeAllCells];
 
@@ -118,7 +117,6 @@ static AFTableCell *resultsLoadingCell;
             AFTableCell *footerCell = [[AFResultsPagingCell alloc] initWithConfiguration:(resultsPage.currentPage <= pages ? AFPagingCellConfigurationBottomBetweenPage : AFPagingCellConfigurationBottomLastPage) resultsPage:resultsPage];
             footerCell.selectionDelegate = self;
             [resultsTableSection addCell:footerCell];
-            [footerCell release];
 
             if (pages > 1 && !(pageScrubbingSection.parentTable))
             {
@@ -132,7 +130,6 @@ static AFTableCell *resultsLoadingCell;
             [resultsTableSection completeAtomic];
         }
 
-        [headerCell release];
 
         //Reload the table!
 	    AFBeginMainDispatch( ^{ [(UITableView*)self.view reloadData]; });
@@ -159,7 +156,6 @@ static AFTableCell *resultsLoadingCell;
     }
 
     [waitAlert dismiss];
-    [waitAlert release];
 
     for (NSObject <AFPagedObjectListViewObserver> *observer in observers)[observer pageRefreshDidFinish:self];
 }
@@ -186,10 +182,9 @@ static AFTableCell *resultsLoadingCell;
 - (void)setQuery:(AFPagedObjectQuery *)queryIn
 {
     AFPagedObjectQuery *oldQuery = query;
-    query = [queryIn retain];
+    query = queryIn;
     [query addObserver:self];
     [oldQuery removeObserver:self];
-    [oldQuery release];
     [query refresh];
 }
 
@@ -227,20 +222,6 @@ static AFTableCell *resultsLoadingCell;
 - (NSString *)queryString
 {return query.queryString;}
 
-- (void)dealloc
-{
-    [pageScrubbingCell release];
-    [selectionDelegate release];
-    [waitAlert release];
-    [resultsTable release];
-    [resultsTableSection release];
-    [observers release];
-    [pageScrubbingSection release];
-    [currentResultsPage release];
-    [query release];
-    [noResultsCell release];
-    [super dealloc];
-}
 
 @synthesize pageObjectSortSelector, query, currentResultsPage, noResultsCell;
 

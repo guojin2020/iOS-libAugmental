@@ -20,9 +20,9 @@
 
 + (NSString *)beginEditingSound;
 
-@property(nonatomic, retain) NSString                       *string;
-@property(nonatomic, retain) UITextField                    *textField;
-@property(nonatomic, retain) NSObject <UITextFieldDelegate> *textFieldDelegate;
+@property(nonatomic, strong) NSString                       *string;
+@property(nonatomic, strong) UITextField                    *textField;
+@property(nonatomic, strong) NSObject <UITextFieldDelegate> *textFieldDelegate;
 @property(nonatomic) uint8_t maxLength;
 
 @end

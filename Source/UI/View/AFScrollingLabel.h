@@ -24,12 +24,12 @@ AFScrollingLabelAnimationMode;
 
 - (void) drawLayer:(CALayer*) layer inContext:(CGContextRef) ctx;
 
-@property (nonatomic, retain)   NSString* text;
-@property (nonatomic, retain)   UIFont*   font;
+@property (nonatomic, strong)   NSString* text;
+@property (nonatomic, strong)   UIFont*   font;
 @property (nonatomic, assign)   float     fontSize;
 @property (nonatomic, assign)   float     fadeSize;
 @property (nonatomic, readonly) CFTypeRef ctFont;
-@property (nonatomic, retain)   UIColor*  textColor;
+@property (nonatomic, strong)   UIColor*  textColor;
 
 @end
 

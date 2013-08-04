@@ -35,11 +35,10 @@
 - (AFObjectTableCell*)addObject:(AFObject<AFCellViewable>*)object;
 {
     Class cellClass = [((id<AFCellViewable>) [object class]) cellViewClass];
-    AFObjectTableCell *cell = [((AFObjectTableCell*) NSAllocateObject(cellClass, 0, NULL)) initWithObject:object];
+    AFObjectTableCell *cell = [[cellClass alloc] initWithObject:object];
 
     [children addObject:cell];
     cell.parentSection = self;
-    [cell release];
 
     [objects addObject:object];
 
@@ -64,10 +63,5 @@
     [objects removeAllObjects];
 }
 
-- (void)dealloc
-{
-    [objects release];
-    [super dealloc];
-}
 
 @end

@@ -6,6 +6,8 @@
 
 #import "AFAVAssetCache.h"
 
+@implementation AVCacheItem
+@end
 
 @implementation AFAVAssetCache
 
@@ -35,19 +37,19 @@ static AFAVAssetCache*defaultCache;
     if(itemPointer)
     {
         item = [itemPointer pointerValue];
-        item->referenceCount++;
-        asset = item->asset;
+        item.referenceCount++;
+        asset = item.asset;
     }
     else
     {
-        asset = [[AVAsset assetWithURL:assetURL] retain];
+        asset = [AVAsset assetWithURL:assetURL];
 
-        item = malloc(sizeof(AVCacheItem));
+        item = [AVCacheItem new];
 
-        item->asset          = asset;
-        item->referenceCount = 1;
+        item.asset          = asset;
+        item.referenceCount = 1;
 
-        [cacheItems setObject:[NSValue valueWithPointer:item] forKey:assetURL];
+        [cacheItems setObject:[NSValue valueWithNonretainedObject:item] forKey:assetURL];
     }
 
     return asset;
@@ -65,18 +67,12 @@ static AFAVAssetCache*defaultCache;
     if(itemPointer)
     {
         AVCacheItem* item = (AVCacheItem*)[itemPointer pointerValue];
-        if(--item->referenceCount==0)
+        if(--item.referenceCount==0)
         {
             [cacheItems removeObjectForKey:assetURL];
-            free(item);
         }
     }
 }
 
--(void)dealloc
-{
-    [cacheItems release];
-    [super dealloc];
-}
 
 @end

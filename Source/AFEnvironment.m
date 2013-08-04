@@ -28,21 +28,13 @@ static AFEnvironment* devEnvironment	 = nil;
 	
 	if((self = [super init]))
 	{
-		APIBaseURL = [APIBaseURLIn retain];
-		productImageBaseURL = [productImageBaseURLIn retain];
-		paypalNotificationURL = [paypalNotificationURLIn retain];
+		APIBaseURL = APIBaseURLIn;
+		productImageBaseURL = productImageBaseURLIn;
+		paypalNotificationURL = paypalNotificationURLIn;
 	}
 	return self;
 }
 
--(void)dealloc
-{
-	[APIBaseURL release];
-	[productImageBaseURL release];
-    [paypalNotificationURL release];
-    [paypalNotificationURL release];
-    [super dealloc];
-}
 
 @synthesize APIBaseURL,productImageBaseURL,paypalNotificationURL;
 

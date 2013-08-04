@@ -8,9 +8,8 @@
     [super viewCellDidLoad];
 
     //Reassign components
-    [messageLabel release];
 
-    messageLabel = [(UILabel *) [cell viewWithTag:1] retain];
+    messageLabel = (UILabel *) [cell viewWithTag:1];
     [messageLabel setTextColor:[AFTableCell defaultTextColor]];
 
     [messageLabel setNumberOfLines:0];
@@ -26,10 +25,5 @@
     messageLabel.text = labelText;
 }
 
-- (void)dealloc
-{
-    [messageLabel release];
-    [super dealloc];
-}
 
 @end

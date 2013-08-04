@@ -8,7 +8,6 @@
         endpoint:(NSObject <AFRequestEndpoint> *)endpointIn
 {
     NSAssert( endpointIn, NSInvalidArgumentException );
-    [self release];
 
     self = [[AFEndpointImmediateRequest alloc] initWithURL:URLIn
                                                   endpoint:endpointIn];
@@ -23,7 +22,6 @@
          handler:(ResponseHandler)endpointIn
 {
     NSAssert( endpointIn, NSInvalidArgumentException );
-    [self release];
 
     self = [[AFBlocksImmediateRequest alloc] initWithURL:URLIn
                                                 endpoint:endpointIn];
@@ -36,7 +34,7 @@
 
 -(void)commonInit
 {
-    responseDataBuffer = [[NSMutableData data] retain];
+    responseDataBuffer = [NSMutableData data];
 }
 
 - (NSMutableURLRequest *)willSendURLRequest:(NSMutableURLRequest *)requestIn
@@ -68,12 +66,6 @@
     return @"Getting file";
 }
 
-- (void)dealloc
-{
-    [responseDataBuffer release];
-    self.postData = nil;
-    [super dealloc];
-}
 
 @end
 
@@ -88,7 +80,7 @@
     self = [super initWithURL:URLIn];
     if(self)
     {
-        endpoint = [endpointIn retain];
+        endpoint = endpointIn;
     }
     return self;
 }
@@ -100,11 +92,6 @@
     [endpoint request:self returnedWithData:responseDataBuffer];
 }
 
--(void)dealloc
-{
-    [endpoint release];
-    [super dealloc];
-}
 
 @end
 

@@ -38,10 +38,5 @@
 	self.view = videoPlayerView;
 }
 
-- (void)dealloc
-{
-    [videoPlayerView release];
-    [super dealloc];
-}
 
 @end

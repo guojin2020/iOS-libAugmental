@@ -37,10 +37,5 @@
 	[cache setObject:object forKey:key];
 }
 
-- (void)dealloc
-{
-    [nextCache release];
-    [super dealloc];
-}
 
 @end

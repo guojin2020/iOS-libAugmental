@@ -2,8 +2,8 @@
 
 @interface AFTableAlert : UIAlertView <UITableViewDelegate>
 {
-    id<UITableViewDataSource> _tableData;
-    id<UITableViewDelegate> _tableDelegate;
+    id<UITableViewDataSource> __weak _tableData;
+    id<UITableViewDelegate> __weak _tableDelegate;
 
     @private
     
@@ -12,7 +12,7 @@
 
 -(void)reloadTableData;
 
-@property (nonatomic, assign, setter=setTableData:) id<UITableViewDataSource> tableData;
-@property (nonatomic, assign, setter=setTableDelegate:) id<UITableViewDelegate> tableDelegate;
+@property (nonatomic, weak, setter=setTableData:) id<UITableViewDataSource> tableData;
+@property (nonatomic, weak, setter=setTableDelegate:) id<UITableViewDelegate> tableDelegate;
 
 @end

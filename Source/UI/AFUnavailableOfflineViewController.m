@@ -8,7 +8,7 @@
 {
     if ((self = [self initWithNibName:@"AFUnavailableOfflineViewController" bundle:[NSBundle mainBundle]]))
     {
-        title = [titleIn retain];
+        title = titleIn;
     }
     return self;
 }
@@ -25,13 +25,6 @@
     titleLabel.text = [NSString stringWithFormat:@"%@ Unavailable", title];
 }
 
-- (void)dealloc
-{
-    [title release];
-    [reconnectButton release];
-    [titleLabel release];
-    [super dealloc];
-}
 
 @synthesize reconnectButton, titleLabel;
 

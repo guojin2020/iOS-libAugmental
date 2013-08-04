@@ -37,18 +37,14 @@
 - (void)dealloc
 {
     [object removeObserver:self];
-    [object release];
-    [cell release];
-    [super dealloc];
 }
 
 - (void)setObject:(AFObject<AFCellViewable> *)objectIn
 {
     AFObservable <AFCellViewable> *oldObject = object;
-    object = [objectIn retain];
+    object = objectIn;
     [object addObserver:self];
     [oldObject removeObserver:self];
-    [oldObject release];
 }
 
 - (UITableViewCell *)viewCellForTableView:(UITableView *)tableIn

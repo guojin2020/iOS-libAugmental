@@ -26,7 +26,7 @@ static NSUserDefaults *defaults;
 {
     if ( self = [self init] )
     {
-        defaultsKey = [defaultsKeyIn retain];
+        defaultsKey = defaultsKeyIn;
 
         NSDictionary* storedDictionary = [defaults dictionaryForKey:defaultsKey];
         if(storedDictionary && [storedDictionary count]>0)
@@ -74,7 +74,7 @@ static NSUserDefaults *defaults;
 			 [anObject isKindOfClass:[NSNumber class]]))
 	        [NSException raise:NSInvalidArgumentException format:AFDefaultsBackedDictionaryInvalidArgumentReason];
 
-	    [dictionary setObject:anObject forKey:aKey];
+	    dictionary[aKey] = anObject;
 	}
 }
 
@@ -94,7 +94,7 @@ static NSUserDefaults *defaults;
 {
 	@synchronized(dictionary)
 	{
-		return [dictionary objectForKey:aKey];
+		return dictionary[aKey];
 	}
 }
 
@@ -142,9 +142,6 @@ static NSUserDefaults *defaults;
                                   name:UIApplicationWillResignActiveNotification
                                 object:NULL];
 
-    [dictionary release];
-    [defaultsKey release];
-    [super dealloc];
 }
 
 @end

@@ -28,8 +28,8 @@
 
 + (BOOL)textShadowEnabled;
 
-@property(nonatomic, retain) UILabel  *headerLabel;
-@property(nonatomic, retain) UILabel  *pageLabel;
-@property(nonatomic, retain) UISlider *slider;
+@property(nonatomic, strong) UILabel  *headerLabel;
+@property(nonatomic, strong) UILabel  *pageLabel;
+@property(nonatomic, strong) UISlider *slider;
 
 @end

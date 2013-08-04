@@ -20,7 +20,6 @@ static NSMutableDictionary* sounds;
 		player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:path] error:&e];
 		[sounds setObject:player forKey:name];
 		[player play];
-		[player release];
 	}
 	else
 	{

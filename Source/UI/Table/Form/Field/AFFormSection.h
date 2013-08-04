@@ -16,6 +16,6 @@
 
 - (void)addField:(AFField*)field;
 
-@property(nonatomic, retain) NSObject <AFSettingProvider> *provider;
+@property(nonatomic, strong) NSObject <AFSettingProvider> *provider;
 
 @end

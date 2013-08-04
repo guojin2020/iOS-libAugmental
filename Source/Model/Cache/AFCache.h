@@ -8,7 +8,7 @@
 
 @interface AFCache : NSObject
 
-@property(nonatomic, retain) AFCache *nextCache;
+@property(nonatomic, strong) AFCache *nextCache;
 
 - (NSObject*)objectForKey:(NSObject *)key;
 

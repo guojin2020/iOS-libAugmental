@@ -17,7 +17,6 @@ static UIImage *dateIcon = nil;
     {
         self.value = [datePickerViewController value];
     }
-    [datePickerViewController release];
     return self;
 }
 
@@ -37,7 +36,7 @@ static UIImage *dateIcon = nil;
 
 + (UIImage *)dateIcon
 {
-    if (!dateIcon) dateIcon = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFMMYYDateField class]] imageForKey:THEME_KEY_DATE_ICON] retain];
+    if (!dateIcon) dateIcon = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFMMYYDateField class]] imageForKey:THEME_KEY_DATE_ICON];
     return dateIcon;
 }
 
@@ -56,18 +55,11 @@ static UIImage *dateIcon = nil;
 
 + (NSDictionary *)defaultThemeSection
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"Date", THEME_KEY_DATE_ICON,
-            nil];
+    return @{THEME_KEY_DATE_ICON: @"Date"};
 }
 
 //================>> Dealloc
 
-- (void)dealloc
-{
-
-    [super dealloc];
-}
 
 //@dynamic value, validator, valid;
 

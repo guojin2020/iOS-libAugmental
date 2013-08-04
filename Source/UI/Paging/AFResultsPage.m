@@ -14,7 +14,7 @@ static NSString *PAGE_OBJECTS_KEY     = @"pageObjects";
     self = [self init];
     if (self)
     {
-        pageObjects    = [pageObjectsIn retain];
+        pageObjects    = pageObjectsIn;
         resultsCount   = resultsCountIn;
         currentPage    = currentPageIn;
         resultsPerPage = resultsPerPageIn;
@@ -49,11 +49,6 @@ static NSString *PAGE_OBJECTS_KEY     = @"pageObjects";
 
 //====================== NSCoding End
 
-- (void)dealloc
-{
-    [pageObjects release];
-    [super dealloc];
-}
 
 @synthesize resultsCount, currentPage, resultsPerPage, pageObjects;
 

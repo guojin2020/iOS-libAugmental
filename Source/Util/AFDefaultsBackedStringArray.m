@@ -25,7 +25,7 @@ static NSUserDefaults *defaults;
 {
     if ( self = [self init] )
     {
-        defaultsKey = [defaultsKeyIn retain];
+        defaultsKey = defaultsKeyIn;
 
         NSArray* storedArray = [defaults arrayForKey:defaultsKey];
         if(storedArray && [storedArray count]>0)
@@ -95,9 +95,6 @@ static NSUserDefaults *defaults;
                                   name:UIApplicationWillResignActiveNotification
                                 object:NULL];
 
-    [array release];
-    [defaultsKey release];
-    [super dealloc];
 }
 
 @end

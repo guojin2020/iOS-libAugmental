@@ -21,7 +21,7 @@
     self = [self init];
     if (self)
     {
-        navController = [navControllerIn retain];
+        navController = navControllerIn;
 
         delegate = delegateIn ? delegateIn : self;
 
@@ -32,7 +32,6 @@
         {
             page = [delegate newPageForViewController:controller];
             [self addPage:page];
-            [page release];
         }
 
         observers = [[NSMutableSet alloc] init];
@@ -47,7 +46,6 @@
 {
     AFPage *page = [delegate newPageForViewController:viewController];
     [self addPage:page];
-    [page release];
     return page;
 }
 
@@ -226,13 +224,6 @@
 
 // viewController.navigationItem.title = i==0?@"Basket":[NSString stringWithFormat:@"%i/%i: %@",i,[pageManager pageCount],viewController.title];
 
-- (void)dealloc
-{
-    [pages release];
-    [observers release];
-    [navController release];
-    [super dealloc];
-}
 
 @synthesize delegate;
 

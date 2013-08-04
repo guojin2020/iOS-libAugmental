@@ -25,6 +25,6 @@
 - (id)initWithURL:(NSURL *)URLIn endpoint:(NSObject <AFRequestEndpoint> *)endpointIn;
 - (id)initWithURL:(NSURL *)URLIn Dictionary:(NSDictionary *)postDictionary endpoint:(NSObject <AFRequestEndpoint> *)endpointIn;
 
-@property(nonatomic, retain, readonly) NSDictionary *returnedDictionary;
+@property(nonatomic, strong, readonly) NSDictionary *returnedDictionary;
 
 @end

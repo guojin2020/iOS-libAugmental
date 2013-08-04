@@ -34,7 +34,6 @@
 - (void)dealloc
 {
     free(samples);
-    [super dealloc];
 }
 
 @synthesize average;

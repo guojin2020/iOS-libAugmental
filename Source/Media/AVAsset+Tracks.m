@@ -36,7 +36,6 @@
 
     NSArray *keys = [[NSArray alloc] initWithObjects:TRACKS_KEY,nil];
     [self loadValuesAsynchronouslyForKeys:keys completionHandler:handleTracksLoaded];
-    [keys release];
 }
 
 @end

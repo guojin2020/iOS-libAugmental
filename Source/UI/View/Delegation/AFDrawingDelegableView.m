@@ -27,9 +27,5 @@
 	[delegate drawRect:rect inView:self];
 }
 
-- (void)dealloc {
-    [delegate release];
-    [super dealloc];
-}
 
 @end

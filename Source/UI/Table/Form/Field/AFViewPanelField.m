@@ -17,9 +17,9 @@ static UIImage *editIcon = nil;
 
     if ((self = [super initWithIdentity:identityIn]))
     {
-        labelText           = [labelTextIn retain];
-        labelIcon           = [labelIconIn retain];
-        panelViewController = [panelViewControllerIn retain];
+        labelText           = labelTextIn;
+        labelIcon           = labelIconIn;
+        panelViewController = panelViewControllerIn;
 
         [panelViewController addObserver:self];
     }
@@ -38,20 +38,16 @@ static UIImage *editIcon = nil;
     [super viewCellDidLoad];
 
     //Reassign components
-    [optionLabel release];
-    [valueLabel release];
-    [editableOptionIcon release];
 
-    optionLabel        = [(UILabel *) [cell viewWithTag:1] retain];
-    valueLabel         = [(UILabel *) [cell viewWithTag:2] retain];
-    editableOptionIcon = [(UIImageView *) [cell viewWithTag:3] retain];
+    optionLabel        = (UILabel *) [cell viewWithTag:1];
+    valueLabel         = (UILabel *) [cell viewWithTag:2];
+    editableOptionIcon = (UIImageView *) [cell viewWithTag:3];
 
     [optionLabel setTextColor:[AFTableCell defaultTextColor]];
     [valueLabel setTextColor:[AFTableCell defaultTextColor]];
 
     UIImageView *accessoryView = [[UIImageView alloc] initWithImage:[AFViewPanelField editIcon]];
     cell.accessoryView = accessoryView;
-    [accessoryView release];
 
     if (labelText) optionLabel.text         = labelText;
     if (labelIcon) editableOptionIcon.image = labelIcon;
@@ -108,9 +104,7 @@ static UIImage *editIcon = nil;
 
 + (NSDictionary *)defaultThemeSection
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            @"editIcon16", THEME_KEY_EDIT_ICON,
-            nil];
+    return @{THEME_KEY_EDIT_ICON: @"editIcon16"};
 }
 
 //=====>> Dealloc
@@ -118,13 +112,7 @@ static UIImage *editIcon = nil;
 - (void)dealloc
 {
     [panelViewController removeObserver:self];
-    [panelViewController release];
-    [labelIcon release];
-    [optionLabel release];
-    [valueLabel release];
-    [editableOptionIcon release];
     //[valueString release];
-    [super dealloc];
 }
 
 @end

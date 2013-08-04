@@ -44,7 +44,6 @@
     container.backgroundColor = [UIColor whiteColor];
     container.clipsToBounds = YES;
     [self addSubview:container];
-    [container release];
     
     table.frame = container.bounds;
     [container addSubview:table];
@@ -55,7 +54,6 @@
     CGContextStrokeRect(UIGraphicsGetCurrentContext(), CGContextGetClipBoundingBox(UIGraphicsGetCurrentContext()));
     UIImageView *imageView = [[UIImageView alloc] initWithImage:UIGraphicsGetImageFromCurrentImageContext()];
     [container addSubview:imageView];
-    [imageView release];
     
     UIGraphicsEndImageContext();
 }
@@ -82,10 +80,5 @@
 
 -(void)reloadTableData{[table reloadData];}
 
--(void)dealloc
-{
-    [table release];
-    [super dealloc];
-}
 
 @end

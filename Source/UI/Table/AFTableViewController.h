@@ -51,8 +51,8 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField;
 
 
-@property (nonatomic, retain) AFTable* table;
-@property (nonatomic, retain) UIButton* doneButton;
+@property (nonatomic, strong) AFTable* table;
+@property (nonatomic, strong) UIButton* doneButton;
 //@property (nonatomic) UITableViewCellStyle cellStyle;
 
 @end

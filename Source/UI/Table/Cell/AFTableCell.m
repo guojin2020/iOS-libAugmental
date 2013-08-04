@@ -40,7 +40,7 @@ static NSString* cellClickedSound			= nil;
 {
 	if((self=[self init]))
 	{
-		labelText=[labelTextIn retain];
+		labelText=labelTextIn;
 		
 		tableView=nil;
 		cell=nil;
@@ -114,7 +114,7 @@ static NSString* cellClickedSound			= nil;
 -(void)setFillColor:(UIColor*)color
 {
 	UIColor* oldColor = fillColor;
-	fillColor = [color retain];
+	fillColor = color;
 	if(fillColor!=oldColor) [cell.backgroundView setNeedsDisplay];
 }
 
@@ -137,19 +137,19 @@ static NSString* cellClickedSound			= nil;
 
 +(UIColor*)defaultTextColor
 {
-    if(!defaultTextColor) defaultTextColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR] retain];
+    if(!defaultTextColor) defaultTextColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_TEXT_COLOR];
     return defaultTextColor;
 }
 
 +(UIColor*)defaultSecondaryTextColor
 {
-    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR] retain];
+    if(!defaultSecondaryTextColor) defaultSecondaryTextColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_SECONDARY_TEXT_COLOR];
     return defaultSecondaryTextColor;
 }
 
 +(UIColor*)defaultBGColor
 {
-    if(!defaultBGColor) defaultBGColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR] retain];
+    if(!defaultBGColor) defaultBGColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] colorForKey:THEME_KEY_DEFAULT_BG_COLOR];
     return defaultBGColor?:[UIColor clearColor];
 }
 
@@ -158,7 +158,7 @@ static NSString* cellClickedSound			= nil;
     if(!defaultTextFont)
     {
         NSString* fontName = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_DEFAULT_TEXT_FONT];
-        defaultTextFont = [[UIFont fontWithName:fontName size:[AFTableCell defaultTextSize]] retain];
+        defaultTextFont = [UIFont fontWithName:fontName size:[AFTableCell defaultTextSize]];
     }
     return defaultTextFont;
 }
@@ -171,7 +171,7 @@ static NSString* cellClickedSound			= nil;
 
 +(NSString*)cellClickedSound
 {
-	if(!cellClickedSound)cellClickedSound=[[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND] retain];
+	if(!cellClickedSound)cellClickedSound=[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFTableCell class]] valueForKey:THEME_KEY_CELL_CLICKED_SOUND];
 	return cellClickedSound;
 }
 
@@ -268,16 +268,6 @@ static NSString* cellClickedSound			= nil;
 
 #pragma mark AFPThemeable implementation end
 
--(void)dealloc
-{
-	[labelText	release];
-	[tableView	release];
-	[cell		release];
-    [fillColor  release];
-    [selectionDelegate release];
-    [parentSection release];
-    [super		dealloc];
-}
 
 @synthesize selectionDelegate, cell, tableView, parentSection, fillColor;
 

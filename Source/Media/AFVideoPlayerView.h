@@ -23,9 +23,9 @@
 - (void)playerItemDidReachEnd:(NSNotification *)notification;
 - (void)refresh;
 
-@property (nonatomic, retain)   AVPlayer     *player;
-@property (nonatomic, retain)   AVPlayerItem *playerItem;
-@property (nonatomic, retain)   UIButton     *playButton;
-@property (nonatomic, readonly) AVAsset      *asset;
+@property (nonatomic, strong)   AVPlayer     *player;
+@property (nonatomic, strong)   AVPlayerItem *playerItem;
+@property (nonatomic, strong)   UIButton     *playButton;
+@property (weak, nonatomic, readonly) AVAsset      *asset;
 
 @end

@@ -38,11 +38,6 @@ static BOOL alreadyShowingOne = NO;
     [self dismissWithClickedButtonIndex:0 animated:YES];
 }
 
-- (void)dealloc
-{
-    [indicator release];
-    [super dealloc];
-}
 
 
 @end

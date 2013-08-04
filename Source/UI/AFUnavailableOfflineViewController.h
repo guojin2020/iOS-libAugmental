@@ -13,7 +13,7 @@
 
 - (IBAction)reconnectButtonTouched:(id)sender;
 
-@property(nonatomic, retain) IBOutlet UIButton *reconnectButton;
-@property(nonatomic, retain) IBOutlet UILabel  *titleLabel;
+@property(nonatomic, strong) IBOutlet UIButton *reconnectButton;
+@property(nonatomic, strong) IBOutlet UILabel  *titleLabel;
 
 @end

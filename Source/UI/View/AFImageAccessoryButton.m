@@ -9,8 +9,8 @@ static const float size = 44;
 {
     if ((self = [super initWithFrame:CGRectMake(0, 0, size, size)]))
     {
-        image          = [imageIn retain];
-        targetObject   = [objectIn retain];
+        image          = imageIn;
+        targetObject   = objectIn;
         targetSelector = selectorIn;
 
         imageView = [[UIImageView alloc] initWithImage:image highlightedImage:image];
@@ -22,7 +22,6 @@ static const float size = 44;
         events = (UIControlEvents) (UIControlEventTouchDown);
 
         [self addSubview:imageView];
-        [imageView release];
 
         [self addTarget:objectIn action:selectorIn forControlEvents:events];
 
@@ -34,8 +33,7 @@ static const float size = 44;
 - (void)setImage:(UIImage *)imageIn
 {
     UIImage *oldImage = image;
-    image = [imageIn retain];
-    [oldImage release];
+    image = imageIn;
 
     imageView.image            = image;
     imageView.highlightedImage = image;
@@ -45,11 +43,7 @@ static const float size = 44;
 - (void)dealloc
 {
     [self removeTarget:targetObject action:targetSelector forControlEvents:events];
-    [image release];
-    [imageView release];
-    [targetObject release];
 
-    [super dealloc];
 }
 
 - (CGAffineTransform)imageTransform

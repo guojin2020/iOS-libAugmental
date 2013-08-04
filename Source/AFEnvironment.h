@@ -14,8 +14,8 @@
 +(AFEnvironment*)liveEnvironment;
 +(AFEnvironment*)devEnvironment;
 
-@property (nonatomic,retain,readonly) NSURL* APIBaseURL;
-@property (nonatomic,retain,readonly) NSURL* productImageBaseURL;
-@property (nonatomic,retain,readonly) NSURL* paypalNotificationURL;
+@property (nonatomic,strong,readonly) NSURL* APIBaseURL;
+@property (nonatomic,strong,readonly) NSURL* productImageBaseURL;
+@property (nonatomic,strong,readonly) NSURL* paypalNotificationURL;
 
 @end

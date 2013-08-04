@@ -26,7 +26,7 @@ static NSNumber *textShadowEnabled;
     if (self)
     {
         suppressSecondEvent           = NO;
-        pagedObjectListViewController = [pagedObjectListViewControllerIn retain];
+        pagedObjectListViewController = pagedObjectListViewControllerIn;
         [pagedObjectListViewController addObserver:self];
     }
     return self;
@@ -34,19 +34,19 @@ static NSNumber *textShadowEnabled;
 
 + (UIColor *)textColor
 {
-    if (!textColor)textColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textColor)textColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR];
     return textColor;
 }
 
 + (UIColor *)textShadowColor
 {
-    if (!textShadowColor)textShadowColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR] retain];
+    if (!textShadowColor)textShadowColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] colorForKey:THEME_KEY_TEXT_COLOR];
     return textShadowColor;
 }
 
 + (BOOL)textShadowEnabled
 {
-    if (!textShadowEnabled)textShadowEnabled = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED] retain];
+    if (!textShadowEnabled)textShadowEnabled = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFPageScrubbingTableCell class]] valueForKey:THEME_KEY_TEXT_SHADOW_ENABLED];
     return [textShadowEnabled boolValue];
 }
 
@@ -54,9 +54,9 @@ static NSNumber *textShadowEnabled;
 {
     [super viewCellDidLoad];
 
-    headerLabel = [(UILabel *) [cell viewWithTag:1] retain];
-    pageLabel   = [(UILabel *) [cell viewWithTag:3] retain];
-    slider      = [(UISlider *) [cell viewWithTag:2] retain];
+    headerLabel = (UILabel *) [cell viewWithTag:1];
+    pageLabel   = (UILabel *) [cell viewWithTag:3];
+    slider      = (UISlider *) [cell viewWithTag:2];
 
     [headerLabel setTextColor:[AFPageScrubbingTableCell textColor]];
     [pageLabel setTextColor:[AFPageScrubbingTableCell textColor]];
@@ -90,7 +90,6 @@ static NSNumber *textShadowEnabled;
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     backView.backgroundColor = [UIColor clearColor];
     cell.backgroundView      = backView;
-    [backView release];
 }
 
 - (void)updateScrubber
@@ -190,11 +189,6 @@ static NSNumber *textShadowEnabled;
 - (void)dealloc
 {
     [pagedObjectListViewController removeObserver:self];
-    [headerLabel release];
-    [pageLabel release];
-    [slider release];
-    [pagedObjectListViewController release];
-    [super dealloc];
 }
 
 @synthesize headerLabel, pageLabel, slider;

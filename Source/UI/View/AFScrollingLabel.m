@@ -39,7 +39,7 @@ AFScrollingLabelAnimationStep;
 
 - (float)endPositionX;
 
-@property (nonatomic, retain) NSTimer* stepTimer;
+@property (nonatomic, strong) NSTimer* stepTimer;
 
 @end
 
@@ -142,9 +142,9 @@ static CGSize cgSizeMax;
 			maskOnColor  = black,
 	        maskOffColor = clear;
 
-	    maskStartColors = [[NSArray alloc] initWithObjects:(id)maskOffColor, (id)maskOnColor,  NULL];
-	    maskEndColors   = [[NSArray alloc] initWithObjects:(id)maskOnColor,  (id)maskOffColor, NULL];
-	    maskBothColors  = [[NSArray alloc] initWithObjects:(id)maskOffColor, (id)maskOnColor,  (id)maskOnColor, (id)maskOffColor, NULL];
+	    maskStartColors = @[(__bridge id)maskOffColor, (__bridge id)maskOnColor];
+	    maskEndColors   = @[(__bridge id)maskOnColor,  (__bridge id)maskOffColor];
+	    maskBothColors  = @[(__bridge id)maskOffColor, (__bridge id)maskOnColor,  (__bridge id)maskOnColor, (__bridge id)maskOffColor];
 
 	    maskStartStops  = [[NSMutableArray alloc] initWithObjects:@0.0, @1.0, NULL];
 	    maskEndStops    = [[NSMutableArray alloc] initWithObjects:@0.0, @1.0, NULL];
@@ -323,7 +323,7 @@ static CGSize cgSizeMax;
 		{
 	        maskColors = maskStartColors;
 	        maskStops  = maskStartStops;
-	        [maskStartStops replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:   ( startFadeSize/width) ]];
+	        maskStartStops[1] = @( startFadeSize/width);
 		}
 	    break;
 
@@ -331,7 +331,7 @@ static CGSize cgSizeMax;
 		{
 	        maskColors = maskEndColors;
 	        maskStops  = maskEndStops;
-	        [maskEndStops   replaceObjectAtIndex:0 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
+	        maskEndStops[0] = @(1-(   endFadeSize/width));
 		}
 	    break;
 
@@ -339,8 +339,8 @@ static CGSize cgSizeMax;
 		{
 	        maskColors = maskBothColors;
 	        maskStops  = maskBothStops;
-	        [maskBothStops replaceObjectAtIndex:1 withObject:[NSNumber numberWithFloat:   ( startFadeSize/width) ]];
-	        [maskBothStops replaceObjectAtIndex:2 withObject:[NSNumber numberWithFloat: 1-(   endFadeSize/width) ]];
+	        maskBothStops[1] = @( startFadeSize/width);
+	        maskBothStops[2] = @(1-(   endFadeSize/width));
 		}
 	    break;
 	}
@@ -388,14 +388,14 @@ static CGSize cgSizeMax;
 
 -(UIFont*) font
 {
-    NSString *fontName = [(NSString *) CTFontCopyPostScriptName(textLayer.font) autorelease];
+    NSString *fontName = (NSString *) CFBridgingRelease(CTFontCopyPostScriptName(textLayer.font));
     return [UIFont fontWithName:fontName size:self.fontSize];
 }
 
 -(void) setFont:(UIFont*)font
 {
     CGAffineTransform transform = CGAffineTransformIdentity;
-	CFStringRef fontName = (CFStringRef)font.fontName;
+	CFStringRef fontName = (__bridge CFStringRef)font.fontName;
 	CTFontRef ctFont = CTFontCreateWithName(fontName, self.font.pointSize, &transform);
 	textLayer.font = (CFTypeRef)ctFont;
 	[self setNeedsLayout];
@@ -419,20 +419,6 @@ static CGSize cgSizeMax;
 	return fitSize;
 }
 
-- (void)dealloc
-{
-	[textLayer release];
-	[maskLayer release];
-	[textLayerDelegate release];
-    [stepTimer release];
-    [maskStartColors release];
-    [maskEndColors release];
-    [maskBothColors release];
-    [maskStartStops release];
-    [maskEndStops release];
-    [maskBothStops release];
-    [super dealloc];
-}
 
 @end
 
@@ -447,7 +433,7 @@ static CGSize cgSizeMax;
 	self = [self init];
 	if(self)
 	{
-		owner = [ownerIn retain];
+		owner = ownerIn;
 	}
 	return self;
 }
@@ -470,10 +456,5 @@ static CGSize cgSizeMax;
 	[owner nextAnimationStep];
 }
 
-- (void)dealloc
-{
-	[owner release];
-	[super dealloc];
-}
 
 @end

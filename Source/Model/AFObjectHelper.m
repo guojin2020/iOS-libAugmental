@@ -17,8 +17,8 @@ static const NSDictionary      *tidyHTMLReplacements;
     [dateFormatter setDateFormat:@"YYYY-MM-dd 00:00:00"];
     numberFormatter = [[NSNumberFormatter alloc] init];
 
-    tidyHTMLReplacements = [[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@":", @"'", @"\"", @"'", @"\n", @"\"", @"\"", @"\n- ", nil]
-                                                        forKeys:[NSArray arrayWithObjects:@"<br>", @"&#39", @"&quot;", @"&rsquo;", @"<br />", @"&ldquo;", @"&rdquo;", @"&bull;", nil]] retain];
+    tidyHTMLReplacements = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@":", @"'", @"\"", @"'", @"\n", @"\"", @"\"", @"\n- ", nil]
+                                                        forKeys:[NSArray arrayWithObjects:@"<br>", @"&#39", @"&quot;", @"&rsquo;", @"<br />", @"&ldquo;", @"&rdquo;", @"&bull;", nil]];
 }
 
 + (void)registerObjectClass:(AFObject*)objectClass
@@ -82,10 +82,5 @@ static const NSDictionary      *tidyHTMLReplacements;
 }
 
 
-- (void)dealloc
-{
-    [objectClasses release];
-    [super dealloc];
-}
 
 @end

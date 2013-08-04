@@ -43,13 +43,12 @@ static UIColor  *loadingTitleColor;
     UIViewController *defaultViewController = [[UIViewController alloc] init];
     self.viewController       = defaultViewController;
     self.viewController.title = [self defaultTabName];
-    [defaultViewController release];
 }
 
 - (void)setViewController:(UIViewController *)viewControllerIn
 {
     UIViewController *oldViewController = viewController;
-    viewController = [viewControllerIn retain];
+    viewController = viewControllerIn;
 
     for (NSObject <AFScreenObserver> *observer in observers)
     {
@@ -61,16 +60,14 @@ static UIColor  *loadingTitleColor;
 
     UITabBarItem *item = [[UITabBarItem alloc] initWithTitle:self.tabName image:self.tabBarIcon tag:0];
     viewController.tabBarItem = item;
-    [item release];
 
-    [oldViewController release];
 }
 
 - (void)viewControllerBackgroundInitWrapInternal
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [self viewControllerBackgroundInit];
-    [pool release];
+    @autoreleasepool {
+        [self viewControllerBackgroundInit];
+    }
 }
 
 - (void)viewControllerBackgroundInit
@@ -164,7 +161,6 @@ static UIColor  *loadingTitleColor;
             if (active)[observer screenBecameActive:self];
             else [observer screenBecameInactive:self];
         }
-        [observerSnapshot release];
     }
 }
 
@@ -211,28 +207,28 @@ static UIColor  *loadingTitleColor;
 + (UIColor *)bgColor
 {
     if (!bgColor)
-    {bgColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR] retain];}
+    {bgColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_BG_COLOR];}
     return bgColor;
 }
 
 + (float)bgOpacity
 {
     if (!bgOpacity)
-    {bgOpacity = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY] retain];}
+    {bgOpacity = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] objectForKey:THEME_KEY_LOADING_BG_OPACITY];}
     return [bgOpacity floatValue];
 }
 
 + (NSString *)loadingTitle
 {
     if (!loadingTitle)
-    {loadingTitle = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE] retain];}
+    {loadingTitle = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] valueForKey:THEME_KEY_LOADING_TITLE];}
     return loadingTitle;
 }
 
 + (UIColor *)loadingTitleColor
 {
     if (!loadingTitleColor)
-    {loadingTitleColor = [[[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR] retain];}
+    {loadingTitleColor = [[AFThemeManager themeSectionForClass:(id<AFPThemeable>)[AFScreen class]] colorForKey:THEME_KEY_LOADING_TITLE_COLOR];}
     return loadingTitleColor;
 }
 
@@ -265,14 +261,7 @@ static UIColor  *loadingTitleColor;
 
 - (void)dealloc
 {
-    [viewController release];
     [[AFSession sharedSession] removeObserver:self];
-    [observers release];
-    [settingsSections release];
-    [tabName release];
-    [loadingLabel release];
-    [loadingView release];
-    [super dealloc];
 }
 
 @synthesize tabName, needsNavigationController, loadingLabel, loadingView;

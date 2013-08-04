@@ -115,7 +115,6 @@ SEL
 	{
         [[AFAppDelegate appEventManager] notifyObservers:AFEventAppSettingsLoadFailed parameters:NULL];
 	}
-	[settingsRequest release];
 }
 
 - (void)requestFailed:(AFRequest *)request withError:(NSError*)error
@@ -156,10 +155,5 @@ SEL
     return nil;
 }
 
--(void)dealloc
-{
-	[window release];
-	[super dealloc];
-}
 
 @end
