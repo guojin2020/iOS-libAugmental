@@ -32,7 +32,7 @@ static const float size = 44;
 
 - (void)setImage:(UIImage *)imageIn
 {
-    UIImage *oldImage = image;
+    //UIImage *oldImage = image;
     image = imageIn;
 
     imageView.image            = image;

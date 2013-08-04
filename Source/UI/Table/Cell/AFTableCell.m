@@ -8,27 +8,44 @@
 #import "AFTableViewController.h"
 #import "AFThemeManager.h"
 #import "AFAssertion.h"
+#import "AFLog.h"
 
 #define ENABLE_DEFAULT_BACKGROUND false
 
-static UIColor* defaultTextColor			= nil;
-static UIColor* defaultSecondaryTextColor	= nil;
-static UIColor* defaultBGColor				= nil;
+static UIColor
+        *defaultTextColor			= nil,
+        *defaultSecondaryTextColor	= nil,
+        *defaultBGColor				= nil;
+
 static UIFont*	defaultTextFont				= nil;
 static float_t	defaultTextSize				= -1.0;
 static NSString* cellClickedSound			= nil;
 
+@interface AFTableCell ()
+
+- (void)beginObservingWindow;
+- (void)endObservingWindow;
+
+- (UITableViewCell *)newCellForTableView:(UITableView *)tableIn
+                            templateName:(NSString *)templateNameIn;
+
+@end
+
 @implementation AFTableCell
+{
+    BOOL observingWindow;
+    CGFloat height;
+}
 
 -(id)init
 {
 	if((self=[super init]))
 	{
-		fillColor	= [AFTableCellBackgroundView defaultBackgroundColor];
-		labelText	= @"";
-		tableView	= nil;
-		cell		= nil;
+		_fillColor	= [AFTableCellBackgroundView defaultBackgroundColor];
+		_labelText	= @"";
+		_tableView	= nil;
 		height		= -1.0f;
+        observingWindow = NO;
         
         [AFThemeManager addObserver:self];
         [self themeChanged];
@@ -40,14 +57,14 @@ static NSString* cellClickedSound			= nil;
 {
 	if((self=[self init]))
 	{
-		labelText=labelTextIn;
+		_labelText=labelTextIn;
 		
-		tableView=nil;
-		cell=nil;
+		_tableView   = NULL;
+		_viewCell = NULL;
 		
 		if([self conformsToProtocol:@protocol(AFCellSelectionDelegate)])
 		{
-			selectionDelegate = (NSObject<AFCellSelectionDelegate>*)self; //Default selection delegate to self if appropriate
+			_selectionDelegate = (NSObject<AFCellSelectionDelegate>*)self; //Default selection delegate to self if appropriate
 		}
 	}
 	return self;
@@ -57,7 +74,7 @@ static NSString* cellClickedSound			= nil;
 {
     AFAssertMainThread();
 
-    [self.cell setNeedsLayout];
+    [_viewCell setNeedsLayout];
 }
 
 -(BOOL)deleteSelected{return NO;}
@@ -67,35 +84,53 @@ static NSString* cellClickedSound			= nil;
 
 -(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
 {
+    AFLogPosition();
 	return [self viewCellForTableView:tableIn templateName:nil];
 }
 
 -(UINavigationController*) navigationController { return self.parentSection.parentTable.viewController.navigationController; }
 
--(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn templateName:(NSString*)templateNameIn
+-(UITableViewCell*)viewCellForTableView:(UITableView*)tableIn
+                           templateName:(NSString*)templateNameIn
 {
-	if( !cell || self.tableView!=tableIn )
-	{
-		//Store the table this cell currently belongs to
-		self.tableView = tableIn;
-		
-		//Create the cell, either using the supplied template name, or a blank default
-		NSString* reuseIdentifier = [[NSNumber numberWithInt:[self hash]] stringValue];
+    AFLogPosition();
 
-		if(templateNameIn)
-		{
-			self.cell = [[AFCellViewFactory defaultFactory] cellOfKind:templateNameIn forTable:tableIn reuseIdentifier:reuseIdentifier];
-		}
-		else
-		{
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
-			if([labelText length]>0) cell.textLabel.text = labelText;
-		}
-		
-		[self viewCellDidLoad];
+	if( !_viewCell || _tableView!=tableIn )
+	{
+        //Store the table this _viewCell currently belongs to
+        _tableView = tableIn;
+
+        _viewCell = [self newCellForTableView:tableIn templateName:templateNameIn];
+
+        [self viewCellDidLoad];
         [self refresh];
+
+        if(_viewCell !=NULL && !observingWindow)
+            [self beginObservingWindow];
 	}
-	return cell;
+
+	return _viewCell;
+}
+
+-(UITableViewCell*)newCellForTableView:(UITableView*)tableIn
+                          templateName:(NSString*)templateNameIn
+{
+    UITableViewCell *newCell;
+
+    //Create the _viewCell, either using the supplied template name, or a blank default
+    NSString* reuseIdentifier = [[NSNumber numberWithInt:[self hash]] stringValue];
+
+    if(templateNameIn)
+    {
+        newCell = [[AFCellViewFactory defaultFactory] cellOfKind:templateNameIn forTable:tableIn reuseIdentifier:reuseIdentifier];
+    }
+    else
+    {
+        newCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+        if([_labelText length]>0) _viewCell.textLabel.text = _labelText;
+    }
+
+    return newCell;
 }
 
 -(CGFloat)heightForTableView:(UITableView*)tableIn
@@ -105,29 +140,75 @@ static NSString* cellClickedSound			= nil;
 
 - (void)didDisappear
 {
+    AFLogPosition();
 }
 
 - (void)willAppear
 {
+    AFLogPosition();
 }
 
 -(void)setFillColor:(UIColor*)color
 {
-	UIColor* oldColor = fillColor;
-	fillColor = color;
-	if(fillColor!=oldColor) [cell.backgroundView setNeedsDisplay];
+	UIColor* oldColor = _fillColor;
+	_fillColor = color;
+	if(_fillColor!=oldColor) [_viewCell.backgroundView setNeedsDisplay];
 }
 
 -(void)accessoryTapped {}
 
--(void)willBeAdded{}
--(void)willBeRemoved{}
+-(void)willBeAdded
+{
+    AFLogPosition();
+
+    if(_viewCell !=NULL && !observingWindow)
+        [self beginObservingWindow];
+}
+
+-(void)willBeRemoved
+{
+    AFLogPosition();
+
+    // Begin KVO observance of cells window, so that we can call willAppear and didDisappear
+    if(observingWindow) [self endObservingWindow];
+}
+
+-(void)beginObservingWindow
+{
+    AFAssertMainThread();
+    NSAssert(!observingWindow, NSInternalInconsistencyException);
+    NSAssert(_viewCell !=NULL, NSInternalInconsistencyException);
+
+    AFLogPosition();
+
+    //AFLog(@"Cell %@ beginObservingWindow, observing window %@", _viewCell, _viewCell.window);
+
+    observingWindow = YES;
+
+    // Begin KVO observance of cells window, so that we can call willAppear and didDisappear
+    [_viewCell addObserver:self
+                forKeyPath:@"window"
+                   options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
+                   context:NULL];
+}
+
+-(void)endObservingWindow
+{
+    AFAssertMainThread();
+    NSAssert(observingWindow, NSInternalInconsistencyException);
+    NSAssert(_viewCell !=NULL, NSInternalInconsistencyException);
+
+    AFLogPosition();
+    //AFLog(@"Cell %@ endObservingWindow, unobserving window %@", _viewCell, _viewCell.window);
+
+    observingWindow = NO;
+    [_viewCell removeObserver:self forKeyPath:@"window"];
+}
 
 -(void)wasSelected
 {
 	[AFAppDelegate playSound:[AFTableCell cellClickedSound]];
-
-	if(selectionDelegate)[selectionDelegate cellSelected:self];
+	[_selectionDelegate cellSelected:self];
 }
 
 -(NSString*)cellTemplateName{return nil;}
@@ -180,12 +261,12 @@ static NSString* cellClickedSound			= nil;
 
 -(void)viewCellDidLoad
 {
-    height = cell.frame.size.height;
+    height = _viewCell.frame.size.height;
     if(height<=0) height = DEFAULT_CELL_HEIGHT;
 
     //Apply default settings for the look and feel of all cells, e.g. font colour
-    cell.textLabel.opaque           = YES;
-    cell.textLabel.backgroundColor  = [UIColor clearColor];
+    _viewCell.textLabel.opaque           = YES;
+    _viewCell.textLabel.backgroundColor  = [UIColor clearColor];
 
     [self setFillColor:[AFTableCell defaultBGColor]];
 
@@ -193,15 +274,9 @@ static NSString* cellClickedSound			= nil;
 
 #if ENABLE_DEFAULT_BACKGROUND
     UIView* backgroundView  = [[AFTableCellBackgroundView alloc] initWithFrame:CGRectZero usefulTableCell:self];
-    cell.backgroundView     = backgroundView;
+    _viewCell.backgroundView     = backgroundView;
     [backgroundView release];
 #endif
-
-	// Begin KVO observance of cells window, so that we can call willAppear and didDisappear
-	[cell addObserver:self
-	       forKeyPath:@"window"
-			  options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
-			  context:NULL];
 }
 
 
@@ -212,9 +287,7 @@ static NSString* cellClickedSound			= nil;
 		                change:(NSDictionary *)change
 			           context:(void *)context
 {
-	//BOOL isPrior = [((NSNumber*)change[NSKeyValueChangeNotificationIsPriorKey]) boolValue];
-
-	if(object==cell)
+	if(object== _viewCell)
 	{
 		if([keyPath isEqualToString:@"window"])
 		{
@@ -227,12 +300,14 @@ static NSString* cellClickedSound			= nil;
 
 			if( (oldWindow==NULL) != (newWindow==NULL) )
 			{
-				if( newWindow ) // Appearing
+				if( newWindow!=NULL ) // Appearing
 				{
+                    AFLogPosition(@"Appearing");
 					[self willAppear];
 				}
 				else // Disappearing
 				{
+                    AFLogPosition(@"Disappearing");
 					[self didDisappear];
 				}
 			}
@@ -254,7 +329,7 @@ static NSString* cellClickedSound			= nil;
 }
 
 +(id<AFPThemeable>)themeParentSectionClass{return (id<AFPThemeable>)[AFTable class];}
-+(NSString*)themeSectionName{return @"cell";}
++(NSString*)themeSectionName{return @"_viewCell";}
 
 +(NSDictionary*)defaultThemeSection
 {
@@ -268,7 +343,12 @@ static NSString* cellClickedSound			= nil;
 
 #pragma mark AFPThemeable implementation end
 
+-(void)dealloc
+{
+    if(observingWindow)
+        [self endObservingWindow];
+}
 
-@synthesize selectionDelegate, cell, tableView, parentSection, fillColor;
+//@synthesize selectionDelegate, viewCell, tableView, parentSection, fillColor;
 
 @end

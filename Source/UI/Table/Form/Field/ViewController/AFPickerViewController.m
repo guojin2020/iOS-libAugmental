@@ -24,7 +24,7 @@ static UIColor *bgColor   = nil;
 
 - (void)setObjects:(NSArray *)objectsIn
 {
-    NSArray *oldObjects = objects;
+    //NSArray *oldObjects = objects;
     objects = [[NSMutableArray alloc] initWithArray:objectsIn];
     if ((!defaultValue || ![objects containsObject:defaultValue]) && [objects count] > 0) self.defaultValue = objects[0];
 }

@@ -23,7 +23,7 @@
 {
     [super didFinish];
 
-    NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
+    //NSString *responseString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
     //DebugLog(@"Response from '%@': %@",[URL absoluteString],responseString);
 
 

@@ -32,12 +32,12 @@ static UIColor *disclosureArrowColor = nil;
 
     //Apply the default disclosure view
     UIView *arrow = [[UICustomDisclosureArrowView alloc] initWithColor:[AFGenericOptionTableCell disclosureArrowColor]];
-    cell.accessoryView = arrow;
+    self.viewCell.accessoryView = arrow;
 
     //Reassign components
 
-    searchOptionLabel = (UILabel *) [cell viewWithTag:1];
-    searchOptionIcon  = (UIImageView *) [cell viewWithTag:2];
+    searchOptionLabel = (UILabel *) [self.viewCell viewWithTag:1];
+    searchOptionIcon  = (UIImageView *) [self.viewCell viewWithTag:2];
 
     //AFLog(@"%@",	searchOptionIcon);
 
@@ -49,7 +49,7 @@ static UIColor *disclosureArrowColor = nil;
 
     //AFLog(@"LabelIcon: %@",labelIcon);
 
-    if (labelText) searchOptionLabel.text = labelText;
+    if (self.labelText) searchOptionLabel.text = self.labelText;
     if (labelIcon && [labelIcon isKindOfClass:[UIImage class]]) [searchOptionIcon setImage:labelIcon];
 }
 

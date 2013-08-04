@@ -54,9 +54,9 @@ static NSNumber *textShadowEnabled;
 {
     [super viewCellDidLoad];
 
-    headerLabel = (UILabel *) [cell viewWithTag:1];
-    pageLabel   = (UILabel *) [cell viewWithTag:3];
-    slider      = (UISlider *) [cell viewWithTag:2];
+    headerLabel = (UILabel *) [self.viewCell viewWithTag:1];
+    pageLabel   = (UILabel *) [self.viewCell viewWithTag:3];
+    slider      = (UISlider *) [self.viewCell viewWithTag:2];
 
     [headerLabel setTextColor:[AFPageScrubbingTableCell textColor]];
     [pageLabel setTextColor:[AFPageScrubbingTableCell textColor]];
@@ -89,7 +89,7 @@ static NSNumber *textShadowEnabled;
 
     UIView *backView = [[UIView alloc] initWithFrame:CGRectZero];
     backView.backgroundColor = [UIColor clearColor];
-    cell.backgroundView      = backView;
+    self.viewCell.backgroundView      = backView;
 }
 
 - (void)updateScrubber
@@ -150,13 +150,13 @@ static NSNumber *textShadowEnabled;
 
 - (void)pageRefreshWillStart:(AFPagedObjectListViewController *)objectListViewController
 {
-    //[cell setHidden:YES];
+    //[_viewCell setHidden:YES];
 }
 
 - (void)pageRefreshDidFinish:(AFPagedObjectListViewController *)objectListViewController
 {
     //AFLog(@"SCRUBBIN DAT FINISH!");
-    //[cell setHidden:NO];
+    //[_viewCell setHidden:NO];
 
     [self updateScrubber];
 }

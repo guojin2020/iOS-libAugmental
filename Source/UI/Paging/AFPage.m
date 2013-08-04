@@ -23,9 +23,7 @@
 
 - (void)setManager:(AFPageManager *)managerIn
 {
-    AFPageManager *oldManager = manager;
     manager = managerIn;
-
     [self updateNavigationItems];
 }
 
@@ -64,7 +62,6 @@
 
 - (void)setPreviousBarButtonItem:(UIBarButtonItem *)newItem
 {
-    UIBarButtonItem *oldItem = previousBarButtonItem;
     previousBarButtonItem = newItem;
     if (viewController)
     {
@@ -82,7 +79,6 @@
 
 - (void)setNextBarButtonItem:(UIBarButtonItem *)newItem
 {
-    UIBarButtonItem *oldItem = nextBarButtonItem;
     nextBarButtonItem = newItem;
     if (viewController)
     {
@@ -158,7 +154,6 @@
 
 - (void)setTitle:(NSString *)titleIn
 {
-    NSString *oldTitle = title;
     title = titleIn;
 
     if (viewController) viewController.title = title ? title : [manager.delegate titleForPage:self];

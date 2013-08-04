@@ -39,11 +39,12 @@
     [queue release];
 }
 
+/*
 -(void)testDownloadRequest
 {
     // A small 26 byte text file containing the string "Download test, 1. 2.. 3..."
     NSString*   fileName    = @"downloadTest.txt";
-    NSString*   urlPath     = [NSString stringWithFormat:@"http://chrishatton.homeip.net/downloads/%@", fileName, nil];
+    NSString*   urlPath     = [NSString stringWithFormat:@"http://chrishatton.homeip.net/downloads/%@", fileName];
     NSURL*      testURL     = [[NSURL alloc] initWithString:urlPath];
     NSString*   basePath    = [AFUtil applicationDocumentsDirectory];
     NSString*   targetPath  = [NSString stringWithFormat:@"%@/%@", basePath, fileName, nil];
@@ -84,6 +85,7 @@
 
     [session release];
 }
+*/
 
 -(void)completeDownloadRequestTest
 {

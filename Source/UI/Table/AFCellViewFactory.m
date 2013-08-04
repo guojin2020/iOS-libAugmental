@@ -23,7 +23,7 @@ static AFCellViewFactory *factorySingleton;
                 UITableViewCell *cellTemplate = (UITableViewCell *) template;
                 NSString        *key          = cellTemplate.reuseIdentifier;
                 if (key) [viewTemplateStore setObject:[NSKeyedArchiver archivedDataWithRootObject:template] forKey:key];
-                else @throw [NSException exceptionWithName:@"Unknown cell" reason:@"pruneCellCache has no reuseIdentifier" userInfo:nil];
+                else @throw [NSException exceptionWithName:@"Unknown _viewCell" reason:@"pruneCellCache has no reuseIdentifier" userInfo:nil];
             }
         }
     }

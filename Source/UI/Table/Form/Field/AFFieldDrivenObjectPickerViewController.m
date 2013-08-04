@@ -36,8 +36,6 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
         {
             [[AFAppDelegate appEventManager] addObserver:self];
         }
-
-        //loadingView = [[NSBundle mainBundle] loadNibNamed:@"AFScreenLoadingView" owner:self options:nil];
     }
     return self;
 }
@@ -60,6 +58,11 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
     [self setDefaultValue:defaultObject];
 
     //[loadingView removeFromSuperview];
+}
+
+- (void)requestFailed:(AFRequest *)request
+            withError:(NSError *)error
+{
 }
 
 -(void)handleAppSettingsLoaded

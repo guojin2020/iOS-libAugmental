@@ -4,4 +4,4 @@ MMYYDate
     int month;
     int year;
 }
-        MMYYDate;
+MMYYDate;

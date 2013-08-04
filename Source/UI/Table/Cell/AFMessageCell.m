@@ -9,7 +9,7 @@
 
     //Reassign components
 
-    messageLabel = (UILabel *) [cell viewWithTag:1];
+    messageLabel = (UILabel *) [self.viewCell viewWithTag:1];
     [messageLabel setTextColor:[AFTableCell defaultTextColor]];
 
     [messageLabel setNumberOfLines:0];
@@ -22,7 +22,7 @@
 {
     AFAssertMainThread();
 
-    messageLabel.text = labelText;
+    messageLabel.text = self.labelText;
 }
 
 

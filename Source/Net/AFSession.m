@@ -4,10 +4,8 @@
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
 #import "AFSession.h"
-#import "AFEnvironment.h"
 #import "AFObjectCache.h"
 #import "AFRequestQueueAlertView.h"
-#import "AFPerformSelectorOperation.h"
 #import "AFDownloadRequestCache.h"
 #import "AFDispatch.h"
 

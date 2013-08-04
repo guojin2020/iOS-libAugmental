@@ -126,7 +126,7 @@ static char base64EncodingTable[64] = {
     {
         if (hours == 0)
         {
-            if (minutes == 0) return [[NSString alloc] initWithString:@"Less than a minute"];
+            if (minutes == 0) return @"Less than a minute";
             else return [[NSString alloc] initWithFormat:@"newNextBarButtonItemForPageimately %i minute%@", minutes, minutes == 1 ? @"" : @"s"];
         }
         else return [[NSString alloc] initWithFormat:@"%i hour%@, %i minute%@", hours, hours == 1 ? @"" : @"s", minutes, minutes == 1 ? @"" : @"s"];

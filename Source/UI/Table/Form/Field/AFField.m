@@ -36,7 +36,7 @@ static UIColor *invalidColor = nil;
         self.validator           = nil;
 
         settingObservers = [[NSMutableSet alloc] init];
-        cell = nil;
+
         [self setLabelText:identity];
 
         [persistenceDelegate restoreSettingValueForKey:identity];
@@ -56,38 +56,38 @@ static UIColor *invalidColor = nil;
 {
     [super viewCellDidLoad];
 
-    cell.textLabel.numberOfLines = 2;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.textLabel.textAlignment = NSTextAlignmentCenter;
+    self.viewCell.textLabel.numberOfLines = 2;
+    self.viewCell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.viewCell.textLabel.textAlignment = NSTextAlignmentCenter;
 
-    cell.textLabel.opaque            = NO;
-    cell.textLabel.backgroundColor   = [UIColor clearColor];
-    cell.contentView.opaque          = NO;
-    cell.contentView.backgroundColor = [UIColor clearColor];
+    self.viewCell.textLabel.opaque            = NO;
+    self.viewCell.textLabel.backgroundColor   = [UIColor clearColor];
+    self.viewCell.contentView.opaque          = NO;
+    self.viewCell.contentView.backgroundColor = [UIColor clearColor];
 
     [self updateControlCell];
 }
 
-
-- (NSString *)labelText
-{return labelText;}
-
 - (void)setLabelText:(NSString *)labelTextIn
 {
-    NSString *oldLabelText = labelText;
-    labelText = labelTextIn;
-    if (cell)[[cell textLabel] setText:labelText];
+    self.labelText = labelTextIn;
+    if (self.viewCell)[[self.viewCell textLabel] setText:self.labelText];
 }
 
 - (void)addObserver:(NSObject <AFFieldObserver> *)observer
-{[settingObservers addObject:observer];}
+{
+    [settingObservers addObject:observer];
+}
 
 - (void)removeObserver:(NSObject <AFFieldObserver> *)observer
-{[settingObservers removeObject:observer];}
-
+{
+    [settingObservers removeObject:observer];
+}
 
 - (void)controlValueChanged:(id)sender
-{[self doesNotRecognizeSelector:_cmd];}
+{
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 /**
  * Sets this Settings value. If the given value is the same as the current value, no action is taken.
@@ -99,8 +99,6 @@ static UIColor *invalidColor = nil;
     valueChangedSinceLastValidation = YES; //Keep this outside conditional; it's only an optimisation to prevent repeated calculation of validation, but woudl cause problems if you were re-setting the same pointer to indicate a change in the pointed-to object.
     if (value != valueIn)
     {
-        //Do the Release/Retain dance with the new value
-        NSObject *oldValue = value;
         value              = valueIn;
 
         for (NSObject <AFFieldObserver> *observer in settingObservers)
@@ -114,8 +112,8 @@ static UIColor *invalidColor = nil;
 }
 
 /**
- * This method should refresh the appearance of the UI table cell for this setting.
- * In AFField this only sets the background color of the cell based on validation.
+ * This method should refresh the appearance of the UI table _viewCell for this setting.
+ * In AFField this only sets the background color of the _viewCell based on validation.
  * Should be subclassed to implement display of the settings value.
  */
 - (void)updateControlCell
@@ -139,7 +137,7 @@ static UIColor *invalidColor = nil;
 }
 
 /**
- This method is called by the AFTable framework when the cell is selected.
+ This method is called by the AFTable framework when the _viewCell is selected.
  As a default behaviour it will cause a UIAlert box to appear, displaying any help
  text associated with this Setting.
  This behaviour may be over-ridden by a subclass e.g. to display a more detailed view, or alternative
@@ -149,7 +147,7 @@ static UIColor *invalidColor = nil;
 {
     if ([helpText isKindOfClass:[NSString class]] && [helpText length] > 0)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:labelText message:[self helpText] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.labelText message:[self helpText] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -159,7 +157,6 @@ static UIColor *invalidColor = nil;
 
 - (void)setValidator:(NSObject <AFValidator> *)newValidator
 {
-    NSObject <AFValidator> *oldValidator = validator;
     validator = newValidator;
     self.value = value;
 }

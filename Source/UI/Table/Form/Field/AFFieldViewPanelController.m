@@ -52,7 +52,7 @@
 
 - (void)setDefaultValue:(NSObject <NSCoding> *)defaultSelectedObjectIn
 {
-    NSObject <NSCoding> *oldSelection = defaultValue;
+    //NSObject <NSCoding> *oldSelection = defaultValue;
     defaultValue = defaultSelectedObjectIn;
 
     if (!value) self.value = defaultValue;
@@ -62,7 +62,6 @@
 {
     if (valueIn != value)
     {
-        NSObject <NSCoding> *oldValue = value;
         value = valueIn;
 
         [self broadcastNewValueToObservers:value];
@@ -70,10 +69,14 @@
 }
 
 - (void)addObserver:(NSObject <AFFieldViewPanelObserver> *)observerIn
-{[observers addObject:observerIn];}
+{
+    [observers addObject:observerIn];
+}
 
 - (void)removeObserver:(NSObject <AFFieldViewPanelObserver> *)observerIn
-{[observers removeObject:observerIn];}
+{
+    [observers removeObject:observerIn];
+}
 
 - (void)broadcastNewValueToObservers:(NSObject *)newValue
 {

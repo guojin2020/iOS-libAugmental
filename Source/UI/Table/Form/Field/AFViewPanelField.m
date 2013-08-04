@@ -17,7 +17,7 @@ static UIImage *editIcon = nil;
 
     if ((self = [super initWithIdentity:identityIn]))
     {
-        labelText           = labelTextIn;
+        self.labelText      = labelTextIn;
         labelIcon           = labelIconIn;
         panelViewController = panelViewControllerIn;
 
@@ -39,17 +39,17 @@ static UIImage *editIcon = nil;
 
     //Reassign components
 
-    optionLabel        = (UILabel *) [cell viewWithTag:1];
-    valueLabel         = (UILabel *) [cell viewWithTag:2];
-    editableOptionIcon = (UIImageView *) [cell viewWithTag:3];
+    optionLabel        = (UILabel *) [self.viewCell viewWithTag:1];
+    valueLabel         = (UILabel *) [self.viewCell viewWithTag:2];
+    editableOptionIcon = (UIImageView *) [self.viewCell viewWithTag:3];
 
     [optionLabel setTextColor:[AFTableCell defaultTextColor]];
     [valueLabel setTextColor:[AFTableCell defaultTextColor]];
 
     UIImageView *accessoryView = [[UIImageView alloc] initWithImage:[AFViewPanelField editIcon]];
-    cell.accessoryView = accessoryView;
+    self.viewCell.accessoryView = accessoryView;
 
-    if (labelText) optionLabel.text         = labelText;
+    if (self.labelText) optionLabel.text         = self.labelText;
     if (labelIcon) editableOptionIcon.image = labelIcon;
 
     [self updateControlCell];

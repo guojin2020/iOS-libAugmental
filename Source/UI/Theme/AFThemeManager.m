@@ -126,7 +126,6 @@ static NSMutableSet *observers;
 
 + (void)setCurrentTheme:(NSDictionary *)newTheme
 {
-    NSDictionary *oldTheme = currentTheme;
     currentTheme = newTheme;
 
     for (NSObject <AFThemeObserver> *observer in observers)

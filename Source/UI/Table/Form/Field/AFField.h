@@ -46,12 +46,12 @@
 - (void)removeObserver:(NSObject <AFFieldObserver> *)observer;
 
 /**
- *	This should be the targeted selector for the change invocationQueue of any UI framework controls in this Settings cell
+ *	This should be the targeted selector for the change invocationQueue of any UI framework controls in this Settings _viewCell
  */
 - (void)controlValueChanged:(id)sender;
 
 /**
- *	This should be implemented by a subclass to update the appearance of this Settings cell.
+ *	This should be implemented by a subclass to update the appearance of this Settings _viewCell.
  *  This method will be called by subclasses of AFField whenever their value property
  *  is changed.
  */
@@ -62,12 +62,12 @@
 -(void)handleAppTerminating;
 
 /**
- *	A default color to use for the cell background when this Settings value is deemed invalid by validator
+ *	A default color to use for the _viewCell background when this Settings value is deemed invalid by validator
  */
 + (UIColor *)validColor;
 
 /**
- *	A default color to use for the cell background when this Settings value is deemed valid by validator
+ *	A default color to use for the _viewCell background when this Settings value is deemed valid by validator
  */
 + (UIColor *)invalidColor;
 

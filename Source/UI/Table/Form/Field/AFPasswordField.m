@@ -34,7 +34,7 @@
 
 - (void)setCounterpart:(AFPasswordField *)counterpartIn
 {
-    AFPasswordField *oldCounterpart = counterpart;
+    //AFPasswordField *oldCounterpart = counterpart;
     counterpart = counterpartIn;
 
     ((AFPasswordValidator *) self.validator).comparisonSetting = counterpart;

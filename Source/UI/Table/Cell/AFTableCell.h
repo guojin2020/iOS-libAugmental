@@ -13,25 +13,23 @@
 #define THEME_KEY_CELL_CLICKED_SOUND			@"beep-21"
 
 @class AFTableSection;
+
 @protocol AFCellSelectionDelegate;
 
 /**
- *	Implementation of a basic Table cell for use in the Table framework classes.
+ *	Implementation of a basic Table _viewCell for use in the Table framework classes.
  *	Uses the default UITableViewCell to display a line of text and a target object and
  *	selector to announce USER-touches.
  */
 @interface AFTableCell : NSObject <AFPThemeable>
-{
-	UITableView*		tableView;
-	UITableViewCell*	cell;
-	UIColor*			fillColor;
-	NSString*			labelText;
-	NSObject<AFCellSelectionDelegate>*	selectionDelegate;
-	
-	AFTableSection* parentSection;
-	
-	CGFloat height;
-}
+
+@property NSString* labelText;
+@property (readonly) UITableViewCell* viewCell;
+@property (readonly) UITableView* tableView;
+@property (weak) AFTableSection* parentSection;
+@property (weak, readonly) UINavigationController* navigationController;
+@property NSObject<AFCellSelectionDelegate>* selectionDelegate;
+@property UIColor* fillColor;
 
 -(id)initWithLabelText:(NSString*)labelTextIn;
 
@@ -39,21 +37,22 @@
 -(CGFloat)heightForTableView:(UITableView*)tableIn;
 -(UITableViewCell*)viewCellForTableView:(UITableView*)tableView;
 -(UITableViewCell*)viewCellForTableView:(UITableView*)tableView templateName:(NSString*)templateNameIn;
+
 -(void)wasSelected;
 -(void)accessoryTapped;
 
 -(void)refresh; // Refresh UI values from object
 
 /**
- Informs the cell that delete has been selected. The cell may take appropriate action e.g. showing a confirmation dialog or changing its state somehow.
- Subclasses should implement an appropriate behaviour and return YES or NO depending on whether the cell should be removed from its parent table.
+ Informs the _viewCell that delete has been selected. The _viewCell may take appropriate action e.g. showing a confirmation dialog or changing its state somehow.
+ Subclasses should implement an appropriate behaviour and return YES or NO depending on whether the _viewCell should be removed from its parent table.
  This method is intended to be subclassed as it will never actually be called on AFTableCell because allowsDeletion always returns NO.
  */
 -(BOOL)deleteSelected;
 /**
- Determines whether this cell will display the Delete action button when it is swiped by the USER.
- This returns NO by default but may be subclassed to return YES by deletable cell types.
- The cell is polled to see whether it is deletable at creation time, so dynamically changing the
+ Determines whether this _viewCell will display the Delete action button when it is swiped by the USER.
+ This returns NO by default but may be subclassed to return YES by deletable _viewCell types.
+ The _viewCell is polled to see whether it is deletable at creation time, so dynamically changing the
  return value after table creation will not reflected on the UI.
  */
 -(BOOL)allowsDeletion;
@@ -75,12 +74,5 @@
 +(NSString*)cellClickedSound;
 
 -(void)viewCellDidLoad;
-
-@property (nonatomic,strong) NSObject<AFCellSelectionDelegate>* selectionDelegate;
-@property (nonatomic,strong) UITableViewCell* cell;
-@property (nonatomic,strong) UITableView* tableView;
-@property (nonatomic,strong) AFTableSection* parentSection;
-@property (weak, nonatomic,readonly) UINavigationController* navigationController;
-@property (nonatomic, strong) UIColor* fillColor;
 
 @end

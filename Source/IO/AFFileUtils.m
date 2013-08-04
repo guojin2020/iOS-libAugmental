@@ -9,7 +9,8 @@
 
 @implementation AFFileUtils
 
-+(bool)createAncestorDirectoriesForPath:(NSURL*)fileURL error:(NSError**)error
++(bool)createAncestorDirectoriesForPath:(NSURL*)fileURL
+                                  error:(NSError**)error
 {
     NSFileManager *fileManager = [NSFileManager defaultManager];
 
@@ -18,7 +19,9 @@
     if(![fileManager fileExistsAtPath:directoryPath isDirectory:&isDirectory])
     {
         AFLog(@"Creating directory: %@", directoryPath);
-        [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES attributes:nil error:error];
+        [fileManager createDirectoryAtPath:directoryPath withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:error];
         return YES;
     }
     else return NO;

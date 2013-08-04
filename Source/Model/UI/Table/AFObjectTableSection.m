@@ -1,5 +1,6 @@
 #import "AFObjectTableSection.h"
 #import "AFCellViewable.h"
+#import "AFLog.h"
 
 @implementation AFObjectTableSection
 
@@ -48,6 +49,7 @@
 
 - (void)setObjectArray:(NSArray *)objectArrayIn;
 {
+    AFLogPosition();
     [self removeAllCells];
     [self addObjectArray:objectArrayIn];
 }
@@ -59,6 +61,7 @@
 
 - (void)removeAllCells
 {
+    AFLogPosition();
     [super removeAllCells];
     [objects removeAllObjects];
 }

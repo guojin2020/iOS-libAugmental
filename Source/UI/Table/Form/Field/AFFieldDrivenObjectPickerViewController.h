@@ -20,4 +20,5 @@ objectDefaultSelectionIdKey:(NSString *)objectDefaultSelectionIdKeyIn
                 objectClass:(Class)objectClassIn;
 
 -(void)handleAppSettingsLoaded;
+
 @end

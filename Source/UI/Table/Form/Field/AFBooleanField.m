@@ -20,9 +20,9 @@
 
     valueSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
     [valueSwitch addTarget:self action:@selector(controlValueChanged:) forControlEvents:UIControlEventValueChanged];
-    [cell setAccessoryView:valueSwitch];
+    [self.viewCell setAccessoryView:valueSwitch];
     [self updateControlCell];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.viewCell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 //@dynamic value, validator, valid;

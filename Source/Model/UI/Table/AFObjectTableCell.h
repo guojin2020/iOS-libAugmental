@@ -6,7 +6,7 @@
 
 /**
  * Implements functionality common to all Table cells
- * This is not a complete implementation of a cell and needs to be subclassed for use
+ * This is not a complete implementation of a _viewCell and needs to be subclassed for use
  */
 @interface AFObjectTableCell : AFTableCell
 {

@@ -47,7 +47,7 @@ static NSString *switchViewSound = nil;
 
 - (void)setBackgroundImage:(UIImage *)newBackground
 {
-    UIImage *oldBackground = backgroundImage;
+    //UIImage *oldBackground = backgroundImage;
     backgroundImage = newBackground;
 
     [backgroundImageView setImage:newBackground];

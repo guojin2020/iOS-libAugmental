@@ -50,7 +50,7 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(void)setParentViewController:(UIViewController*)parentViewControllerIn
 {
-    UIViewController* oldOverrideParent = overrideParent;
+    //UIViewController* oldOverrideParent = overrideParent;
     overrideParent = parentViewControllerIn;
 }
 
@@ -258,20 +258,36 @@ CGRect CGRectMakePair(CGPoint location, CGSize size)
 
 -(AFTableCell*)tableCellForIndexPath:(NSIndexPath*)indexPath 
 {
-	return table ? [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row]:nil;
+    NSAssert(table!=NULL, NSInvalidArgumentException);
+
+	//return table ? [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row]:nil;
+    return [[table sectionAtIndex:(NSUInteger) indexPath.section] cellAtIndex:(NSUInteger) indexPath.row];
 }
 
--(UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
+-(UITableViewCell*)tableView:(UITableView*)tableView
+       cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    NSAssert(tableView!=NULL, NSInvalidArgumentException);
+
 	AFTableCell* usefulCell = [self tableCellForIndexPath:indexPath];
-	returnCell = usefulCell?[usefulCell viewCellForTableView:(UITableView*)(self.view)]:nil;
-	if(!returnCell) returnCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil]; //[NSString stringWithFormat:@"%i%i",indexPath.section,indexPath.row]
+
+    if(usefulCell)
+    {
+        returnCell = [usefulCell viewCellForTableView:(UITableView*)(self.view)];
+    }
+    else
+    {
+        returnCell = NULL;
+    }
+
+    if(!returnCell)
+        returnCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil]; //[NSString stringWithFormat:@"%i%i",indexPath.section,indexPath.row]
 
 	int sectionCells = [[table sectionAtIndex:(NSUInteger) indexPath.section] cellCount];
 	
-	if([usefulCell.cell.backgroundView isKindOfClass:[AFTableCellBackgroundView class]])
+	if([usefulCell.viewCell.backgroundView isKindOfClass:[AFTableCellBackgroundView class]])
 	{
-		const AFTableCellBackgroundView* bgView = (AFTableCellBackgroundView*)(usefulCell.cell.backgroundView);
+		const AFTableCellBackgroundView* bgView = (AFTableCellBackgroundView*)(usefulCell.viewCell.backgroundView);
 		AFTableCellBackgroundViewPosition oldPosition = bgView.position;
 		
 		if(sectionCells==1)						bgView.position = (AFTableCellBackgroundViewPosition) AFTableCellBackgroundViewPositionSingle;

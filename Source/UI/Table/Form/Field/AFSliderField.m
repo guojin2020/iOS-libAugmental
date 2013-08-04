@@ -20,9 +20,9 @@
     [super viewCellDidLoad];
 
     slider = [[UISlider alloc] init];
-    [cell setAccessoryView:slider];
+    [self.viewCell setAccessoryView:slider];
     [self updateControlCell];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    self.viewCell.selectionStyle = UITableViewCellSelectionStyleGray;
 }
 
 

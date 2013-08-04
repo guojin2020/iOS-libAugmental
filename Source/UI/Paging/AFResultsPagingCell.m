@@ -54,32 +54,34 @@ static UIImage *imagePrevious;
     return imagePrevious;
 }
 
-- (UITableViewCell *)viewCellForTableView:(UITableView *)tableIn
+
+
+- (UITableViewCell *)newCellForTableView:(UITableView *)tableIn
+                            templateName:(NSString *)templateNameIn
 {
-    if (!cell || self.tableView != tableIn)
+    UITableViewCell *newCell;
+
+    switch (configuration)
     {
-        switch (configuration)
-        {
-            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopFirstPage:
-            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomLastPage:
-                self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_End"];
-                break;
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationTopFirstPage:
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomLastPage:
+            newCell = [super viewCellForTableView:tableIn templateName:@"pagingCell_End"];
+            break;
 
-            case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
-                self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidTop"];
-                swipeImageView = (UIImageView *) [cell viewWithTag:2];
-                [swipeImageView setImage:[AFResultsPagingCell imagePrevious]];
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
+            newCell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidTop"];
+            swipeImageView = (UIImageView *) [newCell viewWithTag:2];
+            [swipeImageView setImage:[AFResultsPagingCell imagePrevious]];
 
-                break;
-            case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
-                self.cell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidBottom"];
-                swipeImageView = (UIImageView *) [cell viewWithTag:2];
-                [swipeImageView setImage:[AFResultsPagingCell imageNext]];
-                break;
-        }
+            break;
+        case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
+            newCell = [super viewCellForTableView:tableIn templateName:@"pagingCell_MidBottom"];
+            swipeImageView = (UIImageView *) [newCell viewWithTag:2];
+            [swipeImageView setImage:[AFResultsPagingCell imageNext]];
+            break;
     }
 
-    return cell;
+    return newCell;
 }
 
 - (void)viewCellDidLoad
@@ -93,19 +95,19 @@ static UIImage *imagePrevious;
             break;
 
         case (AFPagingCellConfiguration) AFPagingCellConfigurationTopBetweenPage:
-            swipeImageView = (UIImageView *) [cell viewWithTag:2];
+            swipeImageView = (UIImageView *) [self.viewCell viewWithTag:2];
             [swipeImageView setImage:[AFResultsPagingCell imagePrevious]];
 
             break;
         case (AFPagingCellConfiguration) AFPagingCellConfigurationBottomBetweenPage:
-            swipeImageView = (UIImageView *) [cell viewWithTag:2];
+            swipeImageView = (UIImageView *) [self.viewCell viewWithTag:2];
             [swipeImageView setImage:[AFResultsPagingCell imageNext]];
             break;
     }
 
     self.fillColor = [AFResultsPagingCell bgColor];
 
-    showingLabel = (UILabel *) [cell viewWithTag:1];
+    showingLabel = (UILabel *) [self.viewCell viewWithTag:1];
 
     [showingLabel setTextColor:[AFResultsPagingCell textColor]];
 

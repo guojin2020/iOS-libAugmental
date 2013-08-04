@@ -1,7 +1,6 @@
 
 #import "AFRequestQueue.h"
 
-#import "AFPerformSelectorOperation.h"
 #import "AFLog.h"
 #import "AFAssertion.h"
 #import "AFDispatch.h"

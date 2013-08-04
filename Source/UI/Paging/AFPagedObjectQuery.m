@@ -29,7 +29,7 @@
     {
         NSURL *queryURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@&pageBy=%i&page=%i", queryString, pageBy, pageNumber] relativeToURL:[AFSession sharedSession].environment.APIBaseURL];
 
-        AFPagedObjectRequest *oldRequest = currentRequest;
+        //AFPagedObjectRequest *oldRequest = currentRequest;
         currentRequest = [[AFPagedObjectRequest alloc] initWithURL:queryURL endpoint:self resultsPerPage:pageBy page:currentPageNumber];
         [[AFSession sharedSession] handleRequest:currentRequest];
         //[newPageRequest release];

@@ -1,10 +1,8 @@
 //
 // Created by Chris Hatton on 20/04/2013.
 //
-#import <CoreGraphics/CoreGraphics.h>
 #import "AFRenderedImageCache.h"
 #import "AFPImageRenderer.h"
-#import "AFThemeManager.h"
 
 @interface AFRenderedImageCache ()
 

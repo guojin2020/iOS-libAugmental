@@ -93,9 +93,6 @@ static CJSONSerializer   *jsonSerializer;
 {
     [super didFinish];
 
-    NSString *dumpString = [[NSString alloc] initWithData:responseDataBuffer encoding:NSUTF8StringEncoding];
-    //AFLog(@"%@",[NSString stringWithFormat:@"Response from '%@': %@",[[self URL] absoluteString],dumpString]);
-
     NSError *error = nil;
     returnedDictionary = [[AFJSONRequest jsonDeserializer] deserialize:responseDataBuffer error:&error];
 

@@ -39,13 +39,13 @@ static NSString *beginEditingSound = nil;
 {
     [super viewCellDidLoad];
 
-    [cell setAccessoryView:textField];
+    [self.viewCell setAccessoryView:textField];
 
     CGRect textFieldFrame = CGRectMake(100.0, 15.0, 180, 36.0);
-    cell.accessoryView.frame = textFieldFrame;
-    //cell.accessoryView.transform = CGAffineTransformMakeTranslation(0, 15);
+    self.viewCell.accessoryView.frame = textFieldFrame;
+    //_viewCell.accessoryView.transform = CGAffineTransformMakeTranslation(0, 15);
 
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    self.viewCell.selectionStyle = UITableViewCellSelectionStyleGray;
 
     [self updateControlCell];
 }
@@ -61,7 +61,7 @@ static NSString *beginEditingSound = nil;
 {
     [AFAppDelegate playSound:[AFTextField beginEditingSound]];
 
-    [tableView scrollToRowAtIndexPath:[tableView indexPathForCell:cell] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[self.tableView indexPathForCell:self.viewCell] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 
     [self.parentSection.parentTable.viewController textFieldDidBeginEditing:textFieldIn];
     if (textFieldDelegate) [textFieldDelegate textFieldDidBeginEditing:textField];

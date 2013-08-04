@@ -26,7 +26,7 @@
 
         postData = [[AFJSONRequest jsonSerializer] serializeDictionary:postDictionary error:nil];
 
-        NSString *postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
+        //NSString *postString = [[NSString alloc] initWithData:postData encoding:NSUTF8StringEncoding];
 
         NSAssert(postData, @"Deserialisation AFSessionStateError in %@, request was: %@", [self class], [URL absoluteString]);
     }

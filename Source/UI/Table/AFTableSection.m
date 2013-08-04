@@ -2,6 +2,7 @@
 #import "AFTableSection.h"
 #import "AFTable.h"
 #import "AFThemeManager.h"
+#import "AFLog.h"
 
 static UIColor* headerColor				= nil;
 static UIColor* headerShadowColor		= nil;
@@ -75,6 +76,7 @@ SEL AFTableSectionEventEdited;
 
 -(NSInteger)indexOf:(AFTableCell *)cell
 {
+    NSAssert(cell!=NULL, NSInvalidArgumentException);
 	NSAssert([children containsObject:cell],@"Internal inconsistency");
 
 	return [children indexOfObject:cell];
@@ -82,21 +84,26 @@ SEL AFTableSectionEventEdited;
 
 -(void)addCell:(AFTableCell*)cell
 {
+    NSAssert(cell!=NULL, NSInvalidArgumentException);
+    AFLogPosition();
+
 	@synchronized (parentTable)
 	{
 		cell.parentSection = self;
+        [cell willBeAdded];
 		[children addObject:cell];
-		[cell willBeAdded];
 	    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
 	}
 }
 
 -(void)removeCell:(AFTableCell*)cell
 {
+    NSAssert(cell!=NULL, NSInvalidArgumentException);
+
 	@synchronized (parentTable)
 	{
+        [cell willBeRemoved];
 		[children removeObject:cell];
-		[cell willBeRemoved];
 	    [self notifyObservers:AFTableSectionEventEdited parameters:self, nil];
 	}
 }
@@ -108,11 +115,14 @@ SEL AFTableSectionEventEdited;
 
 -(void)removeAllCells
 {
+    AFLogPosition();
 	@synchronized (parentTable)
 	{
 		[self beginAtomic];
 		NSArray* removeList = [NSArray arrayWithArray:children];
-		for(AFTableCell* cell in removeList)[self removeCell:cell];
+
+		for(AFTableCell* cell in removeList) { [self removeCell:cell]; }
+
 		[self completeAtomic];
 	}
 }
@@ -136,6 +146,10 @@ SEL AFTableSectionEventEdited;
 
 //======>> Dealloc
 
+-(void)dealloc
+{
+    [self removeAllCells];
+}
 
 @synthesize title, children, parentTable; //selectionTargets;
 
