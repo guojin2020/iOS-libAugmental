@@ -82,7 +82,8 @@ static char CANCEL_IDENTIFER;
 }
 
 
-+ (void)alertView:(UIAlertView*) alertView didDismissWithButtonIndex:(NSInteger) buttonIndex {
++ (void)alertView:(UIAlertView*) alertView didDismissWithButtonIndex:(NSInteger) buttonIndex
+{
     
 	if(buttonIndex == [alertView cancelButtonIndex])
 	{

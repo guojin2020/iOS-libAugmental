@@ -4,8 +4,10 @@
 #import "AFDownloadRequest.h"
 #import "AFRequestQueue.h"
 #import "AFSession.h"
+#import "AFEnvironment.h"
 #import "AFObjectCache.h"
 #import "AFRequestQueueAlertView.h"
+#import "AFPerformSelectorOperation.h"
 #import "AFDownloadRequestCache.h"
 #import "AFDispatch.h"
 
@@ -80,12 +82,12 @@ static AFSession *sharedSession = nil;
 
 - (BOOL)actionRequest:(AFRequest*)request
 {
-	dispatch_block_t block = ^
-	{
-		[self startConnectionInternal:request];
-	};
+    dispatch_block_t block = ^
+    {
+        [self startConnectionInternal:request];
+    };
 
-	AFBeginBackgroundDispatch( block );
+    AFBeginBackgroundDispatch( block );
 
     return YES;
 }
@@ -95,7 +97,7 @@ static AFSession *sharedSession = nil;
     if (requestIn.attempts <= REQUEST_RETRY_LIMIT)
     {
         //AFLog(@"Retrying %i of %i",requestIn.attempts,REQUEST_RETRY_LIMIT);
-	    [self startConnectionInternal:requestIn];
+        [self startConnectionInternal:requestIn];
     }
     else
     {
@@ -130,7 +132,7 @@ static AFSession *sharedSession = nil;
 
 - (void)dumpAllCookies
 {
-	/*
+    /*
     NSArray           *allCookies = [cookieStore cookies];
     NSDictionary      *cookieProperties;
     for (NSHTTPCookie *currentCookie in allCookies)
@@ -170,7 +172,6 @@ static AFSession *sharedSession = nil;
 - (void)request:(AFRequest*)request returnedWithData:(id)data
 {
 }
-
 
 @synthesize environment, downloadQueue, cache;
 

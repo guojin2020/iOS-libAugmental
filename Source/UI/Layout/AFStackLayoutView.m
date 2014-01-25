@@ -27,10 +27,11 @@
 
     float layoutHeight = self.frame.size.height - ( self.edgeInsets.top + self.edgeInsets.bottom );
 
-    int childCount = self.subviews.count;
-    for (uint i = 0; i<childCount; ++i)
+    NSArray* subviewsToAutoLayout = [self subviewsToAutoLayout];
+
+    for (uint i = 0; i<subviewsToAutoLayout.count; ++i)
     {
-        view = [self.subviews objectAtIndex:i];
+        view = [subviewsToAutoLayout objectAtIndex:i];
 
         if([view conformsToProtocol:@protocol(AFPConstrainedView)])
         {
@@ -43,7 +44,7 @@
 
         spaceRemaining = layoutHeight - caret;
 
-        if( space>spaceRemaining || (fillsRemainder && i==(childCount-1)) )
+        if( space>spaceRemaining || (fillsRemainder && i==(subviewsToAutoLayout.count-1)) )
         {
             space = spaceRemaining;
         }

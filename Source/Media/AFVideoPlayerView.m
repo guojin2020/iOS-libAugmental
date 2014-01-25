@@ -160,7 +160,7 @@ NSString *STATUS_KEY = @"status";
 
 - (AVAsset *)asset { return playerItem.asset; }
 
-@synthesize player;
+//@synthesize player;
 @synthesize playerItem;
 //@synthesize playerView;
 @synthesize playButton;

@@ -82,12 +82,11 @@
  */
 @property(nonatomic) BOOL offline;
 
-@property(nonatomic, strong, readonly) AFEnvironment *environment;
+@property(nonatomic, retain, readonly) AFEnvironment *environment;
 
-@property(nonatomic, strong, readonly) AFRequestQueue *downloadQueue;
+@property(nonatomic, retain, readonly) AFRequestQueue *downloadQueue;
 
-@property(nonatomic, strong, readonly) AFObjectCache *cache;
+@property(nonatomic, retain, readonly) AFObjectCache *cache;
 
 @end
-
 

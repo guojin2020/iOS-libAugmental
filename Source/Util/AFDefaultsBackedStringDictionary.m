@@ -58,7 +58,7 @@ static NSUserDefaults *defaults;
 // Invalidate all other NSMutableDictionary initialisers, allowing only initWithDefaultsKey:
 
 - (id)initWithCapacity:(NSUInteger)numItems                                                 { @throw([AFMethodBlockedException new]); }
-- (id)initWithObjects:(id[])objects forKeys:(id <NSCopying>[])keys count:(NSUInteger)cnt    { @throw([AFMethodBlockedException new]); }
+- (id)initWithObjects:(__strong id[])objects forKeys:(__strong id <NSCopying>[])keys count:(NSUInteger)cnt    { @throw([AFMethodBlockedException new]); }
 - (id)initWithObjectsAndKeys:(id)firstObject, ...                                           { @throw([AFMethodBlockedException new]); }
 - (id)initWithDictionary:(NSDictionary *)otherDictionary                                    { @throw([AFMethodBlockedException new]); }
 - (id)initWithDictionary:(NSDictionary *)otherDictionary copyItems:(BOOL)flag               { @throw([AFMethodBlockedException new]); }

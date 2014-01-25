@@ -415,7 +415,8 @@ static CGSize cgSizeMax;
 - (CGSize)sizeThatFits:(CGSize)constraintSize
 {
 	CGSize fitSize = [self.text sizeWithFont:self.font];
-	if( fitSize.width > constraintSize.width ) fitSize = CGSizeMake(constraintSize.width, fitSize.height); // Only hacking it like this because sizeWithFont: above doesn't respect NSLineBreakByClipping
+	if( fitSize.width > constraintSize.width )
+        fitSize = CGSizeMake(constraintSize.width, fitSize.height); // Only hacking it like this because sizeWithFont: above doesn't respect NSLineBreakByClipping
 	return fitSize;
 }
 

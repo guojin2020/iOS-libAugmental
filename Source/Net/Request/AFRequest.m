@@ -41,7 +41,7 @@ SEL
     AFRequestEventDidPollSize      = @selector(handleRequestDidPollSize:);  //Params: AFRequest
 }
 
-@synthesize attempts, requiresLogin, URL, state, connection = connection;
+@synthesize requiresLogin, URL, state, connection = connection; //attempts,
 
 -(id)initWithURL:(NSURL *)URLIn requiresLogin:(BOOL)requiresLoginIn /* DEPRECATED_ATTRIBUTE */
 {

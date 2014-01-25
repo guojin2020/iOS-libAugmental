@@ -29,7 +29,7 @@ SEL
 {
     AFEventAppSettingsLoaded        = @selector(handleAppSettingsLoaded);
     AFEventAppTerminating           = @selector(handleAppTerminating);
-    AFEventAppSettingsLoadFailed    = @selector(handleAppSettingsLoadFailed);
+    //AFEventAppSettingsLoadFailed    = @selector(handleAppSettingsLoadFailed);
     AFEventAppMemoryWarning         = @selector(handleAppMemoryWarning);
 }
 

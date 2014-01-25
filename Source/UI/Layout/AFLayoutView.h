@@ -6,10 +6,13 @@
 #import <Foundation/Foundation.h>
 
 @interface AFLayoutView : UIView
-{
-    //UIEdgeInsets  edgeInsets;
-}
 
 @property (nonatomic) UIEdgeInsets edgeInsets;
+@property (nonatomic) UIView* backgroundView;
+@property (nonatomic, readonly) NSSet* subviewsExcludedFromLayout;
+
+-(void)setSubview:(UIView*)view excludedFromLayout:(BOOL)excluded;
+
+- (NSArray *)subviewsToAutoLayout;
 
 @end

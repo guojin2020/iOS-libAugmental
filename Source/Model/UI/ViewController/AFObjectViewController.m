@@ -11,7 +11,7 @@
 {
     self = [self initWithNibName:@"AFObjectView" bundle:[NSBundle mainBundle]];
 
-    objects = [objectsIn retain];
+    objects = objectsIn;
 
     //Checking that the input is sane (all elements of the input array are AFObjects of the same type )
     if (!objects || [objects count] == 0)
@@ -46,7 +46,6 @@
         [controllers addObject:[NSNull null]];
     }
     self.viewControllers = controllers;
-    [controllers release];
 
     // a page is the width of the scroll view
     scrollView.pagingEnabled                  = YES;
@@ -77,10 +76,10 @@
     {
         NSObject <AFPanelViewableObject> *pageViewObject = [objects objectAtIndex:page];
 
-        id<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFPanelViewableObject>) [pageViewObject class]) viewPanelClass];
+        Class<AFObjectViewPanelController> viewPanelControllerClass = [((id<AFPanelViewableObject>) [pageViewObject class]) viewPanelClass];
         if (viewPanelControllerClass)
         {
-            viewController = (UIViewController *) [((NSObject <AFObjectViewPanelController> *) NSAllocateObject((Class)viewPanelControllerClass, 0, nil)) initWithObject:pageViewObject];
+            viewController = [[((Class)viewPanelControllerClass) alloc] initWithObject:pageViewObject];
         }
         else
         {
@@ -89,7 +88,6 @@
         }
 
         [viewControllers replaceObjectAtIndex:page withObject:viewController];
-        [viewController release];
     }
 
     // add the controller's view to the scroll view
@@ -170,13 +168,9 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)dealloc
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
 {
-    [objects release];
-    [viewControllers release];
-    [scrollView release];
-    [pageControl release];
-    [super dealloc];
+    return UIInterfaceOrientationPortrait;
 }
 
 @synthesize scrollView, pageControl, viewControllers;

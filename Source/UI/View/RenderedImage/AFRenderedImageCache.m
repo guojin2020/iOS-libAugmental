@@ -33,8 +33,9 @@ static AFRenderedImageCache *sharedInstance = NULL;
 
 -(void)purgeCache
 {
-	for(NSMutableDictionary *sizes in _rendererCaches) [sizes removeAllObjects];
-	[_rendererCaches removeAllObjects];
+    [_rendererCaches removeAllObjects];
+	//for(NSMutableDictionary *sizes in [_rendererCaches all]) [sizes removeAllObjects];
+	//[_rendererCaches removeAllObjects];
 }
 
 -(UIImage*)imageFromRenderer:(id <AFPImageRenderer>)renderer withSize:(CGSize)size

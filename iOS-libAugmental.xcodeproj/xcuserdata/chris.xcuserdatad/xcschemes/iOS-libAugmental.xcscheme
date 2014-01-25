@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0460"
+   LastUpgradeVersion = "0500"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "099B10B5163D639600E81588"
                BuildableName = "libiOS-libAugmental.a"
-               BlueprintName = "iOS-libAugmental"
+               BlueprintName = "iOS-libAugmental_NoLink"
                ReferencedContainer = "container:iOS-libAugmental.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

@@ -30,6 +30,10 @@
     return UIInterfaceOrientationMaskLandscape;
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationLandscapeLeft;
+}
 
 - (AVPlayer *)player { return videoPlayerView.player; }
 
